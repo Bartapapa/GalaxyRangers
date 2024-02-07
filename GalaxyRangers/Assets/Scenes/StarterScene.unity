@@ -1490,6 +1490,54 @@ Transform:
   - {fileID: 342746644}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1053406739
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1053406741}
+  - component: {fileID: 1053406740}
+  m_Layer: 0
+  m_Name: WorldManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1053406740
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1053406739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21732fb0bf97438489e9e1126b9e0d38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  numberOfRooms: 10
+  maxNumberOfWhildRooms: 2
+  seed: sup motherfucker
+  _roomPrefab: {fileID: 0}
+--- !u!4 &1053406741
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1053406739}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 11.743525, y: 2.6922867, z: 2.6759303}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1083302360
 GameObject:
   m_ObjectHideFlags: 3
@@ -1995,32 +2043,33 @@ MonoBehaviour:
   maxWallJumpCount: 1
   wallJumpCount: 0
   jumpBuffer: 0
-  jumpStrength: 8
+  jumpStrength: 16
+  maxJumpDuration: 0.5
   jumpDosageCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 16
-      inSlope: -61.552357
-      outSlope: -61.552357
+      value: 1
+      inSlope: 0
+      outSlope: 0
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.0483871
+      outWeight: 0.2
     - serializedVersion: 3
-      time: 0.32
-      value: 4
-      inSlope: -21.306625
-      outSlope: -21.306625
+      time: 1
+      value: 0
+      inSlope: -2.2641501
+      outSlope: -2.2641501
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.06989241
+      inWeight: 0.04583335
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  shortJumpSpeedFactor: 2
+  shortJumpSpeedFactor: 4
   _isFacingLeftWall: 0
   _isFacingRightWall: 0
   wallDetectionDistance: 0.2
@@ -2948,3 +2997,4 @@ SceneRoots:
   - {fileID: 1800397207}
   - {fileID: 1776906131}
   - {fileID: 1013550320}
+  - {fileID: 1053406741}

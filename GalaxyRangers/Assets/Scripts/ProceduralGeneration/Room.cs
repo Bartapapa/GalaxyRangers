@@ -17,9 +17,9 @@ public enum RoomType
 {
     None,
     Spawn,
+    Boss,
     Exploration,
     Arena,
-    Boss,
     Length,
 }
 
