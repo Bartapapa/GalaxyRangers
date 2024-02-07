@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,7 @@ public class Layer
 {
     public List<Room> roomsInLayer = new List<Room>();
 }
+
 public class World : Graph
 {
     [Header("SEED")]
@@ -26,6 +28,16 @@ public class World : Graph
     //Cached
     [HideInInspector] public int currentInstantiatedRoom = 0;
 
+    //Debug
+    public delegate void RoomCallback(Room room, int layer, Room parentroom);
+    public delegate void RoomChildCallback(Room parentRoom, Room childRoom);
+    public RoomCallback RoomGenerated;
+    public RoomChildCallback RoomGivenChild;
+
+    public World()
+    {
+
+    }
     public World(int numberOfRooms, int maxNumberOfChildRooms, string seed = "")
     {
         _numberOfRooms = numberOfRooms;
@@ -46,7 +58,7 @@ public class World : Graph
     public string GenerateRandomSeed()
     {
         int seed = (int)System.DateTime.Now.Ticks;
-        Random.InitState(seed);
+        UnityEngine.Random.InitState(seed);
         return seed.ToString();
     }
 
@@ -55,7 +67,7 @@ public class World : Graph
         _currentSeed = seed;
         int tempSeed = 0;
         tempSeed = seed.GetHashCode();
-        Random.InitState(tempSeed);
+        UnityEngine.Random.InitState(tempSeed);
     }
     #endregion
 
@@ -87,6 +99,8 @@ public class World : Graph
         Layer originLayer = new Layer();
         originLayer.roomsInLayer.Add(spawnRoom);
         layers.Add(originLayer);
+
+        RoomGenerated(spawnRoom, 0, null);
     }
 
     private void GenerateRooms()
@@ -96,7 +110,7 @@ public class World : Graph
         for (int i = currentInstantiatedRoom; i < numberOfRooms; i++)
         {
             List<Room> generatedRooms = new List<Room>();
-            generatedRooms = GenerateRoomsForLayer(layers[currentLayer]);
+            generatedRooms = GenerateRoomsForLayer(layers[currentLayer], currentLayer);
             if (generatedRooms.Count == 0)
             {
                 break;
@@ -117,18 +131,21 @@ public class World : Graph
         Debug.LogWarning("Generation has ended!");
     }
 
-    private List<Room> GenerateRoomsForLayer(Layer layer)
+    private List<Room> GenerateRoomsForLayer(Layer layer, int index)
     {
         List<Room> generatedRooms = new List<Room>();
 
         foreach(Room room in layer.roomsInLayer)
         {
-            int randomNumberOfChildren = Random.Range(0, GetMaxNumberOfPotentialChildRooms());
+            int randomNumberOfChildren = UnityEngine.Random.Range(0, GetMaxNumberOfPotentialChildRooms());
 
             for (int i = 0; i < randomNumberOfChildren; i++)
             {
                 Room childRoom = new Room(this, room);
                 AddRoom(childRoom);
+
+                RoomGenerated(childRoom, index, room);
+
                 room.AddChildRoom(childRoom);
                 generatedRooms.Add(childRoom);
                 currentInstantiatedRoom++;

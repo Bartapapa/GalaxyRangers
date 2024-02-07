@@ -150,6 +150,7 @@ public partial class PlayerCharacterController : MonoBehaviour
     [SerializeField] private bool jumpBuffer = false;
     [Space]
     [SerializeField] private float jumpStrength = 8f;
+    [SerializeField] private float maxJumpDuration = 1f;
     [SerializeField] private AnimationCurve jumpDosageCurve = AnimationCurve.Linear(0, 0, 1, 1);
     [SerializeField][Range(1f, 4f)] private float shortJumpSpeedFactor = 2f;
     [Header("Wall Detection")]
@@ -910,9 +911,10 @@ public partial class PlayerCharacterController : MonoBehaviour
     private IEnumerator JumpDosage()
     {
         float t = 0;
+        float d = maxJumpDuration;
         Keyframe lastKey = jumpDosageCurve.keys[jumpDosageCurve.keys.Length - 1];
 
-        while (t < lastKey.time)
+        while (t < d)
         {
             if (_isTouchingCeiling)
             {
@@ -921,7 +923,7 @@ public partial class PlayerCharacterController : MonoBehaviour
 
             float holdFactor = _jumpPressed ? 1f : shortJumpSpeedFactor;
             t += Time.deltaTime * holdFactor;
-            float jumpDosageStrength = jumpDosageCurve.Evaluate(t);
+            float jumpDosageStrength = jumpStrength*jumpDosageCurve.Evaluate(t/d);
 
             //rigid.AddForce(Vector3.up * jumpDosageStrength, ForceMode.Acceleration);
             SetRigidbodyVelocity(new Vector3(rigid.velocity.x, jumpDosageStrength, 0));
