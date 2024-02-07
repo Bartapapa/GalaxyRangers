@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class Layer
 {
@@ -27,12 +28,6 @@ public class World : Graph
 
     //Cached
     [HideInInspector] public int currentInstantiatedRoom = 0;
-
-    //Debug
-    public delegate void RoomCallback(Room room, int layer, Room parentroom);
-    public delegate void RoomChildCallback(Room parentRoom, Room childRoom);
-    public RoomCallback RoomGenerated;
-    public RoomChildCallback RoomGivenChild;
 
     public World()
     {
@@ -100,7 +95,9 @@ public class World : Graph
         originLayer.roomsInLayer.Add(spawnRoom);
         layers.Add(originLayer);
 
-        RoomGenerated(spawnRoom, 0, null);
+        //LayerGenerated?.Invoke(originLayer);
+
+        //RoomGenerated?.Invoke(spawnRoom, 0);
     }
 
     private void GenerateRooms()
@@ -121,6 +118,8 @@ public class World : Graph
                 Layer newLayer = new Layer();
                 layers.Add(newLayer);
 
+                //LayerGenerated?.Invoke(newLayer);
+
                 foreach(Room room in generatedRooms)
                 {
                     newLayer.roomsInLayer.Add(room);
@@ -129,6 +128,7 @@ public class World : Graph
         }
 
         Debug.LogWarning("Generation has ended!");
+        //GenerationEnded?.Invoke();
     }
 
     private List<Room> GenerateRoomsForLayer(Layer layer, int index)
@@ -137,17 +137,34 @@ public class World : Graph
 
         foreach(Room room in layer.roomsInLayer)
         {
-            int randomNumberOfChildren = UnityEngine.Random.Range(0, GetMaxNumberOfPotentialChildRooms());
+            float randomNumber = UnityEngine.Random.Range(0f, 1f);
+            int randomNumberOfChildren;
+            int maxNumberOfChildren = GetMaxNumberOfPotentialChildRooms();
+            if (randomNumber < .2f)
+            {
+                randomNumberOfChildren = 0;
+            }
+            else if (randomNumber >= .2f && randomNumber < .4f)
+            {
+                randomNumberOfChildren = 1 <= maxNumberOfChildren ? 1 : 0;
+            }
+            else
+            {
+                randomNumberOfChildren = 2 <= maxNumberOfChildren ? 2 : 0;
+            }
+            //int randomNumberOfChildren = UnityEngine.Random.Range(0, GetMaxNumberOfPotentialChildRooms()+1);
 
             for (int i = 0; i < randomNumberOfChildren; i++)
             {
                 Room childRoom = new Room(this, room);
                 AddRoom(childRoom);
 
-                RoomGenerated(childRoom, index, room);
+                //RoomGenerated?.Invoke(childRoom, index);
 
                 room.AddChildRoom(childRoom);
                 generatedRooms.Add(childRoom);
+
+                //RoomGivenChild?.Invoke(room, childRoom);
                 currentInstantiatedRoom++;
             }
         }
@@ -158,8 +175,13 @@ public class World : Graph
             {
                 Room childRoom = new Room(this, layer.roomsInLayer[0]);
                 AddRoom(childRoom);
+
+                //RoomGenerated?.Invoke(childRoom, index);
+
                 layer.roomsInLayer[0].AddChildRoom(childRoom);
                 generatedRooms.Add(childRoom);
+
+                //RoomGivenChild?.Invoke(layer.roomsInLayer[0], childRoom);
                 currentInstantiatedRoom++;
             }
         }
@@ -186,5 +208,34 @@ public class World : Graph
         _nodeQueue.Enqueue(room);
         _nodeStack.Push(room);
     }
+
+    //private void SeparateAllNodes()
+    //{
+    //    int currentLayer = 0;
+    //    float rootXValue = 0;
+    //    float rootYValue = 0;
+    //    foreach (DebugLayer layer in _debugLayers)
+    //    {
+    //        if (currentLayer == 0)
+    //        {
+    //            rootXValue = 0f;
+    //            rootYValue = 0f;
+    //        }
+    //        else
+    //        {
+    //            for (int i = 0; i < layer.debugRoomsInLayer.Count; i++)
+    //            {
+    //                Vector3 updatedPosition = new Vector3(rootXValue + (2f * i), rootYValue - (2f * currentLayer), 0);
+    //                layer.debugRoomsInLayer[i].transform.position = updatedPosition;
+    //            }
+    //        }
+    //        currentLayer++;
+    //    }
+
+    //    for (int i = 0; i < _debugRooms.Count; i++)
+    //    {
+    //        _debugRooms[i].UpdateEdges();
+    //    }
+    //}
     #endregion
 }

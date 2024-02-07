@@ -7,15 +7,23 @@ public class DebugRoom : MonoBehaviour
 {
     [SerializeField] private DebugEdge _edgePrefab;
 
-    private DebugRoom _parentRoom;
-    private List<DebugRoom> _childRooms = new List<DebugRoom>();
+    public Room room;
+    private List<Transform> _childRooms = new List<Transform>();
     private RoomType _roomType = RoomType.None;
     private List<DebugEdge> _edges = new List<DebugEdge>();
+    public Color originalColor;
 
-    public void BuildRoom(DebugRoom parent, RoomType type = RoomType.None)
+    private void OnDestroy()
     {
-        _parentRoom = parent;
-        SetType(type);
+        foreach(DebugEdge edge in _edges)
+        {
+            Destroy(edge.gameObject);
+        }
+    }
+    public void BuildRoom(Room _room)
+    {
+        room = _room;
+        SetType(room.roomType);
     }
 
     public RoomType GetRandomType()
@@ -33,18 +41,23 @@ public class DebugRoom : MonoBehaviour
         {
             case RoomType.None:
                 mat.color = Color.black;
+                originalColor = Color.black;
                 break;
             case RoomType.Spawn:
                 mat.color = Color.white;
+                originalColor = Color.white;
                 break;
             case RoomType.Exploration:
                 mat.color = Color.blue;
+                originalColor = Color.blue;
                 break;
             case RoomType.Arena:
                 mat.color = Color.yellow;
+                originalColor = Color.yellow;
                 break;
             case RoomType.Boss:
                 mat.color = Color.red;
+                originalColor = Color.red;
                 break;
             case RoomType.Length:
                 break;
@@ -53,11 +66,24 @@ public class DebugRoom : MonoBehaviour
         }
     }
 
-    public void AddChild(DebugRoom childRoom)
+    public void EnterRoom()
+    {
+        Material mat = GetComponent<MeshRenderer>().material;
+
+        mat.color = Color.cyan;
+    }
+
+    public void ExitRoom()
+    {
+        Material mat = GetComponent<MeshRenderer>().material;
+        mat.color = originalColor;
+    }
+
+    public void AddChild(Transform childRoom)
     {
         _childRooms.Add(childRoom);
         DebugEdge newEdge = Instantiate<DebugEdge>(_edgePrefab);
-        newEdge.BuildLine(this, childRoom);
+        newEdge.BuildLine(this.transform, childRoom);
         _edges.Add(newEdge);
     }
 
@@ -65,7 +91,7 @@ public class DebugRoom : MonoBehaviour
     {
         foreach (DebugEdge edge in _edges)
         {
-            edge.BuildLine(this, edge.ChildNode);
+            edge.BuildLine(this.transform, edge.ChildNode);
         }
     }
 
