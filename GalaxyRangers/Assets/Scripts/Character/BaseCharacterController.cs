@@ -6,9 +6,18 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.Windows;
 
+public enum GameFaction
+{
+    None,
+    Player,
+    Enemy,
+    Hostile,
+    Destructible,
+}
+
 [RequireComponent(typeof(CapsuleCollider))]
 [RequireComponent(typeof(Rigidbody))]
-public partial class PlayerCharacterController : MonoBehaviour
+public partial class BaseCharacterController : MonoBehaviour
 {
 
     private Transform _cachedTransform;
@@ -101,7 +110,9 @@ public partial class PlayerCharacterController : MonoBehaviour
     [SerializeField] private Vector2 _rigidbodyVelocity;
     public Vector2 rigidbodyVelocity { get { return _rigidbodyVelocity; } }
     [Space]
-    [SerializeField] private LayerMask environmentLayer;
+    [SerializeField] [ReadOnlyInspector] private LayerMask _currentGroundLayers;
+    [SerializeField] private LayerMask defaultEnvironmentLayers;
+    [SerializeField] private LayerMask onlyGroundLayers;
     [Space]
     [SerializeField] private float _defaultColliderHeight = 1.8f;
     public float defaultColliderHeight { get { return _defaultColliderHeight; } }
@@ -197,14 +208,19 @@ public partial class PlayerCharacterController : MonoBehaviour
 
     [Header("COMBAT")]
     [Space(10)]
+    [SerializeField] private GameFaction _faction;
+    public GameFaction faction { get { return _faction; } }
+    [Space]
     [SerializeField] private bool _hit = false;
     public bool hit { get { return _hit; } }
     [Space]
     [SerializeField] private bool _isDead = false;
     public bool isDead { get { return _isDead; } }
+    public bool isDisabled { get { return _inputsLocked || _isDead || _hit ? true : false; } }
     [SerializeField] private float resurrectDelay = 1f;
+    public bool hasHyperArmor = false;
     [Space]
-    [SerializeField] private Vector3 _cachedKnockback = Vector3.zero;
+    [SerializeField][ReadOnlyInspector] private Vector3 _cachedKnockback = Vector3.zero;
 
     [Header("LOCKS")]
     [Space(10)]
@@ -226,7 +242,7 @@ public partial class PlayerCharacterController : MonoBehaviour
     public delegate void FloatCallback(float floatValue);
     public delegate void RaycastHitCallback(RaycastHit hit);
     public delegate void LandingCallback(float value, RaycastHit hit);
-    public delegate void CharacterControllerCallback(PlayerCharacterController playerCharacterController);
+    public delegate void CharacterControllerCallback(BaseCharacterController playerCharacterController);
     public FloatCallback OnMove;
     public IntCallback OnSetPlayer;
     public IntCallback OnJump;
@@ -284,6 +300,7 @@ public partial class PlayerCharacterController : MonoBehaviour
     private Coroutine dashCoroutine;
     private Coroutine dashBufferCoroutine;
     private Coroutine disableInputCoroutine;
+    private Coroutine oneWayPlatformCoroutine;
 
     #region UNITY_BASED
 
@@ -298,11 +315,18 @@ public partial class PlayerCharacterController : MonoBehaviour
     {
         //This is just for debug purposes - should be cleaned up later, when confronting SceneLoading.
         CameraManager.Instance.SetPlayerCharacterController(this);
+
+        InitCurrentGroundLayers();
     }
 
     private void Update()
     {
         HandleCooldowns();
+
+        if (UnityEngine.Input.GetKeyDown(KeyCode.P))
+        {
+
+        }
     }
 
     private void HandleCooldowns()
@@ -341,6 +365,11 @@ public partial class PlayerCharacterController : MonoBehaviour
         _rigidbodyVelocity = rigid.velocity;
 
         GetWallHit();
+    }
+
+    private void InitCurrentGroundLayers()
+    {
+        _currentGroundLayers = defaultEnvironmentLayers;
     }
 
     #endregion
@@ -410,8 +439,10 @@ public partial class PlayerCharacterController : MonoBehaviour
         if (isDashing)
             return;
 
-        if (!isFastFalling && !isGrounded && !isJumping && rigid.velocity.y < 0f && _upDownInput < -0.5f)
-            isFastFalling = true;
+        //if (!isFastFalling && !isGrounded && !isJumping && rigid.velocity.y < 0f && _upDownInput < -0.5f)
+        //    isFastFalling = true;
+
+        isFastFalling = !isGrounded && !isJumping && rigid.velocity.y < 0f && _upDownInput < -0.5f ? true : false;
 
         float targetGravity = isFastFalling ? gravity * fastFallGravityFactor : gravity;
         rigid.AddForce(Vector3.up * targetGravity, ForceMode.Acceleration);
@@ -523,15 +554,16 @@ public partial class PlayerCharacterController : MonoBehaviour
             Physics.SphereCast(
                 cachedTransform.position + new Vector3(0, capsuleCollider.radius + feetDetectionOffset, 0),
                 capsuleCollider.radius, Vector3.down, out _groundHit,
-                groundDetectionDistance, environmentLayer) :
+                groundDetectionDistance, _currentGroundLayers) :
             Physics.Raycast(
                 characterCenter,
                 Vector3.down, out _groundHit,
-                capsuleCollider.radius + groundDetectionDistance, environmentLayer);
+                capsuleCollider.radius + groundDetectionDistance, _currentGroundLayers);
 
         if (raycast) // Ground detected
         {
-            GroundAttach();
+            if (rigid.velocity.y > 0 && !isGrounded) return;
+              GroundAttach();
         }
         else // No ground detected
         {
@@ -550,7 +582,7 @@ public partial class PlayerCharacterController : MonoBehaviour
             Physics.SphereCast(
                 cachedTransform.position + new Vector3(0, capsuleCollider.radius + feetDetectionOffset, 0),
                 capsuleCollider.radius, Vector3.down, out _groundHit,
-                groundDetectionDistance, environmentLayer);
+                groundDetectionDistance, _currentGroundLayers);
         }
 
         _groundAngle = GetFaceAngleFromNormal(Vector3.up, groundHit.normal);
@@ -575,6 +607,7 @@ public partial class PlayerCharacterController : MonoBehaviour
 
             isFastFalling = false;
             _wallJump = false;
+            _currentGroundLayers = defaultEnvironmentLayers;
 
             SetColliderMode(0);
 
@@ -627,11 +660,11 @@ public partial class PlayerCharacterController : MonoBehaviour
             Physics.SphereCast(
                 cachedTransform.position + new Vector3(0, capsuleCollider.height - headDetectionOffset, 0),
                 capsuleCollider.radius, Vector3.down, out _ceilingHit,
-                ceilingDetectionDistance, environmentLayer) :
+                ceilingDetectionDistance, _currentGroundLayers) :
             Physics.Raycast(
                 characterCenter,
                 Vector3.up, out _groundHit,
-                capsuleCollider.radius + ceilingDetectionDistance, environmentLayer);
+                capsuleCollider.radius + ceilingDetectionDistance, _currentGroundLayers);
 
         _isTouchingCeiling = raycast;
     }
@@ -643,7 +676,7 @@ public partial class PlayerCharacterController : MonoBehaviour
 
         return !Physics.Raycast(
                 characterCenter + new Vector3((isMoving ? Mathf.Sign(_moveInput) : leftRight) * capsuleCollider.radius, 0, 0),
-                Vector3.down, capsuleCollider.height / 2f + Mathf.Lerp(minimumEdgeDetectionDistance, maximumEdgeDetectionDistance, groundAngle / maximumGroundAngle), environmentLayer);
+                Vector3.down, capsuleCollider.height / 2f + Mathf.Lerp(minimumEdgeDetectionDistance, maximumEdgeDetectionDistance, groundAngle / maximumGroundAngle), _currentGroundLayers);
     }
 
     private Vector3 GetSphereHitPosition(RaycastHit hit)
@@ -685,7 +718,7 @@ public partial class PlayerCharacterController : MonoBehaviour
                 new Vector3(direction, 0, 0),
                 out hit,
                 wallDetectionDistance,
-                environmentLayer);
+                _currentGroundLayers);
         }
         else
         {
@@ -695,7 +728,7 @@ public partial class PlayerCharacterController : MonoBehaviour
                 new Vector3(direction, 0, 0),
                 out hit,
                 wallDetectionDistance,
-                environmentLayer);
+                _currentGroundLayers);
         }
 
         if (hitState)
@@ -784,23 +817,44 @@ public partial class PlayerCharacterController : MonoBehaviour
 
     private void SetJumpBuffer()
     {
+        if (_isDead)
+            return;
+
         bool canWallJump = CheckWallJump();
         bool canJump = jumpCount < maxJumpCount;
 
-        if (canWallJump)
+        if (_upDownInput < -0.5f)
         {
-            Jump(1);
+            if (oneWayPlatformCoroutine != null)
+            {
+                StopCoroutine(oneWayPlatformCoroutine);
+            }
+            oneWayPlatformCoroutine = StartCoroutine(CoOneWayPlatformBuffer());
         }
-        else if (canJump)
+        else
         {
-            Jump(0);
+            if (canWallJump)
+            {
+                Jump(1);
+            }
+            else if (canJump)
+            {
+                Jump(0);
+            }
+            else // Set a short buffer if the character cannot jump
+            {
+                if (jumpBufferCoroutine != null)
+                    StopCoroutine(jumpBufferCoroutine);
+                jumpBufferCoroutine = StartCoroutine(CoSetJumpBuffer());
+            }
         }
-        else // Set a short buffer if the character cannot jump
-        {
-            if (jumpBufferCoroutine != null)
-                StopCoroutine(jumpBufferCoroutine);
-            jumpBufferCoroutine = StartCoroutine(CoSetJumpBuffer());
-        }
+    }
+
+    private IEnumerator CoOneWayPlatformBuffer()
+    {
+        _currentGroundLayers = onlyGroundLayers;
+        yield return new WaitForSecondsRealtime(0.5f);
+        _currentGroundLayers = defaultEnvironmentLayers;
     }
 
     private IEnumerator CoSetJumpBuffer()
@@ -808,6 +862,7 @@ public partial class PlayerCharacterController : MonoBehaviour
         jumpBuffer = true;
         yield return new WaitForSecondsRealtime(0.2f);
         jumpBuffer = false;
+        oneWayPlatformCoroutine = null;
     }
 
     private void Jump(int jumpMode)
@@ -1180,26 +1235,30 @@ public partial class PlayerCharacterController : MonoBehaviour
             CancelUTurn();
             CancelJumpDosage();
         }
-        if (invulnerabilityDuration > 0)
-        {
-            characterHealth.Invulnerability(invulnerabilityDuration);
-        }
-        if (disableInputDuration > 0)
-        {
-            DisableInputs(disableInputDuration);
-        }
-        if(knockbackForce > 0)
-        {
-            Vector3 hitPoint = hitCollider.ClosestPoint(characterCenter);
-            Vector3 knockbackDirection = characterCenter - hitPoint;
-            knockbackDirection = new Vector3(knockbackDirection.x, knockbackDirection.y, 0f);
-            knockbackDirection = knockbackDirection.normalized;
-            Vector3 knockback = knockbackDirection * knockbackForce;
-            _cachedKnockback = knockback;
 
-            CancelDash();
-            CancelUTurn();
-            CancelJumpDosage();
+        if (!hasHyperArmor)
+        {
+            if (invulnerabilityDuration > 0)
+            {
+                characterHealth.Invulnerability(invulnerabilityDuration);
+            }
+            if (disableInputDuration > 0)
+            {
+                DisableInputs(disableInputDuration);
+            }
+            if (knockbackForce > 0)
+            {
+                Vector3 hitPoint = hitCollider.ClosestPoint(characterCenter);
+                Vector3 knockbackDirection = characterCenter - hitPoint;
+                knockbackDirection = new Vector3(knockbackDirection.x, knockbackDirection.y, 0f);
+                knockbackDirection = knockbackDirection.normalized;
+                Vector3 knockback = knockbackDirection * knockbackForce;
+                _cachedKnockback = knockback;
+
+                CancelDash();
+                CancelUTurn();
+                CancelJumpDosage();
+            }
         }
 
         if (OnHit != null)

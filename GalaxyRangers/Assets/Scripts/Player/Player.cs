@@ -27,8 +27,11 @@ public class Player : MonoBehaviour
     public static Player Instance;
 
     [Header("OBJECT REFERENCES")]
-    [SerializeField] private PlayerCharacterController _controller;
-    public PlayerCharacterController CharacterController { get { return _controller; } }
+    [SerializeField] private BaseCharacterController _controller;
+    public BaseCharacterController CharacterController { get { return _controller; } }
+
+    [SerializeField] private CharacterCombat _combat;
+    public CharacterCombat CharacterCombat { get { return _combat; } }
 
     [Header("INPUTS")]
     [Space(10)]
@@ -86,6 +89,22 @@ public class Player : MonoBehaviour
         else
         {
             _dashButtonPressed = false;
+        }
+    }
+
+    public void OnLightAttackInput(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            _combat.RequestLightAttack();
+        }
+    }
+
+    public void OnHeavyAttackInput(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            _combat.RequestHeavyAttack();
         }
     }
     #endregion

@@ -114,7 +114,7 @@ public class RogueRoom : MonoBehaviour
         }
     }
 
-    public void SetPlayerAtSpawnPoint(TraversalLocation traversalLocation, PlayerCharacterController player)
+    public void SetPlayerAtSpawnPoint(TraversalLocation traversalLocation, BaseCharacterController player)
     {
         if (traversalLocation == TraversalLocation.None)
         {
