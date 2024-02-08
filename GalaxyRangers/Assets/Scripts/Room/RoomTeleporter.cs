@@ -19,7 +19,7 @@ public class RoomTeleporter : MonoBehaviour
         if (_traversalPoint == null)
             return;
 
-        PlayerCharacterController player = other.GetComponent<PlayerCharacterController>();
+        BaseCharacterController player = other.GetComponent<BaseCharacterController>();
         if (player && !GameManager.Instance.isInFade)
         {
             //Use worldmanager to fade out, change room, fade in.

@@ -3,11 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class CharacterHealth : MonoBehaviour
 {
+    [Header("STAT")]
+    [Space]
     [SerializeField] private CharacterStat Health;
     public float MaxHealth { get { return Health.MaxValue; } }
     public float CurrentHealth { get { return Health.CurrentValue; } }
+    [Space]
     [SerializeField] private bool _isDead = false;
     public bool isDead { get { return _isDead; } }
     [SerializeField] private bool _isInvulnerable = false;

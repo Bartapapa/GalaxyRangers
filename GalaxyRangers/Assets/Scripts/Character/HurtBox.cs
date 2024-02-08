@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class HurtBox : MonoBehaviour
 {
+    [Header("WHO DOES THIS HURT?")]
+    [Space]
+    [SerializeField] private List<GameFaction> _hurtFactions = new List<GameFaction>();
+
+    [Header("PARAMETERS")]
+    [Space]
     [SerializeField] private float _damage = 1f;
     [SerializeField] private float _knockbackForce = 5f;
 
@@ -22,14 +28,15 @@ public class HurtBox : MonoBehaviour
     }
     private void OnTriggerStay(Collider other)
     {
-        PlayerCharacterController charController = other.GetComponent<PlayerCharacterController>();
+        BaseCharacterController charController = other.GetComponent<BaseCharacterController>();
         if (charController)
         {
-            Debug.Log("!");
-            if (!charController.hit)
+            if (!charController.hit && _hurtFactions.Contains(charController.faction))
             {
                 charController.Hit(_damage, _collider, _knockbackForce);
             }
         }
+
+        //Potentially also check Destructibles?
     }
 }

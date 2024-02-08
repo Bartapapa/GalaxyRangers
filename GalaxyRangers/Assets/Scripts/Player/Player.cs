@@ -27,8 +27,8 @@ public class Player : MonoBehaviour
     public static Player Instance;
 
     [Header("OBJECT REFERENCES")]
-    [SerializeField] private PlayerCharacterController _controller;
-    public PlayerCharacterController CharacterController { get { return _controller; } }
+    [SerializeField] private BaseCharacterController _controller;
+    public BaseCharacterController CharacterController { get { return _controller; } }
 
     [Header("INPUTS")]
     [Space(10)]

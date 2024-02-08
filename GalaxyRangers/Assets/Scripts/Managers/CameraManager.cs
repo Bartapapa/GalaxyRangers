@@ -22,8 +22,8 @@ public class CameraManager : MonoBehaviour
 
     [Header("OBJECT REFS")]
     [Space(10)]
-    [SerializeField] private PlayerCharacterController _playerCharacterController;
-    public PlayerCharacterController PlayerCharacterController { get { return _playerCharacterController; } }
+    [SerializeField] private BaseCharacterController _playerCharacterController;
+    public BaseCharacterController PlayerCharacterController { get { return _playerCharacterController; } }
 
     [Header("STATE")]
     [Space(10)]
@@ -75,7 +75,7 @@ public class CameraManager : MonoBehaviour
         TransitionToState(_startingCameraState);
     }
 
-    public void SetPlayerCharacterController(PlayerCharacterController pcController)
+    public void SetPlayerCharacterController(BaseCharacterController pcController)
     {
         _playerCharacterController = pcController;
         pcController.OnMove += OnCharacterMove;
