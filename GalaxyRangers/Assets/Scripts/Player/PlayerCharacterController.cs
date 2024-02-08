@@ -1,4 +1,5 @@
 using DG.Tweening.Core.Easing;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
@@ -65,6 +66,9 @@ public partial class PlayerCharacterController : MonoBehaviour
     [Space(10)]
     [SerializeField] private CharacterBehavior _characterBehavior;
     public CharacterBehavior characterBehavior { get { return _characterBehavior; } }
+    [Space]
+    [SerializeField] private CharacterHealth _characterHealth;
+    public CharacterHealth characterHealth { get { return _characterHealth; } }
 
     [Header("MOTION")]
     [Space(10)]
@@ -141,9 +145,12 @@ public partial class PlayerCharacterController : MonoBehaviour
     [Space]
     [SerializeField] private int maxJumpCount = 2;
     [SerializeField] private int jumpCount;
+    [SerializeField] private int maxWallJumpCount = 1;
+    [SerializeField] private int wallJumpCount = 0;
     [SerializeField] private bool jumpBuffer = false;
     [Space]
     [SerializeField] private float jumpStrength = 8f;
+    [SerializeField] private float maxJumpDuration = 1f;
     [SerializeField] private AnimationCurve jumpDosageCurve = AnimationCurve.Linear(0, 0, 1, 1);
     [SerializeField][Range(1f, 4f)] private float shortJumpSpeedFactor = 2f;
     [Header("Wall Detection")]
@@ -168,13 +175,36 @@ public partial class PlayerCharacterController : MonoBehaviour
     [Space]
     [SerializeField] private bool isFrozen = false;
 
+    [Header("Dash behavior")]
+    [Space]
+    [SerializeField] private bool _isDashing = false;
+    public bool isDashing { get { return _isDashing; } }
+    [Space]
+    [SerializeField] private float _dashSpeed = 15f;
+    public float dashSpeed { get { return _dashSpeed; } }
+    [SerializeField] private float _dashDuration = .5f;
+    [SerializeField] private AnimationCurve dashSpeedCurve = AnimationCurve.Linear(0, 0, 1, 1);
+    public float dashDuration { get { return _dashDuration; } }
+    [SerializeField] private float _dashCooldown = 1f;
+    public float dashCooldown { get { return _dashCooldown; } }
+    [Space]
+    [SerializeField] private int _maxAirDashes = 1;
+    public int maxAirDashes { get { return _maxAirDashes; } }
+    [SerializeField] private int _currentAirDashes = 0;
+    public int currentAirDashes { get { return _currentAirDashes; } }
+    private float _dashCooldownTimer = 0f;
+    private bool dashBuffer = false;
+
     [Header("COMBAT")]
     [Space(10)]
-    [SerializeField] private bool hit = false;
+    [SerializeField] private bool _hit = false;
+    public bool hit { get { return _hit; } }
     [Space]
     [SerializeField] private bool _isDead = false;
     public bool isDead { get { return _isDead; } }
     [SerializeField] private float resurrectDelay = 1f;
+    [Space]
+    [SerializeField] private Vector3 _cachedKnockback = Vector3.zero;
 
     [Header("LOCKS")]
     [Space(10)]
@@ -197,6 +227,7 @@ public partial class PlayerCharacterController : MonoBehaviour
     public delegate void RaycastHitCallback(RaycastHit hit);
     public delegate void LandingCallback(float value, RaycastHit hit);
     public delegate void CharacterControllerCallback(PlayerCharacterController playerCharacterController);
+    public FloatCallback OnMove;
     public IntCallback OnSetPlayer;
     public IntCallback OnJump;
     public RaycastHitCallback OnWallJump;
@@ -207,6 +238,7 @@ public partial class PlayerCharacterController : MonoBehaviour
     public DefaultCallback OnEndHitlag;
     public DefaultCallback OnFreeze;
     public DefaultCallback OnUnfreeze;
+    public DefaultCallback OnDash;
     public CharacterControllerCallback OnDeath;
     public CharacterControllerCallback OnWaitForResurrect;
     public CharacterControllerCallback OnResurrect;
@@ -249,6 +281,9 @@ public partial class PlayerCharacterController : MonoBehaviour
     private Coroutine uTurnCoroutine;
     private Coroutine hitCoroutine;
     private Coroutine resurrectCoroutine;
+    private Coroutine dashCoroutine;
+    private Coroutine dashBufferCoroutine;
+    private Coroutine disableInputCoroutine;
 
     #region UNITY_BASED
 
@@ -257,6 +292,26 @@ public partial class PlayerCharacterController : MonoBehaviour
 #if UNITY_EDITOR
         OnJump += CheatJumpCallback;
 #endif
+    }
+
+    private void Start()
+    {
+        //This is just for debug purposes - should be cleaned up later, when confronting SceneLoading.
+        CameraManager.Instance.SetPlayerCharacterController(this);
+    }
+
+    private void Update()
+    {
+        HandleCooldowns();
+    }
+
+    private void HandleCooldowns()
+    {
+        //Dashing
+        if (_dashCooldownTimer > 0 && !_isDashing)
+        {
+            _dashCooldownTimer -= Time.deltaTime;
+        }
     }
 
     private void FixedUpdate()
@@ -293,7 +348,7 @@ public partial class PlayerCharacterController : MonoBehaviour
     #region INPUTS
     public void SetInputs(PlayerInputs inputs)
     {
-        if (_inputsLocked)
+        if (_inputsLocked || characterHealth.isDead)
         {
             _moveInput = 0f;
             _upDownInput = 0f;
@@ -310,6 +365,32 @@ public partial class PlayerCharacterController : MonoBehaviour
     {
         SetJumpBuffer();
     }
+
+    public void RequestDash()
+    {
+        SetDashBuffer();
+    }
+
+    public void DisableInputs(float duration)
+    {
+        if (disableInputCoroutine != null)
+        {
+            StopCoroutine(disableInputCoroutine);
+        }
+        disableInputCoroutine = StartCoroutine(CoDisableInputs(duration));
+    }
+
+    private IEnumerator CoDisableInputs(float duration)
+    {
+        _inputsLocked = true;
+        float t = 0f;
+        while (t < duration)
+        {
+            t += Time.deltaTime;
+            yield return null;
+        }
+        _inputsLocked = false;
+    }
     #endregion
 
     #region BEHAVIOUR
@@ -324,6 +405,9 @@ public partial class PlayerCharacterController : MonoBehaviour
             return;
 
         if (isJumping)
+            return;
+
+        if (isDashing)
             return;
 
         if (!isFastFalling && !isGrounded && !isJumping && rigid.velocity.y < 0f && _upDownInput < -0.5f)
@@ -343,8 +427,12 @@ public partial class PlayerCharacterController : MonoBehaviour
 
         if (isMoving)
         {
-            if (isGrounded && !uTurn)
+            if (isGrounded && !uTurn && !isDashing)
                 _leftRight = (int)Mathf.Sign(_moveInput);
+            if (OnMove != null)
+            {
+                OnMove(Time.fixedDeltaTime);
+            }
         }
 
         // Character physics is frozen
@@ -376,7 +464,9 @@ public partial class PlayerCharacterController : MonoBehaviour
         if (!isGrounded) // Air movements
         {
             if (wallJump)
+            {
                 velocityLerp = Vector2.Lerp(rigidbodyVelocity, velocityLerp, wallJumpMotionFactorCurve.Evaluate(airTime - wallJumpAirTime));
+            }          
 
             velocityLerp.y = rigid.velocity.y;
         }
@@ -501,6 +591,8 @@ public partial class PlayerCharacterController : MonoBehaviour
 
         _isGrounded = true;
         jumpCount = 0;
+        wallJumpCount = 0;
+        _currentAirDashes = 0;
 
         if (jumpBuffer)
             Jump(0);
@@ -724,7 +816,7 @@ public partial class PlayerCharacterController : MonoBehaviour
         if (isFrozen)
             return;
 
-        if (hit)
+        if (_hit)
             return;
 
         if (jumpCoroutine != null)
@@ -768,6 +860,17 @@ public partial class PlayerCharacterController : MonoBehaviour
 
         int direction = isFacingLeftWall ? 1 : -1;
 
+        if (isDashing)
+        {
+            CancelDash();
+            SetRigidbodyVelocity(new Vector3(maxSpeed*10f * direction, jumpStrength*10f, 0f));
+            Debug.Log("!");
+        }
+        else
+        {
+            SetRigidbodyVelocity(new Vector3(maxSpeed * direction, jumpStrength, 0f));
+        }
+
         SetRigidbodyVelocity(new Vector3(maxSpeed * direction, jumpStrength, 0f));
         SetRigidbodyPosition(GetSphereHitPosition(wallHit));
         _leftRight = direction;
@@ -776,6 +879,13 @@ public partial class PlayerCharacterController : MonoBehaviour
         _wallJump = true;
 
         lastWallJumpHit = wallHit;
+
+        wallJumpCount++;
+        _currentAirDashes--;
+        if (_currentAirDashes < 0)
+        {
+            _currentAirDashes = 0;
+        }
 
         if (OnWallJump != null)
         {
@@ -792,15 +902,19 @@ public partial class PlayerCharacterController : MonoBehaviour
         if (wallHitUpperThanLastWallJump)
             return false;
 
+        if (wallJumpCount >= maxWallJumpCount)
+            return false;
+
         return isFacingAWall;
     }
 
     private IEnumerator JumpDosage()
     {
         float t = 0;
+        float d = maxJumpDuration;
         Keyframe lastKey = jumpDosageCurve.keys[jumpDosageCurve.keys.Length - 1];
 
-        while (t < lastKey.time)
+        while (t < d)
         {
             if (_isTouchingCeiling)
             {
@@ -809,7 +923,7 @@ public partial class PlayerCharacterController : MonoBehaviour
 
             float holdFactor = _jumpPressed ? 1f : shortJumpSpeedFactor;
             t += Time.deltaTime * holdFactor;
-            float jumpDosageStrength = jumpDosageCurve.Evaluate(t);
+            float jumpDosageStrength = jumpStrength*jumpDosageCurve.Evaluate(t/d);
 
             //rigid.AddForce(Vector3.up * jumpDosageStrength, ForceMode.Acceleration);
             SetRigidbodyVelocity(new Vector3(rigid.velocity.x, jumpDosageStrength, 0));
@@ -877,6 +991,115 @@ public partial class PlayerCharacterController : MonoBehaviour
         _uTurn = false;
     }
 
+    private void SetDashBuffer()
+    {
+        bool canDash = true;
+        if (_dashCooldownTimer > 0 || currentAirDashes >= maxAirDashes)
+        {
+            canDash = false;
+        }
+
+        if (canDash)
+        {
+            Dash();
+        }
+        else
+        {
+            if (dashBufferCoroutine != null)
+                StopCoroutine(dashBufferCoroutine);
+            dashBufferCoroutine = StartCoroutine(CoSetDashBuffer());
+        }
+    }
+
+    private IEnumerator CoSetDashBuffer()
+    {
+        dashBuffer = true;
+        yield return new WaitForSecondsRealtime(0.2f);
+        dashBuffer = false;
+    }
+
+    private void Dash()
+    {
+        if (isFrozen)
+            return;
+
+        if (_hit)
+            return;
+
+        if (dashCoroutine != null)
+            StopCoroutine(dashCoroutine);
+        dashCoroutine = StartCoroutine(CoDash());
+
+        CancelJumpDosage();
+
+        _isDashing = true;
+        dashBuffer = false;
+        _wallJump = false;
+        isFastFalling = false;
+        _dashCooldownTimer = _dashCooldown;
+
+        SetColliderMode(1);
+
+        DoADash();
+    }
+
+    private void DoADash()
+    {
+        if (OnDash != null)
+        {
+            OnDash();
+        }
+
+
+        _isMoving = Mathf.Abs(_moveInput) != 0f;
+
+        if (isMoving)
+        {
+            _leftRight = (int)Mathf.Sign(_moveInput);
+            if (OnMove != null)
+            {
+                OnMove(999f);
+            }
+        }
+
+        if (!isGrounded)
+        {
+            _currentAirDashes++;
+        }
+
+        SetRigidbodyVelocity(new Vector3(_leftRight * _dashSpeed, 0f, 0f));
+        CharacterOrientation(true);
+    }
+
+    private IEnumerator CoDash()
+    {
+        float t = 0;
+        float d = _dashDuration;
+
+        while (t < d)
+        {
+            t += Time.deltaTime;
+            float curvedDashSpeed = _dashSpeed * dashSpeedCurve.Evaluate(t/d);
+
+            SetRigidbodyVelocity(new Vector3(_leftRight * curvedDashSpeed, 0, 0));
+
+            yield return null;
+        }
+
+        _isDashing = false;
+    }
+
+    private void CancelDash()
+    {
+        if (!isDashing)
+            return;
+
+        if (dashCoroutine != null)
+            StopCoroutine(dashCoroutine);
+
+        _isDashing = false;
+    }
+
     private void SetColliderMode(int mode)
     {
         SetColliderParameters(capsuleCollider.radius, mode == 0 ? _defaultColliderHeight : _defaultColliderRadius * 2f, defaultColliderHeight / 2f);
@@ -924,6 +1147,11 @@ public partial class PlayerCharacterController : MonoBehaviour
             OnUnfreeze();
         }
 
+        if (_cachedKnockback != Vector3.zero)
+        {
+            SetRigidbodyVelocity(_cachedKnockback);
+            _cachedKnockback = Vector3.zero;
+        }
     }
 
     public void SetStartPosition(Vector2 newStartPos)
@@ -935,22 +1163,54 @@ public partial class PlayerCharacterController : MonoBehaviour
 
     #region COMBAT
 
-    public void Hit(float hitLagDuration = 0.2f)
+    public void Hit(float damage, Collider hitCollider, float knockbackForce, float disableInputDuration = .3f, float hitLagDuration = 0.1f, bool pierceInvulnerability = false, float invulnerabilityDuration = .5f)
     {
-        if (hitCoroutine != null)
-            StopCoroutine(hitCoroutine);
-        hitCoroutine = StartCoroutine(CoHit(hitLagDuration));
+        if (characterHealth.isInvulnerable && !pierceInvulnerability)
+            return;
+
+        characterHealth.Hurt(damage);
+
+        if (hitLagDuration > 0)
+        {
+            if (hitCoroutine != null)
+                StopCoroutine(hitCoroutine);
+            hitCoroutine = StartCoroutine(CoHit(hitLagDuration));
+
+            CancelDash();
+            CancelUTurn();
+            CancelJumpDosage();
+        }
+        if (invulnerabilityDuration > 0)
+        {
+            characterHealth.Invulnerability(invulnerabilityDuration);
+        }
+        if (disableInputDuration > 0)
+        {
+            DisableInputs(disableInputDuration);
+        }
+        if(knockbackForce > 0)
+        {
+            Vector3 hitPoint = hitCollider.ClosestPoint(characterCenter);
+            Vector3 knockbackDirection = characterCenter - hitPoint;
+            knockbackDirection = new Vector3(knockbackDirection.x, knockbackDirection.y, 0f);
+            knockbackDirection = knockbackDirection.normalized;
+            Vector3 knockback = knockbackDirection * knockbackForce;
+            _cachedKnockback = knockback;
+
+            CancelDash();
+            CancelUTurn();
+            CancelJumpDosage();
+        }
 
         if (OnHit != null)
         {
             OnHit();
         }
-
     }
 
     private IEnumerator CoHit(float hitLagDuration)
     {
-        hit = true;
+        _hit = true;
         FreezeCharacter();
 
         float t = 0f;
@@ -961,26 +1221,24 @@ public partial class PlayerCharacterController : MonoBehaviour
             yield return null;
         }
 
-        hit = false;
+        _hit = false;
         UnfreezeCharacter();
 
         if (OnEndHitlag != null)
         {
             OnEndHitlag();
-        } 
-
-        Death();
+        }
     }
 
     private void CancelHit()
     {
-        if (!hit)
+        if (!_hit)
             return;
 
         if (hitCoroutine != null)
             StopCoroutine(hitCoroutine);
 
-        hit = false;
+        _hit = false;
 
         if (OnEndHitlag != null)
         {
@@ -1076,7 +1334,9 @@ public partial class PlayerCharacterController : MonoBehaviour
         isFastFalling = false;
         _wallJump = false;
 
+        wallJumpCount = 0;
         jumpCount = 0;
+        _currentAirDashes = 0;
         airTime = 0;
 
         SetRigidbodyVelocity(Vector3.zero);

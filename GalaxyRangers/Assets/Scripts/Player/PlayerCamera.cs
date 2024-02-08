@@ -23,6 +23,8 @@ public class PlayerCamera : MonoBehaviour
 {
     public CinemachineVirtualCamera Camera;
     [SerializeField] private Transform _focus;
+    [SerializeField] private Vector3 _focusOffset = Vector3.zero;
+    public Vector3 FocusOffset { get { return _focusOffset; } set { _focusOffset = value; } }
     [SerializeField] private List<FocusObject> _focusObjects = new List<FocusObject>();
 
     private void Awake()
@@ -48,7 +50,7 @@ public class PlayerCamera : MonoBehaviour
             Vector3 toPos = _focusObjects[0].IgnoreZ ?
                             new Vector3(_focusObjects[0].Object.position.x, _focusObjects[0].Object.position.y, 0f) :
                             _focusObjects[0].Object.position;
-            _focus.position = toPos;
+            _focus.position = toPos + _focusOffset;
         }
         else
         {
@@ -62,7 +64,7 @@ public class PlayerCamera : MonoBehaviour
                 averagePos += (focusObjectPos * focusObject.Weight);
             }
             averagePos = averagePos / _focusObjects.Count;
-            _focus.position = averagePos;
+            _focus.position = averagePos + _focusOffset;
         }
     }
 
