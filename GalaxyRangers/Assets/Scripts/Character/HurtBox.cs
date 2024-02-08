@@ -39,4 +39,14 @@ public class HurtBox : MonoBehaviour
 
         //Potentially also check Destructibles?
     }
+
+    public void EnableHurtBox()
+    {
+        _collider.enabled = true;
+    }
+
+    public void DisableHurtBox()
+    {
+        _collider.enabled = false;
+    }
 }

@@ -216,6 +216,7 @@ public partial class BaseCharacterController : MonoBehaviour
     [Space]
     [SerializeField] private bool _isDead = false;
     public bool isDead { get { return _isDead; } }
+    public bool isDisabled { get { return _inputsLocked || _isDead || _hit ? true : false; } }
     [SerializeField] private float resurrectDelay = 1f;
     public bool hasHyperArmor = false;
     [Space]

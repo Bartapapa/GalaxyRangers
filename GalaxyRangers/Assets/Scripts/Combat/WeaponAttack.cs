@@ -18,6 +18,8 @@ public class WeaponAttack : ScriptableObject
     [Space]
     [SerializeField] private string _windUpAnimationName = "";
     public string windUpAnimationName { get { return _windUpAnimationName; } }
+    [SerializeField] private string _chargingAnimationName = "";
+    public string chargingAnimationName { get { return _chargingAnimationName; } }
     [SerializeField] private string _attackAnimationName = "";
     public string attackAnimationName { get { return _attackAnimationName; } }
     [SerializeField] private string _followThroughAnimationName = "";
@@ -50,15 +52,15 @@ public class WeaponAttack : ScriptableObject
     [Space]
     [SerializeField] private bool _canCombo;
     public bool canCombo { get { return _canCombo; } }
-    [SerializeField] private float _comboStartTime;
+    [SerializeField][Tooltip("The combo flag start time AFTER followThrough has been called.")] private float _comboStartTime;
     public float comboFlagStartTime { get { return _comboStartTime; } }
     [SerializeField] private float _comboFlagDuration;
     public float comboFlagDuration { get { return _comboFlagDuration; } }
 
     [Header("HYPERARMOR")]
     [Space]
-    [SerializeField] private bool _createsHyeprArmor;
-    public bool createsHyperArmor { get { return _createsHyeprArmor; } }
+    [SerializeField] private bool _createsHyperArmor;
+    public bool createsHyperArmor { get { return _createsHyperArmor; } }
     [SerializeField] private float _hyperArmorStartTime;
     public float hyperArmorStartTime { get { return _hyperArmorStartTime; } }
     [SerializeField] private float _hyperArmorDuration;
