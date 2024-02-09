@@ -22,5 +22,20 @@ public class DebugEdge : MonoBehaviour
         _line.SetPosition(1, child.transform.position);
     }
 
+    public void BuildTeleport(Transform parent, Transform child)
+    {
+        _line = GetComponent<LineRenderer>();
+
+        _line.startColor = Color.green;
+        _line.endColor = Color.green;
+
+        _parentNode = parent;
+        _childNode = child;
+
+        transform.position = parent.transform.position + Vector3.up;
+        _line.SetPosition(0, parent.transform.position + Vector3.up);
+        _line.SetPosition(1, child.transform.position + Vector3.up);
+    }
+
 
 }
