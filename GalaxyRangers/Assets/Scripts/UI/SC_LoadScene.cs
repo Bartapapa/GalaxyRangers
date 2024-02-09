@@ -5,8 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class SC_LoadScene : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject _panelInRef = null;
+    //[SerializeField]
+    //private GameObject _panelInRef = null;
     private Animator _animatorPanel = null;
     [SerializeField]
     private SC_Fade _fadeScript = null;
