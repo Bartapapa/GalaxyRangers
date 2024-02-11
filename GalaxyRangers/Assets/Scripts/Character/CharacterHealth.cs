@@ -8,7 +8,7 @@ public class CharacterHealth : MonoBehaviour
 {
     [Header("STAT")]
     [Space]
-    [SerializeField] private CharacterStat Health;
+    public CharacterStat Health;
     public float MaxHealth { get { return Health.MaxValue; } }
     public float CurrentHealth { get { return Health.CurrentValue; } }
     [Space]

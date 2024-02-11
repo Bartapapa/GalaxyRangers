@@ -2165,6 +2165,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _characterBehavior: {fileID: 1580560404}
   _characterHealth: {fileID: 1033834841}
+  _characterStats: {fileID: 0}
   _isMoving: 0
   _minSpeed: 1
   _maxSpeed: 8
@@ -2406,7 +2407,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _currentRogueRoom: {fileID: 0}
-  seed: barthelemirapeaux
+  seed: claire
   numberOfRooms: 10
   maxNumberOfChildRooms: 2
   mainBranchMinDistance: 4
@@ -3173,6 +3174,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _characterBehavior: {fileID: 1756143504}
   _characterHealth: {fileID: 1532192481}
+  _characterStats: {fileID: 11400000, guid: 95bf302da2d1c5e4d8dce41a7e615030, type: 2}
   _isMoving: 0
   _minSpeed: 1
   _maxSpeed: 8

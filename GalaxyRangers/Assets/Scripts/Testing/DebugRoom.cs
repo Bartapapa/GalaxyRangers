@@ -11,13 +11,37 @@ public class DebugRoom : MonoBehaviour
     private List<Transform> _childRooms = new List<Transform>();
     private RoomType _roomType = RoomType.None;
     private List<DebugEdge> _edges = new List<DebugEdge>();
+    public Color currentColor;
     public Color originalColor;
+    private Material _mat;
+
+    private void Update()
+    {
+        if (room.specialEventType > 0 && _mat != null)
+        {
+            float pingPong = Mathf.PingPong(Time.time / 2, 1f);
+            if (room.specialEventType == 1)
+            {
+                //Second chance
+                _mat.color = Color.Lerp(currentColor, new Color(0f, 1f, 0f, 1f), pingPong);
+            }
+            else if (room.specialEventType == 2)
+            {
+                //Gas
+                _mat.color = Color.Lerp(currentColor, new Color(1f, 0f, 0f, 1f), pingPong);
+            }
+            else return;
+        }
+    }
 
     private void OnDestroy()
     {
         foreach(DebugEdge edge in _edges)
         {
-            Destroy(edge.gameObject);
+            if (edge != null)
+            {
+                Destroy(edge.gameObject);
+            }
         }
     }
     public void BuildRoom(Room _room)
@@ -35,7 +59,7 @@ public class DebugRoom : MonoBehaviour
     private void SetColor(RoomType type, DifficultyScenario scenario)
     {
         _roomType = type;
-        Material mat = GetComponent<MeshRenderer>().material;
+        _mat = GetComponent<MeshRenderer>().material;
         float colorMult = 1;
         switch (scenario)
         {
@@ -56,35 +80,35 @@ public class DebugRoom : MonoBehaviour
         switch (_roomType)
         {
             case RoomType.None:
-                mat.color = Color.black;
+                _mat.color = Color.black;
                 originalColor = Color.black;
                 break;
             case RoomType.Spawn:
-                mat.color = Color.white;
+                _mat.color = Color.white;
                 originalColor = Color.white;
                 break;
             case RoomType.Boss:
-                mat.color = Color.red;
+                _mat.color = Color.red;
                 originalColor = Color.red;
                 break;
             case RoomType.Exploration:
-                mat.color = Color.blue * colorMult;
+                _mat.color = Color.blue * colorMult;
                 originalColor = Color.blue * colorMult;
                 break;
             case RoomType.Arena:
-                mat.color = Color.yellow * colorMult;
+                _mat.color = Color.yellow * colorMult;
                 originalColor = Color.yellow * colorMult;
                 break;
             case RoomType.Shop:
-                mat.color = Color.cyan;
+                _mat.color = Color.cyan;
                 originalColor = Color.cyan;
                 break;
             case RoomType.Heal:
-                mat.color = Color.green;
+                _mat.color = Color.green;
                 originalColor = Color.green;
                 break;
             case RoomType.Item:
-                mat.color = Color.magenta;
+                _mat.color = Color.magenta;
                 originalColor = Color.magenta;
                 break;
             case RoomType.Length:
@@ -92,19 +116,19 @@ public class DebugRoom : MonoBehaviour
             default:
                 break;
         }
+        currentColor = originalColor;
     }
 
     public void EnterRoom()
     {
-        Material mat = GetComponent<MeshRenderer>().material;
-
-        mat.color = Color.cyan;
+        _mat.color = Color.cyan;
+        currentColor = Color.cyan;
     }
 
     public void ExitRoom()
     {
-        Material mat = GetComponent<MeshRenderer>().material;
-        mat.color = originalColor;
+        _mat.color = originalColor;
+        currentColor = originalColor;
     }
 
     public void AddChild(Transform childRoom)

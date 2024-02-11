@@ -30,12 +30,26 @@ public class CharacterStat
             return _value;
         }
     }
+    public int MaxValueInt
+    {
+        get
+        {
+            return Mathf.FloorToInt(MaxValue);
+        }
+    }
     public float CurrentValue
     {
         get
         {
             _currentValue = MaxValue - _damage;
             return _currentValue;
+        }
+    }
+    public int CurrentValueInt
+    {
+        get
+        {
+            return Mathf.FloorToInt(CurrentValue);
         }
     }
 

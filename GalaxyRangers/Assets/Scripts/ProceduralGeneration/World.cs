@@ -196,7 +196,15 @@ public class World : Graph
 
     private void GenerateSubBranches()
     {
-        List<Room> mainBranchRooms = rooms;
+        List<Room> mainBranchRooms = new List<Room>();
+
+        foreach(Room room in rooms)
+        {
+            if (room.roomType != RoomType.Spawn)
+            {
+                mainBranchRooms.Add(room);
+            }
+        }
 
         for (int i = 0; i < mainBranchRooms.Count; i++)
         {
@@ -228,27 +236,30 @@ public class World : Graph
                     }
                 }
 
-                Room mainBranchParent = mainBranchRooms[i];
-                Room parentroom = mainBranchRooms[i];
-                mainBranchRooms[i].teleporter = new Teleporter(true, null);
-
-                Layer parentLayer = mainBranchRooms[i].layer;
-                for (int j = 0; j < randomNumberOfChildren; j++)
+                if (randomNumberOfChildren >= 1)
                 {
-                    Room childRoom = new Room(this, parentroom);
-                    AddRoom(childRoom);
+                    Room mainBranchParent = mainBranchRooms[i];
+                    Room parentroom = mainBranchRooms[i];
+                    mainBranchParent.teleporter = new Teleporter(true, null);
 
-                    parentroom.AddChildRoom(childRoom);
-
-                    currentInstantiatedRoom++;
-
-                    parentroom = childRoom;
-
-                    parentLayer.AddToLayer(childRoom);
-
-                    if (j+1 >= randomNumberOfChildren)
+                    Layer parentLayer = mainBranchRooms[i].layer;
+                    for (int j = 0; j < randomNumberOfChildren; j++)
                     {
-                        childRoom.teleporter = new Teleporter(true, mainBranchParent);
+                        Room childRoom = new Room(this, parentroom);
+                        AddRoom(childRoom);
+
+                        parentroom.AddChildRoom(childRoom);
+
+                        currentInstantiatedRoom++;
+
+                        parentroom = childRoom;
+
+                        parentLayer.AddToLayer(childRoom);
+
+                        if (j + 1 >= randomNumberOfChildren)
+                        {
+                            childRoom.teleporter = new Teleporter(true, mainBranchParent);
+                        }
                     }
                 }
             }
@@ -406,6 +417,15 @@ public class World : Graph
         int randomInt = UnityEngine.Random.Range(0, chosenRooms.Count);
         chosenRooms[randomInt].roomType = RoomType.Boss;
         _bossRoom = chosenRooms[randomInt];
+
+        if (_bossRoom.teleporter.isPresent)
+        {
+            if (_bossRoom.teleporter.toRoom != null)
+            {
+                _bossRoom.teleporter.toRoom.teleporter = new Teleporter(false, null);
+                _bossRoom.teleporter = new Teleporter(false, null);
+            }
+        }
     }
 
     private void SetHealRooms()
@@ -460,10 +480,10 @@ public class World : Graph
                 }
             }
 
-            if (chosenRooms.Count > 0)
-            {
-                break;
-            }
+            //if (chosenRooms.Count > 0)
+            //{
+            //    break;
+            //}
         }
 
         if (chosenRooms.Count <= 0)
@@ -570,34 +590,51 @@ public class World : Graph
             possibleRooms.Add(room);
         }
 
+        List<Room> mediumHardRooms = new List<Room>();
+        List<Room> easyMediumRooms = new List<Room>();
+        foreach (Room room in possibleRooms)
+        {
+            if (room.scenario == DifficultyScenario.Easy)
+            {
+                easyMediumRooms.Add(room);
+            }
+
+            if (room.scenario == DifficultyScenario.Medium)
+            {
+                easyMediumRooms.Add(room);
+                mediumHardRooms.Add(room);
+            }
+
+            if (room.scenario == DifficultyScenario.Hard)
+            {
+                mediumHardRooms.Add(room);
+            }
+        }
+
         //Second chance event
         float randomSecondChance = UnityEngine.Random.Range(0f, 1f);
         if (randomSecondChance <= _secondChanceEventSpawnChance)
         {
-            foreach(Room room in possibleRooms)
+            int randomInt = UnityEngine.Random.Range(0, mediumHardRooms.Count);
+            mediumHardRooms[randomInt].specialEventType = 1;
+            if (easyMediumRooms.Contains(mediumHardRooms[randomInt]))
             {
-                if (room.scenario == DifficultyScenario.Medium || room.scenario == DifficultyScenario.Hard)
-                {
-                    int randomInt = UnityEngine.Random.Range(0, possibleRooms.Count);
-                    possibleRooms[randomInt].specialEventType = 1;
-                    possibleRooms.Remove(possibleRooms[randomInt]);
-                }
+                easyMediumRooms.Remove(mediumHardRooms[randomInt]);
             }
+            mediumHardRooms.Remove(mediumHardRooms[randomInt]);
         }
 
         //Gas event
         float gasChance = UnityEngine.Random.Range(0f, 1f);
-        if (gasChance <= _secondChanceEventSpawnChance)
+        if (gasChance <= _gasEventSpawnChance)
         {
-            foreach (Room room in possibleRooms)
+            int randomInt = UnityEngine.Random.Range(0, mediumHardRooms.Count);
+            easyMediumRooms[randomInt].specialEventType = 2;
+            if (mediumHardRooms.Contains(easyMediumRooms[randomInt]))
             {
-                if (room.scenario == DifficultyScenario.Easy || room.scenario == DifficultyScenario.Medium)
-                {
-                    int randomInt = UnityEngine.Random.Range(0, possibleRooms.Count);
-                    possibleRooms[randomInt].specialEventType = 2;
-                    possibleRooms.Remove(possibleRooms[randomInt]);
-                }
+                mediumHardRooms.Remove(easyMediumRooms[randomInt]);
             }
+            easyMediumRooms.Remove(easyMediumRooms[randomInt]);
         }
     }
     #endregion

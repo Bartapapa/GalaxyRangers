@@ -78,7 +78,7 @@ public class Room : Node
     public float difficultyLevel = 0f;
     public DifficultyScenario scenario = DifficultyScenario.None;
     public int specialEventType = 0;
-    public Teleporter teleporter;
+    public Teleporter teleporter = new Teleporter(false, null);
 
     public Layer layer;
     public Room parentRoom;

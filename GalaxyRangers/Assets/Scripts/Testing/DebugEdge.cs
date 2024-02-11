@@ -26,15 +26,15 @@ public class DebugEdge : MonoBehaviour
     {
         _line = GetComponent<LineRenderer>();
 
-        _line.startColor = Color.green;
+        _line.startColor = new Color (0f, .5f, .5f, 1f);
         _line.endColor = Color.green;
 
         _parentNode = parent;
         _childNode = child;
 
-        transform.position = parent.transform.position + Vector3.up;
-        _line.SetPosition(0, parent.transform.position + Vector3.up);
-        _line.SetPosition(1, child.transform.position + Vector3.up);
+        transform.position = parent.transform.position + Vector3.forward*-.2f;
+        _line.SetPosition(0, parent.transform.position + Vector3.forward*-.2f);
+        _line.SetPosition(1, child.transform.position + Vector3.forward*-.2f);
     }
 
 
