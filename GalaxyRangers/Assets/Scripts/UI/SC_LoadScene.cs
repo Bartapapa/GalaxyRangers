@@ -21,6 +21,8 @@ public class SC_LoadScene : MonoBehaviour
             _animatorPanel = _panelInRef.GetComponent<Animator>();
         }
         StartCoroutine(loadNextScene(sceneName)); */
+
+
     }
 
     public IEnumerator loadNextScene(string sceneName)
