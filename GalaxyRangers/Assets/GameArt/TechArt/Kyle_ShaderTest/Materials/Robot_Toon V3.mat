@@ -127,7 +127,7 @@ Material:
     - _DstBlend: 0
     - _DstBlendAlpha: 0
     - _EnvironmentReflections: 1
-    - _Falloff_Amount: 0.01
+    - _Falloff_Amount: 0.027
     - _Fresnel_Size: 0.33
     - _GlossMapScale: 0
     - _Glossiness: 20
@@ -141,13 +141,13 @@ Material:
     - _QueueOffset: 0
     - _ReceiveShadows: 1
     - _Rim_Amount: 0.7
-    - _Rim_Size: 0.22
+    - _Rim_Size: 0.26
     - _Rim_Threshold: 0.1
     - _SHADOWS_SOFT: 1
     - _SampleGI: 0
     - _Shadow_Blend: 0.019
     - _Shadow_Size: 0.044
-    - _Smoothness: 100
+    - _Smoothness: 952
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _Specular_Blend: 0.01
@@ -159,15 +159,15 @@ Material:
     m_Colors:
     - Color_70EBBDEE: {r: 1, g: 1, b: 1, a: 0}
     - Color_F57A70D0: {r: 0.7075472, g: 0.7075472, b: 0.7075472, a: 0}
-    - _Ambient_Color: {r: 2, g: 2, b: 2, a: 0}
+    - _Ambient_Color: {r: 2.0514812, g: 1.1591434, b: 0.9967103, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _Diffuse_Color: {r: 1, g: 1, b: 1, a: 0}
+    - _Diffuse_Color: {r: 0.959995, g: 1, b: 0.7971698, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _Fresnel_Color: {r: 0, g: 3.2650356, b: 8, a: 0}
-    - _Rim_Color: {r: 0, g: 0.28730002, b: 5.239552, a: 0}
+    - _Rim_Color: {r: 0, g: 7.999999, b: 3.5283484, a: 0}
     - _Shadow_Color: {r: 0.51886785, g: 0.51886785, b: 0.51886785, a: 0}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
-    - _Specular_Color: {r: 0, g: 14.259475, b: 10.260325, a: 0}
+    - _Specular_Color: {r: 7.0941715, g: 14.312049, b: 19.037523, a: 0}
     - _Texture_Color: {r: 1, g: 1, b: 1, a: 0}
   m_BuildTextureStacks: []
