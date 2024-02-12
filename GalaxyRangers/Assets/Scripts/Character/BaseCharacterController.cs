@@ -118,6 +118,7 @@ public partial class BaseCharacterController : MonoBehaviour
     [SerializeField] [ReadOnlyInspector] private LayerMask _currentGroundLayers;
     [SerializeField] private LayerMask defaultEnvironmentLayers;
     [SerializeField] private LayerMask onlyGroundLayers;
+    public LayerMask currentGroundLayers { get { return _currentGroundLayers; } }
     [Space]
     [SerializeField] private float _defaultColliderHeight = 1.8f;
     public float defaultColliderHeight { get { return _defaultColliderHeight; } }
@@ -137,6 +138,7 @@ public partial class BaseCharacterController : MonoBehaviour
     [Space]
     [SerializeField] private bool _isGrounded = true;
     public bool isGrounded { get { return _isGrounded; } }
+    public bool isOnOneWayPlatform { get { return _isGrounded && _groundHit.collider.gameObject.layer == 7 ? true : false; } }
     [Space]
     [SerializeField] private float groundDetectionDistance = 0.2f;
     [SerializeField] private float feetDetectionOffset = 0.1f;
@@ -145,7 +147,7 @@ public partial class BaseCharacterController : MonoBehaviour
     public float groundAngle { get { return _groundAngle; } }
     [SerializeField][Range(0, 90)] private int _maximumGroundAngle = 45;
     public int maximumGroundAngle { get { return _maximumGroundAngle; } }
-    [Header("Ground behaviour")]
+    [Header("Ceiling behaviour")]
     [Space]
     [SerializeField] private bool _isTouchingCeiling = true;
     public bool isTouchingCeiling { get { return _isTouchingCeiling; } }
@@ -279,7 +281,7 @@ public partial class BaseCharacterController : MonoBehaviour
     private RaycastHit lastWallJumpHit;
     private bool wallHitUpperThanLastWallJump { get { return wallJump && (wallHit.normal.x * lastWallJumpHit.normal.x > 0f && wallHit.point.y > lastWallJumpHit.point.y); } }
     private float wallJumpAirTime;
-    private bool isFacingAWall { get { return (isFacingLeftWall || isFacingRightWall); } }
+    public bool isFacingAWall { get { return (isFacingLeftWall || isFacingRightWall); } }
     [Range(0, 180)] private float leftWallAngle;
     [Range(0, 180)] private float rightWallAngle;
     private Vector2 _movingVector
@@ -361,11 +363,6 @@ public partial class BaseCharacterController : MonoBehaviour
     private void Update()
     {
         HandleCooldowns();
-
-        if (UnityEngine.Input.GetKeyDown(KeyCode.P))
-        {
-
-        }
     }
 
     private void HandleCooldowns()
@@ -862,7 +859,7 @@ public partial class BaseCharacterController : MonoBehaviour
         bool canWallJump = CheckWallJump();
         bool canJump = jumpCount < maxJumpCount.CurrentValueInt;
 
-        if (_upDownInput < -0.5f)
+        if (_upDownInput < -0.5f && isOnOneWayPlatform)
         {
             if (oneWayPlatformCoroutine != null)
             {
@@ -892,7 +889,7 @@ public partial class BaseCharacterController : MonoBehaviour
     private IEnumerator CoOneWayPlatformBuffer()
     {
         _currentGroundLayers = onlyGroundLayers;
-        yield return new WaitForSecondsRealtime(0.5f);
+        yield return new WaitForSecondsRealtime(0.35f);
         _currentGroundLayers = defaultEnvironmentLayers;
     }
 
@@ -1006,7 +1003,6 @@ public partial class BaseCharacterController : MonoBehaviour
     {
         float t = 0;
         float d = maxJumpDuration.CurrentValue;
-        Keyframe lastKey = jumpDosageCurve.keys[jumpDosageCurve.keys.Length - 1];
 
         while (t < d)
         {
@@ -1257,7 +1253,7 @@ public partial class BaseCharacterController : MonoBehaviour
 
     #region COMBAT
 
-    public void Hit(float damage, Collider hitCollider, float knockbackForce, float disableInputDuration = .3f, float hitLagDuration = 0.1f, bool pierceInvulnerability = false, float invulnerabilityDuration = .5f)
+    public void Hit(float damage, Collider hitCollider, float knockbackForce, Vector3 overrideKnockbackDirection, float disableInputDuration = .3f, float hitLagDuration = 0.1f, bool pierceInvulnerability = false, float invulnerabilityDuration = .5f)
     {
         if (characterHealth.isInvulnerable && !pierceInvulnerability)
             return;
@@ -1288,9 +1284,19 @@ public partial class BaseCharacterController : MonoBehaviour
             if (knockbackForce > 0)
             {
                 Vector3 hitPoint = hitCollider.ClosestPoint(characterCenter);
-                Vector3 knockbackDirection = characterCenter - hitPoint;
-                knockbackDirection = new Vector3(knockbackDirection.x, knockbackDirection.y, 0f);
-                knockbackDirection = knockbackDirection.normalized;
+                Vector3 knockbackDirection = Vector3.zero;
+                if (overrideKnockbackDirection != Vector3.zero)
+                {
+                    knockbackDirection = new Vector3(knockbackDirection.x, knockbackDirection.y, 0f);
+                    knockbackDirection = overrideKnockbackDirection;
+                }
+                else
+                {
+                    knockbackDirection = characterCenter - hitPoint;
+                    knockbackDirection = new Vector3(knockbackDirection.x, knockbackDirection.y, 0f);
+                    knockbackDirection = knockbackDirection.normalized;
+                }
+
                 Vector3 knockback = knockbackDirection * knockbackForce;
                 _cachedKnockback = knockback;
 

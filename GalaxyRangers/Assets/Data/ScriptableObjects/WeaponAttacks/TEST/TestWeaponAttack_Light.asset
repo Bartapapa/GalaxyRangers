@@ -32,3 +32,9 @@ MonoBehaviour:
   _createsHyperArmor: 0
   _hyperArmorStartTime: 0
   _hyperArmorDuration: 0
+  _comboEndAttackCooldown: 2
+  _minAttackDistance: 1
+  _maxAttackDistance: 2
+  _attackPriority: 10
+  _attackWeight: 10
+  _attackType: 1
