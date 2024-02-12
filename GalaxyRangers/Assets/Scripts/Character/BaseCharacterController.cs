@@ -79,6 +79,10 @@ public partial class BaseCharacterController : MonoBehaviour
     [SerializeField] private CharacterHealth _characterHealth;
     public CharacterHealth characterHealth { get { return _characterHealth; } }
 
+    [Header("BASE CHARACTER STATS")]
+    [Space]
+    [SerializeField] private CharacterStats _characterStats;
+
     [Header("MOTION")]
     [Space(10)]
     [SerializeField] private bool _isMoving;
@@ -86,11 +90,12 @@ public partial class BaseCharacterController : MonoBehaviour
     [Space]
     [SerializeField] private float _minSpeed = 1f;
     public float minSpeed { get { return _minSpeed; } }
-    [SerializeField] private float _maxSpeed = 8f;
-    public float maxSpeed { get { return _maxSpeed; } }
+    [SerializeField][ReadOnlyInspector] private CharacterStat _maxSpeed;
+    public float maxSpeed { get { return _maxSpeed.MaxValue; } }
     [SerializeField] private float currentSpeed;
     [Space]
-    [SerializeField] private float speedLerpRate = 10f;
+    [SerializeField][ReadOnlyInspector] private CharacterStat _speedLerpRate;
+    public float acceleration { get { return _speedLerpRate.MaxValue; } }
     [Space]
     [SerializeField][Range(0f, 1f)] private float _runSpeedThresold = 0.5f;
     public float runSpeedThresold { get { return _runSpeedThresold; } }
@@ -113,6 +118,7 @@ public partial class BaseCharacterController : MonoBehaviour
     [SerializeField] [ReadOnlyInspector] private LayerMask _currentGroundLayers;
     [SerializeField] private LayerMask defaultEnvironmentLayers;
     [SerializeField] private LayerMask onlyGroundLayers;
+    public LayerMask currentGroundLayers { get { return _currentGroundLayers; } }
     [Space]
     [SerializeField] private float _defaultColliderHeight = 1.8f;
     public float defaultColliderHeight { get { return _defaultColliderHeight; } }
@@ -120,11 +126,11 @@ public partial class BaseCharacterController : MonoBehaviour
     public float defaultColliderRadius { get { return _defaultColliderRadius; } }
     [Header("Air behaviour")]
     [Space]
-    [SerializeField] private float gravity = -40;
-    [SerializeField] private float minFallSpeed = -15;
+    [SerializeField] private CharacterStat gravity;
+    [SerializeField] private CharacterStat minFallSpeed;
     [Space]
-    [SerializeField] private float fastFallGravityFactor = 3f;
-    [SerializeField] private float minFastFallSpeed = -30;
+    [SerializeField] private CharacterStat fastFallGravityFactor;
+    [SerializeField] private CharacterStat minFastFallSpeed;
     [SerializeField] private bool isFastFalling = false;
     [Space]
     [SerializeField] private float airTime;
@@ -132,6 +138,7 @@ public partial class BaseCharacterController : MonoBehaviour
     [Space]
     [SerializeField] private bool _isGrounded = true;
     public bool isGrounded { get { return _isGrounded; } }
+    public bool isOnOneWayPlatform { get { return _isGrounded && _groundHit.collider.gameObject.layer == 7 ? true : false; } }
     [Space]
     [SerializeField] private float groundDetectionDistance = 0.2f;
     [SerializeField] private float feetDetectionOffset = 0.1f;
@@ -140,7 +147,7 @@ public partial class BaseCharacterController : MonoBehaviour
     public float groundAngle { get { return _groundAngle; } }
     [SerializeField][Range(0, 90)] private int _maximumGroundAngle = 45;
     public int maximumGroundAngle { get { return _maximumGroundAngle; } }
-    [Header("Ground behaviour")]
+    [Header("Ceiling behaviour")]
     [Space]
     [SerializeField] private bool _isTouchingCeiling = true;
     public bool isTouchingCeiling { get { return _isTouchingCeiling; } }
@@ -154,14 +161,14 @@ public partial class BaseCharacterController : MonoBehaviour
     [SerializeField] private bool _wallJump = false;
     public bool wallJump { get { return _wallJump; } }
     [Space]
-    [SerializeField] private int maxJumpCount = 2;
+    [SerializeField] private CharacterStat maxJumpCount;
     [SerializeField] private int jumpCount;
-    [SerializeField] private int maxWallJumpCount = 1;
+    [SerializeField] private CharacterStat maxWallJumpCount;
     [SerializeField] private int wallJumpCount = 0;
     [SerializeField] private bool jumpBuffer = false;
     [Space]
-    [SerializeField] private float jumpStrength = 8f;
-    [SerializeField] private float maxJumpDuration = 1f;
+    [SerializeField] private CharacterStat jumpStrength;
+    [SerializeField] private CharacterStat maxJumpDuration;
     [SerializeField] private AnimationCurve jumpDosageCurve = AnimationCurve.Linear(0, 0, 1, 1);
     [SerializeField][Range(1f, 4f)] private float shortJumpSpeedFactor = 2f;
     [Header("Wall Detection")]
@@ -191,16 +198,16 @@ public partial class BaseCharacterController : MonoBehaviour
     [SerializeField] private bool _isDashing = false;
     public bool isDashing { get { return _isDashing; } }
     [Space]
-    [SerializeField] private float _dashSpeed = 15f;
-    public float dashSpeed { get { return _dashSpeed; } }
-    [SerializeField] private float _dashDuration = .5f;
+    [SerializeField] private CharacterStat _dashSpeed;
+    public float dashSpeed { get { return _dashSpeed.MaxValue; } }
+    [SerializeField] private CharacterStat _dashDuration;
     [SerializeField] private AnimationCurve dashSpeedCurve = AnimationCurve.Linear(0, 0, 1, 1);
-    public float dashDuration { get { return _dashDuration; } }
-    [SerializeField] private float _dashCooldown = 1f;
-    public float dashCooldown { get { return _dashCooldown; } }
+    public float dashDuration { get { return _dashDuration.MaxValue; } }
+    [SerializeField] private CharacterStat _dashCooldown;
+    public float dashCooldown { get { return _dashCooldown.MaxValue; } }
     [Space]
-    [SerializeField] private int _maxAirDashes = 1;
-    public int maxAirDashes { get { return _maxAirDashes; } }
+    [SerializeField] private CharacterStat _maxAirDashes;
+    public int maxAirDashes { get { return _maxAirDashes.MaxValueInt; } }
     [SerializeField] private int _currentAirDashes = 0;
     public int currentAirDashes { get { return _currentAirDashes; } }
     private float _dashCooldownTimer = 0f;
@@ -274,7 +281,7 @@ public partial class BaseCharacterController : MonoBehaviour
     private RaycastHit lastWallJumpHit;
     private bool wallHitUpperThanLastWallJump { get { return wallJump && (wallHit.normal.x * lastWallJumpHit.normal.x > 0f && wallHit.point.y > lastWallJumpHit.point.y); } }
     private float wallJumpAirTime;
-    private bool isFacingAWall { get { return (isFacingLeftWall || isFacingRightWall); } }
+    public bool isFacingAWall { get { return (isFacingLeftWall || isFacingRightWall); } }
     [Range(0, 180)] private float leftWallAngle;
     [Range(0, 180)] private float rightWallAngle;
     private Vector2 _movingVector
@@ -309,6 +316,40 @@ public partial class BaseCharacterController : MonoBehaviour
 #if UNITY_EDITOR
         OnJump += CheatJumpCallback;
 #endif
+
+        InitializeCharacterStats();
+    }
+
+    private void InitializeCharacterStats()
+    {
+        if (_characterStats == null)
+        {
+            Debug.LogWarning(this.name + " has no base character stats!");
+            return;
+        }
+
+        _maxSpeed = new CharacterStat(_characterStats.baseMaxSpeed);
+        _speedLerpRate = new CharacterStat(_characterStats.baseMaxSpeed);
+
+        gravity = new CharacterStat(_characterStats.gravity);
+        minFallSpeed = new CharacterStat(_characterStats.minFallSpeed);
+        fastFallGravityFactor = new CharacterStat(_characterStats.fastFallGravityFactor);
+        minFastFallSpeed = new CharacterStat(_characterStats.minFastFallSpeed);
+
+        maxJumpCount = new CharacterStat(_characterStats.baseMaxJumpCount);
+        maxWallJumpCount = new CharacterStat(_characterStats.baseMaxWallJumpCount);
+        jumpStrength = new CharacterStat(_characterStats.baseJumpStrength);
+        maxJumpDuration = new CharacterStat(_characterStats.baseMaxJumpDuration);
+        jumpDosageCurve = _characterStats.jumpDosageCurve;
+        shortJumpSpeedFactor = _characterStats.shortJumpSpeedFactor;
+
+        _dashSpeed = new CharacterStat(_characterStats.baseDashSpeed);
+        _dashDuration = new CharacterStat(_characterStats.baseDashDuration);
+        _dashCooldown = new CharacterStat(_characterStats.baseDashCooldown);
+        _maxAirDashes = new CharacterStat(_characterStats.baseMaxAirDashes);
+
+        _faction = _characterStats.faction;
+        _characterHealth.Health = new CharacterStat(_characterStats.baseHealth);
     }
 
     private void Start()
@@ -322,11 +363,6 @@ public partial class BaseCharacterController : MonoBehaviour
     private void Update()
     {
         HandleCooldowns();
-
-        if (UnityEngine.Input.GetKeyDown(KeyCode.P))
-        {
-
-        }
     }
 
     private void HandleCooldowns()
@@ -444,10 +480,10 @@ public partial class BaseCharacterController : MonoBehaviour
 
         isFastFalling = !isGrounded && !isJumping && rigid.velocity.y < 0f && _upDownInput < -0.5f ? true : false;
 
-        float targetGravity = isFastFalling ? gravity * fastFallGravityFactor : gravity;
+        float targetGravity = isFastFalling ? gravity.CurrentValue * fastFallGravityFactor.CurrentValue : gravity.CurrentValue;
         rigid.AddForce(Vector3.up * targetGravity, ForceMode.Acceleration);
 
-        float targetFallSpeed = isFastFalling ? minFastFallSpeed : minFallSpeed;
+        float targetFallSpeed = isFastFalling ? minFastFallSpeed.CurrentValue : minFallSpeed.CurrentValue;
         if (rigid.velocity.y < targetFallSpeed)
             SetRigidbodyVelocity(new Vector3(rigid.velocity.x, targetFallSpeed, 0));
     }
@@ -489,7 +525,7 @@ public partial class BaseCharacterController : MonoBehaviour
 
         // Ground tilt speed
         Vector2 targetVector = _movingVector * targetSpeed;
-        float xVelocityLerp = Mathf.Lerp(rigidbodyVelocity.x, targetVector.x, speedLerpRate * Time.fixedDeltaTime);
+        float xVelocityLerp = Mathf.Lerp(rigidbodyVelocity.x, targetVector.x, _speedLerpRate.CurrentValue * Time.fixedDeltaTime);
         Vector2 velocityLerp = new Vector2(xVelocityLerp, targetVector.y);
 
         if (!isGrounded) // Air movements
@@ -821,9 +857,9 @@ public partial class BaseCharacterController : MonoBehaviour
             return;
 
         bool canWallJump = CheckWallJump();
-        bool canJump = jumpCount < maxJumpCount;
+        bool canJump = jumpCount < maxJumpCount.CurrentValueInt;
 
-        if (_upDownInput < -0.5f)
+        if (_upDownInput < -0.5f && isOnOneWayPlatform)
         {
             if (oneWayPlatformCoroutine != null)
             {
@@ -853,7 +889,7 @@ public partial class BaseCharacterController : MonoBehaviour
     private IEnumerator CoOneWayPlatformBuffer()
     {
         _currentGroundLayers = onlyGroundLayers;
-        yield return new WaitForSecondsRealtime(0.5f);
+        yield return new WaitForSecondsRealtime(0.35f);
         _currentGroundLayers = defaultEnvironmentLayers;
     }
 
@@ -904,7 +940,7 @@ public partial class BaseCharacterController : MonoBehaviour
         _isGrounded = false;
         _groundAngle = 0;
 
-        SetRigidbodyVelocity(new Vector3(rigid.velocity.x, jumpStrength, 0f));
+        SetRigidbodyVelocity(new Vector3(rigid.velocity.x, jumpStrength.CurrentValue, 0f));
 
         jumpCount++;
     }
@@ -918,15 +954,15 @@ public partial class BaseCharacterController : MonoBehaviour
         if (isDashing)
         {
             CancelDash();
-            SetRigidbodyVelocity(new Vector3(maxSpeed*10f * direction, jumpStrength*10f, 0f));
+            SetRigidbodyVelocity(new Vector3(maxSpeed*10f * direction, jumpStrength.CurrentValue*10f, 0f));
             Debug.Log("!");
         }
         else
         {
-            SetRigidbodyVelocity(new Vector3(maxSpeed * direction, jumpStrength, 0f));
+            SetRigidbodyVelocity(new Vector3(maxSpeed * direction, jumpStrength.CurrentValue, 0f));
         }
 
-        SetRigidbodyVelocity(new Vector3(maxSpeed * direction, jumpStrength, 0f));
+        SetRigidbodyVelocity(new Vector3(maxSpeed * direction, jumpStrength.CurrentValue, 0f));
         SetRigidbodyPosition(GetSphereHitPosition(wallHit));
         _leftRight = direction;
         CharacterOrientation(true);
@@ -957,7 +993,7 @@ public partial class BaseCharacterController : MonoBehaviour
         if (wallHitUpperThanLastWallJump)
             return false;
 
-        if (wallJumpCount >= maxWallJumpCount)
+        if (wallJumpCount >= maxWallJumpCount.CurrentValueInt)
             return false;
 
         return isFacingAWall;
@@ -966,8 +1002,7 @@ public partial class BaseCharacterController : MonoBehaviour
     private IEnumerator JumpDosage()
     {
         float t = 0;
-        float d = maxJumpDuration;
-        Keyframe lastKey = jumpDosageCurve.keys[jumpDosageCurve.keys.Length - 1];
+        float d = maxJumpDuration.CurrentValue;
 
         while (t < d)
         {
@@ -978,7 +1013,7 @@ public partial class BaseCharacterController : MonoBehaviour
 
             float holdFactor = _jumpPressed ? 1f : shortJumpSpeedFactor;
             t += Time.deltaTime * holdFactor;
-            float jumpDosageStrength = jumpStrength*jumpDosageCurve.Evaluate(t/d);
+            float jumpDosageStrength = jumpStrength.CurrentValue*jumpDosageCurve.Evaluate(t/d);
 
             //rigid.AddForce(Vector3.up * jumpDosageStrength, ForceMode.Acceleration);
             SetRigidbodyVelocity(new Vector3(rigid.velocity.x, jumpDosageStrength, 0));
@@ -1091,7 +1126,7 @@ public partial class BaseCharacterController : MonoBehaviour
         dashBuffer = false;
         _wallJump = false;
         isFastFalling = false;
-        _dashCooldownTimer = _dashCooldown;
+        _dashCooldownTimer = _dashCooldown.CurrentValue;
 
         SetColliderMode(1);
 
@@ -1122,19 +1157,19 @@ public partial class BaseCharacterController : MonoBehaviour
             _currentAirDashes++;
         }
 
-        SetRigidbodyVelocity(new Vector3(_leftRight * _dashSpeed, 0f, 0f));
+        SetRigidbodyVelocity(new Vector3(_leftRight * _dashSpeed.CurrentValue, 0f, 0f));
         CharacterOrientation(true);
     }
 
     private IEnumerator CoDash()
     {
         float t = 0;
-        float d = _dashDuration;
+        float d = _dashDuration.CurrentValue;
 
         while (t < d)
         {
             t += Time.deltaTime;
-            float curvedDashSpeed = _dashSpeed * dashSpeedCurve.Evaluate(t/d);
+            float curvedDashSpeed = _dashSpeed.CurrentValue * dashSpeedCurve.Evaluate(t/d);
 
             SetRigidbodyVelocity(new Vector3(_leftRight * curvedDashSpeed, 0, 0));
 
@@ -1218,7 +1253,7 @@ public partial class BaseCharacterController : MonoBehaviour
 
     #region COMBAT
 
-    public void Hit(float damage, Collider hitCollider, float knockbackForce, float disableInputDuration = .3f, float hitLagDuration = 0.1f, bool pierceInvulnerability = false, float invulnerabilityDuration = .5f)
+    public void Hit(float damage, Collider hitCollider, float knockbackForce, Vector3 overrideKnockbackDirection, float disableInputDuration = .3f, float hitLagDuration = 0.1f, bool pierceInvulnerability = false, float invulnerabilityDuration = .5f)
     {
         if (characterHealth.isInvulnerable && !pierceInvulnerability)
             return;
@@ -1249,9 +1284,19 @@ public partial class BaseCharacterController : MonoBehaviour
             if (knockbackForce > 0)
             {
                 Vector3 hitPoint = hitCollider.ClosestPoint(characterCenter);
-                Vector3 knockbackDirection = characterCenter - hitPoint;
-                knockbackDirection = new Vector3(knockbackDirection.x, knockbackDirection.y, 0f);
-                knockbackDirection = knockbackDirection.normalized;
+                Vector3 knockbackDirection = Vector3.zero;
+                if (overrideKnockbackDirection != Vector3.zero)
+                {
+                    knockbackDirection = new Vector3(knockbackDirection.x, knockbackDirection.y, 0f);
+                    knockbackDirection = overrideKnockbackDirection;
+                }
+                else
+                {
+                    knockbackDirection = characterCenter - hitPoint;
+                    knockbackDirection = new Vector3(knockbackDirection.x, knockbackDirection.y, 0f);
+                    knockbackDirection = knockbackDirection.normalized;
+                }
+
                 Vector3 knockback = knockbackDirection * knockbackForce;
                 _cachedKnockback = knockback;
 
@@ -1430,7 +1475,7 @@ public partial class BaseCharacterController : MonoBehaviour
         if (!enableInfiniteJumps)
             return;
 
-        if (count == maxJumpCount - 1)
+        if (count == maxJumpCount.CurrentValueInt - 1)
             jumpCount--;
     }
 

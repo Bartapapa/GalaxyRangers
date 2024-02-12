@@ -10,14 +10,4 @@ public class Graph
 
     protected Queue<Node> _nodeQueue = new Queue<Node>();
     protected Stack<Node> _nodeStack = new Stack<Node>();
-
-    protected void BFS()
-    {
-
-    }
-
-    protected void DFS()
-    {
-
-    }
 }

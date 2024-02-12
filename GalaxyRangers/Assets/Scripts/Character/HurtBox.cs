@@ -12,6 +12,7 @@ public class HurtBox : MonoBehaviour
     [Space]
     [SerializeField] private float _damage = 1f;
     [SerializeField] private float _knockbackForce = 5f;
+    [SerializeField] private Vector3 _overrideKnockbackDirection = Vector3.zero;
 
     private Collider _collider;
 
@@ -33,7 +34,12 @@ public class HurtBox : MonoBehaviour
         {
             if (!charController.hit && _hurtFactions.Contains(charController.faction))
             {
-                charController.Hit(_damage, _collider, _knockbackForce);
+                if (_overrideKnockbackDirection != Vector3.zero)
+                {
+                    _overrideKnockbackDirection = _overrideKnockbackDirection.normalized;
+                }
+
+                charController.Hit(_damage, _collider, _knockbackForce, transform.rotation * _overrideKnockbackDirection);
             }
         }
 
@@ -48,5 +54,15 @@ public class HurtBox : MonoBehaviour
     public void DisableHurtBox()
     {
         _collider.enabled = false;
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        if (_overrideKnockbackDirection == Vector3.zero)
+            return;
+
+        Vector3 normalizedOverride = _overrideKnockbackDirection.normalized;
+        Gizmos.color = Color.blue;
+        Gizmos.DrawLine(transform.position, transform.position + (transform.rotation * normalizedOverride));
     }
 }

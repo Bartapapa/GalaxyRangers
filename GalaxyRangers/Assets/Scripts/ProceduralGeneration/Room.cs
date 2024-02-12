@@ -20,6 +20,9 @@ public enum RoomType
     Boss,
     Exploration,
     Arena,
+    Shop,
+    Heal,
+    Item,
     Length,
 }
 
@@ -27,6 +30,14 @@ public enum RoomEnvironment
 {
     Exterior,
     Interior,
+}
+
+public enum DifficultyScenario
+{
+    None,
+    Easy,
+    Medium,
+    Hard,
 }
 
 public class TraversalPoint
@@ -45,15 +56,36 @@ public class TraversalPoint
     }
 }
 
+public class Teleporter
+{
+    public bool isPresent = false;
+    public Room toRoom;
+
+    public Teleporter(bool isPres, Room to)
+    {
+        isPresent = isPres;
+        toRoom = to;
+    }
+}
+
 public class Room : Node
 {
     public World world;
     public RoomType roomType = RoomType.None;
     public RoomEnvironment roomEnvironment = RoomEnvironment.Exterior;
+
+    public int distance = 0;
+    public float difficultyLevel = 0f;
+    public DifficultyScenario scenario = DifficultyScenario.None;
+    public int specialEventType = 0;
+    public Teleporter teleporter = new Teleporter(false, null);
+
+    public Layer layer;
     public Room parentRoom;
     public List<Room> childRooms = new List<Room>();
     public List<TraversalPoint> exitPoints = new List<TraversalPoint>();
     public TraversalPoint entryPoint;
+    public List<Room> roomHistory = new List<Room>();
 
     public Room()
     {

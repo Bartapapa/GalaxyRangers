@@ -3,12 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum AttackType
-{
-    None,
-    Light,
-    Heavy,
-}
 public class CharacterCombat : MonoBehaviour
 {
     [Header("OBJECT REFS")]
@@ -18,9 +12,10 @@ public class CharacterCombat : MonoBehaviour
 
     [Header("WEAPON")]
     [SerializeField] private Weapon _currentWeapon;
+    public Weapon currentWeapon { get { return _currentWeapon; } }
     [SerializeField] private Transform _weaponHoldSocket;
 
-    public bool canAttack { get { return !_controller.isDisabled && (!isAttacking || canDoCombo); } }
+    public bool canAttack { get { return _currentWeapon != null && !_controller.isDisabled && (!isAttacking || canDoCombo); } }
     public bool isAttacking { get { return windUpCoroutine!=null || attackCoroutine!=null || followThroughCoroutine!=null ? true : false; } }
     public bool canDoCombo { get { return followThroughCoroutine != null &&
                 _currentWeaponStrike.attack.canCombo &&

@@ -14,13 +14,24 @@ public class WorldManager : MonoBehaviour
 
     [Header("PARAMETERS")]
     [Space(10)]
+    public string seed = "";
     public int numberOfRooms = 10;
     public int maxNumberOfChildRooms = 2;
-    public string seed = "";
+    public int mainBranchMinDistance = 5;
+    public int mainBranchMaxDistance = 7;
+    public int subBranchMaxDistance = 2;
+    public int maxNumberOfHealRooms = 1;
+    public int maxNumberOfShopRooms = 1;
+    public int maxNumberOfItemRooms = 1;
+    public float gasEventSpawnChance = .05f;
+    public float secondChanceEventSpawnChance = .05f;
+    public float baseDifficulty = 1f;
+    public float difficultyVariance = .5f;
 
     [Header("OBJECT REFERENCES")]
     [Space(10)]
     public Transform CurrentRoomParent;
+    public Transform WorldVisualization;
     [SerializeField] private RogueRoom _roomPrefab;
     [SerializeField] private DebugRoom _debugRoomPrefab;
     [SerializeField] private DebugEdge _debugEdgePrefab;
@@ -52,7 +63,10 @@ public class WorldManager : MonoBehaviour
                 _debugRooms.Clear();
             }
 
-            World newWorld = new World(numberOfRooms, maxNumberOfChildRooms, seed);
+            World newWorld = new World(numberOfRooms, maxNumberOfChildRooms, mainBranchMinDistance, mainBranchMaxDistance, subBranchMaxDistance,
+                                       maxNumberOfHealRooms, maxNumberOfShopRooms, maxNumberOfItemRooms, gasEventSpawnChance, secondChanceEventSpawnChance,
+                                       baseDifficulty, difficultyVariance,
+                                       seed);
             world = newWorld;
             MoveToRoom(world.rooms[0]);
             VisualizeWorld();
@@ -101,7 +115,7 @@ public class WorldManager : MonoBehaviour
             {
                 for (int j = 0; j < world.layers[i].roomsInLayer.Count; j++)
                 {
-                    Vector3 roomPos = new Vector3(0 + (1 * j), 0 + (-1 * i), 0);
+                    Vector3 roomPos = new Vector3(WorldVisualization.position.x + (1 * j), WorldVisualization.position.y + (-1 * i), 0);
                     DebugRoom newRoom = Instantiate<DebugRoom>(_debugRoomPrefab, roomPos, Quaternion.identity);
                     newRoom.BuildRoom(world.layers[i].roomsInLayer[j]);
                     _debugRooms.Add(newRoom);
@@ -123,44 +137,33 @@ public class WorldManager : MonoBehaviour
                     }
                 }
             }
+
+            for (int m = 0; m < _debugRooms.Count; m++)
+            {
+                if (_debugRooms[m].room.teleporter != null)
+                {
+                    if (_debugRooms[m].room.teleporter.isPresent)
+                    {
+                        if (_debugRooms[m].room.teleporter.toRoom != null)
+                        {
+                            Transform teleportDestination = null;
+                            foreach (DebugRoom debugRoom in _debugRooms)
+                            {
+                                if (debugRoom.room == _debugRooms[m].room.teleporter.toRoom)
+                                {
+                                    teleportDestination = debugRoom.transform;
+                                    break;
+                                }
+                            }
+
+                            if (teleportDestination != null)
+                            {
+                                _debugRooms[m].AddTeleportDestination(teleportDestination);
+                            }
+                        }
+                    }
+                }
+            }
         }
-    }
-
-    private void OnDrawGizmos()
-    {
-        //if (world != null)
-        //{
-        //    for (int i = 0; i < world.layers.Count; i++)
-        //    {
-        //        for (int j = 0; j < world.layers[i].roomsInLayer.Count; j++)
-        //        {
-        //            Vector3 roomPos = new Vector3(0 + (1 * j), 0 + (-1 * i), 0);
-
-        //            switch (world.layers[i].roomsInLayer[j].roomType)
-        //            {
-        //                case RoomType.None:
-        //                    Gizmos.color = Color.black;
-        //                    break;
-        //                case RoomType.Spawn:
-        //                    Gizmos.color = Color.white;
-        //                    break;
-        //                case RoomType.Exploration:
-        //                    Gizmos.color = Color.blue;
-        //                    break;
-        //                case RoomType.Arena:
-        //                    Gizmos.color = Color.yellow;
-        //                    break;
-        //                case RoomType.Boss:
-        //                    Gizmos.color = Color.red;
-        //                    break;
-        //                case RoomType.Length:
-        //                    Gizmos.color = Color.clear;
-        //                    break;
-        //            }
-
-        //            Gizmos.DrawCube(roomPos, new Vector3(.7f, .7f, .7f));                  
-        //        }
-        //    }
-        //}
     }
 }

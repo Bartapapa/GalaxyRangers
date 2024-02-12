@@ -9,4 +9,9 @@ public class Node
 
     [SerializeField][HideInInspector] protected List<Node> _childNodes = new List<Node>();
     public List<Node> childNodes { get { return _childNodes; } }
+
+    [SerializeField][HideInInspector] protected List<Node> _history = new List<Node>();
+    public List<Node> history { get { return _history; } set { _history = value; } }
+
+
 }
