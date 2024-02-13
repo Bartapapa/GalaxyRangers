@@ -8,6 +8,10 @@ public class RogueRoom : MonoBehaviour
     public Room roomData;
     public Transform _defaultSpawnPoint;
 
+    [Header("SCENARIOS")]
+    [Space(10)]
+    private float whee;
+
     [Header("EXIT POINTS")]
     [Space(10)]
     [Header("Left top")]
@@ -144,7 +148,7 @@ public class RogueRoom : MonoBehaviour
         }
     }
 
-    public void BuildRoom(Room room)
+    public virtual void BuildRoom(Room room)
     {
         if (room == null)
             return;
@@ -168,6 +172,9 @@ public class RogueRoom : MonoBehaviour
         {
             CloseExitPoint(traversalLocation);
         }
+
+        //Also build scenario fromm the room's scenario.
+        //room.scenario;
     }
 
     private List<TraversalLocation> GetAllTraversalLocations()

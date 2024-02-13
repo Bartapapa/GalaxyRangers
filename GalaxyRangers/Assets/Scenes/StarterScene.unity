@@ -1432,7 +1432,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1800397207
 Transform:
   m_ObjectHideFlags: 0
@@ -1938,6 +1938,59 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4475172479014090140, guid: 4cddb0979183fa840a8cea87caf62710,
+        type: 3}
+      propertyPath: _HUBRoom
+      value: 
+      objectReference: {fileID: 3180170347035312261, guid: 61adf6335f3fa7748a2ad5c2b140cb53,
+        type: 3}
+    - target: {fileID: 4475172479014090140, guid: 4cddb0979183fa840a8cea87caf62710,
+        type: 3}
+      propertyPath: _bossRoom
+      value: 
+      objectReference: {fileID: 3180170347035312261, guid: 61adf6335f3fa7748a2ad5c2b140cb53,
+        type: 3}
+    - target: {fileID: 4475172479014090140, guid: 4cddb0979183fa840a8cea87caf62710,
+        type: 3}
+      propertyPath: _healRooms
+      value: 
+      objectReference: {fileID: 11400000, guid: bfafc73dd50de634b8141f586a1a5ca7,
+        type: 2}
+    - target: {fileID: 4475172479014090140, guid: 4cddb0979183fa840a8cea87caf62710,
+        type: 3}
+      propertyPath: _itemRooms
+      value: 
+      objectReference: {fileID: 11400000, guid: c3bea3a8dc71aed44808203ae777f3c3,
+        type: 2}
+    - target: {fileID: 4475172479014090140, guid: 4cddb0979183fa840a8cea87caf62710,
+        type: 3}
+      propertyPath: _shopRooms
+      value: 
+      objectReference: {fileID: 11400000, guid: 4903c60ee66be6f4999db4cf40506d8d,
+        type: 2}
+    - target: {fileID: 4475172479014090140, guid: 4cddb0979183fa840a8cea87caf62710,
+        type: 3}
+      propertyPath: _arenaRooms
+      value: 
+      objectReference: {fileID: 11400000, guid: 9a67e611f7e0f4949a370ba0c7b85119,
+        type: 2}
+    - target: {fileID: 4475172479014090140, guid: 4cddb0979183fa840a8cea87caf62710,
+        type: 3}
+      propertyPath: _exploRooms
+      value: 
+      objectReference: {fileID: 11400000, guid: 660a16b79320ef24fa0a693ddbc1c910,
+        type: 2}
+    - target: {fileID: 4475172479014090140, guid: 4cddb0979183fa840a8cea87caf62710,
+        type: 3}
+      propertyPath: _spawnRooms
+      value: 
+      objectReference: {fileID: 11400000, guid: c027e510af5044b49a6bcdaefcbdccfe,
+        type: 2}
+    - target: {fileID: 5957424380341390108, guid: 4cddb0979183fa840a8cea87caf62710,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6718100807790390340, guid: 4cddb0979183fa840a8cea87caf62710,
         type: 3}
       propertyPath: m_LocalPosition.x
