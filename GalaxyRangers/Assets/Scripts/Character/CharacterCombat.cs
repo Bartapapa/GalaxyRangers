@@ -79,11 +79,19 @@ public class CharacterCombat : MonoBehaviour
         if (_attackTimer <= _currentWeaponStrike.attack.attackAnimTime - _currentWeaponStrike.attack.attackStartTime &&
            _attackTimer >= _currentWeaponStrike.attack.attackAnimTime - _currentWeaponStrike.attack.attackStartTime - _currentWeaponStrike.attack.attackDuration)
         {
-            _currentWeaponStrike.hurtbox.EnableHurtBox();
+            if (_currentWeaponStrike.hurtbox != null)
+            {
+                _currentWeaponStrike.hurtbox.EnableHurtBox();
+            }
+
         }
         else
         {
-            _currentWeaponStrike.hurtbox.DisableHurtBox();
+            if (_currentWeaponStrike.hurtbox != null)
+            {
+                _currentWeaponStrike.hurtbox.DisableHurtBox();
+            }
+
         }
     }
 

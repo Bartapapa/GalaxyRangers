@@ -34,10 +34,7 @@ public class HurtBox : MonoBehaviour
         BaseCharacterController charController = other.GetComponent<BaseCharacterController>();
         if (charController)
         {
-            if (!charController.hit && _hurtFactions.Contains(charController.faction))
-            {
-                TriggerHit(charController);
-            }
+            TriggerHit(charController);
         }
 
         //Potentially also check Destructibles?
@@ -55,14 +52,17 @@ public class HurtBox : MonoBehaviour
 
     public void TriggerHit(BaseCharacterController character)
     {
-        if (_overrideKnockbackDirection != Vector3.zero)
+        if (!character.hit && _hurtFactions.Contains(character.faction) && !character.characterHealth.isInvulnerable && !character.characterHealth.isDead)
         {
-            _overrideKnockbackDirection = _overrideKnockbackDirection.normalized;
+            if (_overrideKnockbackDirection != Vector3.zero)
+            {
+                _overrideKnockbackDirection = _overrideKnockbackDirection.normalized;
+            }
+
+            character.Hit(_damage, _collider, _knockbackForce, transform.rotation * _overrideKnockbackDirection);
+
+            OnHit?.Invoke(this);
         }
-
-        character.Hit(_damage, _collider, _knockbackForce, transform.rotation * _overrideKnockbackDirection);
-
-        OnHit?.Invoke(this);
     }
 
     private void OnDrawGizmosSelected()

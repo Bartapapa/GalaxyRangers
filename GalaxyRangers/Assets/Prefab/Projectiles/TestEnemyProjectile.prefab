@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 2875950977790827050}
   - component: {fileID: 600796864287656003}
   m_Layer: 10
-  m_Name: TestPlayerProjectile
+  m_Name: TestEnemyProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -95,7 +95,7 @@ MonoBehaviour:
   _currentDirection: {x: 0, y: 0, z: 0}
   _previousPosition: {x: 0, y: 0, z: 0}
   _pierceNumber: 0
-  _pierceThroughWalls: 0
+  _pierceThroughWalls: 1
   _lifeSpan: 5
 --- !u!54 &600796864287656003
 Rigidbody:
@@ -190,7 +190,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71086fce211d55946a3be7d51398d0df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hurtFactions: 02000000
+  _hurtFactions: 01000000
   _damage: 1
   _knockbackForce: 5
   _overrideKnockbackDirection: {x: 0, y: 0, z: 0}

@@ -9,6 +9,9 @@ public class Projectile : MonoBehaviour
     [SerializeField] private HurtBox _hurtBox;
     [SerializeField] private Transform _root;
 
+    [Header("PHYSICS LAYERS")]
+    [SerializeField] private LayerMask _obstacleLayers;
+
     [Header("PARAMETERS")]
     [Space]
     [SerializeField] private float _gravity = 0;
@@ -33,6 +36,7 @@ public class Projectile : MonoBehaviour
     private void Start()
     {
         _currentSpeed = _projectileSpeed;
+        transform.position = new Vector3(transform.position.x, transform.position.y, 0f);
         _previousPosition = transform.position;
 
         _rigid = GetComponent<Rigidbody>();
@@ -42,7 +46,7 @@ public class Projectile : MonoBehaviour
     {
         direction = new Vector3(direction.x, direction.y, 0f).normalized;
         _currentDirection = direction;
-        _root.LookAt(transform.position + _currentDirection, Vector3.up);
+        transform.LookAt(transform.position + _currentDirection, Vector3.up);
     }
 
     private void OnEnable()
@@ -84,13 +88,16 @@ public class Projectile : MonoBehaviour
         RaycastHit[] hits = Physics.RaycastAll(_previousPosition, newPosition - _previousPosition, Vector3.Distance(_previousPosition, newPosition));
         foreach(RaycastHit hit in hits)
         {
+            if ((_obstacleLayers.value & (1 << hit.collider.gameObject.layer)) > 0 && !_pierceThroughWalls)
+            {
+                //Hit obstacle during movement.
+                DestroyProjectile();
+            }
+
             BaseCharacterController charController = hit.collider.GetComponent<BaseCharacterController>();
             if (charController)
             {
-                if (!charController.hit && _hurtBox.hurtFactions.Contains(charController.faction))
-                {
-                    _hurtBox.TriggerHit(charController);
-                }
+                _hurtBox.TriggerHit(charController);
             }
         }
 
@@ -165,14 +172,22 @@ public class Projectile : MonoBehaviour
 
     private void HandleCurrentDirection()
     {
-        float newY = (_currentDirection.y + _gravity)*Time.fixedDeltaTime;
+        float newY = _currentDirection.y + (_gravity*Time.fixedDeltaTime);
         _currentDirection = new Vector3(_currentDirection.x, newY, 0f).normalized;
-        _root.LookAt(transform.position + _currentDirection, Vector3.up);
+        transform.LookAt(transform.position + _currentDirection, Vector3.up);
     }
 
     private void DestroyProjectile()
     {
         //Create SFX at position.
         Destroy(this.gameObject);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if ((_obstacleLayers.value & (1 << other.transform.gameObject.layer)) > 0 && !_pierceThroughWalls)
+        {
+            DestroyProjectile();
+        }
     }
 }

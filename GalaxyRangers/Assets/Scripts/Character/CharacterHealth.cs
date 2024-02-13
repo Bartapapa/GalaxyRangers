@@ -8,7 +8,7 @@ public class CharacterHealth : MonoBehaviour
 {
     [Header("STAT")]
     [Space]
-    public CharacterStat Health = new CharacterStat();
+    public CharacterStat Health;
     public float MaxHealth { get { return Health.MaxValue; } }
     public float CurrentHealth { get { return Health.CurrentValue; } }
     [Space]
@@ -28,8 +28,14 @@ public class CharacterHealth : MonoBehaviour
     private bool _firstFrame = false;
 
     private void Awake()
-    {      
-        float healthValue = Health.MaxValue;
+    {
+        //this.Health.CurrentValueReachedZero -= OnHealthReachedZero;
+        //this.Health.CurrentValueReachedZero += OnHealthReachedZero;
+
+        //CharacterStat healthStat = new CharacterStat(Health.BaseValue);
+        //healthStat.CurrentValueReachedZero += OnHealthReachedZero;
+        //float healthValue = healthStat.MaxValue;
+        //Health = healthStat;
     }
 
     private void Update()

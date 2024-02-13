@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
 
-public class AIState_InCombat : AIState
+public class AIState_InCombatRanged : AIState
 {
     [SerializeField] private AIState chaseState;
     [SerializeField] private AIState fleeState;
+    [SerializeField] private AIState aimState;
 
     private List<WeaponAttack> lightCombo = new List<WeaponAttack>();
     private List<WeaponAttack> heavyComboBreak = new List<WeaponAttack>();
@@ -68,8 +69,9 @@ public class AIState_InCombat : AIState
             else if (attackType == 1)
             {
                 //Light attack.
-                brain.combat.RequestLightAttack();
-                brain.attackCooldown = brain.combat.currentWeaponStrike.attack.comboEndAttackCooldown;
+                return new AIreturn(aimState, simulatedInputs);
+                //brain.combat.RequestLightAttack();
+                //brain.attackCooldown = brain.combat.currentWeaponStrike.attack.comboEndAttackCooldown;
             }
             else if (attackType == 2)
             {

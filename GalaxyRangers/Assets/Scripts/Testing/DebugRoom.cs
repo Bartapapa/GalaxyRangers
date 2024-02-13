@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static TreeEditor.TreeEditorHelper;
+//using static TreeEditor.TreeEditorHelper;
 
 public class DebugRoom : MonoBehaviour
 {

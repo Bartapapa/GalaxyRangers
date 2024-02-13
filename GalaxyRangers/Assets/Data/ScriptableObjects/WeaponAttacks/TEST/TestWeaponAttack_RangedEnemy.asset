@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 86865d891d76fe3458d375aa824f2780, type: 3}
-  m_Name: TestWeaponAttack_Ranged
+  m_Name: TestWeaponAttack_RangedEnemy
   m_EditorClassIdentifier: 
   _canBeCharged: 0
   _minChargeTime: 0.1
@@ -20,8 +20,8 @@ MonoBehaviour:
   _attackAnimationName: 
   _followThroughAnimationName: 
   _chargedAttackAnimationName: 
-  _windUpAnimTime: 0.3
-  _attackAnimTime: 0.5
+  _windUpAnimTime: 0
+  _attackAnimTime: 0
   _followThroughAnimTime: 0.5
   _chargedAttackAnimTime: 0
   _attackStartTime: 999
@@ -32,12 +32,12 @@ MonoBehaviour:
   _createsHyperArmor: 0
   _hyperArmorStartTime: 0
   _hyperArmorDuration: 0
-  _projectile: {fileID: 2875950977790827050, guid: 2b6ceb7c273f9a943accf5fb2a47c4d0,
+  _projectile: {fileID: 2875950977790827050, guid: 515dbc6aa90b1e043952c05f25005f43,
     type: 3}
   _projectileSpawnTime: 0
-  _comboEndAttackCooldown: 2
-  _minAttackDistance: 1
-  _maxAttackDistance: 2
+  _comboEndAttackCooldown: 3
+  _minAttackDistance: 2
+  _maxAttackDistance: 15
   _attackPriority: 10
   _attackWeight: 10
   _attackType: 1

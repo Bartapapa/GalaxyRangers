@@ -41,15 +41,16 @@ public class Weapon : MonoBehaviour
     {
         foreach(WeaponStrike weaponStrike0 in _lightCombo)
         {
-            weaponStrike0.hurtbox.DisableHurtBox();
+            if (weaponStrike0.hurtbox != null) weaponStrike0.hurtbox.DisableHurtBox();
+
         }
         foreach(WeaponStrike weaponStrike1 in _heavyComboBreaks)
         {
-            weaponStrike1.hurtbox.DisableHurtBox();
+            if (weaponStrike1.hurtbox != null) weaponStrike1.hurtbox.DisableHurtBox();
         }
         if(_heavyAttack.attack != null)
         {
-            _heavyAttack.hurtbox.DisableHurtBox();
+            if (_heavyAttack.hurtbox != null) _heavyAttack.hurtbox.DisableHurtBox();
         }
     }
 }
