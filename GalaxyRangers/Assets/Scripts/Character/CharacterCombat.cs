@@ -3,12 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum AttackType
-{
-    None,
-    Light,
-    Heavy,
-}
 public class CharacterCombat : MonoBehaviour
 {
     [Header("OBJECT REFS")]
@@ -18,9 +12,10 @@ public class CharacterCombat : MonoBehaviour
 
     [Header("WEAPON")]
     [SerializeField] private Weapon _currentWeapon;
+    public Weapon currentWeapon { get { return _currentWeapon; } }
     [SerializeField] private Transform _weaponHoldSocket;
 
-    public bool canAttack { get { return !_controller.isDisabled && (!isAttacking || canDoCombo); } }
+    public bool canAttack { get { return _currentWeapon != null && !_controller.isDisabled && (!isAttacking || canDoCombo); } }
     public bool isAttacking { get { return windUpCoroutine!=null || attackCoroutine!=null || followThroughCoroutine!=null ? true : false; } }
     public bool canDoCombo { get { return followThroughCoroutine != null &&
                 _currentWeaponStrike.attack.canCombo &&
@@ -32,6 +27,7 @@ public class CharacterCombat : MonoBehaviour
     //Cache
     private float _attackTimer = float.MinValue;
     private int _comboCounter = -1;
+    private int _projectileSpawnCounter = 0;
     private bool _lightAttackBuffer;
     private bool _heavyAttackBuffer;
     private WeaponStrike _currentWeaponStrike;
@@ -56,6 +52,7 @@ public class CharacterCombat : MonoBehaviour
     {
         HandleAttackTimer();
         HandleCurrentStrikeHurtbox();
+        HandleProjectileSpawn();
 
         if (_lightAttackBuffer && canAttack)
         {
@@ -66,6 +63,8 @@ public class CharacterCombat : MonoBehaviour
             HeavyAttack();
         }
     }
+
+
 
     private void HandleAttackTimer()
     {
@@ -80,11 +79,32 @@ public class CharacterCombat : MonoBehaviour
         if (_attackTimer <= _currentWeaponStrike.attack.attackAnimTime - _currentWeaponStrike.attack.attackStartTime &&
            _attackTimer >= _currentWeaponStrike.attack.attackAnimTime - _currentWeaponStrike.attack.attackStartTime - _currentWeaponStrike.attack.attackDuration)
         {
-            _currentWeaponStrike.hurtbox.EnableHurtBox();
+            if (_currentWeaponStrike.hurtbox != null)
+            {
+                _currentWeaponStrike.hurtbox.EnableHurtBox();
+            }
+
         }
         else
         {
-            _currentWeaponStrike.hurtbox.DisableHurtBox();
+            if (_currentWeaponStrike.hurtbox != null)
+            {
+                _currentWeaponStrike.hurtbox.DisableHurtBox();
+            }
+
+        }
+    }
+
+    private void HandleProjectileSpawn()
+    {
+        if (attackCoroutine == null || _currentWeaponStrike.attack.projectile == null)
+            return;
+        if (_attackTimer <= _currentWeaponStrike.attack.attackAnimTime - _currentWeaponStrike.attack.projectileSpawnTime && _projectileSpawnCounter == 0)
+        {
+            //Spawn projectile
+            _projectileSpawnCounter++;
+            Projectile newProjectile = Instantiate<Projectile>(_currentWeaponStrike.attack.projectile, _currentWeapon.projectileSource.position, _currentWeapon.projectileSource.rotation);
+            newProjectile.InitializeProjectile(_currentWeapon.projectileSource.forward);
         }
     }
 
@@ -127,17 +147,16 @@ public class CharacterCombat : MonoBehaviour
         //Instantiate weapon, normally.
         _currentWeapon = weapon; //instantiated weapon
 
-
-        GameObject weaponMesh = Instantiate<GameObject>(_currentWeapon.weaponMesh, _weaponHoldSocket);
+        WeaponObject weaponObject = Instantiate<WeaponObject>(_currentWeapon.weaponObjectPrefab, _weaponHoldSocket);
+        _currentWeapon.currentWeaponObject = weaponObject;
 
         CancelFullAttack();
-
-        //Spawn weapon's mesh on _weaponHoldSocket;
     }
 
     public void UnEquipWeapon()
     {
         CancelFullAttack();
+        //Destroy _currentWeapon.
     }
 
     public void LightAttack()
@@ -159,9 +178,9 @@ public class CharacterCombat : MonoBehaviour
         {
              //We're in a combo.
             _lightAttackBuffer = false;
-            Debug.Log("Combo'd light attack!");
+            //Debug.Log("Combo'd light attack!");
             _comboCounter++;
-            Debug.Log(_comboCounter);
+            //Debug.Log(_comboCounter);
             CancelFollowThrough();
             _currentWeaponStrike = _currentWeapon.lightCombo[_comboCounter];
             DoWindUp();
@@ -170,7 +189,7 @@ public class CharacterCombat : MonoBehaviour
         else
         {
             _lightAttackBuffer = false;
-            Debug.Log("Started light attack!");
+            //Debug.Log("Started light attack!");
             _comboCounter++;
             _currentWeaponStrike = _currentWeapon.lightCombo[_comboCounter];
             DoWindUp();
@@ -207,6 +226,7 @@ public class CharacterCombat : MonoBehaviour
             _heavyAttackBuffer = false;
             Debug.Log("Heavy combo break!");
             CancelFollowThrough();
+            _projectileSpawnCounter = 0;
             _currentWeaponStrike = _currentWeapon.heavyComboBreaks[_comboCounter];
             DoWindUp();
 
@@ -269,6 +289,7 @@ public class CharacterCombat : MonoBehaviour
         _currentWeapon.ResetHurtBoxes();
         _currentWeaponStrike = null;
         _comboCounter = -1;
+        _projectileSpawnCounter = 0;
         Debug.Log("ended attack!");
     }
 
@@ -316,5 +337,6 @@ public class CharacterCombat : MonoBehaviour
 
         _currentWeapon.ResetHurtBoxes();
         _comboCounter = -1;
+        _projectileSpawnCounter = 0;
     }
 }

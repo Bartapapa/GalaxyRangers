@@ -66,4 +66,25 @@ public class WeaponAttack : ScriptableObject
     [SerializeField] private float _hyperArmorDuration;
     public float hyperArmorDuration { get { return _hyperArmorDuration; } }
 
+    [Header("PROJECTILE")]
+    [SerializeField] private Projectile _projectile;
+    public Projectile projectile { get { return _projectile; } }
+    [SerializeField] private float _projectileSpawnTime = 0f;
+    public float projectileSpawnTime { get { return _projectileSpawnTime; } }
+
+    [Header("AI COMBAT")]
+    [Space]
+    [SerializeField] private float _comboEndAttackCooldown = 1f;
+    public float comboEndAttackCooldown { get { return _comboEndAttackCooldown; } }
+    [SerializeField] private float _minAttackDistance = 1f;
+    public float minAttackDistance { get { return _minAttackDistance; } }
+    [SerializeField] private float _maxAttackDistance = 2f;
+    public float maxAttackDistance { get { return _maxAttackDistance; } }
+    [SerializeField] private int _attackPriority = 10;
+    public int attackPriority { get { return _attackPriority; } }
+    [SerializeField] private int _attackWeight = 10;
+    public int attackWeight { get { return _attackWeight; } }
+    [SerializeField] private int _attackType = 1;
+    public int attackType { get { return _attackType; } }
+
 }

@@ -25,10 +25,29 @@ public class CharacterHealth : MonoBehaviour
 
     private Coroutine invulnerabilityCoroutine;
 
+    private bool _firstFrame = false;
+
     private void Awake()
     {
-        Health.CurrentValueReachedZero += OnHealthReachedZero;
-        float healthValue = Health.MaxValue;
+        //this.Health.CurrentValueReachedZero -= OnHealthReachedZero;
+        //this.Health.CurrentValueReachedZero += OnHealthReachedZero;
+
+        //CharacterStat healthStat = new CharacterStat(Health.BaseValue);
+        //healthStat.CurrentValueReachedZero += OnHealthReachedZero;
+        //float healthValue = healthStat.MaxValue;
+        //Health = healthStat;
+    }
+
+    private void Update()
+    {
+        //Absolutely disgusting. Will have to rework my CharacterStat package in order to take this into account - which happens I DON'T KNOW WHY
+        //Probably has to do with initialization steps, although still doesn't work with Enable, Disable, Start and the rest. Insane.
+
+        if (!_firstFrame)
+        {
+            _firstFrame = true;
+            Health.CurrentValueReachedZero += OnHealthReachedZero;
+        }
     }
 
     public void Hurt(float damage)
