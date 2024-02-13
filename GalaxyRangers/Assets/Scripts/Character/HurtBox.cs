@@ -7,25 +7,27 @@ public class HurtBox : MonoBehaviour
     [Header("WHO DOES THIS HURT?")]
     [Space]
     [SerializeField] private List<GameFaction> _hurtFactions = new List<GameFaction>();
+    public List<GameFaction> hurtFactions { get { return _hurtFactions; } }
 
     [Header("PARAMETERS")]
     [Space]
     [SerializeField] private float _damage = 1f;
+    public float damage { get { return _damage; } }
     [SerializeField] private float _knockbackForce = 5f;
+    public float knockbackForce { get { return _knockbackForce; } }
     [SerializeField] private Vector3 _overrideKnockbackDirection = Vector3.zero;
+    public Vector3 overrideKnockbackDirection { get { return _overrideKnockbackDirection; } }
 
     private Collider _collider;
+    public Collider collider { get { return _collider ? _collider : _collider = GetComponent<Collider>(); } }
+
+    public delegate void HurtBoxCallback(HurtBox hurtBox);
+    public HurtBoxCallback OnHit;
 
     private void Awake()
     {
-        _collider = GetComponent<Collider>();
-        if (!_collider)
-        {
-            Debug.LogWarning(this.gameObject.name + " has no hurtbox collider!");
-            return;
-        }
-        _collider.enabled = true;
-        _collider.isTrigger = true;
+        collider.enabled = true;
+        collider.isTrigger = true;
     }
     private void OnTriggerStay(Collider other)
     {
@@ -34,12 +36,7 @@ public class HurtBox : MonoBehaviour
         {
             if (!charController.hit && _hurtFactions.Contains(charController.faction))
             {
-                if (_overrideKnockbackDirection != Vector3.zero)
-                {
-                    _overrideKnockbackDirection = _overrideKnockbackDirection.normalized;
-                }
-
-                charController.Hit(_damage, _collider, _knockbackForce, transform.rotation * _overrideKnockbackDirection);
+                TriggerHit(charController);
             }
         }
 
@@ -48,12 +45,24 @@ public class HurtBox : MonoBehaviour
 
     public void EnableHurtBox()
     {
-        _collider.enabled = true;
+        collider.enabled = true;
     }
 
     public void DisableHurtBox()
     {
-        _collider.enabled = false;
+        collider.enabled = false;
+    }
+
+    public void TriggerHit(BaseCharacterController character)
+    {
+        if (_overrideKnockbackDirection != Vector3.zero)
+        {
+            _overrideKnockbackDirection = _overrideKnockbackDirection.normalized;
+        }
+
+        character.Hit(_damage, _collider, _knockbackForce, transform.rotation * _overrideKnockbackDirection);
+
+        OnHit?.Invoke(this);
     }
 
     private void OnDrawGizmosSelected()

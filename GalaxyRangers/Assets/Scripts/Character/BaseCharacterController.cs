@@ -315,9 +315,17 @@ public partial class BaseCharacterController : MonoBehaviour
     {
 #if UNITY_EDITOR
         OnJump += CheatJumpCallback;
-#endif
+#endif     
+    }
+
+    private void Start()
+    {
+        //This is just for debug purposes - should be cleaned up later, when confronting SceneLoading.
+        CameraManager.Instance.SetPlayerCharacterController(this);
 
         InitializeCharacterStats();
+
+        InitCurrentGroundLayers();
     }
 
     private void InitializeCharacterStats()
@@ -350,14 +358,6 @@ public partial class BaseCharacterController : MonoBehaviour
 
         _faction = _characterStats.faction;
         _characterHealth.Health = new CharacterStat(_characterStats.baseHealth);
-    }
-
-    private void Start()
-    {
-        //This is just for debug purposes - should be cleaned up later, when confronting SceneLoading.
-        CameraManager.Instance.SetPlayerCharacterController(this);
-
-        InitCurrentGroundLayers();
     }
 
     private void Update()

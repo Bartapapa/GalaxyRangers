@@ -8,10 +8,10 @@ using System.Collections.ObjectModel;
 public class CharacterStat
 {
     public delegate void StatEvent();
-    public event StatEvent MaxValueChanged = null;
-    public event StatEvent CurrentValueReachedZero = null;
-    public event StatEvent CurrentValueReachedFull = null;
-    public event StatEvent CurrentValueBroughtBackFromZero = null;
+    public event StatEvent MaxValueChanged;
+    public event StatEvent CurrentValueReachedZero;
+    public event StatEvent CurrentValueReachedFull;
+    public event StatEvent CurrentValueBroughtBackFromZero;
 
     public float BaseValue = 0f;
     [SerializeField][ReadOnlyInspector] private float _maxValue = float.MinValue;
@@ -154,6 +154,9 @@ public class CharacterStat
         _isDirty = true;
         float oldDamage = _damage;
         _damage += damage;
+
+        CalculateValues();
+
         if (oldDamage < _maxValue && _damage >= _maxValue)
         {
             CurrentValueReachedZero?.Invoke();
@@ -162,8 +165,6 @@ public class CharacterStat
         {
             _damage = _maxValue;
         }
-
-        CalculateValues();
     }
 
     public void Heal(float heal)

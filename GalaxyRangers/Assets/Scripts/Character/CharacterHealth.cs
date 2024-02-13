@@ -8,7 +8,7 @@ public class CharacterHealth : MonoBehaviour
 {
     [Header("STAT")]
     [Space]
-    public CharacterStat Health;
+    public CharacterStat Health = new CharacterStat();
     public float MaxHealth { get { return Health.MaxValue; } }
     public float CurrentHealth { get { return Health.CurrentValue; } }
     [Space]
@@ -25,10 +25,23 @@ public class CharacterHealth : MonoBehaviour
 
     private Coroutine invulnerabilityCoroutine;
 
+    private bool _firstFrame = false;
+
     private void Awake()
-    {
-        Health.CurrentValueReachedZero += OnHealthReachedZero;
+    {      
         float healthValue = Health.MaxValue;
+    }
+
+    private void Update()
+    {
+        //Absolutely disgusting. Will have to rework my CharacterStat package in order to take this into account - which happens I DON'T KNOW WHY
+        //Probably has to do with initialization steps, although still doesn't work with Enable, Disable, Start and the rest. Insane.
+
+        if (!_firstFrame)
+        {
+            _firstFrame = true;
+            Health.CurrentValueReachedZero += OnHealthReachedZero;
+        }
     }
 
     public void Hurt(float damage)

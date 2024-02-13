@@ -13,8 +13,12 @@ public class Weapon : MonoBehaviour
 {
     [Header("OBJECT REFS & ANIMATION")]
     [Space]
-    public GameObject weaponMesh;
+    public WeaponObject weaponObjectPrefab;
+    [ReadOnlyInspector] public WeaponObject currentWeaponObject;
     [SerializeField] private int _stanceType = 0;
+    [Space]
+    [SerializeField] private Transform _projectileSource;
+    public Transform projectileSource { get { return _projectileSource; } }
 
     [Header("LIGHT COMBO")]
     [Space]
@@ -47,10 +51,5 @@ public class Weapon : MonoBehaviour
         {
             _heavyAttack.hurtbox.DisableHurtBox();
         }
-    }
-
-    public void OpenAttackHurtBox()
-    {
-
     }
 }
