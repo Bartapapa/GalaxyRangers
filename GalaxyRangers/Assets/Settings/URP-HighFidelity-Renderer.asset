@@ -22,17 +22,17 @@ MonoBehaviour:
     m_Bits: 512
   outlineSettings:
     outlineColor: {r: 0, g: 0, b: 0, a: 1}
-    outlineScale: 1
-    depthThreshold: 1.5
-    robertsCrossMultiplier: 201
-    normalThreshold: 0.441
-    steepAngleThreshold: 0.33
-    steepAngleMultiplier: 25
+    outlineScale: 0.5
+    depthThreshold: 1
+    robertsCrossMultiplier: 500
+    normalThreshold: 1
+    steepAngleThreshold: 0.22
+    steepAngleMultiplier: 55
   viewSpaceNormalsTextureSettings:
     colorFormat: 0
     depthBufferBits: 16
     filterMode: 0
-    backgroundColor: {r: 0, g: 0, b: 0, a: 0}
+    backgroundColor: {r: 0, g: 0, b: 0, a: 1}
     perObjectData: 0
     enableDynamicBatching: 0
     enableInstancing: 0
