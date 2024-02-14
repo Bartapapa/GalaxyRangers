@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: ArenaRooms
   m_EditorClassIdentifier: 
   Rooms:
-  - {fileID: 7931297960991812180, guid: b95b82c7cda1b0149a346020411180df, type: 3}
-  - {fileID: 8272308109078996686, guid: 64d4c2ef5413e6748a7369b075ba29b1, type: 3}
-  - {fileID: 7179709301092818663, guid: c22451dda304e8248874936d65f44b11, type: 3}
+  - {fileID: 1633943384603499602, guid: b95b82c7cda1b0149a346020411180df, type: 3}
+  - {fileID: 6042989855475740209, guid: 64d4c2ef5413e6748a7369b075ba29b1, type: 3}
+  - {fileID: 4497912132243351110, guid: c22451dda304e8248874936d65f44b11, type: 3}
