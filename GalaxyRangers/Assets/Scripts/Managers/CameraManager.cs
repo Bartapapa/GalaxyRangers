@@ -192,7 +192,7 @@ public class CameraManager : MonoBehaviour
                 ExplorationCamera.Camera.enabled = false;
                 break;
             case CameraState.Arena:
-                //ArenaCamera.Camera.enabled = false;
+                ArenaCamera.Camera.enabled = false;
                 break;
             case CameraState.Dialogue:
                 //DialogueCamera.Camera.enabled = false;
@@ -209,14 +209,14 @@ public class CameraManager : MonoBehaviour
                 break;
             case CameraState.Default:
                 ExplorationCamera.Camera.enabled = false;
-                //ArenaCamera.Camera.enabled = false;
+                ArenaCamera.Camera.enabled = false;
                 //DialogueCamera.Camera.enabled = false;
                 break;
             case CameraState.Exploration:
                 ExplorationCamera.Camera.enabled = true;
                 break;
             case CameraState.Arena:
-                //ArenaCamera.Camera.enabled = true;
+                ArenaCamera.Camera.enabled = true;
                 break;
             case CameraState.Dialogue:
                 //DialogueCamera.Camera.enabled = true;

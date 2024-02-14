@@ -109,9 +109,10 @@ public class WorldManager : MonoBehaviour
         {
             Debug.Log("Room not generated, generating now.");
             RogueRoom newRoom = Instantiate<RogueRoom>(GetRandomRoomOfType(room.roomType), GeneratedRoomParent);
-            newRoom.BuildRoom(room);
             _currentRogueRoom = newRoom;
             room.GeneratedRoom = newRoom;
+
+            newRoom.BuildRoom(room);
         }
         else
         {
@@ -119,14 +120,12 @@ public class WorldManager : MonoBehaviour
             RogueRoom newRoom = room.GeneratedRoom;
             newRoom.gameObject.SetActive(true);
             _currentRogueRoom = newRoom;
+
             _currentRogueRoom.RegenerateRoom();
-            //Perhaps have a function for 'regenerating' rooms, so that when enemies are dead they stay dead, when item is spawned it stays that way, etc.
-            //The RogueRoom itself should make BuildRoom a virtual method so that other sub classes (Item Room, Arena Room, etc, etc) can all build themselves in their own way, like spawning
-            //enemies and items and whatnot. For now this will suffice.
         }
 
         //Set camera settings.
-        //_currentRogueRoom.UseCameraSettings();
+        _currentRogueRoom.UseCameraSettings();
 
         if (usedTraversal == null)
         {

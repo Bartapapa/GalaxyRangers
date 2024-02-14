@@ -181,10 +181,14 @@ public class RogueRoom : MonoBehaviour
 
         roomData = room;
 
+        //Open doors entry and exit points, close the rest.
         BuildTraversalPoints(room);
 
         //Set scenario.
-        //SetScenario(room);
+        SetScenario(room);
+
+        //Create enemies and whatnot.
+        RegenerateRoom();
     }
 
     protected void BuildTraversalPoints(Room room)

@@ -1793,6 +1793,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1024818581739009851, guid: fff465d56b78aca419ac00194e7e09a4,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1838701862833661216, guid: fff465d56b78aca419ac00194e7e09a4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1850,6 +1855,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2531176662470765493, guid: fff465d56b78aca419ac00194e7e09a4,
         type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2531176662470765493, guid: fff465d56b78aca419ac00194e7e09a4,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2531176662470765493, guid: fff465d56b78aca419ac00194e7e09a4,
+        type: 3}
       propertyPath: m_LocalPosition.z
       value: -12
       objectReference: {fileID: 0}
@@ -1858,6 +1873,11 @@ PrefabInstance:
       propertyPath: _focusObjects.Array.data[0].Object
       value: 
       objectReference: {fileID: 1532192477}
+    - target: {fileID: 3147273166021065321, guid: fff465d56b78aca419ac00194e7e09a4,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4415414748025765131, guid: fff465d56b78aca419ac00194e7e09a4,
         type: 3}
       propertyPath: m_IsActive
@@ -1866,17 +1886,27 @@ PrefabInstance:
     - target: {fileID: 4421303327068592349, guid: fff465d56b78aca419ac00194e7e09a4,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 4421303327068592349, guid: fff465d56b78aca419ac00194e7e09a4,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4421303327068592349, guid: fff465d56b78aca419ac00194e7e09a4,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -12
+      value: -8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4557014001246674945, guid: fff465d56b78aca419ac00194e7e09a4,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4557014001246674945, guid: fff465d56b78aca419ac00194e7e09a4,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6226320362416033835, guid: fff465d56b78aca419ac00194e7e09a4,
         type: 3}
@@ -1893,6 +1923,11 @@ PrefabInstance:
       propertyPath: _focusObjects.Array.data[0].Object
       value: 
       objectReference: {fileID: 1532192477}
+    - target: {fileID: 9068022075595393684, guid: fff465d56b78aca419ac00194e7e09a4,
+        type: 3}
+      propertyPath: _startingCameraState
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
