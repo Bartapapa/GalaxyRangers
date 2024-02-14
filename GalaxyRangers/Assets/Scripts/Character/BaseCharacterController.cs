@@ -228,6 +228,7 @@ public partial class BaseCharacterController : MonoBehaviour
     public bool hasHyperArmor = false;
     [Space]
     [SerializeField][ReadOnlyInspector] private Vector3 _cachedKnockback = Vector3.zero;
+    [SerializeField][ReadOnlyInspector] Transform _aimingTarget = null;
 
     [Header("LOCKS")]
     [Space(10)]
@@ -315,9 +316,17 @@ public partial class BaseCharacterController : MonoBehaviour
     {
 #if UNITY_EDITOR
         OnJump += CheatJumpCallback;
-#endif
+#endif     
+    }
+
+    private void Start()
+    {
+        //This is just for debug purposes - should be cleaned up later, when confronting SceneLoading.
+        CameraManager.Instance.SetPlayerCharacterController(this);
 
         InitializeCharacterStats();
+
+        InitCurrentGroundLayers();
     }
 
     private void InitializeCharacterStats()
@@ -350,14 +359,6 @@ public partial class BaseCharacterController : MonoBehaviour
 
         _faction = _characterStats.faction;
         _characterHealth.Health = new CharacterStat(_characterStats.baseHealth);
-    }
-
-    private void Start()
-    {
-        //This is just for debug purposes - should be cleaned up later, when confronting SceneLoading.
-        CameraManager.Instance.SetPlayerCharacterController(this);
-
-        InitCurrentGroundLayers();
     }
 
     private void Update()
@@ -564,13 +565,28 @@ public partial class BaseCharacterController : MonoBehaviour
         }
 
         float toEulerRot;
-        if (_leftRight < 0)
+        if (_aimingTarget != null)
         {
-            toEulerRot = 179.9f;
+            int leftRight = (int)Mathf.Sign(_aimingTarget.position.x - cachedTransform.position.x);
+            if (leftRight < 0)
+            {
+                toEulerRot = 179.9f;
+            }
+            else
+            {
+                toEulerRot = 0.1f;
+            }
         }
         else
         {
-            toEulerRot = 0.1f;
+            if (_leftRight < 0)
+            {
+                toEulerRot = 179.9f;
+            }
+            else
+            {
+                toEulerRot = 0.1f;
+            }
         }
         characterBehavior.transform.rotation = Quaternion.Slerp(characterBehavior.transform.rotation, Quaternion.Euler(0, toEulerRot, 0), forceOrientation ? 1 : 10f * Time.fixedDeltaTime);
     }
@@ -754,7 +770,7 @@ public partial class BaseCharacterController : MonoBehaviour
                 new Vector3(direction, 0, 0),
                 out hit,
                 wallDetectionDistance,
-                _currentGroundLayers);
+                onlyGroundLayers);
         }
         else
         {
@@ -764,7 +780,7 @@ public partial class BaseCharacterController : MonoBehaviour
                 new Vector3(direction, 0, 0),
                 out hit,
                 wallDetectionDistance,
-                _currentGroundLayers);
+                onlyGroundLayers);
         }
 
         if (hitState)
@@ -1120,6 +1136,8 @@ public partial class BaseCharacterController : MonoBehaviour
             StopCoroutine(dashCoroutine);
         dashCoroutine = StartCoroutine(CoDash());
 
+        characterHealth.Invulnerability(.2f);
+
         CancelJumpDosage();
 
         _isDashing = true;
@@ -1306,10 +1324,7 @@ public partial class BaseCharacterController : MonoBehaviour
             }
         }
 
-        if (OnHit != null)
-        {
-            OnHit();
-        }
+        OnHit?.Invoke();
     }
 
     private IEnumerator CoHit(float hitLagDuration)
@@ -1477,6 +1492,15 @@ public partial class BaseCharacterController : MonoBehaviour
 
         if (count == maxJumpCount.CurrentValueInt - 1)
             jumpCount--;
+    }
+
+    #endregion
+
+    #region AI
+
+    public void SetTarget(Transform target)
+    {
+        _aimingTarget = target;
     }
 
     #endregion

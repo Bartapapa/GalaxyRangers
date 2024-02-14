@@ -71,6 +71,7 @@ public class Teleporter
 public class Room : Node
 {
     public World world;
+    public RogueRoom GeneratedRoom;
     public RoomType roomType = RoomType.None;
     public RoomEnvironment roomEnvironment = RoomEnvironment.Exterior;
 

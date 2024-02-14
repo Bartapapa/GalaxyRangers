@@ -31,22 +31,20 @@ public class AIState_Chase : AIState
         //While running, must check for walls, edges and such as they get closer to the player.
         if ((brain.controller.isFacingLeftWall && playerToRightLeft < 0) || (brain.controller.isFacingRightWall && playerToRightLeft > 0))
         {
-            if (playerAboveBelow > 0)
+            if (CanJumpOverWall(brain))
             {
-                if (CanJumpOverWall(brain))
+                if (!brain.controller.isJumping)
                 {
-                    if (!brain.controller.isJumping)
-                    {
-                        brain.RequestJump();
-                    }                 
+                    brain.RequestJump();
                 }
-                else
-                {
-                    //Can't jump.
-                }
-
-                simulatedInputs.JumpPressed = true;
             }
+
+            simulatedInputs.JumpPressed = true;
+
+            //if (playerAboveBelow > 0)
+            //{
+
+            //}
         }
 
         //Default

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,10 +9,12 @@ public class AIBrain_Base : MonoBehaviour
     [Space]
     public BaseCharacterController controller;
     public CharacterCombat combat;
+    public CharacterHealth health;
 
     [Header("STATE MACHINE")]
     [Space]
     [SerializeField] private AIState _defaultState;
+    [SerializeField] private AIState _hurtState;
     [SerializeField][ReadOnlyInspector] private AIState _currentState;
     public AIState currentState { get { return _currentState; } }
 
@@ -31,8 +34,13 @@ public class AIBrain_Base : MonoBehaviour
     public float currentPlayerDistance { get { return _currentPlayerDistance; } }
 
     [Header("COMBAT AI")]
+    [SerializeField] private float _hurtDuration = .3f;
+    public float hurtDuration { get { return _hurtDuration; } }
+    [SerializeField] private float _maxInitialAttackCooldown = 1f;
     [SerializeField] private float _combatDistance = 3f;
     public float combatDistance { get { return _combatDistance; } }
+    [SerializeField] private float _aimDuration = 3f;
+    public float aimDuration { get { return _aimDuration; } }
     [SerializeField][ReadOnlyInspector] private float _attackCooldown = float.MinValue;
     public bool canPerformNewAttack { get { return combat.currentWeapon != null && (_attackCooldown <= 0 || (combat.isAttacking && combat.canDoCombo)); } }
     public float attackCooldown { get { return _attackCooldown; } set { _attackCooldown = value; } }
@@ -43,11 +51,21 @@ public class AIBrain_Base : MonoBehaviour
         {
             _currentState = _defaultState;
         }
+
+        controller.OnHit -= OnHit;
+        controller.OnHit += OnHit;
+    }
+
+    private void OnHit()
+    {
+        //Change to hurt state
+        _currentState.ResetState();
+        _currentState = _hurtState;
     }
 
     private void Update()
     {
-        if (_currentState != null)
+        if (_currentState != null && !health.isDead)
         {
             AIreturn newReturn = _currentState.Tick(this);
             _currentState = newReturn.toState;
@@ -69,6 +87,11 @@ public class AIBrain_Base : MonoBehaviour
         {
             _attackCooldown -= Time.deltaTime;
         }
+    }
+
+    public void GetInitialAttackCooldown()
+    {
+        _attackCooldown = UnityEngine.Random.Range(.2f, _maxInitialAttackCooldown);
     }
 
     #region SIMULATED INPUTS

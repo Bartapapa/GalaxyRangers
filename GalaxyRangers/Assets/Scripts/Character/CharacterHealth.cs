@@ -18,17 +18,37 @@ public class CharacterHealth : MonoBehaviour
     public bool isInvulnerable { get { return _isInvulnerable; } }
     private float _invulnerabilityDurationTimer = 0;
 
+    public delegate void HealthCallback(CharacterHealth characterHealth);
     public delegate void DefaultCallback();
-    public event DefaultCallback CharacterDied;
-    public event DefaultCallback CharacterHurt;
-    public event DefaultCallback CharacterHealed;
+    public event HealthCallback CharacterDied;
+    public event HealthCallback CharacterHurt;
+    public event HealthCallback CharacterHealed;
 
     private Coroutine invulnerabilityCoroutine;
 
+    private bool _firstFrame = false;
+
     private void Awake()
     {
-        Health.CurrentValueReachedZero += OnHealthReachedZero;
-        float healthValue = Health.MaxValue;
+        //this.Health.CurrentValueReachedZero -= OnHealthReachedZero;
+        //this.Health.CurrentValueReachedZero += OnHealthReachedZero;
+
+        //CharacterStat healthStat = new CharacterStat(Health.BaseValue);
+        //healthStat.CurrentValueReachedZero += OnHealthReachedZero;
+        //float healthValue = healthStat.MaxValue;
+        //Health = healthStat;
+    }
+
+    private void Update()
+    {
+        //Absolutely disgusting. Will have to rework my CharacterStat package in order to take this into account - which happens I DON'T KNOW WHY
+        //Probably has to do with initialization steps, although still doesn't work with Enable, Disable, Start and the rest. Insane.
+
+        if (!_firstFrame)
+        {
+            _firstFrame = true;
+            Health.CurrentValueReachedZero += OnHealthReachedZero;
+        }
     }
 
     public void Hurt(float damage)
@@ -37,7 +57,7 @@ public class CharacterHealth : MonoBehaviour
             return;
         Health.Damage(damage);
 
-        CharacterHurt?.Invoke();
+        CharacterHurt?.Invoke(this);
     }
 
     public void Invulnerability(float invulnerabilityDuration = .5f)
@@ -68,7 +88,7 @@ public class CharacterHealth : MonoBehaviour
         if (isDead) return;
         Health.Heal(heal);
 
-        CharacterHealed?.Invoke();
+        CharacterHealed?.Invoke(this);
     }
 
     private void OnHealthReachedZero()
@@ -77,6 +97,6 @@ public class CharacterHealth : MonoBehaviour
         Debug.LogWarning(this.gameObject.name + " has died!");
         _isDead = true;
 
-        CharacterDied?.Invoke();
+        CharacterDied?.Invoke(this);
     }
 }

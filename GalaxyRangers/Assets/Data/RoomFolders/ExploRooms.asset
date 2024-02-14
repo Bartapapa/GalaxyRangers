@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bb1b175021404b45b9fc5961241ce6f, type: 3}
+  m_Name: ExploRooms
+  m_EditorClassIdentifier: 
+  Rooms:
+  - {fileID: 5428773648545542659, guid: a92a2f5c35f1dd44f8ca5e1d5ac9fee7, type: 3}
+  - {fileID: 7433960941391824687, guid: a77d73dca0fc8364f9cdd71bf0a85934, type: 3}
+  - {fileID: 2478990507730174032, guid: 2163bb72c061a5543abcbf25a0557d1a, type: 3}
+  - {fileID: 356055189686795442, guid: 142a7054e795627448092997a764223e, type: 3}
+  - {fileID: 3912330958372094520, guid: 3faaba3cd78ab0341b16e4a577975c12, type: 3}

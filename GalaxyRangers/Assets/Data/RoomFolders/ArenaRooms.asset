@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bb1b175021404b45b9fc5961241ce6f, type: 3}
+  m_Name: ArenaRooms
+  m_EditorClassIdentifier: 
+  Rooms:
+  - {fileID: 1633943384603499602, guid: b95b82c7cda1b0149a346020411180df, type: 3}
+  - {fileID: 6042989855475740209, guid: 64d4c2ef5413e6748a7369b075ba29b1, type: 3}
+  - {fileID: 4497912132243351110, guid: c22451dda304e8248874936d65f44b11, type: 3}

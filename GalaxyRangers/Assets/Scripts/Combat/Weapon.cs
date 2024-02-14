@@ -13,8 +13,12 @@ public class Weapon : MonoBehaviour
 {
     [Header("OBJECT REFS & ANIMATION")]
     [Space]
-    public GameObject weaponMesh;
+    public WeaponObject weaponObjectPrefab;
+    [ReadOnlyInspector] public WeaponObject currentWeaponObject;
     [SerializeField] private int _stanceType = 0;
+    [Space]
+    [SerializeField] private Transform _projectileSource;
+    public Transform projectileSource { get { return _projectileSource; } }
 
     [Header("LIGHT COMBO")]
     [Space]
@@ -37,20 +41,16 @@ public class Weapon : MonoBehaviour
     {
         foreach(WeaponStrike weaponStrike0 in _lightCombo)
         {
-            weaponStrike0.hurtbox.DisableHurtBox();
+            if (weaponStrike0.hurtbox != null) weaponStrike0.hurtbox.DisableHurtBox();
+
         }
         foreach(WeaponStrike weaponStrike1 in _heavyComboBreaks)
         {
-            weaponStrike1.hurtbox.DisableHurtBox();
+            if (weaponStrike1.hurtbox != null) weaponStrike1.hurtbox.DisableHurtBox();
         }
         if(_heavyAttack.attack != null)
         {
-            _heavyAttack.hurtbox.DisableHurtBox();
+            if (_heavyAttack.hurtbox != null) _heavyAttack.hurtbox.DisableHurtBox();
         }
-    }
-
-    public void OpenAttackHurtBox()
-    {
-
     }
 }

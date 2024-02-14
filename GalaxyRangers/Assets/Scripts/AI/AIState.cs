@@ -20,4 +20,9 @@ public abstract class AIState : MonoBehaviour
     {
         return new AIreturn(this, new PlayerInputs());
     }
+
+    public virtual void ResetState()
+    {
+
+    }
 }

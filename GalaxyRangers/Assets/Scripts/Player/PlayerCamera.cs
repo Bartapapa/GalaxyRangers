@@ -112,8 +112,8 @@ public class PlayerCamera : MonoBehaviour
     public void ForceFocusToPosition(Vector3 position)
     {
         Vector3 focusPos = _focus.position;
-        Vector3 delta = focusPos - position;
-        _focus.position = position;
+        Vector3 delta = focusPos - (position+_focusOffset);
+        _focus.position = position+_focusOffset;
         Camera.OnTargetObjectWarped(_focus, delta);
     }
 }

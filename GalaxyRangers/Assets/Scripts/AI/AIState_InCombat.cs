@@ -70,7 +70,6 @@ public class AIState_InCombat : AIState
                 //Light attack.
                 brain.combat.RequestLightAttack();
                 brain.attackCooldown = brain.combat.currentWeaponStrike.attack.comboEndAttackCooldown;
-                Debug.Log(brain.combat.currentWeaponStrike.attack.comboEndAttackCooldown);
             }
             else if (attackType == 2)
             {
@@ -147,7 +146,7 @@ public class AIState_InCombat : AIState
 
         if (allAttacksInDistance.Count <= 0)
         {
-            Debug.Log("No attacks in distance.");
+            Debug.Log("No attacks in range.");
             return 0;
         }
         if (allAttacksInDistance.Count == 1) return allAttacksInDistance[0].attackType;

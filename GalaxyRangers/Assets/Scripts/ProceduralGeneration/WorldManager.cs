@@ -8,9 +8,25 @@ public class WorldManager : MonoBehaviour
     public World world;
     public static WorldManager Instance;
 
+    [Header("ROOM DATABASE")]
+    [Space]
+    [SerializeField] private RoomFolder _exploRooms;
+    [SerializeField] private RoomFolder _arenaRooms;
+    [SerializeField] private RoomFolder _healRooms;
+    [SerializeField] private RoomFolder _itemRooms;
+    [SerializeField] private RoomFolder _shopRooms;
+    [SerializeField] private RoomFolder _spawnRooms;
+    [SerializeField] private RogueRoom _bossRoom;
+    [SerializeField] private RogueRoom _HUBRoom;
+
+    [Header("ENEMY DATABASE")]
+    [SerializeField] private EnemyFolder _enemyFolder;
+    public EnemyFolder enemyFolder { get { return _enemyFolder; } }
+
     [Header("ROOM")]
     [Space(10)]
     [SerializeField] [ReadOnlyInspector] private RogueRoom _currentRogueRoom;
+    public RogueRoom currentRogueRoom { get { return _currentRogueRoom; } }
 
     [Header("PARAMETERS")]
     [Space(10)]
@@ -30,7 +46,7 @@ public class WorldManager : MonoBehaviour
 
     [Header("OBJECT REFERENCES")]
     [Space(10)]
-    public Transform CurrentRoomParent;
+    public Transform GeneratedRoomParent;
     public Transform WorldVisualization;
     [SerializeField] private RogueRoom _roomPrefab;
     [SerializeField] private DebugRoom _debugRoomPrefab;
@@ -63,6 +79,11 @@ public class WorldManager : MonoBehaviour
                 _debugRooms.Clear();
             }
 
+            for (int i = 0; i < GeneratedRoomParent.childCount; i++)
+            {
+                Destroy(GeneratedRoomParent.GetChild(i).gameObject);
+            }
+
             World newWorld = new World(numberOfRooms, maxNumberOfChildRooms, mainBranchMinDistance, mainBranchMaxDistance, subBranchMaxDistance,
                                        maxNumberOfHealRooms, maxNumberOfShopRooms, maxNumberOfItemRooms, gasEventSpawnChance, secondChanceEventSpawnChance,
                                        baseDifficulty, difficultyVariance,
@@ -77,26 +98,50 @@ public class WorldManager : MonoBehaviour
     {
         if (_currentRogueRoom != null)
         {
-            Destroy(_currentRogueRoom.gameObject);
+            _currentRogueRoom.ResetRoom();
+
+            _currentRogueRoom.gameObject.SetActive(false);
+            _currentRogueRoom = null;
         }
 
-        RogueRoom newRoom = Instantiate<RogueRoom>(_roomPrefab, CurrentRoomParent);
-        newRoom.BuildRoom(room);
-        _currentRogueRoom = newRoom;
+        //Generate and build room if first time in room.
+        if (room.GeneratedRoom == null)
+        {
+            Debug.Log("Room not generated, generating now.");
+            RogueRoom newRoom = Instantiate<RogueRoom>(GetRandomRoomOfType(room.roomType), GeneratedRoomParent);
+            _currentRogueRoom = newRoom;
+            room.GeneratedRoom = newRoom;
+
+            newRoom.BuildRoom(room);
+        }
+        else
+        {
+            Debug.Log("Found room, using that one.");
+            RogueRoom newRoom = room.GeneratedRoom;
+            newRoom.gameObject.SetActive(true);
+            _currentRogueRoom = newRoom;
+
+            _currentRogueRoom.RegenerateRoom();
+        }
+
+        //Set camera settings.
+        _currentRogueRoom.UseCameraSettings();
 
         if (usedTraversal == null)
         {
             _currentRogueRoom.SetPlayerAtSpawnPoint(TraversalLocation.None, Player.Instance.CharacterController);
+            //CameraManager.Instance.ForceCameraToPosition(_currentRogueRoom.SetPlayerAtSpawnPoint(TraversalLocation.None, Player.Instance.CharacterController));
         }
         else
         {
             _currentRogueRoom.SetPlayerAtSpawnPoint(usedTraversal.toTraversalLocation, Player.Instance.CharacterController);
+            //CameraManager.Instance.ForceCameraToPosition(_currentRogueRoom.SetPlayerAtSpawnPoint(usedTraversal.toTraversalLocation, Player.Instance.CharacterController));
         }
 
         for (int i = 0; i < _debugRooms.Count; i++)
         {
             _debugRooms[i].ExitRoom();
-            DebugRoom inDebugRoom;
+            //DebugRoom inDebugRoom;
             foreach(Room worldRoom in world.rooms)
             {
                 if (_debugRooms[i].room == room)
@@ -164,6 +209,40 @@ public class WorldManager : MonoBehaviour
                     }
                 }
             }
+        }
+    }
+
+    private RogueRoom GetRandomRoomOfType(RoomType type)
+    {
+        int randomInt;
+        switch (type)
+        {
+            case RoomType.None:
+                return null;
+            case RoomType.Spawn:
+                randomInt = UnityEngine.Random.Range(0, _spawnRooms.Rooms.Count);
+                return _spawnRooms.Rooms[randomInt];
+            case RoomType.Boss:
+                return _bossRoom;
+            case RoomType.Exploration:
+                randomInt = UnityEngine.Random.Range(0, _exploRooms.Rooms.Count);
+                return _exploRooms.Rooms[randomInt];
+            case RoomType.Arena:
+                randomInt = UnityEngine.Random.Range(0, _arenaRooms.Rooms.Count);
+                return _arenaRooms.Rooms[randomInt];
+            case RoomType.Shop:
+                randomInt = UnityEngine.Random.Range(0, _shopRooms.Rooms.Count);
+                return _shopRooms.Rooms[randomInt];
+            case RoomType.Heal:
+                randomInt = UnityEngine.Random.Range(0, _healRooms.Rooms.Count);
+                return _healRooms.Rooms[randomInt];
+            case RoomType.Item:
+                randomInt = UnityEngine.Random.Range(0, _itemRooms.Rooms.Count);
+                return _itemRooms.Rooms[randomInt];
+            case RoomType.Length:
+                return null;
+            default:
+                return null;
         }
     }
 }
