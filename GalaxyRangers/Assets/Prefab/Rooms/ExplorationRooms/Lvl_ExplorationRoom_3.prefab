@@ -32610,6 +32610,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _defaultSpawnPoint: {fileID: 786861223330819856}
+  _ignoreScenario: 0
+  _scenario1: {fileID: 0}
+  _scenario2: {fileID: 0}
+  _scenario3: {fileID: 0}
   _LT_closed: {fileID: 639810157067077981}
   _LT_open: {fileID: 7118133047464578064}
   _LT_teleporter: {fileID: 1940383390657747234}

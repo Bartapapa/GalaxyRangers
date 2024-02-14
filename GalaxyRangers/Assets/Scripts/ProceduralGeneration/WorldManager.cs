@@ -19,9 +19,14 @@ public class WorldManager : MonoBehaviour
     [SerializeField] private RogueRoom _bossRoom;
     [SerializeField] private RogueRoom _HUBRoom;
 
+    [Header("ENEMY DATABASE")]
+    [SerializeField] private EnemyFolder _enemyFolder;
+    public EnemyFolder enemyFolder { get { return _enemyFolder; } }
+
     [Header("ROOM")]
     [Space(10)]
     [SerializeField] [ReadOnlyInspector] private RogueRoom _currentRogueRoom;
+    public RogueRoom currentRogueRoom { get { return _currentRogueRoom; } }
 
     [Header("PARAMETERS")]
     [Space(10)]
@@ -41,7 +46,7 @@ public class WorldManager : MonoBehaviour
 
     [Header("OBJECT REFERENCES")]
     [Space(10)]
-    public Transform CurrentRoomParent;
+    public Transform GeneratedRoomParent;
     public Transform WorldVisualization;
     [SerializeField] private RogueRoom _roomPrefab;
     [SerializeField] private DebugRoom _debugRoomPrefab;
@@ -74,6 +79,11 @@ public class WorldManager : MonoBehaviour
                 _debugRooms.Clear();
             }
 
+            for (int i = 0; i < GeneratedRoomParent.childCount; i++)
+            {
+                Destroy(GeneratedRoomParent.GetChild(i).gameObject);
+            }
+
             World newWorld = new World(numberOfRooms, maxNumberOfChildRooms, mainBranchMinDistance, mainBranchMaxDistance, subBranchMaxDistance,
                                        maxNumberOfHealRooms, maxNumberOfShopRooms, maxNumberOfItemRooms, gasEventSpawnChance, secondChanceEventSpawnChance,
                                        baseDifficulty, difficultyVariance,
@@ -88,27 +98,32 @@ public class WorldManager : MonoBehaviour
     {
         if (_currentRogueRoom != null)
         {
-            Destroy(_currentRogueRoom.gameObject);
+            _currentRogueRoom.ResetRoom();
+
+            _currentRogueRoom.gameObject.SetActive(false);
+            _currentRogueRoom = null;
         }
 
         //Generate and build room if first time in room.
         if (room.GeneratedRoom == null)
         {
-            RogueRoom newRoom = Instantiate<RogueRoom>(GetRandomRoomOfType(room.roomType), CurrentRoomParent);
+            Debug.Log("Room not generated, generating now.");
+            RogueRoom newRoom = Instantiate<RogueRoom>(GetRandomRoomOfType(room.roomType), GeneratedRoomParent);
             newRoom.BuildRoom(room);
             _currentRogueRoom = newRoom;
             room.GeneratedRoom = newRoom;
         }
         else
         {
-            RogueRoom newRoom = Instantiate<RogueRoom>(room.GeneratedRoom, CurrentRoomParent);
-            newRoom.BuildRoom(room);
+            Debug.Log("Found room, using that one.");
+            RogueRoom newRoom = room.GeneratedRoom;
+            newRoom.gameObject.SetActive(true);
+            _currentRogueRoom = newRoom;
+            _currentRogueRoom.RegenerateRoom();
             //Perhaps have a function for 'regenerating' rooms, so that when enemies are dead they stay dead, when item is spawned it stays that way, etc.
             //The RogueRoom itself should make BuildRoom a virtual method so that other sub classes (Item Room, Arena Room, etc, etc) can all build themselves in their own way, like spawning
             //enemies and items and whatnot. For now this will suffice.
         }
-
-        //Otherwise, 
 
         if (usedTraversal == null)
         {
