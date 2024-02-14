@@ -115,6 +115,5 @@ public class PlayerCamera : MonoBehaviour
         Vector3 delta = focusPos - (position+_focusOffset);
         _focus.position = position+_focusOffset;
         Camera.OnTargetObjectWarped(_focus, delta);
-        Debug.Log(delta);
     }
 }

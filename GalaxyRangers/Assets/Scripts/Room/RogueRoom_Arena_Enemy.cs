@@ -73,8 +73,6 @@ public class RogueRoom_Arena_Enemy : RogueRoom_Arena
                 _currentNumberOfEnemies++;
 
                 spawner.ResetSpawner();
-
-                //Bind their OnDeath event to a check to see if all enemies died.
             }
 
         }
