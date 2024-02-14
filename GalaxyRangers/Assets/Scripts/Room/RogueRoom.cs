@@ -3,11 +3,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+public class RogueRoomCameraSettings
+{
+    [Header("CAMERA STATE")]
+    public CameraState cameraState = CameraState.Exploration;
+
+    [Header("CONFINER")]
+    public PolygonCollider2D confiner;
+}
+
 public class RogueRoom : MonoBehaviour
 {
     [Header("ROOM")]
     public Room roomData;
     public Transform _defaultSpawnPoint;
+
+    [Header("ROOM CAMERA SETTINGS")]
+    public RogueRoomCameraSettings cameraSettings = new RogueRoomCameraSettings();
 
     [Header("SCENARIOS")]
     [Space(10)]
@@ -15,7 +28,7 @@ public class RogueRoom : MonoBehaviour
     [SerializeField] private Scenario _scenario1;
     [SerializeField] private Scenario _scenario2;
     [SerializeField] private Scenario _scenario3;
-    private Scenario _chosenScenario;
+    protected Scenario _chosenScenario;
 
     [Header("EXIT POINTS")]
     [Space(10)]
@@ -129,34 +142,36 @@ public class RogueRoom : MonoBehaviour
         }
     }
 
-    public void SetPlayerAtSpawnPoint(TraversalLocation traversalLocation, BaseCharacterController player)
+    public Vector3 SetPlayerAtSpawnPoint(TraversalLocation traversalLocation, BaseCharacterController player)
     {
         if (traversalLocation == TraversalLocation.None)
         {
             player.SetRigidbodyPosition(_defaultSpawnPoint.position);
-            return;
+            return _defaultSpawnPoint.position;
         }
         switch (traversalLocation)
         {
             case TraversalLocation.LeftTop:
                 player.SetRigidbodyPosition(_LT_spawnPoint.position);
-                break;
+                return _LT_spawnPoint.position;
             case TraversalLocation.LeftBottom:
                 player.SetRigidbodyPosition(_LB_spawnPoint.position);
-                break;
+                return _LB_spawnPoint.position;
             case TraversalLocation.MiddleTop:
                 player.SetRigidbodyPosition(_MT_spawnPoint.position);
-                break;
+                return _MT_spawnPoint.position;
             case TraversalLocation.MiddleBottom:
                 player.SetRigidbodyPosition(_MB_spawnPoint.position);
-                break;
+                return _MB_spawnPoint.position;
             case TraversalLocation.RightTop:
                 player.SetRigidbodyPosition(_RT_spawnPoint.position);
-                break;
+                return _RT_spawnPoint.position;
             case TraversalLocation.RightBottom:
                 player.SetRigidbodyPosition(_RB_spawnPoint.position);
-                break;
+                return _RB_spawnPoint.position;
         }
+
+        return Vector3.zero;
     }
 
     public virtual void BuildRoom(Room room)
@@ -172,7 +187,7 @@ public class RogueRoom : MonoBehaviour
         //SetScenario(room);
     }
 
-    private void BuildTraversalPoints(Room room)
+    protected void BuildTraversalPoints(Room room)
     {
         List<TraversalLocation> allTraversalLocations = GetAllTraversalLocations();
 
@@ -269,7 +284,7 @@ public class RogueRoom : MonoBehaviour
         }
     }
 
-    private List<TraversalLocation> GetAllTraversalLocations()
+    protected List<TraversalLocation> GetAllTraversalLocations()
     {
         List<TraversalLocation> allTraversalLocations = new List<TraversalLocation>();
         TraversalLocation LT = TraversalLocation.LeftTop;
@@ -313,6 +328,11 @@ public class RogueRoom : MonoBehaviour
         //Actually, no need since we just don't destroy the previous room. once generated, they'll still be here, with all of their variables. Just don't spawn them on the reset transform.
         //If the room is a heal room, regenerate the same healing pad.
         //Actually, no need since we just don't destroy the previous room. once generated, they'll still be here, with all of their variables. Just don't spawn them on the reset transform.
+    }
+
+    public virtual void UseCameraSettings()
+    {
+        CameraManager.Instance.SetRogueRoomCameraSettings(cameraSettings);
     }
 
 }
