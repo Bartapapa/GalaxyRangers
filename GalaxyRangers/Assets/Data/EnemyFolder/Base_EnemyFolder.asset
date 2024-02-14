@@ -12,8 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53c2df37465cbab4ea8bfcdc86f73b6a, type: 3}
   m_Name: Base_EnemyFolder
   m_EditorClassIdentifier: 
-  meleeNormalPrefab: {fileID: 0}
-  meleeElitePrefab: {fileID: 0}
-  rangedNormalPrefab: {fileID: 0}
-  rangedElitePrefab: {fileID: 0}
-  bossPrefab: {fileID: 0}
+  meleeNormalPrefab: {fileID: 6033406254421080662, guid: 4676568b3eb205545b2add51b5c50e58,
+    type: 3}
+  meleeElitePrefab: {fileID: 6033406254421080662, guid: 4676568b3eb205545b2add51b5c50e58,
+    type: 3}
+  rangedNormalPrefab: {fileID: 6033406254421080662, guid: 4676568b3eb205545b2add51b5c50e58,
+    type: 3}
+  rangedElitePrefab: {fileID: 6033406254421080662, guid: 4676568b3eb205545b2add51b5c50e58,
+    type: 3}
+  bossPrefab: {fileID: 6033406254421080662, guid: 4676568b3eb205545b2add51b5c50e58,
+    type: 3}
