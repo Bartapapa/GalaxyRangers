@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,7 +11,11 @@ public class RogueRoom : MonoBehaviour
 
     [Header("SCENARIOS")]
     [Space(10)]
-    private float whee;
+    [SerializeField] [ReadOnlyInspector] private bool _ignoreScenario = false;
+    [SerializeField] private Scenario _scenario1;
+    [SerializeField] private Scenario _scenario2;
+    [SerializeField] private Scenario _scenario3;
+    private Scenario _chosenScenario;
 
     [Header("EXIT POINTS")]
     [Space(10)]
@@ -49,6 +54,12 @@ public class RogueRoom : MonoBehaviour
     [SerializeField] private GameObject _RB_open;
     [SerializeField] private RoomTeleporter _RB_teleporter;
     [SerializeField] private Transform _RB_spawnPoint;
+
+    //Projectiles, VFX and whatnot are parented to this fucker.
+    [Header("RESET PARENT")]
+    [Space]
+    [SerializeField] private Transform _resetParent;
+    public Transform resetParent { get { return _resetParent; } }
 
     public void OpenExitPoint(TraversalPoint traversalPoint)
     {
@@ -154,6 +165,15 @@ public class RogueRoom : MonoBehaviour
             return;
 
         roomData = room;
+
+        BuildTraversalPoints(room);
+
+        //Set scenario.
+        //SetScenario(room);
+    }
+
+    private void BuildTraversalPoints(Room room)
+    {
         List<TraversalLocation> allTraversalLocations = GetAllTraversalLocations();
 
         if (room.entryPoint != null)
@@ -162,19 +182,91 @@ public class RogueRoom : MonoBehaviour
             allTraversalLocations.Remove(room.entryPoint.fromTraversalLocation);
         }
 
-        foreach(TraversalPoint traversalPoint in room.exitPoints)
+        foreach (TraversalPoint traversalPoint in room.exitPoints)
         {
             OpenExitPoint(traversalPoint);
             allTraversalLocations.Remove(traversalPoint.fromTraversalLocation);
         }
 
-        foreach(TraversalLocation traversalLocation in allTraversalLocations)
+        foreach (TraversalLocation traversalLocation in allTraversalLocations)
         {
             CloseExitPoint(traversalLocation);
         }
+    }
 
-        //Also build scenario fromm the room's scenario.
-        //room.scenario;
+    private void SetScenario(Room room)
+    {
+        switch (room.roomType)
+        {
+            case RoomType.None:
+                _ignoreScenario = true;
+                break;
+            case RoomType.Spawn:
+                _ignoreScenario = true;
+                break;
+            case RoomType.Boss:
+                _ignoreScenario = true;
+                break;
+            case RoomType.Exploration:
+                _ignoreScenario = false;
+                break;
+            case RoomType.Arena:
+                _ignoreScenario = false;
+                break;
+            case RoomType.Shop:
+                _ignoreScenario = true;
+                break;
+            case RoomType.Heal:
+                _ignoreScenario = true;
+                break;
+            case RoomType.Item:
+                _ignoreScenario = true;
+                break;
+            default:
+                _ignoreScenario = true;
+                break;
+        }
+        if (!_ignoreScenario)
+        {
+            switch (room.scenario)
+            {
+                case DifficultyScenario.None:
+                    _scenario1.gameObject.SetActive(true);
+                    _scenario2.gameObject.SetActive(false);
+                    _scenario3.gameObject.SetActive(false);
+
+                    _chosenScenario = _scenario1;
+                    break;
+                case DifficultyScenario.Easy:
+                    _scenario1.gameObject.SetActive(true);
+                    _scenario2.gameObject.SetActive(false);
+                    _scenario3.gameObject.SetActive(false);
+
+                    _chosenScenario = _scenario1;
+                    break;
+                case DifficultyScenario.Medium:
+                    _scenario1.gameObject.SetActive(false);
+                    _scenario2.gameObject.SetActive(true);
+                    _scenario3.gameObject.SetActive(false);
+
+                    _chosenScenario = _scenario2;
+                    break;
+                case DifficultyScenario.Hard:
+                    _scenario1.gameObject.SetActive(false);
+                    _scenario2.gameObject.SetActive(false);
+                    _scenario3.gameObject.SetActive(true);
+
+                    _chosenScenario = _scenario3;
+                    break;
+                default:
+                    _scenario1.gameObject.SetActive(true);
+                    _scenario2.gameObject.SetActive(false);
+                    _scenario3.gameObject.SetActive(false);
+
+                    _chosenScenario = _scenario1;
+                    break;
+            }
+        }
     }
 
     private List<TraversalLocation> GetAllTraversalLocations()
@@ -193,6 +285,34 @@ public class RogueRoom : MonoBehaviour
         TraversalLocation RB = TraversalLocation.RightBottom;
         allTraversalLocations.Add(RB);
         return allTraversalLocations;
+    }
+
+    public virtual void ResetRoom()
+    {
+        for (int i = 0; i < _resetParent.childCount; i++)
+        {
+            Destroy(_resetParent.GetChild(i).gameObject);
+        }
+    }
+
+    public virtual void RegenerateRoom()
+    {
+        //Take the room's scenario, and regenerate all non-killed enemies.
+        //This is necessary, though, since we don't want enemies spawning at the same place as when the player left.
+        if (!_ignoreScenario)
+        {
+            foreach(EnemySpawner enemySpawner in _chosenScenario.enemySpawners)
+            {
+                enemySpawner.GenerateEnemy();
+            }
+        }
+
+        //If the room is an item room, regenerate the same item.
+        //Actually, no need since we just don't destroy the previous room. once generated, they'll still be here, with all of their variables. Just don't spawn them on the reset transform.
+        //If the room is a shop room, regenerate the same items.
+        //Actually, no need since we just don't destroy the previous room. once generated, they'll still be here, with all of their variables. Just don't spawn them on the reset transform.
+        //If the room is a heal room, regenerate the same healing pad.
+        //Actually, no need since we just don't destroy the previous room. once generated, they'll still be here, with all of their variables. Just don't spawn them on the reset transform.
     }
 
 }

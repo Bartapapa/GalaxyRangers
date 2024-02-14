@@ -838,6 +838,12 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 953325320}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &1055713511 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 379616434025463747, guid: 4cddb0979183fa840a8cea87caf62710,
+    type: 3}
+  m_PrefabInstance: {fileID: 4507600784512437681}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1398528067
 GameObject:
   m_ObjectHideFlags: 0
@@ -1986,6 +1992,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: c027e510af5044b49a6bcdaefcbdccfe,
         type: 2}
+    - target: {fileID: 4475172479014090140, guid: 4cddb0979183fa840a8cea87caf62710,
+        type: 3}
+      propertyPath: _enemyFolder
+      value: 
+      objectReference: {fileID: 11400000, guid: 3449624c3a1633a468efe4392ff6c3fa,
+        type: 2}
+    - target: {fileID: 4475172479014090140, guid: 4cddb0979183fa840a8cea87caf62710,
+        type: 3}
+      propertyPath: GeneratedRoomParent
+      value: 
+      objectReference: {fileID: 1055713511}
     - target: {fileID: 5957424380341390108, guid: 4cddb0979183fa840a8cea87caf62710,
         type: 3}
       propertyPath: m_IsActive
@@ -2045,6 +2062,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: //MANAGERS
+      objectReference: {fileID: 0}
+    - target: {fileID: 8735055031729189053, guid: 4cddb0979183fa840a8cea87caf62710,
+        type: 3}
+      propertyPath: m_Name
+      value: GeneratedRooms
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
