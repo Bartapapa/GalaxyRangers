@@ -285,6 +285,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _defaultSpawnPoint: {fileID: 2833900177547982146}
+  _ignoreScenario: 0
+  _scenario1: {fileID: 0}
+  _scenario2: {fileID: 0}
+  _scenario3: {fileID: 0}
   _LT_closed: {fileID: 6896416670258660379}
   _LT_open: {fileID: 33674162224030824}
   _LT_teleporter: {fileID: 7941899301974234516}
@@ -309,6 +313,7 @@ MonoBehaviour:
   _RB_open: {fileID: 0}
   _RB_teleporter: {fileID: 0}
   _RB_spawnPoint: {fileID: 0}
+  _resetParent: {fileID: 0}
 --- !u!1 &546138116631277222
 GameObject:
   m_ObjectHideFlags: 0
