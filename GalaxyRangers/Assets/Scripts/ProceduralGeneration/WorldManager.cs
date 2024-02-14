@@ -125,13 +125,18 @@ public class WorldManager : MonoBehaviour
             //enemies and items and whatnot. For now this will suffice.
         }
 
+        //Set camera settings.
+        //_currentRogueRoom.UseCameraSettings();
+
         if (usedTraversal == null)
         {
             _currentRogueRoom.SetPlayerAtSpawnPoint(TraversalLocation.None, Player.Instance.CharacterController);
+            //CameraManager.Instance.ForceCameraToPosition(_currentRogueRoom.SetPlayerAtSpawnPoint(TraversalLocation.None, Player.Instance.CharacterController));
         }
         else
         {
             _currentRogueRoom.SetPlayerAtSpawnPoint(usedTraversal.toTraversalLocation, Player.Instance.CharacterController);
+            //CameraManager.Instance.ForceCameraToPosition(_currentRogueRoom.SetPlayerAtSpawnPoint(usedTraversal.toTraversalLocation, Player.Instance.CharacterController));
         }
 
         for (int i = 0; i < _debugRooms.Count; i++)

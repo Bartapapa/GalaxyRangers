@@ -1843,6 +1843,41 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2514378820983621446, guid: fff465d56b78aca419ac00194e7e09a4,
+        type: 3}
+      propertyPath: m_CameraDistance
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 2531176662470765493, guid: fff465d56b78aca419ac00194e7e09a4,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -12
+      objectReference: {fileID: 0}
+    - target: {fileID: 2601983355821130918, guid: fff465d56b78aca419ac00194e7e09a4,
+        type: 3}
+      propertyPath: _focusObjects.Array.data[0].Object
+      value: 
+      objectReference: {fileID: 1532192477}
+    - target: {fileID: 4415414748025765131, guid: fff465d56b78aca419ac00194e7e09a4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4421303327068592349, guid: fff465d56b78aca419ac00194e7e09a4,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4421303327068592349, guid: fff465d56b78aca419ac00194e7e09a4,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4421303327068592349, guid: fff465d56b78aca419ac00194e7e09a4,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -12
+      objectReference: {fileID: 0}
     - target: {fileID: 6226320362416033835, guid: fff465d56b78aca419ac00194e7e09a4,
         type: 3}
       propertyPath: m_Name

@@ -18,10 +18,11 @@ public class CharacterHealth : MonoBehaviour
     public bool isInvulnerable { get { return _isInvulnerable; } }
     private float _invulnerabilityDurationTimer = 0;
 
+    public delegate void HealthCallback(CharacterHealth characterHealth);
     public delegate void DefaultCallback();
-    public event DefaultCallback CharacterDied;
-    public event DefaultCallback CharacterHurt;
-    public event DefaultCallback CharacterHealed;
+    public event HealthCallback CharacterDied;
+    public event HealthCallback CharacterHurt;
+    public event HealthCallback CharacterHealed;
 
     private Coroutine invulnerabilityCoroutine;
 
@@ -56,7 +57,7 @@ public class CharacterHealth : MonoBehaviour
             return;
         Health.Damage(damage);
 
-        CharacterHurt?.Invoke();
+        CharacterHurt?.Invoke(this);
     }
 
     public void Invulnerability(float invulnerabilityDuration = .5f)
@@ -87,7 +88,7 @@ public class CharacterHealth : MonoBehaviour
         if (isDead) return;
         Health.Heal(heal);
 
-        CharacterHealed?.Invoke();
+        CharacterHealed?.Invoke(this);
     }
 
     private void OnHealthReachedZero()
@@ -96,6 +97,6 @@ public class CharacterHealth : MonoBehaviour
         Debug.LogWarning(this.gameObject.name + " has died!");
         _isDead = true;
 
-        CharacterDied?.Invoke();
+        CharacterDied?.Invoke(this);
     }
 }
