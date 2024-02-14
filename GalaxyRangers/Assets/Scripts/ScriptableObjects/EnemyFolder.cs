@@ -5,11 +5,11 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "GalaxyRangers/LD/EnemyFolder")]
 public class EnemyFolder : ScriptableObject
 {
-    public CharacterHealth meleeNormalPrefab;
-    public CharacterHealth meleeElitePrefab;
+    public AIBrain_Base meleeNormalPrefab;
+    public AIBrain_Base meleeElitePrefab;
     [Space]
-    public CharacterHealth rangedNormalPrefab;
-    public CharacterHealth rangedElitePrefab;
+    public AIBrain_Base rangedNormalPrefab;
+    public AIBrain_Base rangedElitePrefab;
     [Space]
-    public CharacterHealth bossPrefab;
+    public AIBrain_Base bossPrefab;
 }

@@ -26,38 +26,57 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private EnemyRank _enemyRank = EnemyRank.Random;
 
     //Saved info cache
-    private CharacterHealth _chosenEnemy;
+    private AIBrain_Base _chosenEnemy;
+    private AIBrain_Base _instantiatedEnemy;
     private bool _enemyDied = false;
     public bool enemyDied { get { return _enemyDied; } }
 
-    public void GenerateEnemy()
+    private void OnDisable()
+    {
+        if (_instantiatedEnemy)
+        {
+            _instantiatedEnemy.health.CharacterDied -= OnEnemyDied;
+        }
+    }
+
+    public AIBrain_Base GenerateEnemy()
     {
         if (_chosenEnemy != null)
         {
-            RegenerateEnemy();
+            return RegenerateEnemy();
         }
         else
         {
-            CharacterHealth chosenEnemy = GetEnemy();
+            AIBrain_Base chosenEnemy = GetEnemy();
             if (chosenEnemy == null)
-                return;
+                return null;
 
-            CharacterHealth newEnemy = Instantiate<CharacterHealth>(chosenEnemy, this.transform);
+            AIBrain_Base newEnemy = Instantiate<AIBrain_Base>(chosenEnemy, this.transform);
             _chosenEnemy = chosenEnemy; //Ref to prefab, not instantiated enemy
+            _instantiatedEnemy = newEnemy;
+
             newEnemy.transform.parent = WorldManager.Instance.currentRogueRoom.resetParent;
+            newEnemy.health.CharacterDied -= OnEnemyDied;
+            newEnemy.health.CharacterDied += OnEnemyDied;
+            return newEnemy;
         }
     }
 
-    private void RegenerateEnemy()
+    private AIBrain_Base RegenerateEnemy()
     {
         if (_enemyDied)
-            return;
+            return null;
 
-        CharacterHealth newEnemy = Instantiate<CharacterHealth>(_chosenEnemy, this.transform);
+        AIBrain_Base newEnemy = Instantiate<AIBrain_Base>(_chosenEnemy, this.transform);
         newEnemy.transform.parent = WorldManager.Instance.currentRogueRoom.resetParent;
+        _instantiatedEnemy = newEnemy;
+
+        newEnemy.health.CharacterDied -= OnEnemyDied;
+        newEnemy.health.CharacterDied += OnEnemyDied;
+        return newEnemy;
     }
 
-    private CharacterHealth GetEnemy()
+    private AIBrain_Base GetEnemy()
     {
         switch (_enemyType)
         {
@@ -132,5 +151,17 @@ public class EnemySpawner : MonoBehaviour
 
         }
         return null;
+    }
+
+    private void OnEnemyDied(CharacterHealth health)
+    {
+        _enemyDied = true;
+        health.CharacterDied -= OnEnemyDied;
+    }
+
+    public void ResetSpawner()
+    {
+        _chosenEnemy = null;
+        _enemyDied = false;
     }
 }

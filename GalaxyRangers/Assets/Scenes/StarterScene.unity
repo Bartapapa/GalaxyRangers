@@ -628,6 +628,27 @@ Transform:
   - {fileID: 949463336}
   m_Father: {fileID: 1800397207}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &944702382 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7903287939907092447, guid: fff465d56b78aca419ac00194e7e09a4,
+    type: 3}
+  m_PrefabInstance: {fileID: 3839314250700959978}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &944702386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 944702382}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f453f694addf4275988fac205bc91968, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_BoundingShape2D: {fileID: 0}
+  m_Damping: 0.5
+  m_MaxWindowSize: -1
 --- !u!1 &949463335
 GameObject:
   m_ObjectHideFlags: 0
@@ -838,6 +859,27 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 953325320}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1014601108 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8628656506417963526, guid: fff465d56b78aca419ac00194e7e09a4,
+    type: 3}
+  m_PrefabInstance: {fileID: 3839314250700959978}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1014601113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1014601108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f453f694addf4275988fac205bc91968, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_BoundingShape2D: {fileID: 0}
+  m_Damping: 0.5
+  m_MaxWindowSize: -1
 --- !u!4 &1055713511 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 379616434025463747, guid: 4cddb0979183fa840a8cea87caf62710,
@@ -1861,7 +1903,15 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8628656506417963526, guid: fff465d56b78aca419ac00194e7e09a4,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1014601113}
+    - targetCorrespondingSourceObject: {fileID: 7903287939907092447, guid: fff465d56b78aca419ac00194e7e09a4,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 944702386}
   m_SourcePrefab: {fileID: 100100000, guid: fff465d56b78aca419ac00194e7e09a4, type: 3}
 --- !u!1001 &3913710252251671361
 PrefabInstance:
