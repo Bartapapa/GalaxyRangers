@@ -68,11 +68,6 @@ public class WorldManager : MonoBehaviour
     }
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.N))
-        {
-            CameraManager.Instance.ForceCameraToPosition(Player.Instance.CharacterController.transform.position);
-        }
-
         if (Input.GetKeyDown(KeyCode.G))
         {
             if (_debugRooms.Count > 0)
