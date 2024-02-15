@@ -73,10 +73,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5339006108199215641}
-  - component: {fileID: 7084209846196518681}
-  - component: {fileID: 9166325559377854919}
+  - component: {fileID: -6321917322013470002}
+  - component: {fileID: 5690909037200965987}
   m_Layer: 11
-  m_Name: Teleporter
+  m_Name: HUBTeleporter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -98,7 +98,7 @@ Transform:
   - {fileID: 2396482616398299640}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7084209846196518681
+--- !u!114 &-6321917322013470002
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -107,13 +107,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 6197544357951252513}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d3acbc9020e3c5142ba2e9446ee35b6a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7c225df1895fe2a49a1557e0a32c9562, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _activationDistance: 5
-  _mat: {fileID: 3824191257789518029}
-  canBeActivated: 1
---- !u!65 &9166325559377854919
+  forceSeed: barthelemirapeaux
+--- !u!65 &5690909037200965987
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

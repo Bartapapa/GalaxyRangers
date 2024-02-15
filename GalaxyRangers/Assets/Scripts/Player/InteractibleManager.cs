@@ -15,12 +15,6 @@ public class InteractibleManager : MonoBehaviour
     private void Update()
     {
         HandleCurrentInteractible();
-
-        if (Input.GetKeyDown(KeyCode.N))
-        {
-            Debug.Log("Attempted to interact!");
-            if (_currentSelectedInteractible != null) InteractWithCurrentInteractible();
-        }
     }
 
     private void HandleCurrentInteractible()
@@ -34,19 +28,24 @@ public class InteractibleManager : MonoBehaviour
             }
 
             _currentSelectedInteractible = interactible;
-            _currentSelectedInteractible.SelectInteractible();
+
+            if (_currentSelectedInteractible != null)
+            {
+                _currentSelectedInteractible.SelectInteractible();
+            }
         }
     }
 
     public void InteractWithCurrentInteractible()
     {
-        if (_isInteracting)
+        if (_isInteracting || _currentSelectedInteractible == null)
             return;
 
         _isInteracting = true;
 
         _currentInteractingInteractible = _currentSelectedInteractible;
         _currentInteractingInteractible.StartInteract(this);
+        Debug.Log("Attempted to interact!");
     }
 
     public void ForceInteractWithInteractible(Interactible interactible)
@@ -86,11 +85,15 @@ public class InteractibleManager : MonoBehaviour
             }
         }
 
+        Debug.Log(allPotentialInteractibles.Count);
         return allPotentialInteractibles;
     }
 
     private Interactible GetClosestInteractible(List<Interactible> potentialInteractibles)
     {
+        if (potentialInteractibles.Count == 0)
+            return null;
+
         Interactible chosenInteractible = null;
         float closestDistance = float.MaxValue;
         foreach(Interactible interactible in potentialInteractibles)
