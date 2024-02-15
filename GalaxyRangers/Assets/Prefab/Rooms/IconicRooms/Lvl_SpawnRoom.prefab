@@ -4048,7 +4048,7 @@ Transform:
   m_GameObject: {fileID: 2564657909506719465}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -23.25, y: 1, z: 0}
+  m_LocalPosition: {x: -13.25, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9044,10 +9044,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _defaultSpawnPoint: {fileID: 3226956493406689246}
+  cameraSettings:
+    cameraState: 2
+    confiner: {fileID: 0}
   _ignoreScenario: 0
   _scenario1: {fileID: 0}
   _scenario2: {fileID: 0}
   _scenario3: {fileID: 0}
+  _teleporter: {fileID: 0}
+  _teleporterActivationDistance: 5
   _LT_closed: {fileID: 6757796217048245398}
   _LT_open: {fileID: 8727937387513830901}
   _LT_teleporter: {fileID: 6853991529505317389}

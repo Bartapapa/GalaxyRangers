@@ -64,8 +64,6 @@ public class CharacterCombat : MonoBehaviour
         }
     }
 
-
-
     private void HandleAttackTimer()
     {
         if (_attackTimer > 0) _attackTimer -= Time.deltaTime;

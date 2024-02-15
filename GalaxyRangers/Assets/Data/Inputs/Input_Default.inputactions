@@ -78,9 +78,27 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "SpecialAbility",
+                    "name": "SpecialAbility1",
                     "type": "Button",
                     "id": "18949ef7-498d-4242-85a8-1df54c575688",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "SpecialAbility2",
+                    "type": "Button",
+                    "id": "73d26086-205d-4e12-9d6e-3db68cf33ff7",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "SpecialAbility3",
+                    "type": "Button",
+                    "id": "ea271099-77de-4091-bb77-aa6ccc7fadb7",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -368,7 +386,29 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "SpecialAbility",
+                    "action": "SpecialAbility1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ec8418d3-0052-4738-b112-9acd53963289",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SpecialAbility2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5ecaab2c-ae57-494f-8bed-6e6fc4de2748",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SpecialAbility3",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
