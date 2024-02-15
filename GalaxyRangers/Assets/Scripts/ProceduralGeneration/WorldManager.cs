@@ -18,6 +18,7 @@ public class WorldManager : MonoBehaviour
     [SerializeField] private RoomFolder _spawnRooms;
     [SerializeField] private RogueRoom _bossRoom;
     [SerializeField] private RogueRoom _HUBRoom;
+    public RogueRoom HUBRoom { get { return _HUBRoom; } }
 
     [Header("ENEMY DATABASE")]
     [SerializeField] private EnemyFolder _enemyFolder;
@@ -70,28 +71,57 @@ public class WorldManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.G))
         {
-            if (_debugRooms.Count > 0)
-            {
-                foreach(DebugRoom debugRoom in _debugRooms)
-                {
-                    Destroy(debugRoom.gameObject);
-                }
-                _debugRooms.Clear();
-            }
-
-            for (int i = 0; i < GeneratedRoomParent.childCount; i++)
-            {
-                Destroy(GeneratedRoomParent.GetChild(i).gameObject);
-            }
-
-            World newWorld = new World(numberOfRooms, maxNumberOfChildRooms, mainBranchMinDistance, mainBranchMaxDistance, subBranchMaxDistance,
-                                       maxNumberOfHealRooms, maxNumberOfShopRooms, maxNumberOfItemRooms, gasEventSpawnChance, secondChanceEventSpawnChance,
-                                       baseDifficulty, difficultyVariance,
-                                       seed);
-            world = newWorld;
-            MoveToRoom(world.rooms[0]);
-            VisualizeWorld();
+            StartNewRun();
         }
+    }
+
+    public void StartNewRun(string forceSeed = "")
+    {
+        DestroyWorld();
+
+        HUBRoom.gameObject.SetActive(false);
+
+        string usedSeed = "";
+        if (forceSeed != "")
+        {
+            usedSeed = forceSeed;
+        }
+        else
+        {
+            usedSeed = seed;
+        }
+
+        World newWorld = new World(numberOfRooms, maxNumberOfChildRooms, mainBranchMinDistance, mainBranchMaxDistance, subBranchMaxDistance,
+                                   maxNumberOfHealRooms, maxNumberOfShopRooms, maxNumberOfItemRooms, gasEventSpawnChance, secondChanceEventSpawnChance,
+                                   baseDifficulty, difficultyVariance,
+                                   usedSeed);
+        world = newWorld;
+        MoveToRoom(world.rooms[0]);
+        VisualizeWorld();
+    }
+
+    private void DestroyWorld()
+    {
+        if (_debugRooms.Count > 0)
+        {
+            foreach (DebugRoom debugRoom in _debugRooms)
+            {
+                Destroy(debugRoom.gameObject);
+            }
+            _debugRooms.Clear();
+        }
+
+        for (int i = 0; i < GeneratedRoomParent.childCount; i++)
+        {
+            Destroy(GeneratedRoomParent.GetChild(i).gameObject);
+        }
+    }
+
+    public void EndRun()
+    {
+        DestroyWorld();
+
+        HUBRoom.gameObject.SetActive(true);
     }
 
     public void MoveToRoom(Room room, TraversalPoint usedTraversal = null)

@@ -33,6 +33,9 @@ public class Player : MonoBehaviour
     [SerializeField] private CharacterCombat _combat;
     public CharacterCombat CharacterCombat { get { return _combat; } }
 
+    [SerializeField] private InteractibleManager _interactibleManager;
+    public InteractibleManager interactibleManager { get { return _interactibleManager; } }
+
     [Header("INPUTS")]
     [Space(10)]
     private float _moveInput;
@@ -106,6 +109,23 @@ public class Player : MonoBehaviour
         {
             _combat.RequestHeavyAttack();
         }
+    }
+    public void OnInteractInput(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            _interactibleManager.InteractWithCurrentInteractible();
+        }      
+    }
+
+    public void OnSpecialAbilityInput(InputAction.CallbackContext context)
+    {
+
+    }
+
+    public void OnPauseInput(InputAction.CallbackContext context)
+    {
+        //Pause game.
     }
     #endregion
 
