@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public enum CameraState
 {
@@ -191,7 +192,7 @@ public class CameraManager : MonoBehaviour
                 ExplorationCamera.Camera.enabled = false;
                 break;
             case CameraState.Arena:
-                //ArenaCamera.Camera.enabled = false;
+                ArenaCamera.Camera.enabled = false;
                 break;
             case CameraState.Dialogue:
                 //DialogueCamera.Camera.enabled = false;
@@ -208,17 +209,94 @@ public class CameraManager : MonoBehaviour
                 break;
             case CameraState.Default:
                 ExplorationCamera.Camera.enabled = false;
-                //ArenaCamera.Camera.enabled = false;
+                ArenaCamera.Camera.enabled = false;
                 //DialogueCamera.Camera.enabled = false;
                 break;
             case CameraState.Exploration:
                 ExplorationCamera.Camera.enabled = true;
                 break;
             case CameraState.Arena:
-                //ArenaCamera.Camera.enabled = true;
+                ArenaCamera.Camera.enabled = true;
                 break;
             case CameraState.Dialogue:
                 //DialogueCamera.Camera.enabled = true;
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void SetRogueRoomCameraSettings(RogueRoomCameraSettings cameraSettings)
+    {
+        TransitionToState(cameraSettings.cameraState);
+
+        PolygonCollider2D roomCameraCollider = cameraSettings.confiner;
+
+        switch (_cameraState)
+        {
+            case CameraState.None:
+                break;
+            case CameraState.Default:
+                CinemachineConfiner2D defaultconfiner = DefaultCamera.GetComponent<CinemachineConfiner2D>();
+                defaultconfiner.m_BoundingShape2D = roomCameraCollider;
+                break;
+            case CameraState.Exploration:
+                CinemachineConfiner2D exploconfiner = DefaultCamera.GetComponent<CinemachineConfiner2D>();
+                exploconfiner.m_BoundingShape2D = roomCameraCollider;
+                break;
+            case CameraState.Arena:
+                CinemachineConfiner2D arenaconfiner = DefaultCamera.GetComponent<CinemachineConfiner2D>();
+                arenaconfiner.m_BoundingShape2D = roomCameraCollider;
+                break;
+            case CameraState.Dialogue:
+                CinemachineConfiner2D dialogueconfiner = DefaultCamera.GetComponent<CinemachineConfiner2D>();
+                dialogueconfiner.m_BoundingShape2D = roomCameraCollider;
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void ForceCameraToPosition(Vector3 position)
+    {
+        switch (_cameraState)
+        {
+            case CameraState.None:
+                break;
+            case CameraState.Default:
+                DefaultCamera.ForceFocusToPosition(position);
+                break;
+            case CameraState.Exploration:
+                ExplorationCamera.ForceFocusToPosition(position);
+                break;
+            case CameraState.Arena:
+                ArenaCamera.ForceFocusToPosition(position);
+                break;
+            case CameraState.Dialogue:
+                DialogueCamera.ForceFocusToPosition(position);
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void AddFocusObjectToCamera(Transform focusObject, int weight = 1, bool ignoreZ = true)
+    {
+        switch (_cameraState)
+        {
+            case CameraState.None:
+                break;
+            case CameraState.Default:
+                DefaultCamera.AddFocusObject(focusObject, weight, ignoreZ);
+                break;
+            case CameraState.Exploration:
+                ExplorationCamera.AddFocusObject(focusObject, weight, ignoreZ);
+                break;
+            case CameraState.Arena:
+                ArenaCamera.AddFocusObject(focusObject, weight, ignoreZ);
+                break;
+            case CameraState.Dialogue:
+                DialogueCamera.AddFocusObject(focusObject, weight, ignoreZ);
                 break;
             default:
                 break;

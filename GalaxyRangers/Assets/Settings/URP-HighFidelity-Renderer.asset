@@ -27,12 +27,12 @@ MonoBehaviour:
     robertsCrossMultiplier: 500
     normalThreshold: 1
     steepAngleThreshold: 0.22
-    steepAngleMultiplier: 55
+    steepAngleMultiplier: 28
   viewSpaceNormalsTextureSettings:
     colorFormat: 0
     depthBufferBits: 16
     filterMode: 0
-    backgroundColor: {r: 0, g: 0, b: 0, a: 1}
+    backgroundColor: {r: 0, g: 0, b: 0, a: 0}
     perObjectData: 0
     enableDynamicBatching: 0
     enableInstancing: 0
