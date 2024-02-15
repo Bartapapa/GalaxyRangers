@@ -139,8 +139,28 @@ public class Player : MonoBehaviour
         }      
     }
 
-    public void OnSpecialAbilityInput(InputAction.CallbackContext context)
+    public void OnSpecialAbility1Input(InputAction.CallbackContext context)
     {
+        if (context.started)
+        {
+            
+        }
+        //Special ability.
+    }
+    public void OnSpecialAbility2Input(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+
+        }
+        //Special ability.
+    }
+    public void OnSpecialAbility3Input(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+
+        }
         //Special ability.
     }
 
