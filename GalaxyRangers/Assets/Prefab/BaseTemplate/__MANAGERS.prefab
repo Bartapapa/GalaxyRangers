@@ -31,6 +31,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 5624703911247201937}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3118353216969832700
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1415271427181008574}
+  m_Layer: 0
+  m_Name: HUBParent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1415271427181008574
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3118353216969832700}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5624703911247201937}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4153875941956059428
 GameObject:
   m_ObjectHideFlags: 0
@@ -91,7 +122,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5624703911247201937
 Transform:
   m_ObjectHideFlags: 0
@@ -107,6 +138,7 @@ Transform:
   m_Children:
   - {fileID: 379616434025463747}
   - {fileID: 8651266128846688912}
+  - {fileID: 1415271427181008574}
   m_Father: {fileID: 6718100807790390340}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4475172479014090140
@@ -121,6 +153,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21732fb0bf97438489e9e1126b9e0d38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _exploRooms: {fileID: 11400000, guid: 660a16b79320ef24fa0a693ddbc1c910, type: 2}
+  _arenaRooms: {fileID: 11400000, guid: 9a67e611f7e0f4949a370ba0c7b85119, type: 2}
+  _healRooms: {fileID: 11400000, guid: bfafc73dd50de634b8141f586a1a5ca7, type: 2}
+  _itemRooms: {fileID: 11400000, guid: c3bea3a8dc71aed44808203ae777f3c3, type: 2}
+  _shopRooms: {fileID: 11400000, guid: 4903c60ee66be6f4999db4cf40506d8d, type: 2}
+  _spawnRooms: {fileID: 11400000, guid: c027e510af5044b49a6bcdaefcbdccfe, type: 2}
+  _bossRoom: {fileID: 3180170347035312261, guid: 61adf6335f3fa7748a2ad5c2b140cb53,
+    type: 3}
+  _HUBRoomPrefab: {fileID: 6232000040295945291, guid: e358af6f329227843b9e57c1c694a989,
+    type: 3}
+  _enemyFolder: {fileID: 11400000, guid: 3449624c3a1633a468efe4392ff6c3fa, type: 2}
   _currentRogueRoom: {fileID: 0}
   seed: claire
   numberOfRooms: 10
@@ -135,7 +178,8 @@ MonoBehaviour:
   secondChanceEventSpawnChance: 0.1
   baseDifficulty: 0.5
   difficultyVariance: 0.25
-  CurrentRoomParent: {fileID: 379616434025463747}
+  HUBRoomParent: {fileID: 1415271427181008574}
+  GeneratedRoomParent: {fileID: 379616434025463747}
   WorldVisualization: {fileID: 8651266128846688912}
   _roomPrefab: {fileID: 3180170347035312261, guid: 61adf6335f3fa7748a2ad5c2b140cb53,
     type: 3}
@@ -185,7 +229,7 @@ GameObject:
   m_Component:
   - component: {fileID: 379616434025463747}
   m_Layer: 0
-  m_Name: CurrentRoom
+  m_Name: GeneratedRooms
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

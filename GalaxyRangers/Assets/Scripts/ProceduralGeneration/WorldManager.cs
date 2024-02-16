@@ -17,8 +17,9 @@ public class WorldManager : MonoBehaviour
     [SerializeField] private RoomFolder _shopRooms;
     [SerializeField] private RoomFolder _spawnRooms;
     [SerializeField] private RogueRoom _bossRoom;
-    [SerializeField] private RogueRoom _HUBRoom;
-    public RogueRoom HUBRoom { get { return _HUBRoom; } }
+    [SerializeField] private RogueRoom _HUBRoomPrefab;
+    private RogueRoom _instantiatedHUBRoom;
+    public RogueRoom HUBRoom { get { return _instantiatedHUBRoom; } }
 
     [Header("ENEMY DATABASE")]
     [SerializeField] private EnemyFolder _enemyFolder;
@@ -47,6 +48,7 @@ public class WorldManager : MonoBehaviour
 
     [Header("OBJECT REFERENCES")]
     [Space(10)]
+    public Transform HUBRoomParent;
     public Transform GeneratedRoomParent;
     public Transform WorldVisualization;
     [SerializeField] private RogueRoom _roomPrefab;
@@ -66,12 +68,29 @@ public class WorldManager : MonoBehaviour
             Debug.LogWarning("2 or more WorldManagers found. Destroying the later ones.");
             Destroy(this.gameObject);
         }
+
+        StartWorld();
     }
+
+    private void StartWorld()
+    {
+        RogueRoom hubRoom = Instantiate<RogueRoom>(_HUBRoomPrefab, HUBRoomParent);
+        _currentRogueRoom = hubRoom;
+        _instantiatedHUBRoom = hubRoom;
+
+        EndRun();
+    }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.G))
         {
             StartNewRun();
+        }
+
+        if (Input.GetKeyDown(KeyCode.N))
+        {
+            Player.Instance.CharacterHealth.Hurt(999f);
         }
     }
 
@@ -122,6 +141,10 @@ public class WorldManager : MonoBehaviour
         DestroyWorld();
 
         HUBRoom.gameObject.SetActive(true);
+        _currentRogueRoom = HUBRoom;
+
+        _currentRogueRoom.UseCameraSettings();
+        _currentRogueRoom.SetPlayerAtSpawnPoint(TraversalLocation.None, Player.Instance.CharacterController);
     }
 
     public void MoveToRoom(Room room, TraversalPoint usedTraversal = null)

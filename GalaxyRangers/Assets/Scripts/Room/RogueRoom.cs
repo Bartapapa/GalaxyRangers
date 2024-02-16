@@ -83,15 +83,18 @@ public class RogueRoom : MonoBehaviour
 
     private void Update()
     {
-        if (teleporter.canBeActivated && !teleporter.canBeInteractedWith)
+        if (teleporter)
         {
-            Collider[] coll = Physics.OverlapSphere(_teleporter.transform.position, _teleporterActivationDistance);
-            foreach (Collider collider in coll)
+            if (teleporter.canBeActivated && !teleporter.canBeInteractedWith)
             {
-                InteractibleManager player = collider.GetComponent<InteractibleManager>();
-                if (player)
+                Collider[] coll = Physics.OverlapSphere(_teleporter.transform.position, _teleporterActivationDistance);
+                foreach (Collider collider in coll)
                 {
-                    ToggleTeleporterActivation(true);
+                    InteractibleManager player = collider.GetComponent<InteractibleManager>();
+                    if (player)
+                    {
+                        ToggleTeleporterActivation(true);
+                    }
                 }
             }
         }

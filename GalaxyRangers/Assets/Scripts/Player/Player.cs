@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -33,6 +34,9 @@ public class Player : MonoBehaviour
     [SerializeField] private CharacterCombat _combat;
     public CharacterCombat CharacterCombat { get { return _combat; } }
 
+    [SerializeField] private CharacterHealth _health;
+    public CharacterHealth CharacterHealth { get { return _health; } }
+
     [SerializeField] private InteractibleManager _interactibleManager;
     public InteractibleManager interactibleManager { get { return _interactibleManager; } }
 
@@ -53,6 +57,23 @@ public class Player : MonoBehaviour
         {
             Debug.LogWarning("2 or more Players found. Removing the latest ones.");
             Destroy(this.gameObject);
+        }
+    }
+
+    private void OnEnable()
+    {
+        if (_health)
+        {
+            _health.CharacterDied -= OnCharacterDeath;
+            _health.CharacterDied += OnCharacterDeath;
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (_health)
+        {
+            _health.CharacterDied -= OnCharacterDeath;
         }
     }
 
@@ -118,9 +139,29 @@ public class Player : MonoBehaviour
         }      
     }
 
-    public void OnSpecialAbilityInput(InputAction.CallbackContext context)
+    public void OnSpecialAbility1Input(InputAction.CallbackContext context)
     {
+        if (context.started)
+        {
+            
+        }
+        //Special ability.
+    }
+    public void OnSpecialAbility2Input(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
 
+        }
+        //Special ability.
+    }
+    public void OnSpecialAbility3Input(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+
+        }
+        //Special ability.
     }
 
     public void OnPauseInput(InputAction.CallbackContext context)
@@ -139,4 +180,15 @@ public class Player : MonoBehaviour
 
         CharacterController.SetInputs(inputs);
     }
+
+    #region EVENTS
+    private void OnCharacterDeath(CharacterHealth characterHealth)
+    {
+        //Reset current run.
+        WorldManager.Instance.EndRun();
+
+        characterHealth.Revive();
+    }
+
+    #endregion
 }
