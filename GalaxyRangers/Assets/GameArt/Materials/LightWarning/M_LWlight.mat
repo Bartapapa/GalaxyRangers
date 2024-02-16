@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: M_Star
+  m_Name: M_LWlight
   m_Shader: {fileID: -6465566751694194690, guid: 57356e5a257bc6a4fad4c446fcc06703,
     type: 3}
   m_Parent: {fileID: 0}
@@ -71,7 +71,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Texture:
-        m_Texture: {fileID: 2800000, guid: d22a01df02fc79d4c85adfc313cc978a, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -90,12 +90,13 @@ Material:
     m_Floats:
     - _AlphaClip: 0
     - _AlphaToMask: 0
-    - _Ambient_Strength: 0.25
+    - _Ambient_Strength: 0.35
     - _Blend: 0
     - _BlendModePreserveSpecular: 1
     - _BumpScale: 1
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
+    - _ColorNoise_Intensity: 0.5
     - _Cull: 2
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
@@ -103,31 +104,32 @@ Material:
     - _DstBlend: 0
     - _DstBlendAlpha: 0
     - _EnvironmentReflections: 1
-    - _Falloff_Amount: 0.062
-    - _Falloff_Amount_Diffuse: 0.05
-    - _Falloff_Amount_Rim: 0
-    - _Falloff_Amount_Specular: 0.093
+    - _Falloff_Amount_Diffuse: 0
+    - _Falloff_Amount_Rim: 1
+    - _Falloff_Amount_Specular: 1
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
-    - _Lighting_Cutoff: 0.119
-    - _Lighting_Cutoff_Diffuse: 0.222
-    - _Lighting_Cutoff_Rim: 0.355
-    - _Lighting_Cutoff_Specular: 0.208
+    - _Lighting_Cutoff_Diffuse: 0.261
+    - _Lighting_Cutoff_Rim: 0.093
+    - _Lighting_Cutoff_Specular: 1
     - _MAIN_LIGHT_SHADOWS: 1
     - _Metallic: 0
+    - _Noise_Color_Intensity: 0.5
+    - _Noise_Color_Intensity_2: 0.5
     - _Noise_Intensity: 0
-    - _Noise_Offset: 2
-    - _Noise_Scale: 5
-    - _Noise_Scale_1: 25
+    - _Noise_Offset: 17.94
+    - _Noise_Scale: 562
+    - _Noise_Scale_1: 593.8
+    - _Noise_Scale_2: 150
     - _OcclusionStrength: 1
     - _Parallax: 0.005
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _Rim_Size: 0.48
+    - _Rim_Size: 0.05
     - _SHADOWS_SOFT: 1
-    - _Smoothness: 653
+    - _Smoothness: 2000
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
@@ -136,18 +138,19 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - _Ambient_Color: {r: 1.9999995, g: 1.9430447, b: 1.8584901, a: 0}
+    - _Ambient_Color: {r: 1, g: 1, b: 1, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _Diffuse_Color: {r: 1, g: 0.9245041, b: 0.7877358, a: 0}
+    - _Diffuse_Color: {r: 8, g: 0.56484985, b: 0, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _Noise_Color: {r: 1, g: 1, b: 1, a: 1}
-    - _Noise_Color_1: {r: 1, g: 1, b: 1, a: 1}
-    - _Rim_Color: {r: 2, g: 1.4813379, b: 0, a: 0}
+    - _Noise_Color: {r: 0.31576136, g: 0.30598074, b: 0.33962262, a: 1}
+    - _Noise_Color_1: {r: 1, g: 0, b: 0, a: 1}
+    - _Noise_Color_2: {r: 0, g: 0.22687477, b: 1, a: 1}
+    - _Rim_Color: {r: 0, g: 10.820491, b: 14.259475, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
-    - _Specular_Color: {r: 2.1185474, g: 2.1185474, b: 2.1185474, a: 0}
+    - _Specular_Color: {r: 14.124951, g: 11.88664, b: 8.061882, a: 0}
   m_BuildTextureStacks: []
---- !u!114 &646232304023409618
+--- !u!114 &6773948351749249565
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
