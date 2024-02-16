@@ -85,7 +85,6 @@ public class InteractibleManager : MonoBehaviour
             }
         }
 
-        Debug.Log(allPotentialInteractibles.Count);
         return allPotentialInteractibles;
     }
 
