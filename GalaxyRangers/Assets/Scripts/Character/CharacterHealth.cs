@@ -112,10 +112,13 @@ public class CharacterHealth : MonoBehaviour
         Debug.LogWarning(this.gameObject.name + " has died!");
         _isDead = true;
 
+        CharacterDied?.Invoke(this);
+
         // ICI c'est le code de Leezak PAS BEAU MAIS FONCTIONNE
         if (_isEnemy == true)
+        {
             // Player.Instance._currencyScript.AddGold(_goldAmountToEarn);
+        }
 
-        CharacterDied?.Invoke(this);
     }
 }

@@ -11,12 +11,15 @@ public class CharacterBehavior : MonoBehaviour
     [SerializeField] private BaseCharacterController _characterController;
     [SerializeField] private CharacterHealth _characterHealth;
     [SerializeField] private Renderer _renderer;
+    [SerializeField] private Transform _characterMesh;
     [SerializeField] private Animator _animator;
     public Animator animator { get { return _animator; } }
 
     [Header("BEHAVIOR")]
     [SerializeField] private float _shakeStrength = 1f;
     [SerializeField] private float _heavyLandingFallVelocity = -2f;
+    [SerializeField] private float _hitFlashDuration = .1f;
+    [SerializeField] private float _hitFlashIntensity = 50f;
 
     //Cached
     private Vector2 velocity { get { return _characterController.rigid.velocity; } }
@@ -26,6 +29,9 @@ public class CharacterBehavior : MonoBehaviour
     private int uTurnDirection;
     private bool _hit;
     private bool _shake;
+
+    private Coroutine hitFlashCoroutine;
+
 
     private void Start()
     {
@@ -74,6 +80,7 @@ public class CharacterBehavior : MonoBehaviour
         _characterController.OnHit += PlayHurtAnim;
         _characterController.OnHitLag += StartHitLag;
         _characterController.OnEndHitlag += EndHitLag;
+
         _characterHealth.CharacterDied += PlayDeathAnim;
         _characterHealth.CharacterRevived += OnCharacterRevived;
     }
@@ -82,6 +89,9 @@ public class CharacterBehavior : MonoBehaviour
 
     private void PlayJumpAnim(int jumpCount)
     {
+        if (_characterHealth.isDead)
+            return;
+
         animator.Play("Jump", 0, 0);
 
         //SFX
@@ -89,6 +99,9 @@ public class CharacterBehavior : MonoBehaviour
 
     private void PlayWallJumpAnim(RaycastHit hit)
     {
+        if (_characterHealth.isDead)
+            return;
+
         animator.Play("Jump", 0, 0);
 
         //SFX
@@ -96,6 +109,9 @@ public class CharacterBehavior : MonoBehaviour
 
     private void PlayLandAnim(float landVelocity, RaycastHit groundHit)
     {
+        if (_characterHealth.isDead)
+            return;
+
         if (landVelocity < _heavyLandingFallVelocity)
             animator.Play("Land", 0, 0);
 
@@ -106,12 +122,18 @@ public class CharacterBehavior : MonoBehaviour
 
     private void PlayUTurnAnim()
     {
+        if (_characterHealth.isDead)
+            return;
+
         animator.Play("uTurn", 0, 0);
         uTurnDirection = -_characterController.leftRight;
     }
 
     private void PlayDashAnim()
     {
+        if (_characterHealth.isDead)
+            return;
+
         animator.Play("Dash", 0, 0);
 
         //SFX
@@ -119,6 +141,9 @@ public class CharacterBehavior : MonoBehaviour
 
     private void PlayHurtAnim()
     {
+        if (_characterHealth.isDead)
+            return;
+
         animator.Play("Hurt", 0, 0);
 
         //SFX
@@ -128,11 +153,14 @@ public class CharacterBehavior : MonoBehaviour
     {
         _hit = true;
         _shake = shake;
+
+        HitFlash();
     }
 
     private void EndHitLag()
     {
         animator.speed = 1f;
+        _characterMesh.localPosition = Vector3.zero;
 
         _hit = false;
         _shake = false;
@@ -151,7 +179,7 @@ public class CharacterBehavior : MonoBehaviour
         if (!_shake)
             return;
 
-        transform.localPosition = Vector3.Lerp(transform.localPosition, UnityEngine.Random.insideUnitSphere * _shakeStrength, 24f * Time.deltaTime);
+        _characterMesh.localPosition = Vector3.Lerp(_characterMesh.localPosition, UnityEngine.Random.insideUnitSphere * _shakeStrength, 24f * Time.deltaTime);
     }
 
     private void PlayDeathAnim(CharacterHealth characterHealth)
@@ -180,6 +208,45 @@ public class CharacterBehavior : MonoBehaviour
         animator.SetFloat("yVelocity", 0);
 
         animator.Play("Idle", 0, 0);
+    }
+    #endregion
+
+    #region HITFLASH
+    private void HitFlash()
+    {
+        if (hitFlashCoroutine != null)
+        {
+            StopCoroutine(hitFlashCoroutine);
+        }
+        hitFlashCoroutine = StartCoroutine(CoHitFlash(_hitFlashDuration));
+    }
+
+    private IEnumerator CoHitFlash(float overtime)
+    {
+        float timer = 0f;
+        Renderer[] renderers = _characterMesh.GetComponentsInChildren<Renderer>();
+        while (timer < overtime)
+        {
+            foreach(Renderer rend in renderers)
+            {
+                foreach(Material mat in rend.materials)
+                {
+                    float flashLerp = Mathf.Lerp(_hitFlashIntensity, 1f, timer / overtime);
+                    mat.color = Color.white * flashLerp;
+                }
+            }
+
+            timer += Time.deltaTime;
+            yield return null;
+        }
+
+        foreach (Renderer rend in renderers)
+        {
+            foreach (Material mat in rend.materials)
+            {
+                mat.color = Color.white;
+            }
+        }
     }
     #endregion
 }

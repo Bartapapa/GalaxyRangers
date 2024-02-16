@@ -59,7 +59,9 @@ public class HurtBox : MonoBehaviour
                 _overrideKnockbackDirection = _overrideKnockbackDirection.normalized;
             }
 
-            character.Hit(_damage, _collider, _knockbackForce, transform.rotation * _overrideKnockbackDirection);
+            character.Hit(_damage, _collider, _knockbackForce, transform.rotation * _overrideKnockbackDirection, .3f, .2f);
+
+            //Also potentially add hitlag to the attacking character.
 
             OnHit?.Invoke(this);
         }

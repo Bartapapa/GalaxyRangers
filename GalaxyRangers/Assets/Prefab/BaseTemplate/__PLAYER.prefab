@@ -219,7 +219,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 449762214945250255}
         m_TargetAssemblyTypeName: Player, Assembly-CSharp
-        m_MethodName: OnSpecialAbilityInput
+        m_MethodName: OnSpecialAbility1Input
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -247,6 +247,38 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 7a0cc58c-92ce-477e-a0e2-8694696bdb06
     m_ActionName: Player/PauseGame[/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 449762214945250255}
+        m_TargetAssemblyTypeName: Player, Assembly-CSharp
+        m_MethodName: OnSpecialAbility2Input
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 73d26086-205d-4e12-9d6e-3db68cf33ff7
+    m_ActionName: Player/SpecialAbility2
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 449762214945250255}
+        m_TargetAssemblyTypeName: Player, Assembly-CSharp
+        m_MethodName: OnSpecialAbility3Input
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: ea271099-77de-4091-bb77-aa6ccc7fadb7
+    m_ActionName: Player/SpecialAbility3
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -277,7 +309,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2897671038757359662}
-  - component: {fileID: 9044754260822992743}
+  - component: {fileID: 6765491590334254633}
   m_Layer: 3
   m_Name: Mesh
   m_TagString: Untagged
@@ -304,7 +336,7 @@ Transform:
   - {fileID: 5796453440717630783}
   m_Father: {fileID: 8824705000526499714}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &9044754260822992743
+--- !u!114 &6765491590334254633
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -316,6 +348,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f183bf3a17333d943b323f3bb2f86a7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _characterController: {fileID: 4104125464777441510}
+  _characterHealth: {fileID: 496229119195536853}
+  _renderer: {fileID: 1720228930339761798}
+  _characterMesh: {fileID: 5796453440717630783}
+  _animator: {fileID: 473176362424563525}
+  _shakeStrength: 0.5
+  _heavyLandingFallVelocity: -2
+  _hitFlashDuration: 0.25
+  _hitFlashIntensity: 4
 --- !u!1 &876075960553999112
 GameObject:
   m_ObjectHideFlags: 0
@@ -551,7 +592,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.3
   m_Height: 1.8
   m_Direction: 1
   m_Center: {x: 0, y: 0.9, z: 0}
@@ -594,9 +635,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc0488e5c8c27df4f8e8777c5da716ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _characterBehavior: {fileID: 9044754260822992743}
+  _characterBehavior: {fileID: 6765491590334254633}
   _characterHealth: {fileID: 496229119195536853}
   _characterStats: {fileID: 11400000, guid: 95bf302da2d1c5e4d8dce41a7e615030, type: 2}
+  _rightMeshOrientation: 0.1
+  _leftMeshOrientation: 179.9
   _isMoving: 0
   _minSpeed: 1
   _maxSpeed:
@@ -644,7 +687,7 @@ MonoBehaviour:
   isFastFalling: 0
   airTime: 0
   _isGrounded: 1
-  groundDetectionDistance: 0.2
+  groundDetectionDistance: 0.3
   feetDetectionOffset: 0.1
   _groundAngle: 0
   _maximumGroundAngle: 45
@@ -802,6 +845,8 @@ MonoBehaviour:
     _currentValue: -3.4028235e+38
   _isDead: 0
   _isInvulnerable: 0
+  _isEnemy: 0
+  _goldAmountToEarn: 20
 --- !u!114 &2806389852463111803
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1185,6 +1230,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: GR_MC_FBX
       objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: 6ab7690276b9eaa43863e4161f697b0d,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: c3a611e9ab2f04c47975ab02075a24f9, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -1198,9 +1248,21 @@ PrefabInstance:
       addedObject: {fileID: 7665709493463744722}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6ab7690276b9eaa43863e4161f697b0d, type: 3}
+--- !u!95 &473176362424563525 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 6ab7690276b9eaa43863e4161f697b0d,
+    type: 3}
+  m_PrefabInstance: {fileID: 6339831105674136276}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &534489715794491163 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -3417817204212990513, guid: 6ab7690276b9eaa43863e4161f697b0d,
+    type: 3}
+  m_PrefabInstance: {fileID: 6339831105674136276}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &1720228930339761798 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 4622067426441143378, guid: 6ab7690276b9eaa43863e4161f697b0d,
     type: 3}
   m_PrefabInstance: {fileID: 6339831105674136276}
   m_PrefabAsset: {fileID: 0}

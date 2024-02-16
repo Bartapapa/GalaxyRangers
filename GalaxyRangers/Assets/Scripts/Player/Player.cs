@@ -189,9 +189,13 @@ public class Player : MonoBehaviour
     private void OnCharacterDeath(CharacterHealth characterHealth)
     {
         //Reset current run.
-        WorldManager.Instance.EndRun();
+        if (WorldManager.Instance)
+        {
+            WorldManager.Instance.EndRun();
 
-        characterHealth.Revive();
+            characterHealth.Revive();
+        }
+
     }
 
     #endregion

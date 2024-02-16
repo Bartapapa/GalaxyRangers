@@ -1322,7 +1322,11 @@ public partial class BaseCharacterController : MonoBehaviour
             }
         }
 
-        OnHit?.Invoke();
+        if (!_characterHealth.isDead)
+        {
+            OnHit?.Invoke();
+        }
+
     }
 
     public void HitLag(float duration, bool shake = false)
