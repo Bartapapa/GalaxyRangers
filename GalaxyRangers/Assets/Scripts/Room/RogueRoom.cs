@@ -30,6 +30,13 @@ public class RogueRoom : MonoBehaviour
     [SerializeField] private Scenario _scenario3;
     protected Scenario _chosenScenario;
 
+    [Header("TELEPORTER")]
+    [SerializeField] protected Interactible_RoomTeleporter _teleporter;
+    [SerializeField] private float _teleporterActivationDistance = 5f;
+    public Interactible_RoomTeleporter teleporter { get { return _teleporter; } }
+    private bool _teleporterActivated = false;
+    public bool teleporterActivated { get { return _teleporterActivated; } }
+
     [Header("EXIT POINTS")]
     [Space(10)]
     [Header("Left top")]
@@ -73,6 +80,25 @@ public class RogueRoom : MonoBehaviour
     [Space]
     [SerializeField] private Transform _resetParent;
     public Transform resetParent { get { return _resetParent; } }
+
+    private void Update()
+    {
+        if (teleporter)
+        {
+            if (teleporter.canBeActivated && !teleporter.canBeInteractedWith)
+            {
+                Collider[] coll = Physics.OverlapSphere(_teleporter.transform.position, _teleporterActivationDistance);
+                foreach (Collider collider in coll)
+                {
+                    InteractibleManager player = collider.GetComponent<InteractibleManager>();
+                    if (player)
+                    {
+                        ToggleTeleporterActivation(true);
+                    }
+                }
+            }
+        }
+    }
 
     public void OpenExitPoint(TraversalPoint traversalPoint)
     {
@@ -211,9 +237,35 @@ public class RogueRoom : MonoBehaviour
         {
             CloseExitPoint(traversalLocation);
         }
+
+        //Build teleporter, if present.
+        BuildTeleporter();
     }
 
-    private void SetScenario(Room room)
+    private void BuildTeleporter()
+    {
+        if (_teleporter)
+        {
+            _teleporter.gameObject.SetActive(roomData.teleporter.isPresent);
+
+            if (roomData.teleporter.parentTeleporter)
+            {
+                _teleporter.canBeActivated = false;
+            }
+
+            if (_teleporterActivated)
+            {
+                _teleporter.canBeActivated = true;
+                _teleporter.ActivateTeleporter();
+            }
+            else
+            {
+                _teleporter.DeactivateTeleporter();
+            }
+        }
+    }
+
+    protected void SetScenario(Room room)
     {
         switch (room.roomType)
         {
@@ -337,6 +389,23 @@ public class RogueRoom : MonoBehaviour
     public virtual void UseCameraSettings()
     {
         CameraManager.Instance.SetRogueRoomCameraSettings(cameraSettings);
+    }
+
+    public void ToggleTeleporterActivation(bool activate, bool forceActivation = false)
+    {
+        if (!roomData.teleporter.isPresent)
+            return;
+
+        _teleporterActivated = activate;
+        if (activate)
+        {
+            if (forceActivation) _teleporter.canBeActivated = true;
+            _teleporter.ActivateTeleporter();
+        }
+        else
+        {
+            _teleporter.DeactivateTeleporter();
+        }
     }
 
 }

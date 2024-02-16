@@ -220,12 +220,12 @@ public partial class BaseCharacterController : MonoBehaviour
     [Space]
     [SerializeField] private bool _hit = false;
     public bool hit { get { return _hit; } }
-    [Space]
-    [SerializeField] private bool _isDead = false;
-    public bool isDead { get { return _isDead; } }
-    public bool isDisabled { get { return _inputsLocked || _isDead || _hit ? true : false; } }
+    public bool isDead { get { return _characterHealth.isDead; } }
+    public bool isDisabled { get { return _inputsLocked || isDead || _hit ? true : false; } }
     [SerializeField] private float resurrectDelay = 1f;
     public bool hasHyperArmor = false;
+    private bool _shake = false;
+    public bool shake { get { return _shake; } }
     [Space]
     [SerializeField][ReadOnlyInspector] private Vector3 _cachedKnockback = Vector3.zero;
     [SerializeField][ReadOnlyInspector] Transform _aimingTarget = null;
@@ -869,7 +869,7 @@ public partial class BaseCharacterController : MonoBehaviour
 
     private void SetJumpBuffer()
     {
-        if (_isDead)
+        if (isDead)
             return;
 
         bool canWallJump = CheckWallJump();
@@ -1278,16 +1278,7 @@ public partial class BaseCharacterController : MonoBehaviour
 
         characterHealth.Hurt(damage);
 
-        if (hitLagDuration > 0)
-        {
-            if (hitCoroutine != null)
-                StopCoroutine(hitCoroutine);
-            hitCoroutine = StartCoroutine(CoHit(hitLagDuration));
-
-            CancelDash();
-            CancelUTurn();
-            CancelJumpDosage();
-        }
+        HitLag(hitLagDuration, true);
 
         if (!hasHyperArmor)
         {
@@ -1327,10 +1318,25 @@ public partial class BaseCharacterController : MonoBehaviour
         OnHit?.Invoke();
     }
 
-    private IEnumerator CoHit(float hitLagDuration)
+    public void HitLag(float duration, bool shake = false)
+    {
+        if (duration > 0)
+        {
+            if (hitCoroutine != null)
+                StopCoroutine(hitCoroutine);
+            hitCoroutine = StartCoroutine(CoHit(duration, shake));
+
+            CancelDash();
+            CancelUTurn();
+            CancelJumpDosage();
+        }
+    }
+
+    private IEnumerator CoHit(float hitLagDuration, bool shake)
     {
         _hit = true;
         FreezeCharacter();
+        _shake = shake;
 
         float t = 0f;
         while (t < hitLagDuration)
@@ -1340,6 +1346,7 @@ public partial class BaseCharacterController : MonoBehaviour
             yield return null;
         }
 
+        _shake = false;
         _hit = false;
         UnfreezeCharacter();
 
@@ -1370,8 +1377,6 @@ public partial class BaseCharacterController : MonoBehaviour
     {
         FreezeCharacter();
 
-        _isDead = true;
-
         capsuleCollider.enabled = false;
 
         //resurrectCoroutine = StartCoroutine(WaitForResurrect());
@@ -1381,6 +1386,11 @@ public partial class BaseCharacterController : MonoBehaviour
             OnDeath(this);
         }
 
+    }
+
+    public void Revive(Vector3 pos)
+    {
+        ResetCharacter(pos);
     }
 
     //private IEnumerator WaitForResurrect()
@@ -1433,11 +1443,8 @@ public partial class BaseCharacterController : MonoBehaviour
     //    OnResurrect(this);
     //}
 
-    private void ResetCharacter(Vector3 pos)
+    public void ResetCharacter(Vector3 pos)
     {
-        if (!enableResetCharacter)
-            return;
-
         UnfreezeCharacter();
 
         CancelJumpDosage();

@@ -13,7 +13,7 @@ public class RogueRoom_Arena_Enemy : RogueRoom_Arena
 
     //Cached
     private int _currentWaveNumber = 0;
-    private float _currentWaveTimer = 0f;
+    private float _currentWaveTimer = float.MaxValue;
     private int _currentNumberOfEnemies = 0;
 
     private bool allEnemiesDied { get { return _currentNumberOfEnemies <= 0; } }
@@ -22,7 +22,7 @@ public class RogueRoom_Arena_Enemy : RogueRoom_Arena
 
     private void Update()
     {
-        if (!_hasEnded)
+        if (!_hasEnded && _hasStarted)
         {
             HandleCurrentWaveTimer();
         }
@@ -49,6 +49,8 @@ public class RogueRoom_Arena_Enemy : RogueRoom_Arena
 
     private void StartNewWave()
     {
+        Debug.Log("Started new wave.");
+
         if (_currentWaveNumber >= _numberOfWaves)
         {
             //Has attained max number of waves
@@ -56,6 +58,7 @@ public class RogueRoom_Arena_Enemy : RogueRoom_Arena
         }
         else
         {
+            _currentWaveTimer = _forceNewWaveAfterTime;
             _currentWaveNumber++;
             //Get each enemy spawner, spawn an enemy. Add enemy as focustarget in Camera. Make enemy AI focus player.
             foreach(EnemySpawner spawner in _chosenScenario.enemySpawners)
@@ -85,7 +88,6 @@ public class RogueRoom_Arena_Enemy : RogueRoom_Arena
         if (allEnemiesDied)
         {
             StartNewWave();
-            _currentWaveTimer = _forceNewWaveAfterTime;
         }
 
         foreach(AIBrain_Base ai in _instantiatedEnemies)

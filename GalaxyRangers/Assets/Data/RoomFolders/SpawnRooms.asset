@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: SpawnRooms
   m_EditorClassIdentifier: 
   Rooms:
-  - {fileID: 3180170347035312261, guid: 61adf6335f3fa7748a2ad5c2b140cb53, type: 3}
+  - {fileID: 3470536468263218965, guid: 8130cd04186e9c949a63eafb53d67bbf, type: 3}

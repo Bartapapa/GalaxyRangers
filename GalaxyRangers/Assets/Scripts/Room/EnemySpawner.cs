@@ -47,6 +47,7 @@ public class EnemySpawner : MonoBehaviour
         }
         else
         {
+            Debug.Log("Enemy generated.");
             AIBrain_Base chosenEnemy = GetEnemy();
             if (chosenEnemy == null)
                 return null;
@@ -55,9 +56,6 @@ public class EnemySpawner : MonoBehaviour
             _chosenEnemy = chosenEnemy; //Ref to prefab, not instantiated enemy
             _instantiatedEnemy = newEnemy;
 
-            Debug.Log(WorldManager.Instance);
-            Debug.Log(WorldManager.Instance.currentRogueRoom);
-            Debug.Log(WorldManager.Instance.currentRogueRoom.resetParent);
             newEnemy.transform.parent = WorldManager.Instance.currentRogueRoom.resetParent;
             newEnemy.health.CharacterDied -= OnEnemyDied;
             newEnemy.health.CharacterDied += OnEnemyDied;

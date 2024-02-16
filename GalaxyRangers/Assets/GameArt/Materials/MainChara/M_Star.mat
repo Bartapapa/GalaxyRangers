@@ -90,7 +90,7 @@ Material:
     m_Floats:
     - _AlphaClip: 0
     - _AlphaToMask: 0
-    - _Ambient_Strength: 0.25
+    - _Ambient_Strength: 0.17
     - _Blend: 0
     - _BlendModePreserveSpecular: 1
     - _BumpScale: 1
@@ -111,8 +111,13 @@ Material:
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _Lighting_Cutoff: 0.119
+<<<<<<< HEAD
     - _Lighting_Cutoff_Diffuse: 0.222
     - _Lighting_Cutoff_Rim: 0.355
+=======
+    - _Lighting_Cutoff_Diffuse: 0.043
+    - _Lighting_Cutoff_Rim: 0.25
+>>>>>>> 3c074d51b9024f27aa31b16adb19d9d4996cdc17
     - _Lighting_Cutoff_Specular: 0.208
     - _MAIN_LIGHT_SHADOWS: 1
     - _Metallic: 0

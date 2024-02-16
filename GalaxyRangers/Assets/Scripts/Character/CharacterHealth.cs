@@ -23,21 +23,11 @@ public class CharacterHealth : MonoBehaviour
     public event HealthCallback CharacterDied;
     public event HealthCallback CharacterHurt;
     public event HealthCallback CharacterHealed;
+    public event HealthCallback CharacterRevived;
 
     private Coroutine invulnerabilityCoroutine;
 
     private bool _firstFrame = false;
-
-    private void Awake()
-    {
-        //this.Health.CurrentValueReachedZero -= OnHealthReachedZero;
-        //this.Health.CurrentValueReachedZero += OnHealthReachedZero;
-
-        //CharacterStat healthStat = new CharacterStat(Health.BaseValue);
-        //healthStat.CurrentValueReachedZero += OnHealthReachedZero;
-        //float healthValue = healthStat.MaxValue;
-        //Health = healthStat;
-    }
 
     private void Update()
     {
@@ -53,6 +43,14 @@ public class CharacterHealth : MonoBehaviour
 
     public void Hurt(float damage)
     {
+        if (_isDead)
+        {
+            Debug.Log("I'M DEAD LMFAO");
+        }
+        if (_isInvulnerable)
+        {
+            Debug.Log("I'M INVULNERABLE LMFAO");
+        }
         if (_isDead || _isInvulnerable)
             return;
         Health.Damage(damage);
@@ -89,6 +87,14 @@ public class CharacterHealth : MonoBehaviour
         Health.Heal(heal);
 
         CharacterHealed?.Invoke(this);
+    }
+
+    public void Revive()
+    {
+        Health.HealToMaxValue();
+        _isDead = false;
+
+        CharacterRevived?.Invoke(this);
     }
 
     private void OnHealthReachedZero()

@@ -17,7 +17,9 @@ public class WorldManager : MonoBehaviour
     [SerializeField] private RoomFolder _shopRooms;
     [SerializeField] private RoomFolder _spawnRooms;
     [SerializeField] private RogueRoom _bossRoom;
-    [SerializeField] private RogueRoom _HUBRoom;
+    [SerializeField] private RogueRoom _HUBRoomPrefab;
+    private RogueRoom _instantiatedHUBRoom;
+    public RogueRoom HUBRoom { get { return _instantiatedHUBRoom; } }
 
     [Header("ENEMY DATABASE")]
     [SerializeField] private EnemyFolder _enemyFolder;
@@ -46,6 +48,7 @@ public class WorldManager : MonoBehaviour
 
     [Header("OBJECT REFERENCES")]
     [Space(10)]
+    public Transform HUBRoomParent;
     public Transform GeneratedRoomParent;
     public Transform WorldVisualization;
     [SerializeField] private RogueRoom _roomPrefab;
@@ -65,33 +68,83 @@ public class WorldManager : MonoBehaviour
             Debug.LogWarning("2 or more WorldManagers found. Destroying the later ones.");
             Destroy(this.gameObject);
         }
+
+        StartWorld();
     }
+
+    private void StartWorld()
+    {
+        RogueRoom hubRoom = Instantiate<RogueRoom>(_HUBRoomPrefab, HUBRoomParent);
+        _currentRogueRoom = hubRoom;
+        _instantiatedHUBRoom = hubRoom;
+
+        EndRun();
+    }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.G))
         {
-            if (_debugRooms.Count > 0)
-            {
-                foreach(DebugRoom debugRoom in _debugRooms)
-                {
-                    Destroy(debugRoom.gameObject);
-                }
-                _debugRooms.Clear();
-            }
-
-            for (int i = 0; i < GeneratedRoomParent.childCount; i++)
-            {
-                Destroy(GeneratedRoomParent.GetChild(i).gameObject);
-            }
-
-            World newWorld = new World(numberOfRooms, maxNumberOfChildRooms, mainBranchMinDistance, mainBranchMaxDistance, subBranchMaxDistance,
-                                       maxNumberOfHealRooms, maxNumberOfShopRooms, maxNumberOfItemRooms, gasEventSpawnChance, secondChanceEventSpawnChance,
-                                       baseDifficulty, difficultyVariance,
-                                       seed);
-            world = newWorld;
-            MoveToRoom(world.rooms[0]);
-            VisualizeWorld();
+            StartNewRun();
         }
+
+        if (Input.GetKeyDown(KeyCode.N))
+        {
+            Player.Instance.CharacterHealth.Hurt(999f);
+        }
+    }
+
+    public void StartNewRun(string forceSeed = "")
+    {
+        DestroyWorld();
+
+        HUBRoom.gameObject.SetActive(false);
+
+        string usedSeed = "";
+        if (forceSeed != "")
+        {
+            usedSeed = forceSeed;
+        }
+        else
+        {
+            usedSeed = seed;
+        }
+
+        World newWorld = new World(numberOfRooms, maxNumberOfChildRooms, mainBranchMinDistance, mainBranchMaxDistance, subBranchMaxDistance,
+                                   maxNumberOfHealRooms, maxNumberOfShopRooms, maxNumberOfItemRooms, gasEventSpawnChance, secondChanceEventSpawnChance,
+                                   baseDifficulty, difficultyVariance,
+                                   usedSeed);
+        world = newWorld;
+        MoveToRoom(world.rooms[0]);
+        VisualizeWorld();
+    }
+
+    private void DestroyWorld()
+    {
+        if (_debugRooms.Count > 0)
+        {
+            foreach (DebugRoom debugRoom in _debugRooms)
+            {
+                Destroy(debugRoom.gameObject);
+            }
+            _debugRooms.Clear();
+        }
+
+        for (int i = 0; i < GeneratedRoomParent.childCount; i++)
+        {
+            Destroy(GeneratedRoomParent.GetChild(i).gameObject);
+        }
+    }
+
+    public void EndRun()
+    {
+        DestroyWorld();
+
+        HUBRoom.gameObject.SetActive(true);
+        _currentRogueRoom = HUBRoom;
+
+        _currentRogueRoom.UseCameraSettings();
+        _currentRogueRoom.SetPlayerAtSpawnPoint(TraversalLocation.None, Player.Instance.CharacterController);
     }
 
     public void MoveToRoom(Room room, TraversalPoint usedTraversal = null)

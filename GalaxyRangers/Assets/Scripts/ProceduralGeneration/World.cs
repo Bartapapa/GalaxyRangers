@@ -240,7 +240,7 @@ public class World : Graph
                 {
                     Room mainBranchParent = mainBranchRooms[i];
                     Room parentroom = mainBranchRooms[i];
-                    mainBranchParent.teleporter = new Teleporter(true, null);
+                    //mainBranchParent.teleporter = new Teleporter(true, null);
 
                     Layer parentLayer = mainBranchRooms[i].layer;
                     for (int j = 0; j < randomNumberOfChildren; j++)
@@ -258,7 +258,8 @@ public class World : Graph
 
                         if (j + 1 >= randomNumberOfChildren)
                         {
-                            childRoom.teleporter = new Teleporter(true, mainBranchParent);
+                            childRoom.teleporter = new Teleporter(true, mainBranchParent, false);
+                            mainBranchParent.teleporter = new Teleporter(true, childRoom, true);
                         }
                     }
                 }
@@ -422,8 +423,8 @@ public class World : Graph
         {
             if (_bossRoom.teleporter.toRoom != null)
             {
-                _bossRoom.teleporter.toRoom.teleporter = new Teleporter(false, null);
-                _bossRoom.teleporter = new Teleporter(false, null);
+                _bossRoom.teleporter.toRoom.teleporter = new Teleporter();
+                _bossRoom.teleporter = new Teleporter();
             }
         }
     }

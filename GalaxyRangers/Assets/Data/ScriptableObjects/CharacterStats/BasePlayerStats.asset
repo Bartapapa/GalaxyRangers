@@ -47,8 +47,8 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   shortJumpSpeedFactor: 4
-  baseDashSpeed: 20
-  baseDashDuration: 0.3
+  baseDashSpeed: 40
+  baseDashDuration: 0.1
   baseDashCooldown: 0.3
   baseMaxAirDashes: 1
   faction: 1

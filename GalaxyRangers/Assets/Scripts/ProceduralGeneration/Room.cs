@@ -16,6 +16,7 @@ public enum TraversalLocation
 public enum RoomType
 {
     None,
+    HUB,
     Spawn,
     Boss,
     Exploration,
@@ -60,11 +61,18 @@ public class Teleporter
 {
     public bool isPresent = false;
     public Room toRoom;
+    public bool parentTeleporter = false;
 
-    public Teleporter(bool isPres, Room to)
+    public Teleporter()
+    {
+
+    }
+
+    public Teleporter(bool isPres, Room to, bool parent)
     {
         isPresent = isPres;
         toRoom = to;
+        parentTeleporter = parent;
     }
 }
 
@@ -79,7 +87,7 @@ public class Room : Node
     public float difficultyLevel = 0f;
     public DifficultyScenario scenario = DifficultyScenario.None;
     public int specialEventType = 0;
-    public Teleporter teleporter = new Teleporter(false, null);
+    public Teleporter teleporter = new Teleporter();
 
     public Layer layer;
     public Room parentRoom;

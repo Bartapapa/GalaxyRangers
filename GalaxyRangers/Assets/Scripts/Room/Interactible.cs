@@ -16,12 +16,12 @@ public class Interactible : MonoBehaviour
     protected InteractibleManager _currentManager = null;
 
 
-    public void SelectInteractible()
+    public virtual void SelectInteractible()
     {
         //Visual feedback of selected interactible.
     }
 
-    public void DeselectInteractible()
+    public virtual void DeselectInteractible()
     {
         //Visual feedback of deselected interactible.
     }
