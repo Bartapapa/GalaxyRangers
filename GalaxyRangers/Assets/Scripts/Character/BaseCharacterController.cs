@@ -85,6 +85,8 @@ public partial class BaseCharacterController : MonoBehaviour
 
     [Header("MOTION")]
     [Space(10)]
+    [SerializeField] private float _rightMeshOrientation = .1f;
+    [SerializeField] private float _leftMeshOrientation = 179.9f;
     [SerializeField] private bool _isMoving;
     public bool isMoving { get { return _isMoving; } }
     [Space]
@@ -251,6 +253,7 @@ public partial class BaseCharacterController : MonoBehaviour
     public delegate void RaycastHitCallback(RaycastHit hit);
     public delegate void LandingCallback(float value, RaycastHit hit);
     public delegate void CharacterControllerCallback(BaseCharacterController playerCharacterController);
+    public delegate void HitLagCallback(float duration, bool shake);
     public FloatCallback OnMove;
     public IntCallback OnSetPlayer;
     public IntCallback OnJump;
@@ -259,6 +262,7 @@ public partial class BaseCharacterController : MonoBehaviour
     public DefaultCallback OnUTurn;
     public DefaultCallback OnResetCharacter;
     public DefaultCallback OnHit;
+    public HitLagCallback OnHitLag;
     public DefaultCallback OnEndHitlag;
     public DefaultCallback OnFreeze;
     public DefaultCallback OnUnfreeze;
@@ -546,7 +550,8 @@ public partial class BaseCharacterController : MonoBehaviour
         if (!uTurn && isGrounded && isMoving && // Default conditions
             (leftRight * rigid.velocity.x < 0f) // Stick on opposite side
                                                 //&& Mathf.Abs(rigidbodyVelocity.x) > 2f) // Character was moving fast
-            && currentSpeed > 2f)
+            && currentSpeed > 2f
+            && !isDashing)
         {
             UTurn();
         }
@@ -570,22 +575,22 @@ public partial class BaseCharacterController : MonoBehaviour
             int leftRight = (int)Mathf.Sign(_aimingTarget.position.x - cachedTransform.position.x);
             if (leftRight < 0)
             {
-                toEulerRot = 179.9f;
+                toEulerRot = _leftMeshOrientation;
             }
             else
             {
-                toEulerRot = 0.1f;
+                toEulerRot = _rightMeshOrientation;
             }
         }
         else
         {
             if (_leftRight < 0)
             {
-                toEulerRot = 179.9f;
+                toEulerRot = _leftMeshOrientation;
             }
             else
             {
-                toEulerRot = 0.1f;
+                toEulerRot = _rightMeshOrientation;
             }
         }
         characterBehavior.transform.rotation = Quaternion.Slerp(characterBehavior.transform.rotation, Quaternion.Euler(0, toEulerRot, 0), forceOrientation ? 1 : 10f * Time.fixedDeltaTime);
@@ -1146,7 +1151,7 @@ public partial class BaseCharacterController : MonoBehaviour
         isFastFalling = false;
         _dashCooldownTimer = _dashCooldown.CurrentValue;
 
-        SetColliderMode(1);
+        //SetColliderMode(1);
 
         DoADash();
     }
@@ -1195,6 +1200,7 @@ public partial class BaseCharacterController : MonoBehaviour
         }
 
         _isDashing = false;
+        //SetColliderMode(0);
     }
 
     private void CancelDash()
@@ -1206,6 +1212,7 @@ public partial class BaseCharacterController : MonoBehaviour
             StopCoroutine(dashCoroutine);
 
         _isDashing = false;
+        //SetColliderMode(0);
     }
 
     private void SetColliderMode(int mode)
@@ -1307,7 +1314,7 @@ public partial class BaseCharacterController : MonoBehaviour
                 }
 
                 Vector3 knockback = knockbackDirection * knockbackForce;
-                _cachedKnockback = knockback;
+                _cachedKnockback += knockback;
 
                 CancelDash();
                 CancelUTurn();
@@ -1329,6 +1336,8 @@ public partial class BaseCharacterController : MonoBehaviour
             CancelDash();
             CancelUTurn();
             CancelJumpDosage();
+
+            OnHitLag?.Invoke(duration, shake);
         }
     }
 

@@ -330,7 +330,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87ec1bf6f21881848be2b0a9e4025adb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dynamicRatio: 0.4
+  dynamicRatio: 0.3
   stiffnessForce: 0.01
   stiffnessCurve:
     serializedVersion: 2
