@@ -47,6 +47,10 @@ public class Player : MonoBehaviour
     private bool _jumpButtonPressed;
     private bool _dashButtonPressed;
 
+    // public SC_Currency _currencyScript { get; private set; }
+
+
+
     private void Awake()
     {
         if (Instance == null)

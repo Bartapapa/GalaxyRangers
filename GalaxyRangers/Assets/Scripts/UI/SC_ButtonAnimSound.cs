@@ -33,10 +33,10 @@ public class SC_ButtonAnimSound : MonoBehaviour
             return;
         }
 
-        if (GameObject.FindGameObjectWithTag("AudioManager") != null) ;
+        //if (GameObject.FindGameObjectWithTag("AudioManager") != null) ;
         //GameObject.FindGameObjectWithTag("AudioManager").GetComponent<SC_AudioManager>().PlayClipAt(_soundClick, this.transform.position);
-        else
-            Debug.Log("Pas de AudioManager dans la scene");
+        //else
+        //    Debug.Log("Pas de AudioManager dans la scene");
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -57,10 +57,10 @@ public class SC_ButtonAnimSound : MonoBehaviour
             }
             else
             {
-                if (GameObject.FindGameObjectWithTag("AudioManager") != null) ;
+                // if (GameObject.FindGameObjectWithTag("AudioManager") != null) ;
                 // GameObject.FindGameObjectWithTag("AudioManager").GetComponent<SC_AudioManager>().PlayClipAt(_soundHovered, this.transform.position);
-                else
-                    Debug.Log("Pas de AudioManager dans la scene");
+                // else
+                //    Debug.Log("Pas de AudioManager dans la scene");
             }
         }
     }
