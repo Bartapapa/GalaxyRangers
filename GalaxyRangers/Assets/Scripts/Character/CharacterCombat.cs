@@ -15,7 +15,7 @@ public class CharacterCombat : MonoBehaviour
     public Weapon currentWeapon { get { return _currentWeapon; } }
     [SerializeField] private Transform _weaponHoldSocket;
 
-    public bool canAttack { get { return _currentWeapon != null && !_controller.isDisabled && (!isAttacking || canDoCombo); } }
+    public bool canAttack { get { return _currentWeapon != null && !_controller.isDisabled && !_controller.isDashing && (!isAttacking || canDoCombo); } }
     public bool isAttacking { get { return windUpCoroutine!=null || attackCoroutine!=null || followThroughCoroutine!=null ? true : false; } }
     public bool canDoCombo { get { return followThroughCoroutine != null &&
                 _currentWeaponStrike.attack.canCombo &&
@@ -33,6 +33,15 @@ public class CharacterCombat : MonoBehaviour
     private WeaponStrike _currentWeaponStrike;
     public WeaponStrike currentWeaponStrike { get { return _currentWeaponStrike; } }
     private bool _cancelAttackOnLand = false;
+
+    //Events
+    public delegate void DefaultCallback();
+    public delegate void AttackCallback(WeaponAttack attack);
+    public event AttackCallback OnAttack;
+    public event AttackCallback OnWindUp;
+    public event AttackCallback OnFollowThrough;
+    public event DefaultCallback OnCancelFullAttack;
+    public event DefaultCallback OnAttackCancelledOnLand;
 
     //Coroutines
     private Coroutine lightAttackBufferCoroutine;
@@ -65,10 +74,12 @@ public class CharacterCombat : MonoBehaviour
         //Cancel attack if _cancelAttackOnLand
         if (_cancelAttackOnLand)
         {
-            CancelFullAttack();
-        }
+            Debug.Log("Attack canceled on land.");
 
-        _cancelAttackOnLand = false;
+            CancelFullAttack();
+
+            OnAttackCancelledOnLand?.Invoke();
+        }
     }
 
     private void OnCharacterHit()
@@ -181,7 +192,7 @@ public class CharacterCombat : MonoBehaviour
             _attackTimer >= _currentWeaponStrike.attack.attackAnimTime - _currentWeaponStrike.attack.propulsionStartTime - _currentWeaponStrike.attack.propulsionDuration)
         {
             //Move character along propulsion vector.
-            Vector2 directedPropulsion = new Vector2(_currentWeaponStrike.attack.propulsionDirection.x * _controller.leftRight * _currentWeaponStrike.attack.propulsionForce,
+            Vector2 directedPropulsion = new Vector2(_currentWeaponStrike.attack.propulsionDirection.x * _controller.facingRight * _currentWeaponStrike.attack.propulsionForce,
                                                     _currentWeaponStrike.attack.propulsionDirection.y * _currentWeaponStrike.attack.propulsionForce);
             _controller.CharacterImpulse(directedPropulsion);
         }
@@ -269,6 +280,10 @@ public class CharacterCombat : MonoBehaviour
         {
             _currentWeapon.heavyAttack.hurtbox.SetAttacker(_controller);
         }
+        if (_currentWeapon.airAttack.hurtbox)
+        {
+            _currentWeapon.airAttack.hurtbox.SetAttacker(_controller);
+        }
     }
 
     public void UnEquipWeapon()
@@ -312,8 +327,6 @@ public class CharacterCombat : MonoBehaviour
             _currentWeaponStrike = _currentWeapon.lightCombo[_comboCounter];
             DoWindUp();
         }
-
-
 
         //if _comboCounter > 0, means we're in a combo already.
         //if yes, do _comboCounter's index of current weapon's lightattacks.
@@ -389,18 +402,26 @@ public class CharacterCombat : MonoBehaviour
     {
         windUpCoroutine = StartCoroutine(CoWindUp(_currentWeaponStrike.attack.windUpAnimTime));
         _attackTimer = _currentWeaponStrike.attack.windUpAnimTime;
+
+        _controller.CharacterOrientation(true);
+
+        OnWindUp?.Invoke(_currentWeaponStrike.attack);
     }
 
     private void DoAttack()
     {
         attackCoroutine = StartCoroutine(CoAttack(_currentWeaponStrike.attack.attackAnimTime));
         _attackTimer = _currentWeaponStrike.attack.attackAnimTime;
+
+        OnAttack?.Invoke(_currentWeaponStrike.attack);
     }
 
     private void DoFollowThrough()
     {
         followThroughCoroutine = StartCoroutine(CoFollowThrough(_currentWeaponStrike.attack.followThroughAnimTime));
         _attackTimer = _currentWeaponStrike.attack.followThroughAnimTime;
+
+        OnFollowThrough?.Invoke(_currentWeaponStrike.attack);
     }
 
     private IEnumerator CoWindUp(float duration)
@@ -481,8 +502,11 @@ public class CharacterCombat : MonoBehaviour
         CancelFollowThrough();
 
         _currentWeapon.ResetHurtBoxes();
+        _currentWeaponStrike = null;
         _comboCounter = -1;
         _projectileSpawnCounter = 0;
         _cancelAttackOnLand = false;
+
+        OnCancelFullAttack?.Invoke();
     }
 }

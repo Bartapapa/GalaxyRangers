@@ -48,6 +48,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f183bf3a17333d943b323f3bb2f86a7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _characterController: {fileID: 657948459595263489}
+  _characterHealth: {fileID: 3841135652161114397}
+  _characterCombat: {fileID: 4938026576061553525}
+  _renderer: {fileID: 0}
+  _characterMesh: {fileID: 3722010788076992791}
+  _animator: {fileID: 0}
+  _shakeStrength: 1
+  _heavyLandingFallVelocity: -2
+  _hitFlashDuration: 0.1
+  _hitFlashIntensity: 5
 --- !u!1 &253697869602068727
 GameObject:
   m_ObjectHideFlags: 0
@@ -330,7 +340,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _characterBehavior: {fileID: 8621994987149497805}
   _characterHealth: {fileID: 3841135652161114397}
+  _characterCombat: {fileID: 4938026576061553525}
   _characterStats: {fileID: 11400000, guid: 43306ba555977294e9d74b3b1ec3d608, type: 2}
+  _rightMeshOrientation: 0.1
+  _leftMeshOrientation: 179.9
   _isMoving: 0
   _minSpeed: 1
   _maxSpeed:

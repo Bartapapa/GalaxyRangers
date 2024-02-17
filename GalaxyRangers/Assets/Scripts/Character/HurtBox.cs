@@ -17,6 +17,10 @@ public class HurtBox : MonoBehaviour
     public float knockbackForce { get { return _knockbackForce; } }
     [SerializeField] private Vector3 _overrideKnockbackDirection = Vector3.zero;
     public Vector3 overrideKnockbackDirection { get { return _overrideKnockbackDirection; } }
+    [SerializeField] private float _disableInputDuration = .3f;
+    [SerializeField] private float _hitLagDuration = .2f;
+    [SerializeField] private bool _pierceInvulnerability = false;
+    [SerializeField] private float _invulnerabilityDuration = .5f;
 
     [Header("ATTACKER")]
     [Space]
@@ -74,28 +78,42 @@ public class HurtBox : MonoBehaviour
     {
         if (!character.hit && _hurtFactions.Contains(character.faction) && !character.characterHealth.isInvulnerable && !character.characterHealth.isDead)
         {
+            Vector2 attackerVel = Vector2.zero;
+            if (_attacker != null)
+            {
+                attackerVel = _attacker.rigid.velocity;
+            }
+
+            if (_attacker != null)
+            {
+                _attacker.HitLag(_hitLagDuration);
+            }
+
+            if (_usePogoForce && _pogoDirection != Vector3.zero && _attacker != null)
+            {
+                if (_onlyPogoInAir && _attacker.isGrounded)
+                {
+
+                }
+                else
+                {
+                    _pogoDirection = _pogoDirection.normalized;
+                    Vector3 pogoDir = ((transform.rotation * _pogoDirection) * _pogoForce) + new Vector3(attackerVel.x, 0f, 0f);
+                    _attacker.CacheVelocity(pogoDir);
+                    //_attacker.CharacterImpulse(pogoDir);
+
+                    OnPogo?.Invoke(this);
+                }
+            }
+
             if (_overrideKnockbackDirection != Vector3.zero)
             {
                 _overrideKnockbackDirection = _overrideKnockbackDirection.normalized;
             }
 
-            character.Hit(_damage, _collider, _knockbackForce, transform.rotation * _overrideKnockbackDirection, .3f, .2f);
-
-            //Also potentially add hitlag to the attacking character.
+            character.Hit(_damage, _collider, _knockbackForce, transform.rotation * _overrideKnockbackDirection, _disableInputDuration, _hitLagDuration, _pierceInvulnerability, _invulnerabilityDuration);
 
             OnHit?.Invoke(this);
-        }
-
-        if (_usePogoForce && _pogoDirection != Vector3.zero && _attacker != null)
-        {
-            if (_onlyPogoInAir && _attacker.isGrounded)
-                return;
-
-            _pogoDirection = _pogoDirection.normalized;
-
-            _attacker.CharacterImpulse(transform.rotation * _pogoDirection * _pogoForce);
-
-            OnPogo?.Invoke(this);
         }
     }
 

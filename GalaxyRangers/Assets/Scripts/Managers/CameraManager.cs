@@ -53,6 +53,9 @@ public class CameraManager : MonoBehaviour
     private float _desiredCameraDirectionChangeTimer = 0f;
     private Coroutine _changeCameraDirectionCoroutine;
 
+    //Cached
+    private float _lastGroundedPlayerYPos = 0f;
+
     private void Awake()
     {
         if (Instance == null)
@@ -74,6 +77,31 @@ public class CameraManager : MonoBehaviour
     private void Start()
     {
         TransitionToState(_startingCameraState);
+
+        SetPlayerCharacterController(_playerCharacterController);
+    }
+
+    private void Update()
+    {
+        HandleCameraDeadZones();
+        HandleCameraFocusOffset();
+    }
+
+    private void HandleCameraDeadZones()
+    {
+        if (CameraState != CameraState.Exploration)
+            return;
+
+        _explorationFramingTransposer.m_DeadZoneHeight = !_playerCharacterController.isGrounded ? .9f : 0f;
+    }
+
+    private void HandleCameraFocusOffset()
+    {
+        if (CameraState != CameraState.Exploration)
+            return;
+
+        _explorationCamera.FocusOffset = !_playerCharacterController.isGrounded && !_playerCharacterController.isJumping && (_playerCharacterController.transform.position.y < _lastGroundedPlayerYPos)?
+            new Vector3(_explorationCamera.FocusOffset.x, -1, _explorationCamera.FocusOffset.z) : new Vector3(_explorationCamera.FocusOffset.x, 3, _explorationCamera.FocusOffset.z);
     }
 
     public void SetPlayerCharacterController(BaseCharacterController pcController)
@@ -82,7 +110,7 @@ public class CameraManager : MonoBehaviour
         pcController.OnMove += OnCharacterMove;
         pcController.OnJump += OnCharacterJump;
         pcController.OnWallJump += OnCharacterWallJump;
-        pcController.OnLand += OnCharacterLand;
+        //pcController.OnLand += OnCharacterLand;
     }
 
     private void OnCharacterMove(float fixedDeltaTime)
@@ -100,7 +128,7 @@ public class CameraManager : MonoBehaviour
                     _desiredCameraDirectionChangeTimer += fixedDeltaTime;
                     if (_desiredCameraDirectionChangeTimer >= _desiredCameraDirectionChangeTime)
                     {
-                        ChangeDesiredCameraDirection(PlayerCharacterController.leftRight);
+                        ChangeDesiredCameraDirection(PlayerCharacterController.facingRight);
                     }
                 }
                 else
@@ -119,62 +147,17 @@ public class CameraManager : MonoBehaviour
 
     private void OnCharacterJump(int intValue)
     {
-        switch (_cameraState)
-        {
-            case CameraState.None:
-                break;
-            case CameraState.Default:
-                break;
-            case CameraState.Exploration:
-                _explorationFramingTransposer.m_DeadZoneHeight = .5f;
-                break;
-            case CameraState.Arena:
-                break;
-            case CameraState.Dialogue:
-                break;
-            default:
-                break;
-        }
+        _lastGroundedPlayerYPos = _playerCharacterController.transform.position.y;
     }
 
     private void OnCharacterWallJump(RaycastHit hit)
     {
-        switch (_cameraState)
-        {
-            case CameraState.None:
-                break;
-            case CameraState.Default:
-                break;
-            case CameraState.Exploration:
-                _explorationFramingTransposer.m_DeadZoneHeight = .5f;
-                break;
-            case CameraState.Arena:
-                break;
-            case CameraState.Dialogue:
-                break;
-            default:
-                break;
-        }
+        _lastGroundedPlayerYPos = _playerCharacterController.transform.position.y;
     }
 
     private void OnCharacterLand(float value, RaycastHit hit)
     {
-        switch (_cameraState)
-        {
-            case CameraState.None:
-                break;
-            case CameraState.Default:
-                break;
-            case CameraState.Exploration:
-                _explorationFramingTransposer.m_DeadZoneHeight = 0f;
-                break;
-            case CameraState.Arena:
-                break;
-            case CameraState.Dialogue:
-                break;
-            default:
-                break;
-        }
+        _lastGroundedPlayerYPos = _playerCharacterController.transform.position.y;
     }
 
     private void TransitionToState(CameraState toState)

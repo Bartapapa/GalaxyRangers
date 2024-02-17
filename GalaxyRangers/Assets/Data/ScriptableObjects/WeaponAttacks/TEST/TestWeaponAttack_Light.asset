@@ -20,12 +20,12 @@ MonoBehaviour:
   _attackAnimationName: 
   _followThroughAnimationName: 
   _chargedAttackAnimationName: 
-  _windUpAnimTime: 0.3
-  _attackAnimTime: 0.5
+  _windUpAnimTime: 0.2
+  _attackAnimTime: 0.3
   _followThroughAnimTime: 0.5
   _chargedAttackAnimTime: 0
   _attackStartTime: 0.1
-  _attackDuration: 0.4
+  _attackDuration: 0.2
   _doPropulsion: 1
   _propulsionStartTime: 0.1
   _propulsionDuration: 0.1

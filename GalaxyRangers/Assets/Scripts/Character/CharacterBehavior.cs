@@ -10,6 +10,7 @@ public class CharacterBehavior : MonoBehaviour
     [Space]
     [SerializeField] private BaseCharacterController _characterController;
     [SerializeField] private CharacterHealth _characterHealth;
+    [SerializeField] private CharacterCombat _characterCombat;
     [SerializeField] private Renderer _renderer;
     [SerializeField] private Transform _characterMesh;
     [SerializeField] private Animator _animator;
@@ -51,11 +52,14 @@ public class CharacterBehavior : MonoBehaviour
     {
         airDirection = Mathf.Lerp(airDirection,
             _characterController.isGrounded ? 0f : (_characterController.rigidbodyVelocity.x / _characterController.maxSpeed * _characterController.leftRight),
-            4f * Time.deltaTime);
+            10f * Time.deltaTime);
     }
 
     private void ApplyAnimatorParams()
     {
+        if (animator == null)
+            return;
+
         animator.SetBool("isMoving", _characterController.isMoving);
         animator.SetBool("isGrounded", _characterController.isGrounded);
         animator.SetBool("isJumping", _characterController.isJumping);
@@ -67,6 +71,8 @@ public class CharacterBehavior : MonoBehaviour
 
         float speedLerp = Mathf.Lerp(animator.GetFloat("speedLerp"), _characterController.speedLerp, 10f * Time.deltaTime);
         animator.SetFloat("speedLerp", speedLerp);
+
+        animator.SetLayerWeight(1, _characterCombat.isAttacking ? 1 : 0);
     }
 
     private void InitEvents()
@@ -83,6 +89,11 @@ public class CharacterBehavior : MonoBehaviour
 
         _characterHealth.CharacterDied += PlayDeathAnim;
         _characterHealth.CharacterRevived += OnCharacterRevived;
+
+        _characterCombat.OnWindUp += PlayWindUpAnim;
+        _characterCombat.OnAttack += PlayAttackAnim;
+        _characterCombat.OnFollowThrough += PlayFollowThroughAnim;
+        _characterCombat.OnAttackCancelledOnLand += AttackCancelledOnLanding;
     }
 
     #region PLAYANIMS
@@ -112,7 +123,7 @@ public class CharacterBehavior : MonoBehaviour
         if (_characterHealth.isDead)
             return;
 
-        if (landVelocity < _heavyLandingFallVelocity)
+        if (landVelocity > _heavyLandingFallVelocity)
             animator.Play("Land", 0, 0);
 
         //SFX
@@ -149,12 +160,51 @@ public class CharacterBehavior : MonoBehaviour
         //SFX
     }
 
+    private void PlayWindUpAnim(WeaponAttack attack)
+    {
+        if (_characterHealth.isDead || attack.windUpAnimationName == "" || attack.windUpAnimTime <= 0)
+            return;
+
+        string windupAnimationName = attack.windUpAnimationName;
+        float animSpeed = 1f / attack.windUpAnimTime;
+
+        animator.SetFloat("animSpeed", animSpeed);
+        animator.Play(windupAnimationName, 1, 0);
+    }
+
+    private void PlayAttackAnim(WeaponAttack attack)
+    {
+        if (_characterHealth.isDead || attack.attackAnimationName == "" || attack.attackAnimTime <= 0)
+            return;
+
+        string attackAnimationName = attack.attackAnimationName;
+        float animSpeed = 1f / attack.attackAnimTime;
+
+        animator.SetFloat("animSpeed", animSpeed);
+        animator.Play(attackAnimationName, 1, 0);
+    }
+
+    private void PlayFollowThroughAnim(WeaponAttack attack)
+    {
+        if (_characterHealth.isDead || attack.followThroughAnimationName == "" || attack.followThroughAnimTime <= 0)
+            return;
+
+        string followthroughAnimationName = attack.followThroughAnimationName;
+        float animSpeed = 1f / attack.followThroughAnimTime;
+
+        animator.SetFloat("animSpeed", animSpeed);
+        animator.Play(followthroughAnimationName, 1, 0);
+    }
+
     private void StartHitLag(float duration, bool shake)
     {
         _hit = true;
         _shake = shake;
 
-        HitFlash();
+        if (_shake)
+        {
+            HitFlash();
+        }
     }
 
     private void EndHitLag()
@@ -207,7 +257,12 @@ public class CharacterBehavior : MonoBehaviour
         animator.SetFloat("airDirection",0);
         animator.SetFloat("yVelocity", 0);
 
-        animator.Play("Idle", 0, 0);
+        animator.Play("Locomotion", 0, 0);
+    }
+
+    private void AttackCancelledOnLanding()
+    {
+        PlayLandAnim(_characterController.rigid.velocity.y, _characterController.groundHit);
     }
     #endregion
 

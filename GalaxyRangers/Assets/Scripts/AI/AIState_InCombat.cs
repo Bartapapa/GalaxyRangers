@@ -69,12 +69,24 @@ public class AIState_InCombat : AIState
             {
                 //Light attack.
                 brain.combat.RequestLightAttack();
+
+                if (brain.combat.currentWeaponStrike == null)
+                {
+                    return new AIreturn(this, simulatedInputs);
+                }
+
                 brain.attackCooldown = brain.combat.currentWeaponStrike.attack.comboEndAttackCooldown;
             }
             else if (attackType == 2)
             {
                 //Heavy attack.
                 brain.combat.RequestHeavyAttack();
+
+                if (brain.combat.currentWeaponStrike == null)
+                {
+                    return new AIreturn(this, simulatedInputs);
+                }
+
                 brain.attackCooldown = brain.combat.currentWeaponStrike.attack.comboEndAttackCooldown;
             }
             else
