@@ -93,7 +93,7 @@ public class CharacterBehavior : MonoBehaviour
         _characterCombat.OnWindUp += PlayWindUpAnim;
         _characterCombat.OnAttack += PlayAttackAnim;
         _characterCombat.OnFollowThrough += PlayFollowThroughAnim;
-        _characterCombat.OnAttackCancelledOnLand += AttackCancelledOnLanding;
+        //_characterCombat.OnAttackCancelledOnLand += AttackCancelledOnLanding;
     }
 
     #region PLAYANIMS
@@ -123,7 +123,7 @@ public class CharacterBehavior : MonoBehaviour
         if (_characterHealth.isDead)
             return;
 
-        if (landVelocity > _heavyLandingFallVelocity)
+        if (landVelocity < _heavyLandingFallVelocity)
             animator.Play("Land", 0, 0);
 
         //SFX
