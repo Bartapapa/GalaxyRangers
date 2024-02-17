@@ -20,6 +20,7 @@ public class CharacterQuest : MonoBehaviour
     public QuestVariables _questVariables;
     public bool _isQuestCompleted = false;
     public bool _isQuestActive = false;
+    
 
     public void InitQuest(QuestVariables _variables)
     {

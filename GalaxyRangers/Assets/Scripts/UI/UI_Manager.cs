@@ -9,6 +9,9 @@ public class UI_Manager : MonoBehaviour
     [Header("UI References")]
     [SerializeField] private GameObject _HubShopRef;
     [SerializeField] private GameObject _GUIRef;
+    [SerializeField] private SC_UI_ScriptDisplay _scriptDisplay;
+    public SC_UI_ScriptDisplay _scriptDisplayRef { get { return _scriptDisplay; } }
+
 
     private void Awake()
     {

@@ -100,6 +100,7 @@ public class SC_HubQuest : MonoBehaviour
         // Init the structure of CharacterQuest With my variables
         InitStructure();
         Player.Instance.CharacterQuest.InitQuest(_questVariables);
+        UI_Manager.Instance._scriptDisplayRef.InitQuestPanel(_questVariables, _tmpEnemy_1, _tmpEnemy_2);
     }
 
 }
