@@ -847,6 +847,11 @@ public partial class BaseCharacterController : MonoBehaviour
         airTime += Time.fixedDeltaTime;
     }
 
+    public void CharacterImpulse(Vector2 vel)
+    {
+        SetRigidbodyVelocity(vel);
+    }
+
     private void SetRigidbodyVelocity(Vector2 vel, string message = "")
     {
         rigid.velocity = vel;

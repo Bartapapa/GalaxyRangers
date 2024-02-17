@@ -48,6 +48,20 @@ public class WeaponAttack : ScriptableObject
     public float attackDuration { get { return _attackDuration; } }
     [Space]
 
+    [Header("PROPULSION")]
+    [Space]
+    [SerializeField] private bool _doPropulsion = false;
+    public bool doPropulsion { get { return _doPropulsion; } }
+    [SerializeField] private float _propulsionStartTime;
+    public float propulsionStartTime { get { return _propulsionStartTime; } }
+    [SerializeField] private float _propulsionDuration;
+    public float propulsionDuration { get { return _propulsionDuration; } }
+    [SerializeField] private Vector2 _propulsionDirection = Vector2.zero;
+    public Vector2 propulsionDirection { get { return _propulsionDirection.normalized; } }
+    [SerializeField] private float _propulsionForce = 1f;
+    public float propulsionForce { get { return _propulsionForce; } }
+    [Space]
+
     [Header("COMBO")]
     [Space]
     [SerializeField] private bool _canCombo;

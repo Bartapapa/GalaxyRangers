@@ -37,6 +37,11 @@ public class Weapon : MonoBehaviour
     [SerializeField] private float _maxChargedHeavyAttackDamageMultiplier = 2f;
     public float maxChargedHeavyAttackDamageMultiplier { get { return _maxChargedHeavyAttackDamageMultiplier; } }
 
+    [Header("AIR ATTACK")]
+    [Space]
+    [SerializeField] private WeaponStrike _airAttack;
+    public WeaponStrike airAttack { get { return _airAttack; } }
+
     public void ResetHurtBoxes()
     {
         foreach(WeaponStrike weaponStrike0 in _lightCombo)
@@ -51,6 +56,10 @@ public class Weapon : MonoBehaviour
         if(_heavyAttack.attack != null)
         {
             if (_heavyAttack.hurtbox != null) _heavyAttack.hurtbox.DisableHurtBox();
+        }
+        if(_airAttack.attack != null)
+        {
+            if (_airAttack.hurtbox != null) _airAttack.hurtbox.DisableHurtBox();
         }
     }
 }

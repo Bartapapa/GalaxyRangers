@@ -18,17 +18,37 @@ public class HurtBox : MonoBehaviour
     [SerializeField] private Vector3 _overrideKnockbackDirection = Vector3.zero;
     public Vector3 overrideKnockbackDirection { get { return _overrideKnockbackDirection; } }
 
+    [Header("ATTACKER")]
+    [Space]
+    [SerializeField][ReadOnlyInspector] private BaseCharacterController _attacker;
+    public BaseCharacterController attacker { get { return _attacker; } }
+    [SerializeField] private bool _usePogoForce = false;
+    public bool usePogoForce { get { return _usePogoForce; } }
+    [SerializeField] private bool _onlyPogoInAir = true;
+    public bool onlyPogoInAir { get { return _onlyPogoInAir; } }
+    [SerializeField] private float _pogoForce = 1f;
+    public float pogoForce { get { return _pogoForce; } }
+    [SerializeField] private Vector3 _pogoDirection = Vector3.zero;
+    public Vector3 pogoDirection { get { return _pogoDirection; } }
+
     private Collider _collider;
     public Collider collider { get { return _collider ? _collider : _collider = GetComponent<Collider>(); } }
 
     public delegate void HurtBoxCallback(HurtBox hurtBox);
     public HurtBoxCallback OnHit;
+    public HurtBoxCallback OnPogo;
 
     private void Awake()
     {
         collider.enabled = true;
         collider.isTrigger = true;
     }
+
+    public void SetAttacker(BaseCharacterController character)
+    {
+        _attacker = character;
+    }
+
     private void OnTriggerStay(Collider other)
     {
         BaseCharacterController charController = other.GetComponent<BaseCharacterController>();
@@ -65,15 +85,34 @@ public class HurtBox : MonoBehaviour
 
             OnHit?.Invoke(this);
         }
+
+        if (_usePogoForce && _pogoDirection != Vector3.zero && _attacker != null)
+        {
+            if (_onlyPogoInAir && _attacker.isGrounded)
+                return;
+
+            _pogoDirection = _pogoDirection.normalized;
+
+            _attacker.CharacterImpulse(transform.rotation * _pogoDirection * _pogoForce);
+
+            OnPogo?.Invoke(this);
+        }
     }
 
     private void OnDrawGizmosSelected()
     {
-        if (_overrideKnockbackDirection == Vector3.zero)
-            return;
+        if (_overrideKnockbackDirection != Vector3.zero)
+        {
+            Vector3 normalizedOverride = _overrideKnockbackDirection.normalized;
+            Gizmos.color = Color.blue;
+            Gizmos.DrawLine(transform.position, transform.position + (transform.rotation * normalizedOverride));
+        }
 
-        Vector3 normalizedOverride = _overrideKnockbackDirection.normalized;
-        Gizmos.color = Color.blue;
-        Gizmos.DrawLine(transform.position, transform.position + (transform.rotation * normalizedOverride));
+        if (_usePogoForce && _pogoDirection != Vector3.zero)
+        {
+            Vector3 normalizedPogo = _pogoDirection.normalized;
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawLine(transform.position, transform.position + (transform.rotation * normalizedPogo));
+        }
     }
 }
