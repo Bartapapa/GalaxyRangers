@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class SC_HealthBar : MonoBehaviour
 {
 
-    public CharacterHealth ch_health;
+    private CharacterHealth ch_health;
 
     public Slider healthSlider;
     public Slider easeHealthSlider;
@@ -18,6 +18,10 @@ public class SC_HealthBar : MonoBehaviour
     private TextMeshProUGUI _textMaxHealth;
     private float lerpSpeed = 0.05f;
 
+    private void Start() {
+        ch_health = Player.Instance.CharacterHealth;
+    }
+    
     private void Update()
     {
         if (healthSlider.value != ch_health.Health.CurrentValue)

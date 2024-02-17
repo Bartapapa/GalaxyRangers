@@ -299,7 +299,9 @@ MonoBehaviour:
   _controller: {fileID: 4104125464777441510}
   _combat: {fileID: 2806389852463111803}
   _health: {fileID: 496229119195536853}
+  _quest: {fileID: 5351322942039381582}
   _interactibleManager: {fileID: 5721714948715481511}
+  _currencyScript: {fileID: 4620464566907259800}
 --- !u!1 &499566687661981660
 GameObject:
   m_ObjectHideFlags: 0
@@ -633,6 +635,8 @@ GameObject:
   - component: {fileID: 4104125464777441510}
   - component: {fileID: 496229119195536853}
   - component: {fileID: 2806389852463111803}
+  - component: {fileID: 5351322942039381582}
+  - component: {fileID: 4620464566907259800}
   - component: {fileID: 5721714948715481511}
   m_Layer: 3
   m_Name: Character
@@ -930,7 +934,7 @@ MonoBehaviour:
     _currentValue: -3.4028235e+38
   _isDead: 0
   _isInvulnerable: 0
-  _isEnemy: 0
+  _typeOfCharacter: 0
   _goldAmountToEarn: 20
 --- !u!114 &2806389852463111803
 MonoBehaviour:
@@ -948,6 +952,39 @@ MonoBehaviour:
   _weaponRoot: {fileID: 3883088007394213894}
   _currentWeapon: {fileID: 7055081114272758090}
   _weaponHoldSocket: {fileID: 7665709493463744722}
+--- !u!114 &5351322942039381582
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4509545563952184591}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3f5844caa5186b419cca8386acf4fde, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isQuestCompleted: 0
+  _isQuestActive: 0
+--- !u!114 &4620464566907259800
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4509545563952184591}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00125f044048b224fa811295ffa5815d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GoldAmount: 20
+  BlueTokenAmount: 66
+  RelicsAmount: 55
+  current_XPAmount: 10
+  current_XPLevelAmount: 1
+  NewXP_Relationship: 0
+  New_XPAmount: 0
 --- !u!114 &5721714948715481511
 MonoBehaviour:
   m_ObjectHideFlags: 0
