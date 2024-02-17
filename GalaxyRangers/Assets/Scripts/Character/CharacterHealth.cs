@@ -3,6 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum TypeOfCharacter
+{
+    Player,
+    EnemyCac,
+    EnemyCacEpic,
+    EnemyLongRange,
+    EnemyLongRangeEpic,
+    EnemyBoss
+}
 
 public class CharacterHealth : MonoBehaviour
 {
@@ -27,7 +36,7 @@ public class CharacterHealth : MonoBehaviour
 
 // Pas beau mais fonctionne
     [Header("Leezak's Code")]
-    [SerializeField] private bool _isEnemy = false;
+    [SerializeField] private TypeOfCharacter _typeOfCharacter = TypeOfCharacter.Player;
     [SerializeField] private int _goldAmountToEarn = 20;
 
 
@@ -115,10 +124,7 @@ public class CharacterHealth : MonoBehaviour
         CharacterDied?.Invoke(this);
 
         // ICI c'est le code de Leezak PAS BEAU MAIS FONCTIONNE
-        if (_isEnemy == true)
-        {
-            // Player.Instance._currencyScript.AddGold(_goldAmountToEarn);
-        }
-
+        if (_typeOfCharacter != TypeOfCharacter.Player)
+            Player.Instance._currencyScript.AddGold(_goldAmountToEarn);
     }
 }

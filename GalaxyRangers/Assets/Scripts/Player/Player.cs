@@ -37,6 +37,9 @@ public class Player : MonoBehaviour
     [SerializeField] private CharacterHealth _health;
     public CharacterHealth CharacterHealth { get { return _health; } }
 
+    [SerializeField] private CharacterQuest _quest;
+    public CharacterQuest CharacterQuest { get { return _quest; } }
+
     [SerializeField] private InteractibleManager _interactibleManager;
     public InteractibleManager interactibleManager { get { return _interactibleManager; } }
 
@@ -47,8 +50,7 @@ public class Player : MonoBehaviour
     private bool _jumpButtonPressed;
     private bool _dashButtonPressed;
 
-    // public SC_Currency _currencyScript { get; private set; }
-
+    public SC_Currency_Relation _currencyScript = null;
 
 
     private void Awake()

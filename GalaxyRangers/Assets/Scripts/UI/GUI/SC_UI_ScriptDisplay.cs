@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SC_Gold : MonoBehaviour
+public class SC_UI_ScriptDisplay : MonoBehaviour
 {
     [SerializeField]
     private TextMeshProUGUI goldText;
