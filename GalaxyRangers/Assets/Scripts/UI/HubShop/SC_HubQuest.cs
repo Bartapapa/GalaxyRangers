@@ -38,6 +38,7 @@ public class SC_HubQuest : MonoBehaviour
         if (_isSpecialQuestWithoutBeingTouch) {
             _txtObjective_1.text = "Kill " + _enemyNumberToKill_1 + " " + _tmpEnemy_1 +
             " without\n   being touched";
+            _enemyNumberToKill_2 = 0;
         }
         else {
             if (_enemyNumberToKill_2 == 0)

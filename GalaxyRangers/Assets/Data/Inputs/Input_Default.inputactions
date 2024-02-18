@@ -105,6 +105,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "QuestDisplay",
+                    "type": "Button",
+                    "id": "168ab702-4412-4a68-986c-706596611597",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "PauseGame",
                     "type": "Button",
                     "id": "7a0cc58c-92ce-477e-a0e2-8694696bdb06",
@@ -382,7 +391,7 @@
                 {
                     "name": "",
                     "id": "3fffc16d-34ae-4a00-b992-31fbe902118b",
-                    "path": "",
+                    "path": "<Mouse>/forwardButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -431,6 +440,17 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "PauseGame",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e713752f-0be9-47f0-9827-98e277ae744d",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "QuestDisplay",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
