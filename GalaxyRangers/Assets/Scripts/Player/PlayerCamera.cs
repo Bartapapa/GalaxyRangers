@@ -56,14 +56,25 @@ public class PlayerCamera : MonoBehaviour
         {
             //Multiple objects
             Vector3 averagePos = Vector3.zero;
+            int totalWeight = 0;
             foreach(FocusObject focusObject in _focusObjects)
             {
+                if (focusObject.Object == null)
+                {
+                    RemoveFocusObject(focusObject.Object);
+                    return;
+                }
+
                 Vector3 focusObjectPos = focusObject.IgnoreZ ?
                             new Vector3(focusObject.Object.position.x, focusObject.Object.position.y, 0f) :
                             focusObject.Object.position;
-                averagePos += (focusObjectPos * focusObject.Weight);
+                for (int i = 0; i < focusObject.Weight; i++)
+                {
+                    averagePos += focusObjectPos;
+                    totalWeight++;
+                }     
             }
-            averagePos = averagePos / _focusObjects.Count;
+            averagePos = averagePos / totalWeight;
             _focus.position = averagePos + _focusOffset;
         }
     }

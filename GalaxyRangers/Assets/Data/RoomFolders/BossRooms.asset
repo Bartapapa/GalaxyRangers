@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bb1b175021404b45b9fc5961241ce6f, type: 3}
   m_Name: BossRooms
   m_EditorClassIdentifier: 
-  Rooms: []
+  Rooms:
+  - {fileID: 5825325118229345029, guid: 90203e727c6e2784ea2b68970a485990, type: 3}

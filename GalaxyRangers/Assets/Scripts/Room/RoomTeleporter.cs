@@ -20,11 +20,16 @@ public class RoomTeleporter : MonoBehaviour
             return;
 
         BaseCharacterController player = other.GetComponent<BaseCharacterController>();
-        if (player && !GameManager.Instance.isInFade)
+        if (player)
         {
+            if (player.faction == GameFaction.Player && !GameManager.Instance.isInFade)
+            {
+                GameManager.Instance.Fade(.5f,
+                    () => WorldManager.Instance.MoveToRoom(_traversalPoint.toRoom, _traversalPoint));
+            }
             //Use worldmanager to fade out, change room, fade in.
             //WorldManager.Instance.world.rooms.Find(_traversalPoint.toRoom);
-            WorldManager.Instance.MoveToRoom(_traversalPoint.toRoom, _traversalPoint);
+            //WorldManager.Instance.MoveToRoom(_traversalPoint.toRoom, _traversalPoint);
         }
     }
 }

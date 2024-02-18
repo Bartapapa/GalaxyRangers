@@ -1526,7 +1526,6 @@ public partial class BaseCharacterController : MonoBehaviour
         {
             OnResetCharacter();
         }
-
     }
 
     #endregion

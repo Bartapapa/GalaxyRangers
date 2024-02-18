@@ -68,7 +68,10 @@ public class WorldManager : MonoBehaviour
             Debug.LogWarning("2 or more WorldManagers found. Destroying the later ones.");
             Destroy(this.gameObject);
         }
+    }
 
+    private void Start()
+    {
         StartWorld();
     }
 
@@ -147,8 +150,9 @@ public class WorldManager : MonoBehaviour
         _currentRogueRoom.SetPlayerAtSpawnPoint(TraversalLocation.None, Player.Instance.CharacterController);
     }
 
-    public void MoveToRoom(Room room, TraversalPoint usedTraversal = null)
+    public void MoveToRoom(Room room, TraversalPoint usedTraversal = null, bool forceActivateTeleporter = false)
     {
+        
         if (_currentRogueRoom != null)
         {
             _currentRogueRoom.ResetRoom();
@@ -165,6 +169,8 @@ public class WorldManager : MonoBehaviour
             _currentRogueRoom = newRoom;
             room.GeneratedRoom = newRoom;
 
+            if (forceActivateTeleporter) newRoom.teleporterActivated = true;
+
             newRoom.BuildRoom(room);
         }
         else
@@ -173,6 +179,8 @@ public class WorldManager : MonoBehaviour
             RogueRoom newRoom = room.GeneratedRoom;
             newRoom.gameObject.SetActive(true);
             _currentRogueRoom = newRoom;
+
+            if (forceActivateTeleporter) newRoom.teleporterActivated = true;
 
             _currentRogueRoom.RegenerateRoom();
         }

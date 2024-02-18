@@ -70,7 +70,7 @@ public class CameraManager : MonoBehaviour
         }
 
         _explorationFramingTransposer = ExplorationCamera.Camera.GetCinemachineComponent<CinemachineFramingTransposer>();
-        //_arenaFramingTransposer = ArenaCamera.Camera.GetCinemachineComponent<CinemachineFramingTransposer>();
+        _arenaFramingTransposer = ArenaCamera.Camera.GetCinemachineComponent<CinemachineFramingTransposer>();
         //_dialogueFramingTransposer = DialogueCamera.Camera.GetCinemachineComponent<CinemachineFramingTransposer>();
     }
 
@@ -224,14 +224,17 @@ public class CameraManager : MonoBehaviour
                 defaultconfiner.m_BoundingShape2D = roomCameraCollider;
                 break;
             case CameraState.Exploration:
+                _explorationFramingTransposer.m_CameraDistance = cameraSettings.cameraDistance;
                 CinemachineConfiner2D exploconfiner = DefaultCamera.GetComponent<CinemachineConfiner2D>();
                 exploconfiner.m_BoundingShape2D = roomCameraCollider;
                 break;
             case CameraState.Arena:
+                _arenaFramingTransposer.m_CameraDistance = cameraSettings.cameraDistance;
                 CinemachineConfiner2D arenaconfiner = DefaultCamera.GetComponent<CinemachineConfiner2D>();
                 arenaconfiner.m_BoundingShape2D = roomCameraCollider;
                 break;
             case CameraState.Dialogue:
+                _dialogueFramingTransposer.m_CameraDistance = cameraSettings.cameraDistance;
                 CinemachineConfiner2D dialogueconfiner = DefaultCamera.GetComponent<CinemachineConfiner2D>();
                 dialogueconfiner.m_BoundingShape2D = roomCameraCollider;
                 break;
@@ -280,6 +283,29 @@ public class CameraManager : MonoBehaviour
                 break;
             case CameraState.Dialogue:
                 DialogueCamera.AddFocusObject(focusObject, weight, ignoreZ);
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void RemoveFocusObjectFromCamera(Transform focusObject)
+    {
+        switch (_cameraState)
+        {
+            case CameraState.None:
+                break;
+            case CameraState.Default:
+                DefaultCamera.RemoveFocusObject(focusObject);
+                break;
+            case CameraState.Exploration:
+                ExplorationCamera.RemoveFocusObject(focusObject);
+                break;
+            case CameraState.Arena:
+                ArenaCamera.RemoveFocusObject(focusObject);
+                break;
+            case CameraState.Dialogue:
+                DialogueCamera.RemoveFocusObject(focusObject);
                 break;
             default:
                 break;

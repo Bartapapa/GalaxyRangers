@@ -52,4 +52,4 @@ MonoBehaviour:
   baseDashCooldown: 0.3
   baseMaxAirDashes: 1
   faction: 1
-  baseHealth: 5
+  baseHealth: 50

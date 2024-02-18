@@ -2024,7 +2024,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1800397207
 Transform:
   m_ObjectHideFlags: 0
@@ -2783,17 +2783,17 @@ PrefabInstance:
     - target: {fileID: 1744475520140110866, guid: 4676568b3eb205545b2add51b5c50e58,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3146099597508254337, guid: 4676568b3eb205545b2add51b5c50e58,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3146099597508254337, guid: 4676568b3eb205545b2add51b5c50e58,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3274916532848517143, guid: 4676568b3eb205545b2add51b5c50e58,
         type: 3}
@@ -2858,12 +2858,12 @@ PrefabInstance:
     - target: {fileID: 4323104584183701758, guid: 4676568b3eb205545b2add51b5c50e58,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4323104584183701758, guid: 4676568b3eb205545b2add51b5c50e58,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6033406254421080662, guid: 4676568b3eb205545b2add51b5c50e58,
         type: 3}
@@ -2943,6 +2943,11 @@ PrefabInstance:
       propertyPath: _focusObjects.Array.data[0].Object
       value: 
       objectReference: {fileID: 1532192477}
+    - target: {fileID: 2601983355821130918, guid: fff465d56b78aca419ac00194e7e09a4,
+        type: 3}
+      propertyPath: _focusObjects.Array.data[0].Weight
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2627088829947448837, guid: fff465d56b78aca419ac00194e7e09a4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3117,7 +3122,7 @@ PrefabInstance:
     - target: {fileID: 5957424380341390108, guid: 4cddb0979183fa840a8cea87caf62710,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6718100807790390340, guid: 4cddb0979183fa840a8cea87caf62710,
         type: 3}

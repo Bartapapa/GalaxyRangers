@@ -42,8 +42,24 @@ public class Interactible_RoomTeleporter : Interactible
     protected override void InteractEvent(InteractibleManager manager)
     {
         //Force MoveToRoom to room determined by teleporter.
-        WorldManager.Instance.MoveToRoom(teleporter.toRoom);
-        EndInteract(manager);
+        Debug.Log(teleporter);
+        Debug.Log(teleporter.toRoom);
+
+        if (!GameManager.Instance.isInFade)
+        {
+            GameManager.Instance.Fade(.5f,
+                () => WorldManager.Instance.MoveToRoom(teleporter.toRoom, null, true),
+                () => EndInteract(manager));
+
+            //Use worldmanager to fade out, change room, fade in.
+            //WorldManager.Instance.world.rooms.Find(_traversalPoint.toRoom);
+            //WorldManager.Instance.MoveToRoom(_traversalPoint.toRoom, _traversalPoint);
+        }
+        else
+        {
+            EndInteract(manager);
+        }
+        
     }
 
     private IEnumerator CoTeleport()

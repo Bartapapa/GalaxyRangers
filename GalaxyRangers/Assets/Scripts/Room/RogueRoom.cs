@@ -8,9 +8,22 @@ public class RogueRoomCameraSettings
 {
     [Header("CAMERA STATE")]
     public CameraState cameraState = CameraState.Exploration;
+    public float cameraDistance = 8f;
 
     [Header("CONFINER")]
     public PolygonCollider2D confiner;
+
+    public RogueRoomCameraSettings()
+    {
+
+    }
+
+    public RogueRoomCameraSettings(CameraState state, PolygonCollider2D confiner, float camDistance)
+    {
+        cameraState = state;
+        this.confiner = confiner;
+        cameraDistance = camDistance;
+    }
 }
 
 public class RogueRoom : MonoBehaviour
@@ -21,6 +34,7 @@ public class RogueRoom : MonoBehaviour
 
     [Header("ROOM CAMERA SETTINGS")]
     public RogueRoomCameraSettings cameraSettings = new RogueRoomCameraSettings();
+    public RogueRoomCameraSettings completedCameraSettings = new RogueRoomCameraSettings();
 
     [Header("SCENARIOS")]
     [Space(10)]
@@ -29,13 +43,14 @@ public class RogueRoom : MonoBehaviour
     [SerializeField] private Scenario _scenario2;
     [SerializeField] private Scenario _scenario3;
     protected Scenario _chosenScenario;
+    protected bool _isCompleted = false;
 
     [Header("TELEPORTER")]
     [SerializeField] protected Interactible_RoomTeleporter _teleporter;
     [SerializeField] private float _teleporterActivationDistance = 5f;
     public Interactible_RoomTeleporter teleporter { get { return _teleporter; } }
     private bool _teleporterActivated = false;
-    public bool teleporterActivated { get { return _teleporterActivated; } }
+    public bool teleporterActivated { get { return _teleporterActivated; } set { _teleporterActivated = value; } }
 
     [Header("EXIT POINTS")]
     [Space(10)]
@@ -172,28 +187,29 @@ public class RogueRoom : MonoBehaviour
     {
         if (traversalLocation == TraversalLocation.None)
         {
-            player.SetRigidbodyPosition(_defaultSpawnPoint.position);
+            player.ResetCharacter(_defaultSpawnPoint.position);
+            //player.SetRigidbodyPosition(_defaultSpawnPoint.position);
             return _defaultSpawnPoint.position;
         }
         switch (traversalLocation)
         {
             case TraversalLocation.LeftTop:
-                player.SetRigidbodyPosition(_LT_spawnPoint.position);
+                player.ResetCharacter(_LT_spawnPoint.position);
                 return _LT_spawnPoint.position;
             case TraversalLocation.LeftBottom:
-                player.SetRigidbodyPosition(_LB_spawnPoint.position);
+                player.ResetCharacter(_LB_spawnPoint.position);
                 return _LB_spawnPoint.position;
             case TraversalLocation.MiddleTop:
-                player.SetRigidbodyPosition(_MT_spawnPoint.position);
+                player.ResetCharacter(_MT_spawnPoint.position);
                 return _MT_spawnPoint.position;
             case TraversalLocation.MiddleBottom:
-                player.SetRigidbodyPosition(_MB_spawnPoint.position);
+                player.ResetCharacter(_MB_spawnPoint.position);
                 return _MB_spawnPoint.position;
             case TraversalLocation.RightTop:
-                player.SetRigidbodyPosition(_RT_spawnPoint.position);
+                player.ResetCharacter(_RT_spawnPoint.position);
                 return _RT_spawnPoint.position;
             case TraversalLocation.RightBottom:
-                player.SetRigidbodyPosition(_RB_spawnPoint.position);
+                player.ResetCharacter(_RB_spawnPoint.position);
                 return _RB_spawnPoint.position;
         }
 
@@ -242,11 +258,15 @@ public class RogueRoom : MonoBehaviour
         BuildTeleporter();
     }
 
-    private void BuildTeleporter()
+    public void BuildTeleporter()
     {
         if (_teleporter)
         {
+            Debug.Log("Teleporter built!");
+
             _teleporter.gameObject.SetActive(roomData.teleporter.isPresent);
+
+            _teleporter.teleporter = roomData.teleporter;
 
             if (roomData.teleporter.parentTeleporter)
             {
@@ -372,11 +392,16 @@ public class RogueRoom : MonoBehaviour
         //This is necessary, though, since we don't want enemies spawning at the same place as when the player left.
         if (!_ignoreScenario)
         {
-            foreach(EnemySpawner enemySpawner in _chosenScenario.enemySpawners)
+            if (!_isCompleted)
             {
-                enemySpawner.GenerateEnemy();
+                foreach (EnemySpawner enemySpawner in _chosenScenario.enemySpawners)
+                {
+                    enemySpawner.GenerateEnemy();
+                }
             }
         }
+
+        BuildTeleporter();
 
         //If the room is an item room, regenerate the same item.
         //Actually, no need since we just don't destroy the previous room. once generated, they'll still be here, with all of their variables. Just don't spawn them on the reset transform.
@@ -388,7 +413,15 @@ public class RogueRoom : MonoBehaviour
 
     public virtual void UseCameraSettings()
     {
-        CameraManager.Instance.SetRogueRoomCameraSettings(cameraSettings);
+        if (!_isCompleted)
+        {
+            CameraManager.Instance.SetRogueRoomCameraSettings(cameraSettings);
+        }
+        else
+        {
+            CameraManager.Instance.SetRogueRoomCameraSettings(completedCameraSettings);
+        }
+        
     }
 
     public void ToggleTeleporterActivation(bool activate, bool forceActivation = false)
