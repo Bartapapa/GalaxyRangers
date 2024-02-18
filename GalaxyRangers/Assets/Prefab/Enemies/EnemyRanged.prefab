@@ -376,7 +376,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _characterBehavior: {fileID: 4779089136010498559}
   _characterHealth: {fileID: 3417362527517585662}
+  _characterCombat: {fileID: 0}
   _characterStats: {fileID: 11400000, guid: 43306ba555977294e9d74b3b1ec3d608, type: 2}
+  _rightMeshOrientation: 0.1
+  _leftMeshOrientation: 179.9
   _isMoving: 0
   _minSpeed: 1
   _maxSpeed:
@@ -557,7 +560,7 @@ MonoBehaviour:
   _hit: 0
   resurrectDelay: 1
   hasHyperArmor: 0
-  _cachedKnockback: {x: 0, y: 0, z: 0}
+  _cachedVelocity: {x: 0, y: 0, z: 0}
   _aimingTarget: {fileID: 0}
   enableGroundDetection: 1
   enableCeilingDetection: 1
@@ -582,8 +585,8 @@ MonoBehaviour:
     _currentValue: -3.4028235e+38
   _isDead: 0
   _isInvulnerable: 0
-  _isEnemy: 1
-  _goldAmountToEarn: 20
+  _typeOfCharacter: 3
+  _goldAmountToEarn: 15
 --- !u!114 &781411374885464745
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1376,6 +1379,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f183bf3a17333d943b323f3bb2f86a7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _characterController: {fileID: 0}
+  _characterHealth: {fileID: 0}
+  _characterCombat: {fileID: 0}
+  _renderer: {fileID: 0}
+  _characterMesh: {fileID: 0}
+  _animator: {fileID: 0}
+  _shakeStrength: 1
+  _heavyLandingFallVelocity: -2
+  _hitFlashDuration: 0.1
+  _hitFlashIntensity: 50
 --- !u!1 &8699286147919217260
 GameObject:
   m_ObjectHideFlags: 0

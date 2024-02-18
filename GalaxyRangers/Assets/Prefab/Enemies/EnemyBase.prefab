@@ -524,7 +524,7 @@ MonoBehaviour:
   _hit: 0
   resurrectDelay: 1
   hasHyperArmor: 0
-  _cachedKnockback: {x: 0, y: 0, z: 0}
+  _cachedVelocity: {x: 0, y: 0, z: 0}
   _aimingTarget: {fileID: 0}
   enableGroundDetection: 1
   enableCeilingDetection: 1
@@ -549,7 +549,7 @@ MonoBehaviour:
     _currentValue: -3.4028235e+38
   _isDead: 0
   _isInvulnerable: 0
-  _isEnemy: 1
+  _typeOfCharacter: 1
   _goldAmountToEarn: 20
 --- !u!114 &4938026576061553525
 MonoBehaviour:

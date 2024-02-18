@@ -300,6 +300,7 @@ MonoBehaviour:
   _combat: {fileID: 2806389852463111803}
   _health: {fileID: 496229119195536853}
   _quest: {fileID: 5351322942039381582}
+  _speciality_1: {fileID: 1908059206342052854}
   _interactibleManager: {fileID: 5721714948715481511}
   _currencyScript: {fileID: 4620464566907259800}
 --- !u!1 &499566687661981660
@@ -636,6 +637,7 @@ GameObject:
   - component: {fileID: 496229119195536853}
   - component: {fileID: 2806389852463111803}
   - component: {fileID: 5351322942039381582}
+  - component: {fileID: 1908059206342052854}
   - component: {fileID: 4620464566907259800}
   - component: {fileID: 5721714948715481511}
   m_Layer: 3
@@ -966,6 +968,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _isQuestCompleted: 0
   _isQuestActive: 0
+--- !u!114 &1908059206342052854
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4509545563952184591}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2ead2cfaecb0014babe8c0c4792d4b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &4620464566907259800
 MonoBehaviour:
   m_ObjectHideFlags: 0
