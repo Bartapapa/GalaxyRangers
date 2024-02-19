@@ -56,6 +56,15 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   outlineSettings:
+<<<<<<< HEAD
+    outlineColor: {r: 0.16470589, g: 0.16470589, b: 0.16470589, a: 1}
+    outlineScale: 0.5
+    depthThreshold: 1
+    robertsCrossMultiplier: 170
+    normalThreshold: 0.73
+    steepAngleThreshold: 0
+    steepAngleMultiplier: 63
+=======
     outlineColor: {r: 0, g: 0, b: 0, a: 1}
     outlineScale: 0.5
     depthThreshold: 12.13
@@ -63,6 +72,7 @@ MonoBehaviour:
     normalThreshold: 0.77
     steepAngleThreshold: 1.22
     steepAngleMultiplier: 0
+>>>>>>> 80a45f83dffd17932aa10afb86d4d09a3f2a07f3
   viewSpaceNormalsTextureSettings:
     colorFormat: 0
     depthBufferBits: 16
