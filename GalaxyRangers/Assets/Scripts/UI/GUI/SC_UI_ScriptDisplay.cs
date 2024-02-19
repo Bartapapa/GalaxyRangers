@@ -42,9 +42,10 @@ public class SC_UI_ScriptDisplay : MonoBehaviour
         txt_relics.text = Player.Instance._currencyScript.RelicsAmount.ToString();
     }
 
-    public void ChangeValueCountKill()
+    public void ChangeValueCountKill(int _currentKill_1 , int _currentKill_2)
     {
-
+        _currentKillCount_Quest_1.text = _currentKill_1.ToString();
+        _currentKillCount_Quest_2.text = _currentKill_2.ToString();
     }
 
     public void DisplayQuestPanel()
@@ -65,6 +66,7 @@ public class SC_UI_ScriptDisplay : MonoBehaviour
     
     public void InitQuestPanel(QuestVariables _questVariables , string _enemyName_1 , string _enemyName_2)
     {
+        ChangeValueCountKill(0, 0);
         _txtObjective_1.text = "Beat " + _questVariables._enemyNumberToKill_1.ToString() + " " + _enemyName_1;
         if (_questVariables._enemyNumberToKill_2 > 0) {
             _txtObjective_2.text = "Beat " + _questVariables._enemyNumberToKill_2.ToString() + " " + _enemyName_2;
