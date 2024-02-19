@@ -160,8 +160,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _hurtFactions: 020000000300000004000000
   _damage: 3
-  _knockbackForce: 25
-  _overrideKnockbackDirection: {x: 1, y: 2, z: 0}
+  _knockbackForce: 0
+  _overrideKnockbackDirection: {x: 0, y: 1, z: 0}
   _disableInputDuration: 0.3
   _hitLagDuration: 0.2
   _pierceInvulnerability: 0
@@ -169,7 +169,7 @@ MonoBehaviour:
   _attacker: {fileID: 0}
   _usePogoForce: 1
   _onlyPogoInAir: 1
-  _pogoForce: 5
+  _pogoForce: 12
   _pogoDirection: {x: 0, y: 1, z: 0}
 --- !u!135 &7273686844935466528
 SphereCollider:
