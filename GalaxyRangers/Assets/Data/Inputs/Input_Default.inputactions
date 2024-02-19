@@ -347,7 +347,7 @@
                 {
                     "name": "",
                     "id": "ef436ff8-4703-48fb-a3c0-2a1f0d3d6e0b",
-                    "path": "<Keyboard>/leftAlt",
+                    "path": "<Keyboard>/leftShift",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
@@ -391,10 +391,10 @@
                 {
                     "name": "",
                     "id": "3fffc16d-34ae-4a00-b992-31fbe902118b",
-                    "path": "<Mouse>/forwardButton",
+                    "path": "<Keyboard>/f",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Keyboard&Mouse",
                     "action": "SpecialAbility1",
                     "isComposite": false,
                     "isPartOfComposite": false
