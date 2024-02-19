@@ -13,6 +13,7 @@ public class SC_Currency_Relation : MonoBehaviour
     public int RelicsAmount = 0;
     public int current_XPAmount = 10;
     public int current_XPLevelAmount = 1;
+    public List<int> MaxXP_ByLevel = new List<int>();
 
     [Header("Do not touch")]
     public bool NewXP_Relationship = false;

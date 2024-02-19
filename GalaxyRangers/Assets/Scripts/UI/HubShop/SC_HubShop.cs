@@ -26,6 +26,10 @@ public class SC_HubShop : MonoBehaviour
         _levelAmount.text = "LVL " + Player.Instance._currencyScript.current_XPLevelAmount.ToString();
 
         // Debug.Log("Mise a jour des valeurs de la boutique de relation");
+        if (Player.Instance._currencyScript.NewXP_Relationship) {
+            Player.Instance._currencyScript.NewXP_Relationship = false;
+            
+        }
     }
 
 
