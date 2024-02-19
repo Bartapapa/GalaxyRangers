@@ -124,7 +124,10 @@ public class CharacterHealth : MonoBehaviour
         CharacterDied?.Invoke(this);
 
         // ICI c'est le code de Leezak PAS BEAU MAIS FONCTIONNE
-        if (_typeOfCharacter != TypeOfCharacter.Player)
+        if (_typeOfCharacter != TypeOfCharacter.Player) {
             Player.Instance._currencyScript.AddGold(_goldAmountToEarn);
+            Player.Instance.CharacterQuest.SetTheCurrentNbKill(_typeOfCharacter);
+            // Debug.LogWarning("Envoie des pieces ainsi que de l'évolution du nombreux des kills");
+        }
     }
 }
