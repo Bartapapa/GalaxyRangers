@@ -9,8 +9,9 @@ public class SC_UI_ScriptDisplay : MonoBehaviour
     // Variable qui change durant la run
     [Header("")]
 
-    [SerializeField]
-    private TextMeshProUGUI goldText;
+    [SerializeField] private TextMeshProUGUI txt_goldText;
+    [SerializeField] private TextMeshProUGUI txt_blueToken;
+    [SerializeField] private TextMeshProUGUI txt_relics;
     
     [SerializeField] private TextMeshProUGUI _currentKillCount_Quest_1;
     [SerializeField] private TextMeshProUGUI _currentKillCount_Quest_2;
@@ -36,9 +37,9 @@ public class SC_UI_ScriptDisplay : MonoBehaviour
     private void Update()
     {
         
-        // goldText.text = Player.Instance._currencyScript.GoldAmount.ToString();
-        // goldText.text = Player.Instance._currencyScript.BlueTokenAmount.ToString();
-        // goldText.text = Player.Instance._currencyScript.RelicsAmount.ToString();
+        txt_goldText.text = Player.Instance._currencyScript.GoldAmount.ToString();
+        txt_blueToken.text = Player.Instance._currencyScript.BlueTokenAmount.ToString();
+        txt_relics.text = Player.Instance._currencyScript.RelicsAmount.ToString();
     }
 
     public void ChangeValueCountKill()

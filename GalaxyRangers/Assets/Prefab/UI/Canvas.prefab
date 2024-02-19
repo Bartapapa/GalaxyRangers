@@ -2664,7 +2664,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef0cbd48ac68c4d4d82c5efcc85f6cdf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  goldText: {fileID: 223852069504515359}
+  txt_goldText: {fileID: 7043358402738195555}
+  txt_blueToken: {fileID: 1498262058314373546}
+  txt_relics: {fileID: 223852069504515359}
   _currentKillCount_Quest_1: {fileID: 0}
   _currentKillCount_Quest_2: {fileID: 0}
   _txtObjective_1: {fileID: 8749555854007049047}
