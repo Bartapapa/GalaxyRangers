@@ -576,6 +576,9 @@ public partial class BaseCharacterController : MonoBehaviour
         if (isFrozen)
             return;
 
+        if (isDead)
+            return;
+
         if (!forceOrientation)
         {
             if (uTurn)
@@ -1200,7 +1203,6 @@ public partial class BaseCharacterController : MonoBehaviour
         {
             OnDash();
         }
-
 
         _isMoving = Mathf.Abs(_moveInput) != 0f;
 

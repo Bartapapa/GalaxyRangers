@@ -159,6 +159,16 @@ public class CharacterBehavior : MonoBehaviour
 
         //SFX
     }
+    public void PlayAimAnim()
+    {
+        if (_characterHealth.isDead)
+            return;
+
+        animator.Play("Aiming", 0, 0);
+
+        //SFX
+    }
+
 
     private void PlayWindUpAnim(WeaponAttack attack)
     {
@@ -280,6 +290,7 @@ public class CharacterBehavior : MonoBehaviour
     {
         float timer = 0f;
         Renderer[] renderers = _characterMesh.GetComponentsInChildren<Renderer>();
+
         while (timer < overtime)
         {
             foreach(Renderer rend in renderers)
@@ -287,7 +298,8 @@ public class CharacterBehavior : MonoBehaviour
                 foreach(Material mat in rend.materials)
                 {
                     float flashLerp = Mathf.Lerp(_hitFlashIntensity, 1f, timer / overtime);
-                    mat.color = Color.white * flashLerp;
+                    //mat.color = Color.white * flashLerp;
+                    mat.SetFloat("_Diffuse_Color_Intensity", flashLerp);
                 }
             }
 
@@ -299,9 +311,12 @@ public class CharacterBehavior : MonoBehaviour
         {
             foreach (Material mat in rend.materials)
             {
-                mat.color = Color.white;
+                //mat.color = Color.white;
+                mat.SetFloat("_Diffuse_Color_Intensity", 1f);
             }
         }
+
+        hitFlashCoroutine = null;
     }
     #endregion
 }
