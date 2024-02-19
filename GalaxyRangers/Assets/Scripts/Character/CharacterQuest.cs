@@ -119,6 +119,12 @@ public class CharacterQuest : MonoBehaviour
             {
                 _isQuestCompleted = true;
                 UI_Manager.Instance._scriptDisplayRef.DisplayQuestPanel();
+                Player.Instance._currencyScript.NewXP_Relationship = true;
+                Player.Instance._currencyScript.New_XPAmount = _questVariables._reputationXPnumber;
+                if (_questVariables._isBlueToken)
+                    Player.Instance._currencyScript.AddBlueToken(_questVariables._rewardMoney);
+                else
+                    Player.Instance._currencyScript.AddGold(_questVariables._rewardMoney);
             }
         }
     }
