@@ -29,7 +29,7 @@ public class AIState_Aim : AIState
         {
             _aimingTimer += Time.deltaTime;
 
-            brain.combat.currentWeapon.projectileSource.LookAt(_aimingTarget);
+            //brain.combat.currentWeapon.projectileSource.LookAt(_aimingTarget);
 
             RaycastHit hit;
             float distance = Vector3.Distance(brain.combat.currentWeapon.projectileSource.position, _aimingTarget);
@@ -40,6 +40,16 @@ public class AIState_Aim : AIState
                 brain.combat.currentWeapon.projectileSource.forward * distance;
 
             aimLine.UpdateLine(brain.combat.currentWeapon.projectileSource.position, _aimingPoint);
+
+            Vector3 forwardDir = Vector3.right * brain.controller.facingRight;
+            if (forwardDir == Vector3.zero) forwardDir = brain.transform.forward;
+            Vector3 targetDir = brain.playerTransform.position - brain.transform.position;
+            targetDir = targetDir.normalized;
+            float upDown = Mathf.Sign(brain.playerTransform.position.y - brain.transform.position.y);
+            float angle = Vector3.Angle(forwardDir, targetDir) * upDown;
+            brain.SetBehaviorFloat("aimDir", angle / 90f);
+
+            //Set brain's Animator aimDir to 1 (up), 0 (forward) or -1 (down) depending on player pos.
         }
         else
         {
@@ -47,6 +57,9 @@ public class AIState_Aim : AIState
             brain.combat.RequestLightAttack();
             brain.attackCooldown = brain.combat.currentWeaponStrike.attack.comboEndAttackCooldown;
             ResetState();
+
+            //Set brain's Animator isAiming to false.
+            brain.SetBehaviorBool("isAiming", false);
             return new AIreturn(inCombatState, simulatedInputs);
         }
 

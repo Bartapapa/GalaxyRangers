@@ -175,9 +175,12 @@ public class CharacterCombat : MonoBehaviour
             //Spawn projectile
             _projectileSpawnCounter++;
             Projectile newProjectile = Instantiate<Projectile>(_currentWeaponStrike.attack.projectile, _currentWeapon.projectileSource.position, _currentWeapon.projectileSource.rotation);
-            if (WorldManager.Instance.currentRogueRoom.resetParent != null)
+            if (WorldManager.Instance)
             {
-                newProjectile.transform.parent = WorldManager.Instance.currentRogueRoom.resetParent;
+                if (WorldManager.Instance.currentRogueRoom.resetParent != null)
+                {
+                    newProjectile.transform.parent = WorldManager.Instance.currentRogueRoom.resetParent;
+                }
             }
             newProjectile.InitializeProjectile(_currentWeapon.projectileSource.forward);
         }
