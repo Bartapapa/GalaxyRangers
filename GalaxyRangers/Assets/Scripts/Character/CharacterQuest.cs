@@ -57,7 +57,7 @@ public class CharacterQuest : MonoBehaviour
         }
         if (_isQuestActive && !_isQuestCompleted) {
             CheckToIncrQuest(_type);
-            UI_Manager.Instance._scriptDisplayRef.ChangeValueCountKill(_currentNbKill_1, _currentNbKill_2);
+            UI_Manager.Instance._scriptDisplayRef.ChangeValueCountKill(_currentNbKill_1,_currentNbKill_2);
             CheckIfCompletedQuest();
         }
     }
