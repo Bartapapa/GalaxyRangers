@@ -69,6 +69,9 @@ public class AIState_InCombatRanged : AIState
             else if (attackType == 1)
             {
                 //Light attack.
+                //Set brain's Animator isAiming to true.
+                brain.SetBehaviorBool("isAiming", true);
+                brain.behavior.PlayAimAnim();
                 return new AIreturn(aimState, simulatedInputs);
                 //brain.combat.RequestLightAttack();
                 //brain.attackCooldown = brain.combat.currentWeaponStrike.attack.comboEndAttackCooldown;
