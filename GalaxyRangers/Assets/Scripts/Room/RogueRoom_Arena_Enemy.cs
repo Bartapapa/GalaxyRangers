@@ -87,6 +87,7 @@ public class RogueRoom_Arena_Enemy : RogueRoom_Arena
 
         if (allEnemiesDied)
         {
+            //Pause, then
             StartNewWave();
         }
 
@@ -95,6 +96,8 @@ public class RogueRoom_Arena_Enemy : RogueRoom_Arena
             if (health == ai.health)
             {
                 _instantiatedEnemies.Remove(ai);
+
+                CameraManager.Instance.RemoveFocusObjectFromCamera(ai.transform);
                 break;
             }
         }

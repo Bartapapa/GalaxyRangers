@@ -3,6 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum TypeOfCharacter
+{
+    Player,
+    EnemyCac,
+    EnemyCacEpic,
+    EnemyLongRange,
+    EnemyLongRangeEpic,
+    EnemyBoss
+}
 
 public class CharacterHealth : MonoBehaviour
 {
@@ -25,17 +34,26 @@ public class CharacterHealth : MonoBehaviour
     public event HealthCallback CharacterHealed;
     public event HealthCallback CharacterRevived;
 
+// Pas beau mais fonctionne
+    [Header("Leezak's Code")]
+    [SerializeField] private TypeOfCharacter _typeOfCharacter = TypeOfCharacter.Player;
+    [SerializeField] private int _goldAmountToEarn = 20;
+
+
     private Coroutine invulnerabilityCoroutine;
 
     private bool _firstFrame = false;
+
+
+
+
 
     private void Update()
     {
         //Absolutely disgusting. Will have to rework my CharacterStat package in order to take this into account - which happens I DON'T KNOW WHY
         //Probably has to do with initialization steps, although still doesn't work with Enable, Disable, Start and the rest. Insane.
 
-        if (!_firstFrame)
-        {
+        if (!_firstFrame) {
             _firstFrame = true;
             Health.CurrentValueReachedZero += OnHealthReachedZero;
         }
@@ -104,5 +122,9 @@ public class CharacterHealth : MonoBehaviour
         _isDead = true;
 
         CharacterDied?.Invoke(this);
+
+        // ICI c'est le code de Leezak PAS BEAU MAIS FONCTIONNE
+        if (_typeOfCharacter != TypeOfCharacter.Player)
+            Player.Instance._currencyScript.AddGold(_goldAmountToEarn);
     }
 }

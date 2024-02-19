@@ -37,6 +37,13 @@ public class Player : MonoBehaviour
     [SerializeField] private CharacterHealth _health;
     public CharacterHealth CharacterHealth { get { return _health; } }
 
+    [SerializeField] private CharacterQuest _quest;
+    public CharacterQuest CharacterQuest { get { return _quest; } }
+
+
+    [SerializeField] private CharacterSpeciality_1 _speciality_1;
+    public CharacterSpeciality_1 _specialityRef_1 { get { return _speciality_1; } }
+
     [SerializeField] private InteractibleManager _interactibleManager;
     public InteractibleManager interactibleManager { get { return _interactibleManager; } }
 
@@ -46,6 +53,9 @@ public class Player : MonoBehaviour
     private float _upDownInput;
     private bool _jumpButtonPressed;
     private bool _dashButtonPressed;
+
+    public SC_Currency_Relation _currencyScript = null;
+
 
     private void Awake()
     {
@@ -103,6 +113,14 @@ public class Player : MonoBehaviour
         _jumpButtonPressed = context.action.IsPressed();      
     }
 
+    public void OnQuestDisplayInput(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            UI_Manager.Instance._scriptDisplayRef.DisplayQuestPanel();
+        }
+    }
+
     public void OnDashInput(InputAction.CallbackContext context)
     {
         if (context.ReadValue<float>() >= .5f)
@@ -143,7 +161,7 @@ public class Player : MonoBehaviour
     {
         if (context.started)
         {
-            
+            _specialityRef_1.TryToLaunchAbility();
         }
         //Special ability.
     }
@@ -185,9 +203,13 @@ public class Player : MonoBehaviour
     private void OnCharacterDeath(CharacterHealth characterHealth)
     {
         //Reset current run.
-        WorldManager.Instance.EndRun();
+        if (WorldManager.Instance)
+        {
+            WorldManager.Instance.EndRun();
 
-        characterHealth.Revive();
+            characterHealth.Revive();
+        }
+
     }
 
     #endregion

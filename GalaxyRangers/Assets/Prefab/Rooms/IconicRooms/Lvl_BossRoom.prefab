@@ -246,8 +246,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6863994800363667237}
-  - component: {fileID: 2334222851604191707}
   - component: {fileID: 5825325118229345029}
+  - component: {fileID: 2334222851604191707}
   m_Layer: 0
   m_Name: Lvl_BossRoom
   m_TagString: Untagged
@@ -272,53 +272,9 @@ Transform:
   - {fileID: 817009394334662266}
   - {fileID: 8939123695158697539}
   - {fileID: 4709769952822405938}
+  - {fileID: 6834007078627917054}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2334222851604191707
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 403176355650831762}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7028cb10df0ea864782719319e9385d5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _defaultSpawnPoint: {fileID: 2833900177547982146}
-  cameraSettings:
-    cameraState: 2
-    confiner: {fileID: 0}
-  _ignoreScenario: 0
-  _scenario1: {fileID: 0}
-  _scenario2: {fileID: 0}
-  _scenario3: {fileID: 0}
-  _LT_closed: {fileID: 6896416670258660379}
-  _LT_open: {fileID: 33674162224030824}
-  _LT_teleporter: {fileID: 7941899301974234516}
-  _LT_spawnPoint: {fileID: 4614880979472453676}
-  _LB_closed: {fileID: 9006886715412246640}
-  _LB_open: {fileID: 222099076123310232}
-  _LB_teleporter: {fileID: 7468466242785397263}
-  _LB_spawnPoint: {fileID: 4333739417830474931}
-  _MT_closed: {fileID: 3218916094176025461}
-  _MT_open: {fileID: 7745399081287913869}
-  _MT_teleporter: {fileID: 3618888253240781913}
-  _MT_spawnPoint: {fileID: 6327672010459817068}
-  _MB_closed: {fileID: 0}
-  _MB_open: {fileID: 0}
-  _MB_teleporter: {fileID: 0}
-  _MB_spawnPoint: {fileID: 0}
-  _RT_closed: {fileID: 0}
-  _RT_open: {fileID: 0}
-  _RT_teleporter: {fileID: 0}
-  _RT_spawnPoint: {fileID: 0}
-  _RB_closed: {fileID: 0}
-  _RB_open: {fileID: 0}
-  _RB_teleporter: {fileID: 0}
-  _RB_spawnPoint: {fileID: 0}
-  _resetParent: {fileID: 0}
 --- !u!114 &5825325118229345029
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -339,6 +295,8 @@ MonoBehaviour:
   _scenario1: {fileID: 0}
   _scenario2: {fileID: 0}
   _scenario3: {fileID: 0}
+  _teleporter: {fileID: 0}
+  _teleporterActivationDistance: 5
   _LT_closed: {fileID: 6896416670258660379}
   _LT_open: {fileID: 33674162224030824}
   _LT_teleporter: {fileID: 7941899301974234516}
@@ -363,8 +321,55 @@ MonoBehaviour:
   _RB_open: {fileID: 2332175907595697517}
   _RB_teleporter: {fileID: 6737613578095013363}
   _RB_spawnPoint: {fileID: 3718031562093917620}
-  _resetParent: {fileID: 0}
+  _resetParent: {fileID: 6834007078627917054}
   whee: 0
+--- !u!114 &2334222851604191707
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 403176355650831762}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7028cb10df0ea864782719319e9385d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _defaultSpawnPoint: {fileID: 2833900177547982146}
+  cameraSettings:
+    cameraState: 2
+    confiner: {fileID: 0}
+  _ignoreScenario: 0
+  _scenario1: {fileID: 0}
+  _scenario2: {fileID: 0}
+  _scenario3: {fileID: 0}
+  _teleporter: {fileID: 0}
+  _teleporterActivationDistance: 5
+  _LT_closed: {fileID: 6896416670258660379}
+  _LT_open: {fileID: 33674162224030824}
+  _LT_teleporter: {fileID: 7941899301974234516}
+  _LT_spawnPoint: {fileID: 4614880979472453676}
+  _LB_closed: {fileID: 9006886715412246640}
+  _LB_open: {fileID: 222099076123310232}
+  _LB_teleporter: {fileID: 7468466242785397263}
+  _LB_spawnPoint: {fileID: 4333739417830474931}
+  _MT_closed: {fileID: 3218916094176025461}
+  _MT_open: {fileID: 7745399081287913869}
+  _MT_teleporter: {fileID: 3618888253240781913}
+  _MT_spawnPoint: {fileID: 6327672010459817068}
+  _MB_closed: {fileID: 0}
+  _MB_open: {fileID: 0}
+  _MB_teleporter: {fileID: 0}
+  _MB_spawnPoint: {fileID: 0}
+  _RT_closed: {fileID: 0}
+  _RT_open: {fileID: 0}
+  _RT_teleporter: {fileID: 0}
+  _RT_spawnPoint: {fileID: 0}
+  _RB_closed: {fileID: 0}
+  _RB_open: {fileID: 0}
+  _RB_teleporter: {fileID: 0}
+  _RB_spawnPoint: {fileID: 0}
+  _resetParent: {fileID: 6834007078627917054}
 --- !u!1 &546138116631277222
 GameObject:
   m_ObjectHideFlags: 0
@@ -8096,6 +8101,37 @@ Transform:
   m_Children:
   - {fileID: 2895142489474068138}
   m_Father: {fileID: 1238745172094788294}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5712105916097814383
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6834007078627917054}
+  m_Layer: 0
+  m_Name: RESETPARENT
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6834007078627917054
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5712105916097814383}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6863994800363667237}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5727016556972807175
 GameObject:

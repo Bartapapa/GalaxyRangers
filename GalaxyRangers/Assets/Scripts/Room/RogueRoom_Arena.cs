@@ -27,7 +27,7 @@ public class RogueRoom_Arena : RogueRoom
         SetScenario(room);
 
         //Start arena.
-        if (_hasEnded)
+        if (_hasEnded || _isCompleted)
             return;
 
         arenaStartCoroutine = StartCoroutine(CoArenaStart());
@@ -67,8 +67,15 @@ public class RogueRoom_Arena : RogueRoom
         CameraManager.Instance.CameraState = CameraState.Exploration;
 
         //Force activate teleporter.
-        ToggleTeleporterActivation(true, true);
+        //ToggleTeleporterActivation(true, false);
+
+        //Disable all spwaners.
+        foreach(EnemySpawner spawner in _chosenScenario.enemySpawners)
+        {
+            spawner.enabled = false;
+        }
 
         _hasEnded = true;
+        _isCompleted = true;
     }
 }

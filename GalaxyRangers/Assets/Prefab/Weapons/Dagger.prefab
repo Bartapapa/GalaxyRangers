@@ -1,5 +1,86 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1197253577813409717
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3392728549743615674}
+  - component: {fileID: 95443232262905109}
+  - component: {fileID: 3966149193681346936}
+  m_Layer: 6
+  m_Name: H_0_HB
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3392728549743615674
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1197253577813409717}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0.9063446, w: 0.4225393}
+  m_LocalPosition: {x: 1.75, y: 1.0299997, z: -0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 120801628579203837}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -130.01}
+--- !u!114 &95443232262905109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1197253577813409717}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71086fce211d55946a3be7d51398d0df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _hurtFactions: 020000000300000004000000
+  _damage: 3
+  _knockbackForce: 25
+  _overrideKnockbackDirection: {x: 1, y: 2, z: 0}
+  _disableInputDuration: 0.3
+  _hitLagDuration: 0.2
+  _pierceInvulnerability: 0
+  _invulnerabilityDuration: 0.5
+  _attacker: {fileID: 0}
+  _usePogoForce: 0
+  _onlyPogoInAir: 1
+  _pogoForce: 1
+  _pogoDirection: {x: 0, y: 0, z: 0}
+--- !u!136 &3966149193681346936
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1197253577813409717}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Radius: 0.6
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1276525356715636548
 GameObject:
   m_ObjectHideFlags: 0
@@ -29,9 +110,169 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 6730956012134979302}
+  - {fileID: 3392728549743615674}
   m_Father: {fileID: 2050364572051650601}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1926359888493150356
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5751932534848787511}
+  - component: {fileID: 1379082182638366624}
+  - component: {fileID: 7273686844935466528}
+  m_Layer: 6
+  m_Name: AA_0_HB
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5751932534848787511
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1926359888493150356}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.20000005, y: -0.48999977, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1227563943798855740}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1379082182638366624
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1926359888493150356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71086fce211d55946a3be7d51398d0df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _hurtFactions: 020000000300000004000000
+  _damage: 3
+  _knockbackForce: 25
+  _overrideKnockbackDirection: {x: 1, y: 2, z: 0}
+  _disableInputDuration: 0.3
+  _hitLagDuration: 0.2
+  _pierceInvulnerability: 0
+  _invulnerabilityDuration: 0.5
+  _attacker: {fileID: 0}
+  _usePogoForce: 1
+  _onlyPogoInAir: 1
+  _pogoForce: 5
+  _pogoDirection: {x: 0, y: 1, z: 0}
+--- !u!135 &7273686844935466528
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1926359888493150356}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Radius: 0.6
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &2423470061783258433
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2575726485292086032}
+  - component: {fileID: 6683448392611282595}
+  - component: {fileID: 7136862633443897210}
+  m_Layer: 6
+  m_Name: LC_2_HB
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2575726485292086032
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2423470061783258433}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: -0.44651014, w: 0.89477855}
+  m_LocalPosition: {x: 1.67, y: 1.378, z: -0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 990027677935326979}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -53.04}
+--- !u!114 &6683448392611282595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2423470061783258433}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71086fce211d55946a3be7d51398d0df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _hurtFactions: 020000000300000004000000
+  _damage: 1
+  _knockbackForce: 10
+  _overrideKnockbackDirection: {x: 0, y: 1, z: 0}
+  _disableInputDuration: 0.3
+  _hitLagDuration: 0
+  _pierceInvulnerability: 0
+  _invulnerabilityDuration: 0.5
+  _attacker: {fileID: 0}
+  _usePogoForce: 0
+  _onlyPogoInAir: 1
+  _pogoForce: 1
+  _pogoDirection: {x: 0, y: 0, z: 0}
+--- !u!136 &7136862633443897210
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2423470061783258433}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Radius: 0.6
+  m_Height: 1.8
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3404081396280844507
 GameObject:
   m_ObjectHideFlags: 0
@@ -64,76 +305,6 @@ Transform:
   - {fileID: 961808165746687097}
   m_Father: {fileID: 2050364572051650601}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &5140693258528050353
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6730956012134979302}
-  - component: {fileID: 5365181635535930238}
-  - component: {fileID: 1272887640065073829}
-  m_Layer: 6
-  m_Name: H_0_HB
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6730956012134979302
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5140693258528050353}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.1100001, y: 0.96000004, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 120801628579203837}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5365181635535930238
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5140693258528050353}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 71086fce211d55946a3be7d51398d0df, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _hurtFactions: 020000000300000004000000
-  _damage: 5
-  _knockbackForce: 40
-  _overrideKnockbackDirection: {x: 1, y: 2, z: 0}
---- !u!135 &1272887640065073829
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5140693258528050353}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Radius: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5668941997768131035
 GameObject:
   m_ObjectHideFlags: 0
@@ -161,7 +332,7 @@ Transform:
   m_GameObject: {fileID: 5668941997768131035}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.000000014901161, z: -0, w: 1}
-  m_LocalPosition: {x: 1.11, y: 0.96, z: 0}
+  m_LocalPosition: {x: 1.344, y: 1.132, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -181,8 +352,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _hurtFactions: 020000000300000004000000
   _damage: 1
-  _knockbackForce: 10
+  _knockbackForce: 7
   _overrideKnockbackDirection: {x: 1, y: 0.5, z: 0}
+  _disableInputDuration: 0.3
+  _hitLagDuration: 0
+  _pierceInvulnerability: 0
+  _invulnerabilityDuration: 0.5
+  _attacker: {fileID: 0}
+  _usePogoForce: 0
+  _onlyPogoInAir: 1
+  _pogoForce: 1
+  _pogoDirection: {x: 0, y: 0, z: 0}
 --- !u!135 &1103355892225527197
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -202,7 +382,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 0
   serializedVersion: 3
-  m_Radius: 0.5
+  m_Radius: 0.7
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6509565201812203861
 GameObject:
@@ -214,7 +394,7 @@ GameObject:
   m_Component:
   - component: {fileID: 961808165746687097}
   - component: {fileID: 2532989181226115341}
-  - component: {fileID: 3153920277851213245}
+  - component: {fileID: 6404589385025521246}
   m_Layer: 6
   m_Name: HB_0_HB
   m_TagString: Untagged
@@ -230,13 +410,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6509565201812203861}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.344, y: 1.132, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: 1.47, y: 1.31, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6355608865081675701}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
 --- !u!114 &2532989181226115341
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -253,8 +433,17 @@ MonoBehaviour:
   _damage: 3
   _knockbackForce: 25
   _overrideKnockbackDirection: {x: 1, y: 2, z: 0}
---- !u!135 &3153920277851213245
-SphereCollider:
+  _disableInputDuration: 0.3
+  _hitLagDuration: 0.2
+  _pierceInvulnerability: 0
+  _invulnerabilityDuration: 0.5
+  _attacker: {fileID: 0}
+  _usePogoForce: 0
+  _onlyPogoInAir: 1
+  _pogoForce: 1
+  _pogoDirection: {x: 0, y: 0, z: 0}
+--- !u!136 &6404589385025521246
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -271,8 +460,10 @@ SphereCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 0
-  serializedVersion: 3
-  m_Radius: 0.7
+  serializedVersion: 2
+  m_Radius: 0.6
+  m_Height: 2
+  m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6942981440643142860
 GameObject:
@@ -304,6 +495,39 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5358895148344726329}
+  - {fileID: 2575726485292086032}
+  m_Father: {fileID: 2050364572051650601}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7312049407505619727
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1227563943798855740}
+  m_Layer: 6
+  m_Name: AirAttack
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1227563943798855740
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7312049407505619727}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 5751932534848787511}
   m_Father: {fileID: 2050364572051650601}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7344720012344621879
@@ -389,21 +613,24 @@ MonoBehaviour:
   _stanceType: 0
   _projectileSource: {fileID: 3429686215253078890}
   _lightCombo:
-  - attack: {fileID: 11400000, guid: e050e7d4797f71e4489e15e4a206a335, type: 2}
+  - attack: {fileID: 11400000, guid: 9083b6b8bacd5bc46bdd40d2c99de0a9, type: 2}
     hurtbox: {fileID: 477662121486330813}
-  - attack: {fileID: 11400000, guid: e050e7d4797f71e4489e15e4a206a335, type: 2}
+  - attack: {fileID: 11400000, guid: fbd40573344289541b2ae04949d3debb, type: 2}
     hurtbox: {fileID: 477662121486330813}
-  - attack: {fileID: 11400000, guid: e050e7d4797f71e4489e15e4a206a335, type: 2}
-    hurtbox: {fileID: 477662121486330813}
+  - attack: {fileID: 11400000, guid: 3dbb500168d00a7499be2ffa596d6583, type: 2}
+    hurtbox: {fileID: 6683448392611282595}
   _heavyComboBreaks:
-  - attack: {fileID: 11400000, guid: bb278a5e346e69743bfa9766a28d2741, type: 2}
+  - attack: {fileID: 11400000, guid: b17cfea085916c645b1269b43ba0443e, type: 2}
     hurtbox: {fileID: 2532989181226115341}
-  - attack: {fileID: 11400000, guid: bb278a5e346e69743bfa9766a28d2741, type: 2}
+  - attack: {fileID: 11400000, guid: b17cfea085916c645b1269b43ba0443e, type: 2}
     hurtbox: {fileID: 2532989181226115341}
   _heavyAttack:
-    attack: {fileID: 11400000, guid: 0e18a486f12cd934aa8b180a031ec8c5, type: 2}
-    hurtbox: {fileID: 5365181635535930238}
+    attack: {fileID: 11400000, guid: 705927fe3210e0044b675e212c673253, type: 2}
+    hurtbox: {fileID: 95443232262905109}
   _maxChargedHeavyAttackDamageMultiplier: 2
+  _airAttack:
+    attack: {fileID: 11400000, guid: 6d4c4aebb22f93d48b1b2579201f5aec, type: 2}
+    hurtbox: {fileID: 1379082182638366624}
 --- !u!1 &8021132557076234053
 GameObject:
   m_ObjectHideFlags: 0
@@ -436,5 +663,6 @@ Transform:
   - {fileID: 990027677935326979}
   - {fileID: 120801628579203837}
   - {fileID: 6355608865081675701}
+  - {fileID: 1227563943798855740}
   m_Father: {fileID: 1576859346003920362}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

@@ -78,6 +78,9 @@ public partial class BaseCharacterController : MonoBehaviour
     [Space]
     [SerializeField] private CharacterHealth _characterHealth;
     public CharacterHealth characterHealth { get { return _characterHealth; } }
+    [Space]
+    [SerializeField] private CharacterCombat _characterCombat;
+    public CharacterCombat characterCombat { get { return _characterCombat; } }
 
     [Header("BASE CHARACTER STATS")]
     [Space]
@@ -85,6 +88,8 @@ public partial class BaseCharacterController : MonoBehaviour
 
     [Header("MOTION")]
     [Space(10)]
+    [SerializeField] private float _rightMeshOrientation = .1f;
+    [SerializeField] private float _leftMeshOrientation = 179.9f;
     [SerializeField] private bool _isMoving;
     public bool isMoving { get { return _isMoving; } }
     [Space]
@@ -227,7 +232,7 @@ public partial class BaseCharacterController : MonoBehaviour
     private bool _shake = false;
     public bool shake { get { return _shake; } }
     [Space]
-    [SerializeField][ReadOnlyInspector] private Vector3 _cachedKnockback = Vector3.zero;
+    [SerializeField][ReadOnlyInspector] private Vector3 _cachedVelocity = Vector3.zero;
     [SerializeField][ReadOnlyInspector] Transform _aimingTarget = null;
 
     [Header("LOCKS")]
@@ -251,6 +256,7 @@ public partial class BaseCharacterController : MonoBehaviour
     public delegate void RaycastHitCallback(RaycastHit hit);
     public delegate void LandingCallback(float value, RaycastHit hit);
     public delegate void CharacterControllerCallback(BaseCharacterController playerCharacterController);
+    public delegate void HitLagCallback(float duration, bool shake);
     public FloatCallback OnMove;
     public IntCallback OnSetPlayer;
     public IntCallback OnJump;
@@ -259,6 +265,7 @@ public partial class BaseCharacterController : MonoBehaviour
     public DefaultCallback OnUTurn;
     public DefaultCallback OnResetCharacter;
     public DefaultCallback OnHit;
+    public HitLagCallback OnHitLag;
     public DefaultCallback OnEndHitlag;
     public DefaultCallback OnFreeze;
     public DefaultCallback OnUnfreeze;
@@ -298,6 +305,8 @@ public partial class BaseCharacterController : MonoBehaviour
     private float _targetSpeed { get { return isMoving ? Mathf.Lerp(minSpeed, maxSpeed, speedLerp) : 0f; } }
     public float targetSpeed { get { return _targetSpeed; } }
     private Vector2 startPos;
+    private int _facingRight = 0;
+    public int facingRight { get { return _facingRight; } }
 
     // Coroutines
     private Coroutine jumpCoroutine;
@@ -322,7 +331,7 @@ public partial class BaseCharacterController : MonoBehaviour
     private void Start()
     {
         //This is just for debug purposes - should be cleaned up later, when confronting SceneLoading.
-        CameraManager.Instance.SetPlayerCharacterController(this);
+        //CameraManager.Instance.SetPlayerCharacterController(this);
 
         InitializeCharacterStats();
 
@@ -526,6 +535,13 @@ public partial class BaseCharacterController : MonoBehaviour
 
         // Ground tilt speed
         Vector2 targetVector = _movingVector * targetSpeed;
+
+        //Prevent movement when attacking on ground.
+        if (_characterCombat.isAttacking && isGrounded)
+        {
+            targetVector = Vector2.zero;
+        }
+
         float xVelocityLerp = Mathf.Lerp(rigidbodyVelocity.x, targetVector.x, _speedLerpRate.CurrentValue * Time.fixedDeltaTime);
         Vector2 velocityLerp = new Vector2(xVelocityLerp, targetVector.y);
 
@@ -546,13 +562,15 @@ public partial class BaseCharacterController : MonoBehaviour
         if (!uTurn && isGrounded && isMoving && // Default conditions
             (leftRight * rigid.velocity.x < 0f) // Stick on opposite side
                                                 //&& Mathf.Abs(rigidbodyVelocity.x) > 2f) // Character was moving fast
-            && currentSpeed > 2f)
+            && currentSpeed > 2f
+            && !isDashing
+            && !_characterCombat.isAttacking)
         {
             UTurn();
         }
     }
 
-    private void CharacterOrientation(bool forceOrientation = false)
+    public void CharacterOrientation(bool forceOrientation = false)
     {
         // Character physics is frozen
         if (isFrozen)
@@ -562,6 +580,9 @@ public partial class BaseCharacterController : MonoBehaviour
         {
             if (uTurn)
                 return;
+
+            if (_characterCombat.isAttacking)
+                return;
         }
 
         float toEulerRot;
@@ -570,22 +591,26 @@ public partial class BaseCharacterController : MonoBehaviour
             int leftRight = (int)Mathf.Sign(_aimingTarget.position.x - cachedTransform.position.x);
             if (leftRight < 0)
             {
-                toEulerRot = 179.9f;
+                toEulerRot = _leftMeshOrientation;
+                _facingRight = -1;
             }
             else
             {
-                toEulerRot = 0.1f;
+                toEulerRot = _rightMeshOrientation;
+                _facingRight = 1;
             }
         }
         else
         {
             if (_leftRight < 0)
             {
-                toEulerRot = 179.9f;
+                toEulerRot = _leftMeshOrientation;
+                _facingRight = -1;
             }
             else
             {
-                toEulerRot = 0.1f;
+                toEulerRot = _rightMeshOrientation;
+                _facingRight = 1;
             }
         }
         characterBehavior.transform.rotation = Quaternion.Slerp(characterBehavior.transform.rotation, Quaternion.Euler(0, toEulerRot, 0), forceOrientation ? 1 : 10f * Time.fixedDeltaTime);
@@ -842,6 +867,23 @@ public partial class BaseCharacterController : MonoBehaviour
         airTime += Time.fixedDeltaTime;
     }
 
+    public void CacheVelocity(Vector3 velocity, bool overrideCachedVelociy = false)
+    {
+        if (overrideCachedVelociy)
+        {
+            _cachedVelocity = velocity;
+        }
+        else
+        {
+            _cachedVelocity += velocity;
+        }
+    }
+
+    public void CharacterImpulse(Vector2 vel)
+    {
+        SetRigidbodyVelocity(vel);
+    }
+
     private void SetRigidbodyVelocity(Vector2 vel, string message = "")
     {
         rigid.velocity = vel;
@@ -1033,11 +1075,12 @@ public partial class BaseCharacterController : MonoBehaviour
 
             //rigid.AddForce(Vector3.up * jumpDosageStrength, ForceMode.Acceleration);
             SetRigidbodyVelocity(new Vector3(rigid.velocity.x, jumpDosageStrength, 0));
-            
+
             yield return null;
         }
 
         _isJumping = false;
+        
     }
 
     private void CancelJumpDosage()
@@ -1146,7 +1189,7 @@ public partial class BaseCharacterController : MonoBehaviour
         isFastFalling = false;
         _dashCooldownTimer = _dashCooldown.CurrentValue;
 
-        SetColliderMode(1);
+        //SetColliderMode(1);
 
         DoADash();
     }
@@ -1195,6 +1238,7 @@ public partial class BaseCharacterController : MonoBehaviour
         }
 
         _isDashing = false;
+        //SetColliderMode(0);
     }
 
     private void CancelDash()
@@ -1206,6 +1250,7 @@ public partial class BaseCharacterController : MonoBehaviour
             StopCoroutine(dashCoroutine);
 
         _isDashing = false;
+        //SetColliderMode(0);
     }
 
     private void SetColliderMode(int mode)
@@ -1255,10 +1300,10 @@ public partial class BaseCharacterController : MonoBehaviour
             OnUnfreeze();
         }
 
-        if (_cachedKnockback != Vector3.zero)
+        if (_cachedVelocity != Vector3.zero)
         {
-            SetRigidbodyVelocity(_cachedKnockback);
-            _cachedKnockback = Vector3.zero;
+            SetRigidbodyVelocity(_cachedVelocity);
+            _cachedVelocity = Vector3.zero;
         }
     }
 
@@ -1307,7 +1352,7 @@ public partial class BaseCharacterController : MonoBehaviour
                 }
 
                 Vector3 knockback = knockbackDirection * knockbackForce;
-                _cachedKnockback = knockback;
+                _cachedVelocity += knockback;
 
                 CancelDash();
                 CancelUTurn();
@@ -1315,21 +1360,29 @@ public partial class BaseCharacterController : MonoBehaviour
             }
         }
 
-        OnHit?.Invoke();
+        if (!_characterHealth.isDead)
+        {
+            OnHit?.Invoke();
+        }
+
     }
 
     public void HitLag(float duration, bool shake = false)
     {
-        if (duration > 0)
+        if (duration <= 0)
         {
-            if (hitCoroutine != null)
-                StopCoroutine(hitCoroutine);
-            hitCoroutine = StartCoroutine(CoHit(duration, shake));
-
-            CancelDash();
-            CancelUTurn();
-            CancelJumpDosage();
+            duration = 0.01f;
         }
+
+        if (hitCoroutine != null)
+            StopCoroutine(hitCoroutine);
+        hitCoroutine = StartCoroutine(CoHit(duration, shake));
+
+        CancelDash();
+        CancelUTurn();
+        CancelJumpDosage();
+
+        OnHitLag?.Invoke(duration, shake);
     }
 
     private IEnumerator CoHit(float hitLagDuration, bool shake)
@@ -1473,7 +1526,6 @@ public partial class BaseCharacterController : MonoBehaviour
         {
             OnResetCharacter();
         }
-
     }
 
     #endregion
