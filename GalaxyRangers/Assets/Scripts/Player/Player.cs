@@ -185,6 +185,8 @@ public class Player : MonoBehaviour
     public void OnPauseInput(InputAction.CallbackContext context)
     {
         //Pause game.
+        UI_Manager.Instance._scriptPauseMenu.Pause();
+        // Debug.LogWarning("Marche");
     }
     #endregion
 
