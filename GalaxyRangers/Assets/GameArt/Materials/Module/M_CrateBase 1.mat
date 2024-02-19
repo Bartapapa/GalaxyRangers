@@ -13,6 +13,7 @@ Material:
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
+  - _MAIN_LIGHT_SHADOWS
   - _SHADOWS_SOFT
   m_InvalidKeywords: []
   m_LightmapFlags: 4
@@ -112,7 +113,7 @@ Material:
     - _Lighting_Cutoff_Diffuse: 0
     - _Lighting_Cutoff_Rim: 0.09
     - _Lighting_Cutoff_Specular: 1
-    - _MAIN_LIGHT_SHADOWS: 0
+    - _MAIN_LIGHT_SHADOWS: 1
     - _Metallic: 0
     - _Noise_Color_Intensity: 0.384
     - _Noise_Color_Intensity_2: 0.21
@@ -141,7 +142,7 @@ Material:
     - _Ambient_Color: {r: 1, g: 1, b: 1, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _Diffuse_Color: {r: 0.18569775, g: 0.19350748, b: 0.3679245, a: 1}
+    - _Diffuse_Color: {r: 0.13013652, g: 0.14126332, b: 0.14995982, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _Noise_Color: {r: 1, g: 1, b: 1, a: 1}
     - _Noise_Color_1: {r: 1, g: 0, b: 0, a: 1}
