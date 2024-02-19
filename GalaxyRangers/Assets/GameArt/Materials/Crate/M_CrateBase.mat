@@ -101,6 +101,7 @@ Material:
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
+    - _Diffuse_Color_Intensity: 1
     - _DstBlend: 0
     - _DstBlendAlpha: 0
     - _EnvironmentReflections: 1
@@ -115,9 +116,9 @@ Material:
     - _Lighting_Cutoff_Specular: 1
     - _MAIN_LIGHT_SHADOWS: 1
     - _Metallic: 0
-    - _Noise_Color_Intensity: 0.384
-    - _Noise_Color_Intensity_2: 0.21
-    - _Noise_Intensity: 0.192
+    - _Noise_Color_Intensity: 0.88
+    - _Noise_Color_Intensity_2: 0.62
+    - _Noise_Intensity: 0.07
     - _Noise_Lerp_Intensity: 0.8
     - _Noise_Offset: 17.94
     - _Noise_Scale: 1500
@@ -139,7 +140,7 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - _Ambient_Color: {r: 1, g: 1, b: 1, a: 0}
+    - _Ambient_Color: {r: 1, g: 1, b: 1, a: 1}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Diffuse_Color: {r: 0.3584906, g: 0.3548904, b: 0.3026878, a: 1}
