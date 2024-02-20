@@ -8,12 +8,12 @@ public class CharacterBehavior : MonoBehaviour
 {
     [Header("OBJECT REFERENCES")]
     [Space]
-    [SerializeField] private BaseCharacterController _characterController;
-    [SerializeField] private CharacterHealth _characterHealth;
-    [SerializeField] private CharacterCombat _characterCombat;
-    [SerializeField] private Renderer _renderer;
-    [SerializeField] private Transform _characterMesh;
-    [SerializeField] private Animator _animator;
+    [SerializeField] protected BaseCharacterController _characterController;
+    [SerializeField] protected CharacterHealth _characterHealth;
+    [SerializeField] protected CharacterCombat _characterCombat;
+    [SerializeField] protected Renderer _renderer;
+    [SerializeField] protected Transform _characterMesh;
+    [SerializeField] protected Animator _animator;
     public Animator animator { get { return _animator; } }
 
     [Header("BEHAVIOR")]
@@ -23,15 +23,15 @@ public class CharacterBehavior : MonoBehaviour
     [SerializeField] private float _hitFlashIntensity = 50f;
 
     //Cached
-    private Vector2 velocity { get { return _characterController.rigid.velocity; } }
-    private float airDirection = 0f;
-    private float runSpeedFactor = 1f;
-    private float groundTilt = 0f;
-    private int uTurnDirection;
-    private bool _hit;
-    private bool _shake;
+    protected Vector2 velocity { get { return _characterController.rigid.velocity; } }
+    protected float airDirection = 0f;
+    protected float runSpeedFactor = 1f;
+    protected float groundTilt = 0f;
+    protected int uTurnDirection;
+    protected bool _hit;
+    protected bool _shake;
 
-    private Coroutine hitFlashCoroutine;
+    protected Coroutine hitFlashCoroutine;
 
 
     private void Start()
@@ -72,10 +72,13 @@ public class CharacterBehavior : MonoBehaviour
         float speedLerp = Mathf.Lerp(animator.GetFloat("speedLerp"), _characterController.speedLerp, 10f * Time.deltaTime);
         animator.SetFloat("speedLerp", speedLerp);
 
-        animator.SetLayerWeight(1, _characterCombat.isAttacking ? 1 : 0);
+        if (_characterCombat)
+        {
+            animator.SetLayerWeight(1, _characterCombat.isAttacking ? 1 : 0);
+        }
     }
 
-    private void InitEvents()
+    protected virtual void InitEvents()
     {
         _characterController.OnJump += PlayJumpAnim;
         _characterController.OnWallJump += PlayWallJumpAnim;
@@ -90,9 +93,13 @@ public class CharacterBehavior : MonoBehaviour
         _characterHealth.CharacterDied += PlayDeathAnim;
         _characterHealth.CharacterRevived += OnCharacterRevived;
 
-        _characterCombat.OnWindUp += PlayWindUpAnim;
-        _characterCombat.OnAttack += PlayAttackAnim;
-        _characterCombat.OnFollowThrough += PlayFollowThroughAnim;
+        if (_characterCombat)
+        {
+            _characterCombat.OnWindUp += PlayWindUpAnim;
+            _characterCombat.OnAttack += PlayAttackAnim;
+            _characterCombat.OnFollowThrough += PlayFollowThroughAnim;
+        }
+
         //_characterCombat.OnAttackCancelledOnLand += AttackCancelledOnLanding;
     }
 
@@ -168,7 +175,15 @@ public class CharacterBehavior : MonoBehaviour
 
         //SFX
     }
+    public void PlayAnim(string animName, int layer = 0)
+    {
+        if (_characterHealth.isDead)
+            return;
 
+        animator.Play(animName, layer, 0);
+
+        //SFX
+    }
 
     private void PlayWindUpAnim(WeaponAttack attack)
     {
