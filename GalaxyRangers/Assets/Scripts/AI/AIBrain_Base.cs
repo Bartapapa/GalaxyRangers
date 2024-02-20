@@ -17,7 +17,7 @@ public class AIBrain_Base : MonoBehaviour
     [Space]
     [SerializeField] private AIState _defaultState;
     [SerializeField] private AIState _hurtState;
-    [SerializeField][ReadOnlyInspector] private AIState _currentState;
+    [SerializeField][ReadOnlyInspector] protected AIState _currentState;
     public AIState currentState { get { return _currentState; } }
 
     [Header("SIMULATED INPUTS")]
@@ -64,6 +64,7 @@ public class AIBrain_Base : MonoBehaviour
     {
         //Change to hurt state
         _currentState.ResetState();
+        combat.CancelFullAttack();
         _currentState = _hurtState;
     }
 
@@ -139,6 +140,11 @@ public class AIBrain_Base : MonoBehaviour
     }
 
     #endregion
+
+    public virtual void OnAnimationCallback(int index)
+    {
+
+    }
 
     #region GIZMOS
     private void OnDrawGizmosSelected()

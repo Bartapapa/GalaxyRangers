@@ -336,20 +336,38 @@ public class RogueRoom : MonoBehaviour
                     _chosenScenario = _scenario1;
                     break;
                 case DifficultyScenario.Medium:
-                    _scenario1.gameObject.SetActive(false);
-                    _scenario2.gameObject.SetActive(true);
+                    _scenario1.gameObject.SetActive(true);
+                    _scenario2.gameObject.SetActive(false);
                     _scenario3.gameObject.SetActive(false);
 
-                    _chosenScenario = _scenario2;
+                    _chosenScenario = _scenario1;
+
+                    //_scenario1.gameObject.SetActive(false);
+                    //_scenario2.gameObject.SetActive(true);
+                    //_scenario3.gameObject.SetActive(false);
+
+                    //_chosenScenario = _scenario2;
                     break;
                 case DifficultyScenario.Hard:
-                    _scenario1.gameObject.SetActive(false);
+                    _scenario1.gameObject.SetActive(true);
                     _scenario2.gameObject.SetActive(false);
-                    _scenario3.gameObject.SetActive(true);
+                    _scenario3.gameObject.SetActive(false);
 
-                    _chosenScenario = _scenario3;
+                    _chosenScenario = _scenario1;
+
+                    //_scenario1.gameObject.SetActive(false);
+                    //_scenario2.gameObject.SetActive(false);
+                    //_scenario3.gameObject.SetActive(true);
+
+                    //_chosenScenario = _scenario3;
                     break;
                 default:
+                    _scenario1.gameObject.SetActive(true);
+                    _scenario2.gameObject.SetActive(false);
+                    _scenario3.gameObject.SetActive(false);
+
+                    _chosenScenario = _scenario1;
+
                     _scenario1.gameObject.SetActive(true);
                     _scenario2.gameObject.SetActive(false);
                     _scenario3.gameObject.SetActive(false);
