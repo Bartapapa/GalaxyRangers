@@ -189,7 +189,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b600441d64a62454bba708df6f4dc20f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _panelInRef: {fileID: 0}
+  _panelInRef: {fileID: 2062721925}
   _fadeScript: {fileID: 0}
 --- !u!1 &34352335
 GameObject:
@@ -225,7 +225,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -129, y: 56.625305}
+  m_AnchoredPosition: {x: -129, y: 56.625244}
   m_SizeDelta: {x: 258, y: 113.25101}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &34352337
@@ -2969,7 +2969,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Lvl_Test_01_LD
+          m_StringArgument: StarterScene
           m_BoolArgument: 1
         m_CallState: 2
       - m_Target: {fileID: 1225668437}
@@ -3719,7 +3719,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Lvl_Test_01_LD
+          m_StringArgument: StarterScene
           m_BoolArgument: 1
         m_CallState: 2
       - m_Target: {fileID: 1458029652}

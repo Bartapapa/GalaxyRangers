@@ -279,6 +279,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: ea271099-77de-4091-bb77-aa6ccc7fadb7
     m_ActionName: Player/SpecialAbility3
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 449762214945250255}
+        m_TargetAssemblyTypeName: Player, Assembly-CSharp
+        m_MethodName: OnQuestDisplayInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 168ab702-4412-4a68-986c-706596611597
+    m_ActionName: Player/QuestDisplay[/Keyboard/tab]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -980,6 +996,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2ead2cfaecb0014babe8c0c4792d4b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _capacity_isUsed: 0
+  _capacityDurationTimer: 10
+  _capacityLoadValue: 0
 --- !u!114 &4620464566907259800
 MonoBehaviour:
   m_ObjectHideFlags: 0

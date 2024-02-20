@@ -10,8 +10,10 @@ public class AIBrain_Base : MonoBehaviour
     public BaseCharacterController controller;
     public CharacterCombat combat;
     public CharacterHealth health;
+    public CharacterBehavior behavior;
 
     [Header("STATE MACHINE")]
+    public float enemyType = 0f;
     [Space]
     [SerializeField] private AIState _defaultState;
     [SerializeField] private AIState _hurtState;
@@ -54,6 +56,8 @@ public class AIBrain_Base : MonoBehaviour
 
         controller.OnHit -= OnHit;
         controller.OnHit += OnHit;
+
+        SetBehaviorFloat("alert", enemyType);
     }
 
     private void OnHit()
@@ -120,6 +124,20 @@ public class AIBrain_Base : MonoBehaviour
     {
         combat.RequestHeavyAttack();
     }
+    #endregion
+
+    #region BEHAVIOR
+
+    public void SetBehaviorBool(string boolName, bool value)
+    {
+        behavior.animator.SetBool(boolName, value);
+    }
+
+    public void SetBehaviorFloat(string floatName, float value)
+    {
+        behavior.animator.SetFloat(floatName, value);
+    }
+
     #endregion
 
     #region GIZMOS
