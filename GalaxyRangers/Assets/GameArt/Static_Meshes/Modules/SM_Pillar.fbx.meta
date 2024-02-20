@@ -1,9 +1,19 @@
 fileFormatVersion: 2
-guid: 14a0c8831f97b624aa71f43bced61d97
+guid: 5e4fdb101ebad5349ab8261a4610ad58
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: RL_Scene_Wall_04
+    second: {fileID: 2100000, guid: 948301caca1cef84f834447befb4ed07, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert1
+    second: {fileID: 2100000, guid: b0a8e37d42b3e234b80316f5b25aeb92, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

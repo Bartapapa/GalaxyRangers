@@ -118,8 +118,20 @@ public class WorldManager : MonoBehaviour
                                    baseDifficulty, difficultyVariance,
                                    usedSeed);
         world = newWorld;
+        GenerateEntireWorld();
         MoveToRoom(world.rooms[0]);
         VisualizeWorld();
+    }
+
+    private void GenerateEntireWorld()
+    {
+        for (int i = 0; i < world.rooms.Count; i++)
+        {
+            RogueRoom newRoom = Instantiate<RogueRoom>(GetRandomRoomOfType(world.rooms[i].roomType), GeneratedRoomParent);
+            world.rooms[i].GeneratedRoom = newRoom;
+            newRoom.BuildRoom(world.rooms[i]);
+            newRoom.gameObject.SetActive(false);
+        }
     }
 
     private void DestroyWorld()
@@ -151,8 +163,7 @@ public class WorldManager : MonoBehaviour
     }
 
     public void MoveToRoom(Room room, TraversalPoint usedTraversal = null, bool forceActivateTeleporter = false)
-    {
-        
+    {       
         if (_currentRogueRoom != null)
         {
             _currentRogueRoom.ResetRoom();

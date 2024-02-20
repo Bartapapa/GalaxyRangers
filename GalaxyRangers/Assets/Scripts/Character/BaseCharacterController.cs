@@ -95,20 +95,20 @@ public partial class BaseCharacterController : MonoBehaviour
     [Space]
     [SerializeField] private float _minSpeed = 1f;
     public float minSpeed { get { return _minSpeed; } }
-    [SerializeField][ReadOnlyInspector] private CharacterStat _maxSpeed;
+    [SerializeField][ReadOnlyInspector] protected CharacterStat _maxSpeed;
     public float maxSpeed { get { return _maxSpeed.MaxValue; } }
-    [SerializeField] private float currentSpeed;
+    [SerializeField] protected float currentSpeed;
     [Space]
-    [SerializeField][ReadOnlyInspector] private CharacterStat _speedLerpRate;
+    [SerializeField][ReadOnlyInspector] protected CharacterStat _speedLerpRate;
     public float acceleration { get { return _speedLerpRate.MaxValue; } }
     [Space]
     [SerializeField][Range(0f, 1f)] private float _runSpeedThresold = 0.5f;
     public float runSpeedThresold { get { return _runSpeedThresold; } }
     [Space]
-    [SerializeField][Range(0f, 1f)] private float _speedLerp;
+    [SerializeField][Range(0f, 1f)] protected float _speedLerp;
     public float speedLerp { get { return _speedLerp; } }
     [Space]
-    [SerializeField][Range(-1, 1)] private int _leftRight = 1;
+    [SerializeField][Range(-1, 1)] protected int _leftRight = 1;
     public int leftRight { get { return _leftRight; } }
     [Space]
     [SerializeField] private float uTurnDelay = 0.2f;
@@ -120,14 +120,14 @@ public partial class BaseCharacterController : MonoBehaviour
     [SerializeField] private Vector2 _rigidbodyVelocity;
     public Vector2 rigidbodyVelocity { get { return _rigidbodyVelocity; } }
     [Space]
-    [SerializeField] [ReadOnlyInspector] private LayerMask _currentGroundLayers;
-    [SerializeField] private LayerMask defaultEnvironmentLayers;
-    [SerializeField] private LayerMask onlyGroundLayers;
+    [SerializeField] [ReadOnlyInspector] protected LayerMask _currentGroundLayers;
+    [SerializeField] protected LayerMask defaultEnvironmentLayers;
+    [SerializeField] protected LayerMask onlyGroundLayers;
     public LayerMask currentGroundLayers { get { return _currentGroundLayers; } }
     [Space]
-    [SerializeField] private float _defaultColliderHeight = 1.8f;
+    [SerializeField] protected float _defaultColliderHeight = 1.8f;
     public float defaultColliderHeight { get { return _defaultColliderHeight; } }
-    [SerializeField] private float _defaultColliderRadius = 0.5f;
+    [SerializeField] protected float _defaultColliderRadius = 0.5f;
     public float defaultColliderRadius { get { return _defaultColliderRadius; } }
     [Header("Air behaviour")]
     [Space]
@@ -141,12 +141,12 @@ public partial class BaseCharacterController : MonoBehaviour
     [SerializeField] private float airTime;
     [Header("Ground behaviour")]
     [Space]
-    [SerializeField] private bool _isGrounded = true;
+    [SerializeField] protected bool _isGrounded = true;
     public bool isGrounded { get { return _isGrounded; } }
     public bool isOnOneWayPlatform { get { return _isGrounded && _groundHit.collider.gameObject.layer == 7 ? true : false; } }
     [Space]
-    [SerializeField] private float groundDetectionDistance = 0.2f;
-    [SerializeField] private float feetDetectionOffset = 0.1f;
+    [SerializeField] protected float groundDetectionDistance = 0.2f;
+    [SerializeField] protected float feetDetectionOffset = 0.1f;
     [Space]
     [SerializeField][Range(0, 90)] private float _groundAngle = 0;
     public float groundAngle { get { return _groundAngle; } }
@@ -154,14 +154,14 @@ public partial class BaseCharacterController : MonoBehaviour
     public int maximumGroundAngle { get { return _maximumGroundAngle; } }
     [Header("Ceiling behaviour")]
     [Space]
-    [SerializeField] private bool _isTouchingCeiling = true;
+    [SerializeField] protected bool _isTouchingCeiling = true;
     public bool isTouchingCeiling { get { return _isTouchingCeiling; } }
     [Space]
-    [SerializeField] private float ceilingDetectionDistance = 0.2f;
-    [SerializeField] private float headDetectionOffset = 0.1f;
+    [SerializeField] protected float ceilingDetectionDistance = 0.2f;
+    [SerializeField] protected float headDetectionOffset = 0.1f;
     [Header("Jump behaviour")]
     [Space]
-    [SerializeField] private bool _isJumping = false;
+    [SerializeField] protected bool _isJumping = false;
     public bool isJumping { get { return _isJumping; } }
     [SerializeField] private bool _wallJump = false;
     public bool wallJump { get { return _wallJump; } }
@@ -178,12 +178,12 @@ public partial class BaseCharacterController : MonoBehaviour
     [SerializeField][Range(1f, 4f)] private float shortJumpSpeedFactor = 2f;
     [Header("Wall Detection")]
     [Space]
-    [SerializeField] private bool _isFacingLeftWall = false;
+    [SerializeField] protected bool _isFacingLeftWall = false;
     public bool isFacingLeftWall { get { return _isFacingLeftWall; } }
-    [SerializeField] private bool _isFacingRightWall = false;
+    [SerializeField] protected bool _isFacingRightWall = false;
     public bool isFacingRightWall { get { return _isFacingRightWall; } }
     [Space]
-    [SerializeField] private float wallDetectionDistance = 0.2f;
+    [SerializeField] protected float wallDetectionDistance = 0.2f;
     [SerializeField] private AnimationCurve wallJumpMotionFactorCurve = AnimationCurve.Linear(0, 0, 1, 1);
     [Space]
     [SerializeField][Range(0, 180)] private float wallAngle = 0;
@@ -191,12 +191,12 @@ public partial class BaseCharacterController : MonoBehaviour
     [SerializeField][Range(0, 180)] private int maximumWallAngle = 100;
     [Header("Edge Detection")]
     [Space]
-    [SerializeField] private bool isFacingEdge = false;
+    [SerializeField] protected bool isFacingEdge = false;
     [Space]
     [SerializeField] private float minimumEdgeDetectionDistance = 0.5f;
     [SerializeField] private float maximumEdgeDetectionDistance = 1.5f;
     [Space]
-    [SerializeField] private bool isFrozen = false;
+    [SerializeField] protected bool isFrozen = false;
 
     [Header("Dash behavior")]
     [Space]
@@ -237,8 +237,8 @@ public partial class BaseCharacterController : MonoBehaviour
 
     [Header("LOCKS")]
     [Space(10)]
-    [SerializeField] private bool enableGroundDetection = true;
-    [SerializeField] private bool enableCeilingDetection = true;
+    [SerializeField] protected bool enableGroundDetection = true;
+    [SerializeField] protected bool enableCeilingDetection = true;
 
     [Header("CHEATS")]
     [Space(10)]
@@ -276,9 +276,9 @@ public partial class BaseCharacterController : MonoBehaviour
 
     // Cache
     public Vector3 characterCenter { get { return cachedTransform.position + capsuleCollider.center; } }
-    private RaycastHit _groundHit;
+    protected RaycastHit _groundHit;
     public RaycastHit groundHit { get { return _groundHit; } }
-    private RaycastHit _ceilingHit;
+    protected RaycastHit _ceilingHit;
     public RaycastHit ceilingHit { get { return _ceilingHit; } }
     //private RaycastHit groundEdgeHit;
     //private RaycastHit leftWallHit;
@@ -328,7 +328,7 @@ public partial class BaseCharacterController : MonoBehaviour
 #endif     
     }
 
-    private void Start()
+    protected virtual void Start()
     {
         //This is just for debug purposes - should be cleaned up later, when confronting SceneLoading.
         //CameraManager.Instance.SetPlayerCharacterController(this);
@@ -347,7 +347,7 @@ public partial class BaseCharacterController : MonoBehaviour
         }
 
         _maxSpeed = new CharacterStat(_characterStats.baseMaxSpeed);
-        _speedLerpRate = new CharacterStat(_characterStats.baseMaxSpeed);
+        _speedLerpRate = new CharacterStat(_characterStats.acceleration);
 
         gravity = new CharacterStat(_characterStats.gravity);
         minFallSpeed = new CharacterStat(_characterStats.minFallSpeed);
@@ -384,7 +384,7 @@ public partial class BaseCharacterController : MonoBehaviour
         }
     }
 
-    private void FixedUpdate()
+    protected virtual void FixedUpdate()
     {
         FixedCacheData();
 
@@ -393,8 +393,8 @@ public partial class BaseCharacterController : MonoBehaviour
         GroundDetection();
         WallDetection();
         CeilingDetection();
-        AirBehaviour();
 
+        AirBehaviour();
         Motion();
         CharacterOrientation();
     }
@@ -406,7 +406,7 @@ public partial class BaseCharacterController : MonoBehaviour
     /// <summary>
     /// Cache values during FixedUpdate
     /// </summary>
-    private void FixedCacheData()
+    protected void FixedCacheData()
     {
         _rigidbodyVelocity = rigid.velocity;
 
@@ -470,7 +470,7 @@ public partial class BaseCharacterController : MonoBehaviour
 
     #region BEHAVIOUR
 
-    private void Gravity()
+    protected void Gravity()
     {
         // Character physics is frozen
         if (isFrozen)
@@ -584,8 +584,14 @@ public partial class BaseCharacterController : MonoBehaviour
             if (uTurn)
                 return;
 
-            if (_characterCombat.isAttacking)
-                return;
+            if (_characterCombat)
+            {
+                if (_characterCombat.isAttacking)
+                {
+                    return;
+                }
+            }
+                
         }
 
         float toEulerRot;
@@ -619,7 +625,7 @@ public partial class BaseCharacterController : MonoBehaviour
         characterBehavior.transform.rotation = Quaternion.Slerp(characterBehavior.transform.rotation, Quaternion.Euler(0, toEulerRot, 0), forceOrientation ? 1 : 10f * Time.fixedDeltaTime);
     }
 
-    private void GroundDetection()
+    protected virtual void GroundDetection()
     {
         // Ground detection explicitely disabled
         if (!enableGroundDetection)
@@ -654,7 +660,7 @@ public partial class BaseCharacterController : MonoBehaviour
         isFacingEdge = EdgeCast();
     }
 
-    private void GroundAttach(bool forceGroundDetection = false)
+    protected void GroundAttach(bool forceGroundDetection = false)
     {
         // Catch landing position
         if (forceGroundDetection)
@@ -711,7 +717,7 @@ public partial class BaseCharacterController : MonoBehaviour
             Jump(0);
     }
 
-    private void GroundDetach()
+    protected void GroundDetach()
     {
         // Ground just not found (air start)
         if (isGrounded)
@@ -731,7 +737,7 @@ public partial class BaseCharacterController : MonoBehaviour
         _isGrounded = false;
     }
 
-    private void CeilingDetection()
+    protected void CeilingDetection()
     {
         if (!enableCeilingDetection) return;
 
@@ -749,7 +755,7 @@ public partial class BaseCharacterController : MonoBehaviour
         _isTouchingCeiling = raycast;
     }
 
-    private bool EdgeCast()
+    protected bool EdgeCast()
     {
         if (!isGrounded)
             return false;
@@ -769,7 +775,7 @@ public partial class BaseCharacterController : MonoBehaviour
         return hit.point + (hit.normal - Vector3.up) * capsuleCollider.radius;
     }
 
-    private void WallDetection()
+    protected void WallDetection()
     {
         _isFacingLeftWall = SideWallDetection(-1);
         _isFacingRightWall = SideWallDetection(1);
@@ -887,7 +893,7 @@ public partial class BaseCharacterController : MonoBehaviour
         SetRigidbodyVelocity(vel);
     }
 
-    private void SetRigidbodyVelocity(Vector2 vel, string message = "")
+    protected void SetRigidbodyVelocity(Vector2 vel, string message = "")
     {
         rigid.velocity = vel;
         _rigidbodyVelocity = vel;
