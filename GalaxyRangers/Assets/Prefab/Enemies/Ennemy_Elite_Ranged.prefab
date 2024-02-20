@@ -289,7 +289,7 @@ GameObject:
   - component: {fileID: 781411374885464745}
   - component: {fileID: 1698785404415308575}
   m_Layer: 6
-  m_Name: EnemyRanged
+  m_Name: Ennemy_Elite_Ranged
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -377,7 +377,7 @@ MonoBehaviour:
   _characterBehavior: {fileID: 4779089136010498559}
   _characterHealth: {fileID: 3417362527517585662}
   _characterCombat: {fileID: 781411374885464745}
-  _characterStats: {fileID: 11400000, guid: 43306ba555977294e9d74b3b1ec3d608, type: 2}
+  _characterStats: {fileID: 11400000, guid: dbb62d0a5f15f4640b32bcc8d7f6d0b4, type: 2}
   _rightMeshOrientation: 0.1
   _leftMeshOrientation: 179.9
   _isMoving: 0
