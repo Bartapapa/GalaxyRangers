@@ -25,14 +25,17 @@ public class RogueRoom_Arena : RogueRoom
 
         //Set scenario.
         SetScenario(room);
+    }
+
+    public override void RegenerateRoom()
+    {
+        BuildTeleporter();
 
         //Start arena.
         if (_hasEnded || _isCompleted)
             return;
 
         arenaStartCoroutine = StartCoroutine(CoArenaStart());
-
-        _teleporter.canBeActivated = false;
     }
 
     private IEnumerator CoArenaStart()
@@ -46,6 +49,9 @@ public class RogueRoom_Arena : RogueRoom
     {
         Debug.Log("Closed all exits.");
         //Close exits.
+
+        _teleporter.canBeActivated = false;
+
         List<TraversalLocation> allTraversalLocations = GetAllTraversalLocations();
         foreach(TraversalLocation traversal in allTraversalLocations)
         {

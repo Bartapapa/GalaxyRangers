@@ -142,7 +142,7 @@ Material:
     - _Ambient_Color: {r: 0.49928805, g: 0.49967754, b: 0.5660378, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _Diffuse_Color: {r: 0.2735849, g: 0.2735849, b: 0.2735849, a: 1}
+    - _Diffuse_Color: {r: 0.22561412, g: 0.22721164, b: 0.2830189, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _Noise_Color: {r: 0.2971757, g: 0, b: 0.3773585, a: 1}
     - _Noise_Color_1: {r: 1, g: 0, b: 0, a: 1}
