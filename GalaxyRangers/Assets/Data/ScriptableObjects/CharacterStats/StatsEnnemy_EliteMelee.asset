@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2749a4894c09e9843ab5abb4a925b732, type: 3}
-  m_Name: BasePlayerStats
+  m_Name: StatsEnnemy_EliteMelee
   m_EditorClassIdentifier: 
   baseMaxSpeed: 8
   acceleration: 10
@@ -47,9 +47,9 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   shortJumpSpeedFactor: 4
-  baseDashSpeed: 40
-  baseDashDuration: 0.1
+  baseDashSpeed: 20
+  baseDashDuration: 0.3
   baseDashCooldown: 0.3
   baseMaxAirDashes: 1
-  faction: 1
-  baseHealth: 120
+  faction: 2
+  baseHealth: 180

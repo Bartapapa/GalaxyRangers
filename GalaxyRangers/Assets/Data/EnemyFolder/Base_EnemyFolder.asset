@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   meleeNormalPrefab: {fileID: 6033406254421080662, guid: 4676568b3eb205545b2add51b5c50e58,
     type: 3}
-  meleeElitePrefab: {fileID: 6033406254421080662, guid: 4676568b3eb205545b2add51b5c50e58,
+  meleeElitePrefab: {fileID: 6033406254421080662, guid: 8177e8f2f8d4149439a65050daac50db,
     type: 3}
-  rangedNormalPrefab: {fileID: 6033406254421080662, guid: 4676568b3eb205545b2add51b5c50e58,
+  rangedNormalPrefab: {fileID: 1698785404415308575, guid: 523dd99628710ef43b29bb6d00c2357a,
     type: 3}
-  rangedElitePrefab: {fileID: 6033406254421080662, guid: 4676568b3eb205545b2add51b5c50e58,
+  rangedElitePrefab: {fileID: 1698785404415308575, guid: 87cd27a26ae933a4da920f2d928c803c,
     type: 3}
   bossPrefab: {fileID: 6033406254421080662, guid: 4676568b3eb205545b2add51b5c50e58,
     type: 3}
