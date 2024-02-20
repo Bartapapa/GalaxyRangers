@@ -123,14 +123,14 @@ public class World : Graph
 
     public void GenerateWorld(string seed = "")
     {
-        if (seed == "")
-        {
-            GenerateRandomSeed();
-        }
-        else
-        {
-            SetRandomSeed(seed);
-        }
+        //if (seed == "")
+        //{
+        //    GenerateRandomSeed();
+        //}
+        //else
+        //{
+        //    SetRandomSeed(seed);
+        //}
 
         GenerateSpawnRoom();
         //GenerateRooms();

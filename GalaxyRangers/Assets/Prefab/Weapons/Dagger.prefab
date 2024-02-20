@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hurtFactions: 020000000300000004000000
-  _damage: 3
+  _damage: 50
   _knockbackForce: 25
   _overrideKnockbackDirection: {x: 1, y: 2, z: 0}
   _disableInputDuration: 0.3
@@ -159,7 +159,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hurtFactions: 020000000300000004000000
-  _damage: 3
+  _damage: 35
   _knockbackForce: 0
   _overrideKnockbackDirection: {x: 0, y: 1, z: 0}
   _disableInputDuration: 0.3
@@ -238,7 +238,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hurtFactions: 020000000300000004000000
-  _damage: 1
+  _damage: 38
   _knockbackForce: 10
   _overrideKnockbackDirection: {x: 0, y: 1, z: 0}
   _disableInputDuration: 0.3
@@ -351,7 +351,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hurtFactions: 020000000300000004000000
-  _damage: 1
+  _damage: 35
   _knockbackForce: 7
   _overrideKnockbackDirection: {x: 1, y: 0.5, z: 0}
   _disableInputDuration: 0.3
@@ -430,7 +430,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hurtFactions: 020000000300000004000000
-  _damage: 3
+  _damage: 65
   _knockbackForce: 25
   _overrideKnockbackDirection: {x: 1, y: 2, z: 0}
   _disableInputDuration: 0.3

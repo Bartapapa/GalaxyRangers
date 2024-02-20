@@ -42,7 +42,7 @@ MonoBehaviour:
   _projectileSpawnTime: 0
   _comboEndAttackCooldown: 3
   _minAttackDistance: 2
-  _maxAttackDistance: 15
+  _maxAttackDistance: 20
   _attackPriority: 1
   _attackWeight: 1
   _attackType: 1
