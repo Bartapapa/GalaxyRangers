@@ -10,6 +10,7 @@ public class UI_Manager : MonoBehaviour
     [SerializeField] private GameObject _HubShopRef;
     [SerializeField] private GameObject _GUIRef;
     [SerializeField] private SC_UI_ScriptDisplay _scriptDisplay;
+    [SerializeField] public SC_PauseMenu _scriptPauseMenu;
     public SC_UI_ScriptDisplay _scriptDisplayRef { get { return _scriptDisplay; } }
 
 

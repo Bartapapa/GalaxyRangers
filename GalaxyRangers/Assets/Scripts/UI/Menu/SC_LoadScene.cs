@@ -19,20 +19,18 @@ public class SC_LoadScene : MonoBehaviour
         if (_fadeScript != null && _panelInRef != null) {
             _panelInRef.SetActive(true);
             _animatorPanel = _panelInRef.GetComponent<Animator>();
-            StartCoroutine(loadNextScene(sceneName));
+            _animatorPanel.SetTrigger("TriggerFadeIn");
         }
         else
         {
             Debug.LogWarning("Pas Drag and drop de panel ou de fade dans le bouton start");
         }
-
-
+        StartCoroutine(loadNextScene(sceneName));
     }
 
     public IEnumerator loadNextScene(string sceneName)
     {
         // Lance l'animation
-        _animatorPanel.SetTrigger("TriggerFadeIn");
         yield return new WaitForSeconds(1f);
         Debug.Log("Change to level " + sceneName);
         SceneManager.LoadScene(sceneName);

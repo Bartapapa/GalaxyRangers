@@ -7,10 +7,9 @@ using UnityEngine.UI;
 public class SC_PauseMenu : MonoBehaviour
 {
     private bool _isPause = false;
-    [SerializeField]
-    private GameObject PauseMenuUI;
     // [SerializeField]
     // private Button buttonSpeed;
+    [SerializeField] GameObject _pauseMenuGO = null;
     private bool _isDead = false;
     private float _speedOfLevel = 1f;
     private string sceneName;
@@ -18,13 +17,23 @@ public class SC_PauseMenu : MonoBehaviour
 
     public void Pause()
     {
-        if (_isDead == false)
+        /*if (_isDead == false)
         {
-            PauseMenuUI.SetActive(true);
             // buttonPause.gameObject.SetActive(false);
             // buttonSpeed.gameObject.SetActive(false);
-            _isPause = true;
             Time.timeScale = 0;
+        }*/
+        if (_isPause)
+        {
+            _isPause = false;
+            _pauseMenuGO.SetActive(false);   
+            //Time.timeScale = 0;
+        }
+        else
+        {
+            _isPause = true;
+            _pauseMenuGO.SetActive(true);
+            //Time.timeScale = 1;
         }
     }
     public void Resume()
@@ -32,7 +41,6 @@ public class SC_PauseMenu : MonoBehaviour
         if (_isDead == false)
         {
             // _textSpeedOfLevel.SetText("x1");
-            PauseMenuUI.SetActive(false);
             // buttonSpeed.gameObject.SetActive(true);
             _isPause = false;
             Time.timeScale = 1;
@@ -52,16 +60,9 @@ public class SC_PauseMenu : MonoBehaviour
 
     private void Update()
     {
-        if ((Input.GetKeyDown(KeyCode.P) || Input.GetKeyDown(KeyCode.Escape)) && _isDead == false)
+        /*if ((Input.GetKeyDown(KeyCode.P) || Input.GetKeyDown(KeyCode.Escape)) && _isDead == false)
         {
-            if (_isPause)
-            {
-                Resume();
-            }
-            else
-            {
-                Pause();
-            }
-        }
+
+        }*/
     }
 }

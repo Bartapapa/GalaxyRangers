@@ -16,7 +16,7 @@ public class SC_HealthBar : MonoBehaviour
     
     [SerializeField]
     private TextMeshProUGUI _textMaxHealth;
-    private float lerpSpeed = 0.05f;
+    private float lerpSpeed = 0.025f;
 
     private void Start() {
         ch_health = Player.Instance.CharacterHealth;
