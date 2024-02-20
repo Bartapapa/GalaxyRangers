@@ -1713,10 +1713,45 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3722010788076992791}
     m_Modifications:
+    - target: {fileID: 360608904624258594, guid: 3b84bcf474a27d2409b9fd9cc4a57b4e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 604820877577208724, guid: 3b84bcf474a27d2409b9fd9cc4a57b4e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 905487127807007072, guid: 3b84bcf474a27d2409b9fd9cc4a57b4e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1437927792451082684, guid: 3b84bcf474a27d2409b9fd9cc4a57b4e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1523377739613651419, guid: 3b84bcf474a27d2409b9fd9cc4a57b4e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1971694900123270678, guid: 3b84bcf474a27d2409b9fd9cc4a57b4e,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1977402687679848670, guid: 3b84bcf474a27d2409b9fd9cc4a57b4e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2103508520220532143, guid: 3b84bcf474a27d2409b9fd9cc4a57b4e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2463174717441751365, guid: 3b84bcf474a27d2409b9fd9cc4a57b4e,
         type: 3}
@@ -1793,6 +1828,16 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5855123135301090379, guid: 3b84bcf474a27d2409b9fd9cc4a57b4e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6043072316159891384, guid: 3b84bcf474a27d2409b9fd9cc4a57b4e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8416902859637613375, guid: 3b84bcf474a27d2409b9fd9cc4a57b4e,
         type: 3}
       propertyPath: m_Controller
@@ -1801,6 +1846,11 @@ PrefabInstance:
     - target: {fileID: 8416902859637613375, guid: 3b84bcf474a27d2409b9fd9cc4a57b4e,
         type: 3}
       propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8846480627981725012, guid: 3b84bcf474a27d2409b9fd9cc4a57b4e,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

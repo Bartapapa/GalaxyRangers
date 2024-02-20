@@ -1718,6 +1718,31 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1815758933266936846}
     m_Modifications:
+    - target: {fileID: 360608904624258594, guid: 3b84bcf474a27d2409b9fd9cc4a57b4e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 905487127807007072, guid: 3b84bcf474a27d2409b9fd9cc4a57b4e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1523377739613651419, guid: 3b84bcf474a27d2409b9fd9cc4a57b4e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1977402687679848670, guid: 3b84bcf474a27d2409b9fd9cc4a57b4e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2103508520220532143, guid: 3b84bcf474a27d2409b9fd9cc4a57b4e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2463174717441751365, guid: 3b84bcf474a27d2409b9fd9cc4a57b4e,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -1793,6 +1818,11 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: ecb939c3b0b054a478e952448f3f988a, type: 2}
+    - target: {fileID: 8846480627981725012, guid: 3b84bcf474a27d2409b9fd9cc4a57b4e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
