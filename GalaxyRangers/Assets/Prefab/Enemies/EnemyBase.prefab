@@ -341,7 +341,7 @@ MonoBehaviour:
   _characterBehavior: {fileID: 8621994987149497805}
   _characterHealth: {fileID: 3841135652161114397}
   _characterCombat: {fileID: 4938026576061553525}
-  _characterStats: {fileID: 11400000, guid: 43306ba555977294e9d74b3b1ec3d608, type: 2}
+  _characterStats: {fileID: 11400000, guid: 22084355f87168a4d8efa8a164a7288f, type: 2}
   _rightMeshOrientation: 0.1
   _leftMeshOrientation: 179.9
   _isMoving: 0
@@ -1520,6 +1520,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 477662121486330813, guid: 74f9f64ebc3e3b445ad735a07d2c3b31,
         type: 3}
+      propertyPath: _damage
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 477662121486330813, guid: 74f9f64ebc3e3b445ad735a07d2c3b31,
+        type: 3}
       propertyPath: _hitLagDuration
       value: 0.1
       objectReference: {fileID: 0}
@@ -1622,6 +1627,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -110
+      objectReference: {fileID: 0}
+    - target: {fileID: 5365181635535930238, guid: 74f9f64ebc3e3b445ad735a07d2c3b31,
+        type: 3}
+      propertyPath: _damage
+      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: 6730956012134979302, guid: 74f9f64ebc3e3b445ad735a07d2c3b31,
         type: 3}

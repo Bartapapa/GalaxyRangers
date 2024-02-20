@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: M_Module05
+  m_Name: M_Band
   m_Shader: {fileID: -6465566751694194690, guid: 31642ad8bd310ae40ac1aca5e9968311,
     type: 3}
   m_Parent: {fileID: 2100000, guid: ba1d78d91d678684cab4315b562ee858, type: 2}
@@ -27,10 +27,13 @@ Material:
     m_TexEnvs: []
     m_Ints: []
     m_Floats:
+    - _Lighting_Cutoff_Specular: 1
     - _Noise_Scale: 80
     - _Noise_Scale_2: 0
+    - _Rim_Size: 0
+    - _Smoothness: 2000
     m_Colors:
-    - _Diffuse_Color: {r: 0.30816376, g: 0.3068263, b: 0.3301887, a: 1}
+    - _Diffuse_Color: {r: 0.5, g: 0.33163363, b: 0.1485849, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &6773948351749249565
 MonoBehaviour:

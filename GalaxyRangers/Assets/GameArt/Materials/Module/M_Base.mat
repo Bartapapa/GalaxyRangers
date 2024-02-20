@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: M_Module03
+  m_Name: M_Base
   m_Shader: {fileID: -6465566751694194690, guid: 31642ad8bd310ae40ac1aca5e9968311,
     type: 3}
   m_Parent: {fileID: 0}
@@ -130,7 +130,7 @@ Material:
     - _ReceiveShadows: 1
     - _Rim_Size: 0
     - _SHADOWS_SOFT: 1
-    - _Smoothness: 0
+    - _Smoothness: 2000
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
@@ -142,7 +142,7 @@ Material:
     - _Ambient_Color: {r: 0.49928805, g: 0.49967754, b: 0.5660378, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _Diffuse_Color: {r: 0.46226418, g: 0.46226418, b: 0.46226418, a: 1}
+    - _Diffuse_Color: {r: 0.6981132, g: 0.63827115, b: 0.57627267, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _Noise_Color: {r: 0.2971757, g: 0, b: 0.3773585, a: 1}
     - _Noise_Color_1: {r: 1, g: 0, b: 0, a: 1}
