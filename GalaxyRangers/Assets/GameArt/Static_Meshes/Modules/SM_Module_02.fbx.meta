@@ -7,13 +7,28 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: RL_Scene_Wall_01
+    second: {fileID: 2100000, guid: c83ad282ef5d37e4189d8e2771424276, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: RL_Scene_Wall_02
+    second: {fileID: 2100000, guid: 54cd3f6321bad9f42b3ea3be0102e815, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: RL_Scene_Wall_03
+    second: {fileID: 2100000, guid: 948301caca1cef84f834447befb4ed07, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: RL_Scene_Wall_04
     second: {fileID: 2100000, guid: 948301caca1cef84f834447befb4ed07, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: lambert1
-    second: {fileID: 2100000, guid: b0a8e37d42b3e234b80316f5b25aeb92, type: 2}
+    second: {fileID: 2100000, guid: 277783202cb6cff46858445c04026362, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

@@ -113,7 +113,7 @@ Material:
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _Scale_Side_Textue: 0.5
+    - _Scale_Side_Textue: 0.06
     - _Scale_Top_Texture: 0.5
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
