@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1918252658913581895}
   - component: {fileID: 8753848504429038931}
   - component: {fileID: 6839640141162370241}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Zachary_Hat_LP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,6 +92,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -9100194520394117828, guid: 53bb66849e93918449d6d83a81d045b0,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 53bb66849e93918449d6d83a81d045b0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -142,16 +147,66 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7440198867021202293, guid: 53bb66849e93918449d6d83a81d045b0,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: -4199088225469609528, guid: 53bb66849e93918449d6d83a81d045b0,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: -2367881684166587479, guid: 53bb66849e93918449d6d83a81d045b0,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: -1582640912470701334, guid: 53bb66849e93918449d6d83a81d045b0,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 571808744883751315, guid: 53bb66849e93918449d6d83a81d045b0,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 827495034396951828, guid: 53bb66849e93918449d6d83a81d045b0,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 53bb66849e93918449d6d83a81d045b0,
         type: 3}
       propertyPath: m_Name
       value: GR_Zachary_Mesh
+      objectReference: {fileID: 0}
+    - target: {fileID: 1819349492803680173, guid: 53bb66849e93918449d6d83a81d045b0,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: 53bb66849e93918449d6d83a81d045b0,
         type: 3}
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: c3a611e9ab2f04c47975ab02075a24f9, type: 2}
+    - target: {fileID: 7068276791730597089, guid: 53bb66849e93918449d6d83a81d045b0,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8919445297502029570, guid: 53bb66849e93918449d6d83a81d045b0,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 9180651030253704641, guid: 53bb66849e93918449d6d83a81d045b0,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
