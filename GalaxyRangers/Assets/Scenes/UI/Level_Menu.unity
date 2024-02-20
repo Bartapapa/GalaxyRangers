@@ -3492,7 +3492,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: StarterScene
+          m_StringArgument: Game_Scene_System
           m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &1458029655
@@ -3568,6 +3568,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startAnimator: {fileID: 0}
   newGameAnimator: {fileID: 1458029657}
+  settingsAnimator: {fileID: 0}
   newGameButton: {fileID: 1458029654}
   optionsButton: {fileID: 0}
   controlButton: {fileID: 0}
@@ -4827,8 +4828,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startAnimator: {fileID: 1912591004}
-  newGameAnimator: {fileID: 0}
-  newGameButton: {fileID: 0}
+  newGameAnimator: {fileID: 1458029657}
+  settingsAnimator: {fileID: 2046921322}
+  newGameButton: {fileID: 1458029654}
   optionsButton: {fileID: 0}
   controlButton: {fileID: 0}
   _buttonType: 0
@@ -5288,9 +5290,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 705ff69fbce1632409f973fa0939e895, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startAnimator: {fileID: 2046921322}
-  newGameAnimator: {fileID: 0}
-  newGameButton: {fileID: 0}
+  startAnimator: {fileID: 1912591004}
+  newGameAnimator: {fileID: 1458029657}
+  settingsAnimator: {fileID: 2046921322}
+  newGameButton: {fileID: 1458029654}
   optionsButton: {fileID: 2075123951}
   controlButton: {fileID: 45763229}
   _buttonType: 2

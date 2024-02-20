@@ -17,13 +17,14 @@ public class SC_An_Menu : MonoBehaviour
     }
     [SerializeField] private Animator startAnimator = null;
     [SerializeField] private Animator newGameAnimator = null;
+    [SerializeField] private Animator settingsAnimator = null;
     [SerializeField] private Button newGameButton = null;
     [SerializeField] private Button optionsButton = null;
     [SerializeField] private Button controlButton = null;
     private bool _isClicked = false;
     [SerializeField] private buttonType _buttonType = buttonType.None;
 
-    /*private void Start()
+    private void Start()
     {
         if (newGameButton)
             newGameButton.interactable = false;
@@ -31,7 +32,7 @@ public class SC_An_Menu : MonoBehaviour
             optionsButton.interactable = false;
             controlButton.interactable = false;
         }
-    }*/
+    }
 
 
 
@@ -48,6 +49,7 @@ public class SC_An_Menu : MonoBehaviour
                 }
                 else {
                     _isClicked = true;
+                    settingsAnimator.SetTrigger("ClickClose");
                     startAnimator.SetTrigger("ClickOpen");
                     newGameAnimator.SetTrigger("Enable");
                     newGameButton.interactable = true;
@@ -59,15 +61,16 @@ public class SC_An_Menu : MonoBehaviour
                 break;
             case buttonType.Settings:
                 if (_isClicked == true) {
-                    startAnimator.SetTrigger("ClickClose");
-                    newGameAnimator.SetTrigger("Down");
+                    settingsAnimator.SetTrigger("ClickClose");
                     _isClicked = false;
                     optionsButton.interactable = false;
                     controlButton.interactable = false;
                 }
                 else {
-                    startAnimator.SetTrigger("ClickOpen");
-                    newGameAnimator.SetTrigger("Up");
+                    settingsAnimator.SetTrigger("ClickOpen");
+                    startAnimator.SetTrigger("Up");
+                    newGameAnimator.SetTrigger("Disable");
+                    newGameButton.interactable = false;
                     _isClicked = true;
                     optionsButton.interactable = true;
                     controlButton.interactable = true;
