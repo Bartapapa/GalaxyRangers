@@ -893,7 +893,7 @@ public partial class BaseCharacterController : MonoBehaviour
         SetRigidbodyVelocity(vel);
     }
 
-    protected void SetRigidbodyVelocity(Vector2 vel, string message = "")
+    public void SetRigidbodyVelocity(Vector2 vel, string message = "")
     {
         rigid.velocity = vel;
         _rigidbodyVelocity = vel;

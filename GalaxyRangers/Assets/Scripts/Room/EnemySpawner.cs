@@ -93,8 +93,8 @@ public class EnemySpawner : MonoBehaviour
                     case EnemyRank.Elite:
                         return WorldManager.Instance.enemyFolder.meleeElitePrefab;
                     case EnemyRank.Random:
-                        int randomInt = UnityEngine.Random.Range(0, 2);
-                        return randomInt == 0 ? WorldManager.Instance.enemyFolder.meleeNormalPrefab : WorldManager.Instance.enemyFolder.meleeElitePrefab;
+                        int randomInt = UnityEngine.Random.Range(0, 10);
+                        return randomInt > 2 ? WorldManager.Instance.enemyFolder.meleeNormalPrefab : WorldManager.Instance.enemyFolder.meleeElitePrefab;
                     default:
                         return null;
                 }
@@ -108,8 +108,8 @@ public class EnemySpawner : MonoBehaviour
                     case EnemyRank.Elite:
                         return WorldManager.Instance.enemyFolder.rangedElitePrefab;
                     case EnemyRank.Random:
-                        int randomInt = UnityEngine.Random.Range(0, 2);
-                        return randomInt == 0 ? WorldManager.Instance.enemyFolder.rangedNormalPrefab : WorldManager.Instance.enemyFolder.rangedElitePrefab;
+                        int randomInt = UnityEngine.Random.Range(0, 10);
+                        return randomInt > 2 ? WorldManager.Instance.enemyFolder.rangedNormalPrefab : WorldManager.Instance.enemyFolder.rangedElitePrefab;
                     default:
                         return null;
                 }
@@ -125,20 +125,20 @@ public class EnemySpawner : MonoBehaviour
                         int randomInt1 = UnityEngine.Random.Range(0, 2);
                         return randomInt1 == 0 ? WorldManager.Instance.enemyFolder.meleeElitePrefab : WorldManager.Instance.enemyFolder.rangedElitePrefab;
                     case EnemyRank.Random:
-                        int randomInt2 = UnityEngine.Random.Range(0, 4);
-                        if (randomInt2 == 0)
+                        int randomInt2 = UnityEngine.Random.Range(0, 20);
+                        if (randomInt2 >= 0 && randomInt2 < 7)
                         {
                             return WorldManager.Instance.enemyFolder.meleeNormalPrefab;
                         }
-                        else if (randomInt2 == 1)
+                        else if (randomInt2 >= 7 && randomInt2 < 10)
                         {
                             return WorldManager.Instance.enemyFolder.meleeElitePrefab;
                         }
-                        else if (randomInt2 == 2)
+                        else if (randomInt2 >= 10 && randomInt2 < 17)
                         {
                             return WorldManager.Instance.enemyFolder.rangedNormalPrefab;
                         }
-                        else if (randomInt2 == 3)
+                        else if (randomInt2 >= 17)
                         {
                             return WorldManager.Instance.enemyFolder.rangedElitePrefab;
                         }
