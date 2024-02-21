@@ -550,7 +550,7 @@ MonoBehaviour:
   _isDead: 0
   _isInvulnerable: 0
   _typeOfCharacter: 1
-  _goldAmountToEarn: 20
+  _goldAmountToEarn: 5
 --- !u!114 &4938026576061553525
 MonoBehaviour:
   m_ObjectHideFlags: 0
