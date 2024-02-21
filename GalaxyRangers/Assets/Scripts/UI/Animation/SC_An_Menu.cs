@@ -22,67 +22,65 @@ public class SC_An_Menu : MonoBehaviour
     [SerializeField] private Button optionsButton = null;
     [SerializeField] private Button controlButton = null;
     private bool _isClicked = false;
-    [SerializeField] private buttonType _buttonType = buttonType.None;
+    private bool _isClickedSetting = false;
 
     private void Start()
     {
-        if (newGameButton)
+        newGameButton.interactable = false;
+        optionsButton.interactable = false;
+        controlButton.interactable = false;
+    }
+
+    public void ClickOnButStart()
+    {
+        if (_isClicked == true) {
+            _isClicked = false;
+            startAnimator.SetTrigger("ClickClose");
+            newGameAnimator.SetTrigger("Disable");
             newGameButton.interactable = false;
-        if (optionsButton && controlButton) {
+        }
+        else {
+            _isClicked = true;
+            startAnimator.SetTrigger("ClickOpen");
+            newGameAnimator.SetTrigger("Enable");
+            newGameButton.interactable = true;
+
+            settingsAnimator.SetTrigger("ClickClose");
+            _isClickedSetting = false;
             optionsButton.interactable = false;
             controlButton.interactable = false;
         }
     }
 
-
-
-    public void ClickOnBut()
+    public void ClickOnButSetting()
     {
-        switch (_buttonType)
-        {
-            case buttonType.Start:
-                if (_isClicked == true) {
-                    _isClicked = false;
-                    startAnimator.SetTrigger("ClickClose");
-                    newGameAnimator.SetTrigger("Disable");
-                    newGameButton.interactable = false;
-                }
-                else {
-                    _isClicked = true;
-                    settingsAnimator.SetTrigger("ClickClose");
-                    startAnimator.SetTrigger("ClickOpen");
-                    newGameAnimator.SetTrigger("Enable");
-                    newGameButton.interactable = true;
-                }
-                break;
-            case buttonType.NewGame:
-                if (_isClicked == false)
-                    newGameAnimator.SetTrigger("Click");
-                break;
-            case buttonType.Settings:
-                if (_isClicked == true) {
-                    settingsAnimator.SetTrigger("ClickClose");
-                    _isClicked = false;
-                    optionsButton.interactable = false;
-                    controlButton.interactable = false;
-                }
-                else {
-                    settingsAnimator.SetTrigger("ClickOpen");
-                    startAnimator.SetTrigger("Up");
-                    newGameAnimator.SetTrigger("Disable");
-                    newGameButton.interactable = false;
-                    _isClicked = true;
-                    optionsButton.interactable = true;
-                    controlButton.interactable = true;
-                }
-                break;
-            case buttonType.None:
-                break;
+        if (_isClickedSetting == true) {
+            settingsAnimator.SetTrigger("ClickClose");
+            _isClickedSetting = false;
+            optionsButton.interactable = false;
+            controlButton.interactable = false;
+
+            startAnimator.SetTrigger("Down");
         }
+        else {
+            settingsAnimator.SetTrigger("ClickOpen");
+            _isClickedSetting = true;
+            optionsButton.interactable = true;
+            controlButton.interactable = true;
 
-
-        
+            _isClicked = false;
+            startAnimator.SetTrigger("Up");
+            newGameAnimator.SetTrigger("Disable");
+            newGameButton.interactable = false;
+        }
     }
 
 
+
+
+
+            // case buttonType.NewGame:
+            //     if (_isClicked == false)
+            //         newGameAnimator.SetTrigger("Click");
+            //     break;
 }

@@ -11,13 +11,13 @@ public class SC_Currency_Relation : MonoBehaviour
     public int GoldAmount = 0;
     public int BlueTokenAmount = 0;
     public int RelicsAmount = 0;
-    public int current_XPAmount = 10;
+    public float current_XPAmount = 10;
     public int current_XPLevelAmount = 1;
     public List<int> MaxXP_ByLevel = new List<int>();
 
     [Header("Do not touch")]
     public bool NewXP_Relationship = false;
-    public int New_XPAmount = 0;
+    public float New_XPAmount = 0;
 
     public void AddGold(int _gold)
     {
