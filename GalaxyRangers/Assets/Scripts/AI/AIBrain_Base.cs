@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
 
 public class AIBrain_Base : MonoBehaviour
@@ -48,7 +49,7 @@ public class AIBrain_Base : MonoBehaviour
     public bool canPerformNewAttack { get { return combat.currentWeapon != null && (_attackCooldown <= 0 || (combat.isAttacking && combat.canDoCombo)); } }
     public float attackCooldown { get { return _attackCooldown; } set { _attackCooldown = value; } }
 
-    private void Start()
+    protected virtual void Start()
     {
         if (_defaultState != null)
         {
