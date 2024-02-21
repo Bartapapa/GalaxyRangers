@@ -78,10 +78,25 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: b4595fff084daa548bf2def70ae8365e, type: 2}
+    - target: {fileID: -159737786614551742, guid: b9e1d55f783d36444af5eb2dda415d1c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: b9e1d55f783d36444af5eb2dda415d1c,
         type: 3}
       propertyPath: m_Name
       value: Panneau_LP
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: b9e1d55f783d36444af5eb2dda415d1c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1954768923863543728, guid: b9e1d55f783d36444af5eb2dda415d1c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 3935220872502600173, guid: b9e1d55f783d36444af5eb2dda415d1c,
         type: 3}

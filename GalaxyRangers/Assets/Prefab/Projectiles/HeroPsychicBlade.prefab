@@ -126,9 +126,9 @@ MonoBehaviour:
   _decayOverTime: -1
   _currentDirection: {x: 0, y: 0, z: 0}
   _previousPosition: {x: 0, y: 0, z: 0}
-  _pierceNumber: 0
-  _pierceThroughWalls: 0
-  _lifeSpan: 5
+  _pierceNumber: -1
+  _pierceThroughWalls: 1
+  _lifeSpan: 8
 --- !u!54 &600796864287656003
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -203,7 +203,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _hurtFactions: 02000000
   _damage: 1
-  _knockbackForce: 5
+  _knockbackForce: 1
   _overrideKnockbackDirection: {x: 0, y: 0, z: 0}
   _disableInputDuration: 0.3
   _hitLagDuration: 0.2

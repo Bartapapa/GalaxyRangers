@@ -13,6 +13,14 @@ public class AIB_Boss : AIBrain_Base
 
     public Transform psychicBladeSpawner;
 
+    protected override void Start()
+    {
+        base.Start();
+
+        health.CharacterDied -= OnBossDeath;
+        health.CharacterDied += OnBossDeath;
+    }
+
     public override void OnAnimationCallback(int index)
     {
         if (index == 0)
@@ -26,7 +34,6 @@ public class AIB_Boss : AIBrain_Base
         {
             //Shoot real projectile
             Projectile newProjectile = Instantiate<Projectile>(realPsychicBlade, psychicBladeSpawner.position, psychicBladeSpawner.rotation);
-            Debug.Log(newProjectile.transform.rotation.eulerAngles);
             if (WorldManager.Instance)
             {
                 if (WorldManager.Instance.currentRogueRoom.resetParent != null)
@@ -49,5 +56,11 @@ public class AIB_Boss : AIBrain_Base
             }
             newProjectile.InitializeProjectile(psychicBladeSpawner.forward);
         }
+    }
+
+    private void OnBossDeath(CharacterHealth health)
+    {
+        controller.rigid.freezeRotation = true;
+        controller.rigid.constraints = RigidbodyConstraints.FreezePosition;
     }
 }

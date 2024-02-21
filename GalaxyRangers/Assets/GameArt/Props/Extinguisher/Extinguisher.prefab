@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4982310514518436572}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Extinguisher
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -105,10 +105,45 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 50.893
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 6af674aa9fe513f4788bad8f7bcbb167,
+        type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: b38982cdbbecc194b994cd6481516f8d, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 6af674aa9fe513f4788bad8f7bcbb167,
+        type: 3}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3988786d4b2b68e44bb6c7863fe856a0, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 6af674aa9fe513f4788bad8f7bcbb167,
+        type: 3}
+      propertyPath: m_Materials.Array.data[3]
+      value: 
+      objectReference: {fileID: 2100000, guid: b38982cdbbecc194b994cd6481516f8d, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 6af674aa9fe513f4788bad8f7bcbb167,
+        type: 3}
+      propertyPath: m_Materials.Array.data[4]
+      value: 
+      objectReference: {fileID: 2100000, guid: b38982cdbbecc194b994cd6481516f8d, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 6af674aa9fe513f4788bad8f7bcbb167,
+        type: 3}
+      propertyPath: m_Materials.Array.data[5]
+      value: 
+      objectReference: {fileID: 2100000, guid: b38982cdbbecc194b994cd6481516f8d, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 6af674aa9fe513f4788bad8f7bcbb167,
+        type: 3}
+      propertyPath: m_Materials.Array.data[6]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3988786d4b2b68e44bb6c7863fe856a0, type: 2}
     - target: {fileID: 919132149155446097, guid: 6af674aa9fe513f4788bad8f7bcbb167,
         type: 3}
       propertyPath: m_Name
       value: M_Extinguisher
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6af674aa9fe513f4788bad8f7bcbb167,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
