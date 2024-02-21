@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: M_Module03
+  m_Name: M_Darker
   m_Shader: {fileID: -6465566751694194690, guid: 31642ad8bd310ae40ac1aca5e9968311,
     type: 3}
   m_Parent: {fileID: 0}
@@ -89,7 +89,7 @@ Material:
     m_Floats:
     - _AlphaClip: 0
     - _AlphaToMask: 0
-    - _Ambient_Strength: 0.35
+    - _Ambient_Strength: 0.281
     - _Blend: 0
     - _BlendModePreserveSpecular: 1
     - _BumpScale: 1
@@ -115,14 +115,14 @@ Material:
     - _Lighting_Cutoff_Specular: 1
     - _MAIN_LIGHT_SHADOWS: 0
     - _Metallic: 0
-    - _Noise_Color_Intensity: 0.384
-    - _Noise_Color_Intensity_2: 0.21
+    - _Noise_Color_Intensity: 0
+    - _Noise_Color_Intensity_2: 0
     - _Noise_Intensity: 0
     - _Noise_Lerp_Intensity: 0.8
     - _Noise_Offset: 17.94
-    - _Noise_Scale: 1500
+    - _Noise_Scale: 0
     - _Noise_Scale_1: 593.8
-    - _Noise_Scale_2: 1489
+    - _Noise_Scale_2: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.005
     - _QueueControl: 0
@@ -130,7 +130,7 @@ Material:
     - _ReceiveShadows: 1
     - _Rim_Size: 0
     - _SHADOWS_SOFT: 1
-    - _Smoothness: 0
+    - _Smoothness: 2000
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
@@ -139,10 +139,10 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - _Ambient_Color: {r: 0.49928805, g: 0.49967754, b: 0.5660378, a: 0}
+    - _Ambient_Color: {r: 0.5575382, g: 0.5575382, b: 0.6320754, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _Diffuse_Color: {r: 0.46226418, g: 0.46226418, b: 0.46226418, a: 1}
+    - _Diffuse_Color: {r: 0.16460484, g: 0.177478, b: 0.254717, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _Noise_Color: {r: 0.2971757, g: 0, b: 0.3773585, a: 1}
     - _Noise_Color_1: {r: 1, g: 0, b: 0, a: 1}

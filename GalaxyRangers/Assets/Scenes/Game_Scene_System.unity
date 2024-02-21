@@ -1335,6 +1335,16 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2360111004137844126, guid: 81f6207fd8f41414c94bf1f828d311f2,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -6.498047
+      objectReference: {fileID: 0}
+    - target: {fileID: 2360111004137844126, guid: 81f6207fd8f41414c94bf1f828d311f2,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 10.811523
+      objectReference: {fileID: 0}
     - target: {fileID: 3243848741889079379, guid: 81f6207fd8f41414c94bf1f828d311f2,
         type: 3}
       propertyPath: m_Name
@@ -1720,18 +1730,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 6435192621253210006}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1452892777 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 324586809920375086, guid: f8ca78cde7b1db948b9dc4ad2ed2545f,
-    type: 3}
-  m_PrefabInstance: {fileID: 3042256480082850857}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a2c46e6e5cb0f24f96d5fe81f35c195, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1496055370
 GameObject:
   m_ObjectHideFlags: 0
@@ -2249,7 +2247,7 @@ PrefabInstance:
     - target: {fileID: 7676400110299993495, guid: 5258f6724a87322489be14c9d8c70097,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2262,6 +2260,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1714370047}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1714370050 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5844184023919746622, guid: 5258f6724a87322489be14c9d8c70097,
+    type: 3}
+  m_PrefabInstance: {fileID: 1714370047}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a2c46e6e5cb0f24f96d5fe81f35c195, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1796220065
 GameObject:
   m_ObjectHideFlags: 0
@@ -3069,7 +3079,7 @@ PrefabInstance:
         type: 3}
       propertyPath: _currentWeapon
       value: 
-      objectReference: {fileID: 1452892777}
+      objectReference: {fileID: 1714370050}
     - target: {fileID: 2920547705048805676, guid: f8ca78cde7b1db948b9dc4ad2ed2545f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3123,7 +3133,7 @@ PrefabInstance:
     - target: {fileID: 4545137693488071303, guid: f8ca78cde7b1db948b9dc4ad2ed2545f,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4685951059241647077, guid: f8ca78cde7b1db948b9dc4ad2ed2545f,
         type: 3}

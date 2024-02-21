@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: M_Module06
+  m_Name: M_Base
   m_Shader: {fileID: -6465566751694194690, guid: 31642ad8bd310ae40ac1aca5e9968311,
     type: 3}
   m_Parent: {fileID: 0}
@@ -115,8 +115,8 @@ Material:
     - _Lighting_Cutoff_Specular: 1
     - _MAIN_LIGHT_SHADOWS: 0
     - _Metallic: 0
-    - _Noise_Color_Intensity: 0.544
-    - _Noise_Color_Intensity_2: 1
+    - _Noise_Color_Intensity: 0.384
+    - _Noise_Color_Intensity_2: 0.21
     - _Noise_Intensity: 0
     - _Noise_Lerp_Intensity: 0.8
     - _Noise_Offset: 17.94
@@ -130,7 +130,7 @@ Material:
     - _ReceiveShadows: 1
     - _Rim_Size: 0
     - _SHADOWS_SOFT: 1
-    - _Smoothness: 0
+    - _Smoothness: 2000
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
@@ -139,14 +139,14 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - _Ambient_Color: {r: 0.49928805, g: 0.49967754, b: 0.5660378, a: 0}
+    - _Ambient_Color: {r: 0.4528302, g: 0.4528302, b: 0.4528302, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _Diffuse_Color: {r: 0.28915986, g: 0.29211012, b: 0.3584906, a: 1}
+    - _Diffuse_Color: {r: 0.6132076, g: 0.46569064, b: 0.46684763, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _Noise_Color: {r: 0.2971757, g: 0, b: 0.3773585, a: 1}
     - _Noise_Color_1: {r: 1, g: 0, b: 0, a: 1}
-    - _Noise_Color_2: {r: 0, g: 0.33376837, b: 1, a: 1}
+    - _Noise_Color_2: {r: 1, g: 0, b: 0.010103226, a: 1}
     - _Rim_Color: {r: 4, g: 4, b: 4, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _Specular_Color: {r: 14.124951, g: 11.88664, b: 8.061882, a: 0}
