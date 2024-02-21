@@ -6,6 +6,7 @@ public class Interactible_HUBTeleporter : Interactible
 {
     [Header("FORCE SEED")]
     public string forceSeed = "";
+    [SerializeField] private GameObject _shopPanel;
 
     protected override void InteractEvent(InteractibleManager manager)
     {
@@ -14,5 +15,15 @@ public class Interactible_HUBTeleporter : Interactible
         WorldManager.Instance.StartNewRun(forceSeed);
 
         EndInteract(manager);
+    }
+
+    public override void SelectInteractible()
+    {
+        _shopPanel.SetActive(true);
+    }
+
+    public override void DeselectInteractible()
+    {
+        _shopPanel.SetActive(false);
     }
 }
