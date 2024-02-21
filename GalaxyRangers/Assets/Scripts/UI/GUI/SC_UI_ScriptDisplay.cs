@@ -29,6 +29,9 @@ public class SC_UI_ScriptDisplay : MonoBehaviour
     [Header("Quest Display")]
     [SerializeField] private GameObject _questPanel = null;
     [SerializeField] private GameObject _questLogo = null;
+    [SerializeField] private Animator _questPanelAnimator = null;
+    [SerializeField] private Animator _questLogoAnimator = null;
+
     private bool _questPanelActive = true;
 
 
@@ -52,13 +55,19 @@ public class SC_UI_ScriptDisplay : MonoBehaviour
     {
         if (_questPanelActive == true) {
             _questPanelActive = false;
-            _questPanel.SetActive(false);
-            _questLogo.gameObject.SetActive(true);
+            // _questPanel.SetActive(false);
+            // _questLogo.SetActive(true);
+            _questLogoAnimator.SetTrigger("Enable");
+            Debug.LogWarning("Enable");
+            _questPanelAnimator.SetTrigger("Disable");
         }
         else {
             _questPanelActive = true;
-            _questPanel.SetActive(true);
-            _questLogo.gameObject.SetActive(false);
+            // _questPanel.SetActive(true);
+            // _questLogo.SetActive(false);
+            _questLogoAnimator.SetTrigger("Disable");
+            Debug.LogWarning("Disable");
+            _questPanelAnimator.SetTrigger("Enable");
         }
     }
 
