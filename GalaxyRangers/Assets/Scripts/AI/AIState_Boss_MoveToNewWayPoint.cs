@@ -6,6 +6,7 @@ using UnityEngine.Rendering.PostProcessing;
 public class AIState_Boss_MoveToNewWayPoint : AIState
 {
     [SerializeField] private AIState idleState;
+    [SerializeField] private AIState moveToCenter;
 
     [Header("PARAMETERS")]
     [Space]
@@ -47,7 +48,7 @@ public class AIState_Boss_MoveToNewWayPoint : AIState
             if (_visitedWaypointsIndex >= _currentVisitedWayPointsIndexDestination)
             {
                 ResetState();
-                return new AIreturn(idleState, simulatedInputs);
+                return new AIreturn(moveToCenter, simulatedInputs);
             }
             OnWayPointAttained();
             return new AIreturn(this, simulatedInputs);

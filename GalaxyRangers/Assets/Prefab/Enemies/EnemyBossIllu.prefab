@@ -406,13 +406,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bbd9791fbeb8d7408ccc3646057433d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  illusionDisplacementState: {fileID: 1118457374596051057}
   trueBossHealth: {fileID: 0}
+  bossAI: {fileID: 500167050393739809}
   controller: {fileID: 6124525589637944022}
   mesh: {fileID: 6872690441151647692}
   rend: {fileID: 3619769747311419763}
   healthBar: {fileID: 2277766259817083846}
   apparateDuration: 1
-  apparateIntensity: 50
+  apparateIntensity: 100
 --- !u!1 &399400338842702558
 GameObject:
   m_ObjectHideFlags: 0
@@ -953,6 +955,53 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1 &4098199681151991792
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1070322664067304480}
+  - component: {fileID: 1118457374596051057}
+  m_Layer: 6
+  m_Name: IllusionDisplacement
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1070322664067304480
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4098199681151991792}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8091934732352794529}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1118457374596051057
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4098199681151991792}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3dc569f5c4472847967c59aa3f5a97d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  psychicBladeAttackState: {fileID: 3519835752800348447}
+  BossDisplacementStates: []
+  toWayPoint: {fileID: 0}
 --- !u!1 &4413054247519502104
 GameObject:
   m_ObjectHideFlags: 0
@@ -1310,6 +1359,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8950728310068089465}
+  - {fileID: 1070322664067304480}
   m_Father: {fileID: 2965203088745570375}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &6406945473490085927
@@ -1384,6 +1434,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 323730547699460851, guid: eda61646638405b46841738bf44b84b2,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 323730547699460851, guid: eda61646638405b46841738bf44b84b2,
         type: 3}

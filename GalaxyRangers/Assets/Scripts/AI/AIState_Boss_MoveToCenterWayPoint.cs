@@ -14,7 +14,7 @@ public class AIState_Boss_MoveToCenterWayPoint : AIState
     private AIBrain_Base _currentBrain;
     private bool _initialized = false;
 
-    public bool isAtCurrentWayPoint { get { return _currentWayPoint ? Vector3.Distance(_currentBrain.controller.characterCenter, _currentWayPoint.position) <= 3f : false; } }
+    public bool isAtCurrentWayPoint { get { return _currentWayPoint ? Vector3.Distance(_currentBrain.controller.characterCenter, _currentWayPoint.position) <= 1f : false; } }
 
     public override AIreturn Tick(AIBrain_Base brain)
     {

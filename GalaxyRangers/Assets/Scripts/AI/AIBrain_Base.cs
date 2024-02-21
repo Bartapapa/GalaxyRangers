@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
 
 public class AIBrain_Base : MonoBehaviour
@@ -16,9 +17,10 @@ public class AIBrain_Base : MonoBehaviour
     public float enemyType = 0f;
     [Space]
     [SerializeField] private AIState _defaultState;
+    public AIState defaultState { get { return _defaultState; } }
     [SerializeField] private AIState _hurtState;
     [SerializeField][ReadOnlyInspector] protected AIState _currentState;
-    public AIState currentState { get { return _currentState; } }
+    public AIState currentState { get { return _currentState; } set { _currentState = value; } }
 
     [Header("SIMULATED INPUTS")]
     [Space]
@@ -47,7 +49,7 @@ public class AIBrain_Base : MonoBehaviour
     public bool canPerformNewAttack { get { return combat.currentWeapon != null && (_attackCooldown <= 0 || (combat.isAttacking && combat.canDoCombo)); } }
     public float attackCooldown { get { return _attackCooldown; } set { _attackCooldown = value; } }
 
-    private void Start()
+    protected virtual void Start()
     {
         if (_defaultState != null)
         {

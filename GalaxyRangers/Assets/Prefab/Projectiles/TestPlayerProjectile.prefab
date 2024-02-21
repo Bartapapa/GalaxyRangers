@@ -82,7 +82,7 @@ MonoBehaviour:
   _root: {fileID: 78782511526656810}
   _obstacleLayers:
     serializedVersion: 2
-    m_Bits: 129
+    m_Bits: 385
   _gravity: 0
   _projectileSpeed: 10
   _speedDecay:
@@ -194,6 +194,15 @@ MonoBehaviour:
   _damage: 1
   _knockbackForce: 5
   _overrideKnockbackDirection: {x: 0, y: 0, z: 0}
+  _disableInputDuration: 0.3
+  _hitLagDuration: 0.2
+  _pierceInvulnerability: 0
+  _invulnerabilityDuration: 0.5
+  _attacker: {fileID: 0}
+  _usePogoForce: 0
+  _onlyPogoInAir: 1
+  _pogoForce: 1
+  _pogoDirection: {x: 0, y: 0, z: 0}
 --- !u!1 &5279548498337217240
 GameObject:
   m_ObjectHideFlags: 0
