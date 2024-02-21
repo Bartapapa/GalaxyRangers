@@ -550,6 +550,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   idleState: {fileID: 8380574292337896645}
+  moveToCenter: {fileID: 142546882457532753}
   minNumberOfVisitedWayPoints: 3
   maxNumberOfVisitedWayPoints: 8
   wayPoints:
@@ -994,6 +995,59 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0b30aff80910d3409a0ec7442785869, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &3440793417797223769
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6155233619005571359}
+  - component: {fileID: 8361854105990771028}
+  m_Layer: 6
+  m_Name: AttackDo
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6155233619005571359
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3440793417797223769}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8579436664927685121}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8361854105990771028
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3440793417797223769}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6c7feed397c1024585a41262bca41dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  idleState: {fileID: 8380574292337896645}
+  attackDisplacement: {fileID: 8404900426787341663}
+  illusions:
+  - {fileID: 0}
+  - {fileID: 0}
+  illusionWaypoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1 &4269700285205947999
 GameObject:
   m_ObjectHideFlags: 0
@@ -1028,6 +1082,8 @@ Transform:
   - {fileID: 3946386684692820098}
   - {fileID: 6457043979988981626}
   - {fileID: 7541723364991325431}
+  - {fileID: 4091353892728839772}
+  - {fileID: 6155233619005571359}
   m_Father: {fileID: 76175391611179704}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4901531682990431800
@@ -1149,7 +1205,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac9db57d9b7f368428a1c78958ea9688, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackDisplacement: {fileID: 8404900426787341663}
   illusions:
+  - {fileID: 0}
+  - {fileID: 0}
+  illusionWaypoints:
+  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
 --- !u!1 &5637602388745507540
@@ -1196,9 +1257,58 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 166c4e33f7ee5694fb1d0dd5430ad663, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveToWayPointState: {fileID: 323040297763806152}
+  moveToWayPointState: {fileID: 339519777995491453}
   minIdleWaitTime: 1
   maxIdleWaitTime: 5
+--- !u!1 &5642741880398016523
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4091353892728839772}
+  - component: {fileID: 8404900426787341663}
+  m_Layer: 6
+  m_Name: AttackDisp
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4091353892728839772
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5642741880398016523}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8579436664927685121}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8404900426787341663
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5642741880398016523}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3dc569f5c4472847967c59aa3f5a97d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  psychicBladeAttackState: {fileID: 8361854105990771028}
+  BossDisplacementStates:
+  - {fileID: 0}
+  - {fileID: 0}
+  toWayPoint: {fileID: 0}
 --- !u!1 &6473897118346828655
 GameObject:
   m_ObjectHideFlags: 0

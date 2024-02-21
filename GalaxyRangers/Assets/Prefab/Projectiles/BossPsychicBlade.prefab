@@ -4934,7 +4934,7 @@ GameObject:
   - component: {fileID: 2875950977790827050}
   - component: {fileID: 600796864287656003}
   m_Layer: 10
-  m_Name: TestEnemyProjectile
+  m_Name: BossPsychicBlade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4974,7 +4974,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 385
   _gravity: 0
-  _projectileSpeed: 30
+  _projectileSpeed: 10
   _speedDecay:
     serializedVersion: 2
     m_Curve: []
