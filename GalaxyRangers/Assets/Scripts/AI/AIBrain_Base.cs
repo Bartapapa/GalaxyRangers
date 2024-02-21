@@ -16,9 +16,10 @@ public class AIBrain_Base : MonoBehaviour
     public float enemyType = 0f;
     [Space]
     [SerializeField] private AIState _defaultState;
+    public AIState defaultState { get { return _defaultState; } }
     [SerializeField] private AIState _hurtState;
     [SerializeField][ReadOnlyInspector] protected AIState _currentState;
-    public AIState currentState { get { return _currentState; } }
+    public AIState currentState { get { return _currentState; } set { _currentState = value; } }
 
     [Header("SIMULATED INPUTS")]
     [Space]

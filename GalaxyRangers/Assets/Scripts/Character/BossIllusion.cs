@@ -5,7 +5,12 @@ using UnityEngine;
 
 public class BossIllusion : MonoBehaviour
 {
+    public AIState_Boss_AttackDisplacement illusionDisplacementState;
+    [Space]
+
     public CharacterHealth trueBossHealth;
+    public AIB_Boss bossAI;
+    public AIState idleState { get { return bossAI.defaultState; } }
     [Space]
     public BCC_Boss controller;
     public Transform mesh;

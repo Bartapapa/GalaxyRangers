@@ -4972,7 +4972,7 @@ MonoBehaviour:
   _root: {fileID: 78782511526656810}
   _obstacleLayers:
     serializedVersion: 2
-    m_Bits: 129
+    m_Bits: 385
   _gravity: 0
   _projectileSpeed: 30
   _speedDecay:
