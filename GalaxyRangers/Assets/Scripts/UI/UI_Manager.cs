@@ -8,6 +8,10 @@ public class UI_Manager : MonoBehaviour
 
     [Header("UI References")]
     [SerializeField] private GameObject _HubShopRef;
+    [SerializeField] private GameObject _HubShop;
+    [SerializeField] private GameObject _HubQuestRef;
+    [SerializeField] private Animator _HubButtonshop;
+    [SerializeField] private Animator _HubButtonQuest;
     [SerializeField] private GameObject _GUIRef;
     [SerializeField] private SC_UI_ScriptDisplay _scriptDisplay;
     [SerializeField] public SC_PauseMenu _scriptPauseMenu;
@@ -30,12 +34,16 @@ public class UI_Manager : MonoBehaviour
     public void OpenHubShop()
     {
         _HubShopRef.SetActive(true);
+        _HubButtonshop.SetTrigger("Click");
         _GUIRef.SetActive(false);
         Time.timeScale = 0;
     }
 
     public void CloseHubShop()
     {
+        _HubQuestRef.SetActive(false);
+        _HubButtonQuest.SetTrigger("Unclick");
+        _HubShop.SetActive(true);
         _HubShopRef.SetActive(false);
         _GUIRef.SetActive(true);
         Time.timeScale = 1;
