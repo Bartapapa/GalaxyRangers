@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4990312673682049046}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Barriers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -105,10 +105,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 524a5caa9ef814d448d2b06455888381,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: b46b6d60dea2e4f4f93597ec3d86c69d, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 524a5caa9ef814d448d2b06455888381,
+        type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: b38982cdbbecc194b994cd6481516f8d, type: 2}
     - target: {fileID: 919132149155446097, guid: 524a5caa9ef814d448d2b06455888381,
         type: 3}
       propertyPath: m_Name
       value: M_Barrier
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 524a5caa9ef814d448d2b06455888381,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
