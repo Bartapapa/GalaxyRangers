@@ -84,22 +84,27 @@ public class Projectile : MonoBehaviour
 
         Vector3 newPosition = transform.position;
 
-        //Check if collided with Characters in between current position and previous position
-        RaycastHit[] hits = Physics.RaycastAll(_previousPosition, newPosition - _previousPosition, Vector3.Distance(_previousPosition, newPosition));
-        foreach(RaycastHit hit in hits)
+        if (_hurtBox != null)
         {
-            if ((_obstacleLayers.value & (1 << hit.collider.gameObject.layer)) > 0 && !_pierceThroughWalls)
+            //Check if collided with Characters in between current position and previous position
+            RaycastHit[] hits = Physics.RaycastAll(_previousPosition, newPosition - _previousPosition, Vector3.Distance(_previousPosition, newPosition));
+            foreach (RaycastHit hit in hits)
             {
-                //Hit obstacle during movement.
-                DestroyProjectile();
-            }
+                if ((_obstacleLayers.value & (1 << hit.collider.gameObject.layer)) > 0 && !_pierceThroughWalls)
+                {
+                    //Hit obstacle during movement.
+                    DestroyProjectile();
+                }
 
-            BaseCharacterController charController = hit.collider.GetComponent<BaseCharacterController>();
-            if (charController)
-            {
-                _hurtBox.TriggerHit(charController);
+                BaseCharacterController charController = hit.collider.GetComponent<BaseCharacterController>();
+                if (charController)
+                {
+                    _hurtBox.TriggerHit(charController);
+                }
             }
         }
+
+
 
         //Place new previous position.
         _previousPosition = transform.position;

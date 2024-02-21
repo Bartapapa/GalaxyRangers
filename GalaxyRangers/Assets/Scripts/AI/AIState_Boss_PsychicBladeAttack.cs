@@ -42,14 +42,14 @@ public class AIState_Boss_PsychicBladeAttack : AIState
             {
                 if (!_attackedOnce)
                 {
-                    //Attack first time
+                    //Attack
                     _currentNumberOfAttacks++;
                     _currentTimer = _timeBeforeAttack;
                     _attackedOnce = true;
-                    brain.behavior.PlayAnim("Illusion");
+                    brain.behavior.PlayAnim("RealAttack");
                     foreach (BossIllusion illusion in illusions)
                     {
-                        illusion.controller.characterBehavior.PlayAnim("Illusion");
+                        illusion.controller.characterBehavior.PlayAnim("IllusionAttack");
                     }
                     //Add event to anim so that projectile spawns at same point.
                     return new AIreturn(this, simulatedInputs);
