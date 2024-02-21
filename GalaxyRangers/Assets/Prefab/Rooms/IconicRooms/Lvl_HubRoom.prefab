@@ -13069,7 +13069,8 @@ PrefabInstance:
       value: HUBTeleporter
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 7062523955117242892, guid: f90b90ea6e652c04ca25f7d7d3126e8b, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f90b90ea6e652c04ca25f7d7d3126e8b, type: 3}
