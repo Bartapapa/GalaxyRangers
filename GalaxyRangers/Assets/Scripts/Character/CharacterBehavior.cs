@@ -48,14 +48,14 @@ public class CharacterBehavior : MonoBehaviour
         HitLagShake();
     }
 
-    private void GetValuesFromController()
+    protected virtual void GetValuesFromController()
     {
         airDirection = Mathf.Lerp(airDirection,
             _characterController.isGrounded ? 0f : (_characterController.rigidbodyVelocity.x / _characterController.maxSpeed * _characterController.leftRight),
             10f * Time.deltaTime);
     }
 
-    private void ApplyAnimatorParams()
+    protected virtual void ApplyAnimatorParams()
     {
         if (animator == null)
             return;
@@ -228,7 +228,7 @@ public class CharacterBehavior : MonoBehaviour
 
         if (_shake)
         {
-            HitFlash();
+            HitFlash(_hitFlashDuration);
         }
     }
 
@@ -292,13 +292,13 @@ public class CharacterBehavior : MonoBehaviour
     #endregion
 
     #region HITFLASH
-    private void HitFlash()
+    public void HitFlash(float duration)
     {
         if (hitFlashCoroutine != null)
         {
             StopCoroutine(hitFlashCoroutine);
         }
-        hitFlashCoroutine = StartCoroutine(CoHitFlash(_hitFlashDuration));
+        hitFlashCoroutine = StartCoroutine(CoHitFlash(duration));
     }
 
     private IEnumerator CoHitFlash(float overtime)
