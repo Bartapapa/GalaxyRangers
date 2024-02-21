@@ -31,6 +31,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 5955927938188496144}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &248520334211607037
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7009350736184419069}
+  m_Layer: 6
+  m_Name: ProjectileSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7009350736184419069
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 248520334211607037}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.00000013238373, y: 0.7071068, z: -0.7071068, w: 0.00000011920932}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5625943290289054214}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: -180}
 --- !u!1 &667588385479518759
 GameObject:
   m_ObjectHideFlags: 0
@@ -62,6 +93,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 867889074754056938}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1503248583756936440
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 278358076699395454}
+  m_Layer: 6
+  m_Name: ProjectileSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &278358076699395454
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1503248583756936440}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.00000013238373, y: 0.7071068, z: -0.7071068, w: 0.00000011920932}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1250783302511189611}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: -180}
 --- !u!1 &2068358206177916971
 GameObject:
   m_ObjectHideFlags: 0
@@ -228,6 +290,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 5955927938188496144}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3248669093666979657
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8984586232639808453}
+  m_Layer: 6
+  m_Name: ProjectileSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8984586232639808453
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3248669093666979657}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.00000013238373, y: 0.7071068, z: -0.7071068, w: 0.00000011920932}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3983559608386567591}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: -180}
 --- !u!1 &5393276014242800045
 GameObject:
   m_ObjectHideFlags: 0
@@ -399,6 +492,23 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyBossIllu
       objectReference: {fileID: 0}
+    - target: {fileID: 500167050393739809, guid: 0bd6aa898f12c87488940c1b3b68ca28,
+        type: 3}
+      propertyPath: fakePsychicBlade
+      value: 
+      objectReference: {fileID: 6212837868137510180, guid: bb3c97f58aab86b49b5a14fd1abdd69e,
+        type: 3}
+    - target: {fileID: 500167050393739809, guid: 0bd6aa898f12c87488940c1b3b68ca28,
+        type: 3}
+      propertyPath: realPsychicBlade
+      value: 
+      objectReference: {fileID: 6175176166079463134, guid: 6b9d021dc05932b46ab2ceb399dda346,
+        type: 3}
+    - target: {fileID: 500167050393739809, guid: 0bd6aa898f12c87488940c1b3b68ca28,
+        type: 3}
+      propertyPath: psychicBladeSpawner
+      value: 
+      objectReference: {fileID: 7009350736184419069}
     - target: {fileID: 4875186535676989424, guid: 0bd6aa898f12c87488940c1b3b68ca28,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -454,9 +564,18 @@ PrefabInstance:
       propertyPath: trueBossHealth
       value: 
       objectReference: {fileID: 3310452973835669818}
+    - target: {fileID: 9146345693513274468, guid: 0bd6aa898f12c87488940c1b3b68ca28,
+        type: 3}
+      propertyPath: boss
+      value: 
+      objectReference: {fileID: 813896466873602007}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 4875186535676989424, guid: 0bd6aa898f12c87488940c1b3b68ca28,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7009350736184419069}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0bd6aa898f12c87488940c1b3b68ca28, type: 3}
 --- !u!114 &161837941492424071 stripped
@@ -469,6 +588,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c3dc569f5c4472847967c59aa3f5a97d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &813896466873602007 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 500167050393739809, guid: 0bd6aa898f12c87488940c1b3b68ca28,
+    type: 3}
+  m_PrefabInstance: {fileID: 989518470836170230}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35e8786443b112f4ca894d6368971bc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &5625943290289054214 stripped
@@ -507,6 +638,23 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 500167050393739809, guid: 0bd6aa898f12c87488940c1b3b68ca28,
+        type: 3}
+      propertyPath: fakePsychicBlade
+      value: 
+      objectReference: {fileID: 6212837868137510180, guid: bb3c97f58aab86b49b5a14fd1abdd69e,
+        type: 3}
+    - target: {fileID: 500167050393739809, guid: 0bd6aa898f12c87488940c1b3b68ca28,
+        type: 3}
+      propertyPath: realPsychicBlade
+      value: 
+      objectReference: {fileID: 6175176166079463134, guid: 6b9d021dc05932b46ab2ceb399dda346,
+        type: 3}
+    - target: {fileID: 500167050393739809, guid: 0bd6aa898f12c87488940c1b3b68ca28,
+        type: 3}
+      propertyPath: psychicBladeSpawner
+      value: 
+      objectReference: {fileID: 278358076699395454}
     - target: {fileID: 1118457374596051057, guid: 0bd6aa898f12c87488940c1b3b68ca28,
         type: 3}
       propertyPath: psychicBladeAttackState
@@ -582,9 +730,18 @@ PrefabInstance:
       propertyPath: apparateIntensity
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 9146345693513274468, guid: 0bd6aa898f12c87488940c1b3b68ca28,
+        type: 3}
+      propertyPath: boss
+      value: 
+      objectReference: {fileID: 4507500688546962445}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 2965203088745570375, guid: 0bd6aa898f12c87488940c1b3b68ca28,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 278358076699395454}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0bd6aa898f12c87488940c1b3b68ca28, type: 3}
 --- !u!114 &623149594596546355 stripped
@@ -605,6 +762,12 @@ SkinnedMeshRenderer:
     type: 3}
   m_PrefabInstance: {fileID: 4070454403897327148}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &1250783302511189611 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2965203088745570375, guid: 0bd6aa898f12c87488940c1b3b68ca28,
+    type: 3}
+  m_PrefabInstance: {fileID: 4070454403897327148}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &4033157878239972957 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1118457374596051057, guid: 0bd6aa898f12c87488940c1b3b68ca28,
@@ -615,6 +778,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c3dc569f5c4472847967c59aa3f5a97d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4507500688546962445 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 500167050393739809, guid: 0bd6aa898f12c87488940c1b3b68ca28,
+    type: 3}
+  m_PrefabInstance: {fileID: 4070454403897327148}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35e8786443b112f4ca894d6368971bc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &6830966478354575657 stripped
@@ -823,9 +998,30 @@ PrefabInstance:
       propertyPath: BossDisplacementStates.Array.data[1]
       value: 
       objectReference: {fileID: 4033157878239972957}
+    - target: {fileID: 8508233786071501163, guid: 7dda3b105ec4bf94592417735ef68f3b,
+        type: 3}
+      propertyPath: fakePsychicBlade
+      value: 
+      objectReference: {fileID: 6212837868137510180, guid: bb3c97f58aab86b49b5a14fd1abdd69e,
+        type: 3}
+    - target: {fileID: 8508233786071501163, guid: 7dda3b105ec4bf94592417735ef68f3b,
+        type: 3}
+      propertyPath: realPsychicBlade
+      value: 
+      objectReference: {fileID: 6175176166079463134, guid: 6b9d021dc05932b46ab2ceb399dda346,
+        type: 3}
+    - target: {fileID: 8508233786071501163, guid: 7dda3b105ec4bf94592417735ef68f3b,
+        type: 3}
+      propertyPath: psychicBladeSpawner
+      value: 
+      objectReference: {fileID: 8984586232639808453}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 6912318788925428301, guid: 7dda3b105ec4bf94592417735ef68f3b,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8984586232639808453}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7dda3b105ec4bf94592417735ef68f3b, type: 3}
 --- !u!114 &3310452973835669818 stripped

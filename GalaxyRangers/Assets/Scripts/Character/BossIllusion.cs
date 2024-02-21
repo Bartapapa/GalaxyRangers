@@ -137,6 +137,6 @@ public class BossIllusion : MonoBehaviour
     private void OnBossDie(CharacterHealth characterHealth)
     {
         controller.characterHealth.Hurt(999f);
-        //Disapparate
+        Disapparate();
     }
 }
