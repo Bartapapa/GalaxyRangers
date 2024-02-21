@@ -366,10 +366,10 @@ MonoBehaviour:
     m_Bits: 0
   defaultEnvironmentLayers:
     serializedVersion: 2
-    m_Bits: 129
+    m_Bits: 385
   onlyGroundLayers:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 257
   _defaultColliderHeight: 1.8
   _defaultColliderRadius: 0.5
   gravity:
