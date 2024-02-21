@@ -1,9 +1,16 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class CharacterSpeciality_1 : MonoBehaviour
 {
+    [SerializeField] private CharacterCombat combat;
+    [SerializeField] private WeaponAttack specialAttack;
+    [SerializeField] private Transform psychicBladeSpawnerR;
+    [SerializeField] private Transform psychicBladeSpawnerL;
+    [SerializeField] private Projectile psychicBladeHeroProjectile;
+
     [SerializeField] private bool _capacity_isUsed = false;
     [SerializeField] private float _capacityDurationTimer = 10.0f;
     private float _capacityCooldownTimer = 0.0f;
@@ -48,6 +55,32 @@ public class CharacterSpeciality_1 : MonoBehaviour
     // Si dessous la fonction pour lancer la competence
     private void LaunchAbility()
     {
+        //Play animation.
+        combat.SpecialAttack(specialAttack);
+    }
 
+    public void ShootProjectileCallback()
+    {
+        //R proj
+        Projectile newRProjectile = Instantiate<Projectile>(psychicBladeHeroProjectile, psychicBladeSpawnerR.position, psychicBladeSpawnerR.rotation);
+        if (WorldManager.Instance)
+        {
+            if (WorldManager.Instance.currentRogueRoom.resetParent != null)
+            {
+                newRProjectile.transform.parent = WorldManager.Instance.currentRogueRoom.resetParent;
+            }
+        }
+        newRProjectile.InitializeProjectile(psychicBladeSpawnerR.forward);
+
+        //L proj
+        Projectile newLProjectile = Instantiate<Projectile>(psychicBladeHeroProjectile, psychicBladeSpawnerL.position, psychicBladeSpawnerL.rotation);
+        if (WorldManager.Instance)
+        {
+            if (WorldManager.Instance.currentRogueRoom.resetParent != null)
+            {
+                newLProjectile.transform.parent = WorldManager.Instance.currentRogueRoom.resetParent;
+            }
+        }
+        newLProjectile.InitializeProjectile(psychicBladeSpawnerL.forward);
     }
 }

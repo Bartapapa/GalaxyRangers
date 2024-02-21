@@ -401,6 +401,29 @@ public class CharacterCombat : MonoBehaviour
         DoWindUp();
     }
 
+    public void SpecialAttack(WeaponAttack specialAttack)
+    {
+        if (!canAttack)
+            return;
+
+        if (heavyAttackBufferCoroutine != null)
+        {
+            StopCoroutine(heavyAttackBufferCoroutine);
+        }
+        if (lightAttackBufferCoroutine != null)
+        {
+            StopCoroutine(lightAttackBufferCoroutine);
+        }
+        _lightAttackBuffer = false;
+        _heavyAttackBuffer = false;
+
+        WeaponStrike newstrike = new WeaponStrike();
+        newstrike.attack = specialAttack;
+
+        _currentWeaponStrike = newstrike;
+        DoWindUp();
+    }
+
     private void DoWindUp()
     {
         windUpCoroutine = StartCoroutine(CoWindUp(_currentWeaponStrike.attack.windUpAnimTime));
