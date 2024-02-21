@@ -11792,12 +11792,12 @@ PrefabInstance:
     - target: {fileID: 8419119581977815888, guid: b82bb7f2fbae5104588a0c208158d2a7,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -15.710194
+      value: -16.63
       objectReference: {fileID: 0}
     - target: {fileID: 8419119581977815888, guid: b82bb7f2fbae5104588a0c208158d2a7,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.2652493
+      value: -3.85
       objectReference: {fileID: 0}
     - target: {fileID: 8419119581977815888, guid: b82bb7f2fbae5104588a0c208158d2a7,
         type: 3}
@@ -12919,6 +12919,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2540962497616976559}
     m_Modifications:
+    - target: {fileID: 3431765310467833180, guid: 060f483a750b0904c8e9ea26e8dfcc7e,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 3677777170598982919, guid: 060f483a750b0904c8e9ea26e8dfcc7e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -12973,6 +12978,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Panneau_LP
+      objectReference: {fileID: 0}
+    - target: {fileID: 4053739346533527485, guid: 060f483a750b0904c8e9ea26e8dfcc7e,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5280700296422193582, guid: 060f483a750b0904c8e9ea26e8dfcc7e,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
