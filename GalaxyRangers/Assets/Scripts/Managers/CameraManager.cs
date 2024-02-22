@@ -225,17 +225,17 @@ public class CameraManager : MonoBehaviour
                 break;
             case CameraState.Exploration:
                 _explorationFramingTransposer.m_CameraDistance = cameraSettings.cameraDistance;
-                CinemachineConfiner2D exploconfiner = DefaultCamera.GetComponent<CinemachineConfiner2D>();
+                CinemachineConfiner2D exploconfiner = ExplorationCamera.GetComponent<CinemachineConfiner2D>();
                 exploconfiner.m_BoundingShape2D = roomCameraCollider;
                 break;
             case CameraState.Arena:
                 _arenaFramingTransposer.m_CameraDistance = cameraSettings.cameraDistance;
-                CinemachineConfiner2D arenaconfiner = DefaultCamera.GetComponent<CinemachineConfiner2D>();
+                CinemachineConfiner2D arenaconfiner = ArenaCamera.GetComponent<CinemachineConfiner2D>();
                 arenaconfiner.m_BoundingShape2D = roomCameraCollider;
                 break;
             case CameraState.Dialogue:
                 _dialogueFramingTransposer.m_CameraDistance = cameraSettings.cameraDistance;
-                CinemachineConfiner2D dialogueconfiner = DefaultCamera.GetComponent<CinemachineConfiner2D>();
+                CinemachineConfiner2D dialogueconfiner = DialogueCamera.GetComponent<CinemachineConfiner2D>();
                 dialogueconfiner.m_BoundingShape2D = roomCameraCollider;
                 break;
             default:
