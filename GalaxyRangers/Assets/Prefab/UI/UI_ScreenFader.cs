@@ -6,6 +6,7 @@ public class UI_ScreenFader : MonoBehaviour
 {
     public Animator animator;
     public GameObject screen;
+    public GameObject credits;
 
     public void FadeInSide()
     {

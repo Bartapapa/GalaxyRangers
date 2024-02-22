@@ -28,6 +28,14 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            OnBossCharacterDeath(new CharacterHealth());
+        }
+    }
+
     #region FADING
     public void Fade(float overTime, bool screenFade = false, Action onFadeInComplete = null, Action onFadeOutComplete = null)
     {
@@ -150,6 +158,28 @@ public class GameManager : MonoBehaviour
         WorldManager.Instance.EndRun();
 
         character.Revive();
+    }
+
+    public void OnBossCharacterDeath(CharacterHealth bossHealth)
+    {
+        //Boss has died, roll credits lmfaooooooooooooooooooo
+        CameraManager.Instance.RemoveFocusObjectFromCamera(Player.Instance.CharacterController.transform);
+        StartCoroutine(WaitForTime(2f,
+            () => EndFade()));
+    }
+
+    private void EndFade()
+    {
+        _isFading = true;
+        UI_Manager.Instance.screenFader.FadeInScreen();
+        StartCoroutine(WaitForTime(2f,
+            () => RollCredits()));
+    }
+
+    private void RollCredits()
+    {
+        UI_Manager.Instance.screenFader.credits.SetActive(true);
+        UI_Manager.Instance.screenFader.animator.Play("CreditsRoll");
     }
 
     #endregion

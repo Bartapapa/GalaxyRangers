@@ -15,13 +15,11 @@ public class RogueRoom_Arena_Boss : RogueRoom_Arena
         UI_Manager.Instance.EnterInBossRoom(_boss.health);
         _boss.health.CharacterDied += OnBossDied;
 
-        CameraManager.Instance.AddFocusObjectToCamera(_boss.transform, 5);
+        CameraManager.Instance.AddFocusObjectToCamera(_boss.transform, 2);
     }
 
     private void OnBossDied(CharacterHealth characterHealth)
     {
-        //Boss has died, roll credits lmfaooooooooooooooooooo
-        Debug.Log("BOSS HAS DIED LMFAOOOOOOOOO");
-        CameraManager.Instance.RemoveFocusObjectFromCamera(Player.Instance.CharacterController.transform);
+        GameManager.Instance.OnBossCharacterDeath(characterHealth);
     }
 }
