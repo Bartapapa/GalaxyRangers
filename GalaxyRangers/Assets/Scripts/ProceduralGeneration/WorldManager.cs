@@ -122,7 +122,7 @@ public class WorldManager : MonoBehaviour
         world = newWorld;
         GenerateEntireWorld();
         MoveToRoom(world.rooms[0]);
-        VisualizeWorld();
+        //VisualizeWorld();
     }
 
     private void GenerateEntireWorld()

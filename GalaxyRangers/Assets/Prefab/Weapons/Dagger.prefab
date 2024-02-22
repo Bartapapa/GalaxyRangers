@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3392728549743615674}
   - component: {fileID: 95443232262905109}
   - component: {fileID: 3966149193681346936}
-  m_Layer: 6
+  m_Layer: 3
   m_Name: H_0_HB
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -90,7 +90,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 120801628579203837}
-  m_Layer: 6
+  m_Layer: 3
   m_Name: Heavy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -124,7 +124,7 @@ GameObject:
   - component: {fileID: 5751932534848787511}
   - component: {fileID: 1379082182638366624}
   - component: {fileID: 7273686844935466528}
-  m_Layer: 6
+  m_Layer: 3
   m_Name: AA_0_HB
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -203,7 +203,7 @@ GameObject:
   - component: {fileID: 2575726485292086032}
   - component: {fileID: 6683448392611282595}
   - component: {fileID: 7136862633443897210}
-  m_Layer: 6
+  m_Layer: 3
   m_Name: LC_2_HB
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -282,7 +282,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6355608865081675701}
-  m_Layer: 6
+  m_Layer: 3
   m_Name: HeavyBreak
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -316,7 +316,7 @@ GameObject:
   - component: {fileID: 5358895148344726329}
   - component: {fileID: 477662121486330813}
   - component: {fileID: 1103355892225527197}
-  m_Layer: 6
+  m_Layer: 3
   m_Name: LC_0_HB
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -395,7 +395,7 @@ GameObject:
   - component: {fileID: 961808165746687097}
   - component: {fileID: 2532989181226115341}
   - component: {fileID: 6404589385025521246}
-  m_Layer: 6
+  m_Layer: 3
   m_Name: HB_0_HB
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -474,7 +474,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 990027677935326979}
-  m_Layer: 6
+  m_Layer: 3
   m_Name: LightCombo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -507,7 +507,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1227563943798855740}
-  m_Layer: 6
+  m_Layer: 3
   m_Name: AirAttack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -539,7 +539,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3429686215253078890}
-  m_Layer: 6
+  m_Layer: 3
   m_Name: ProjectileSource
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -571,7 +571,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1576859346003920362}
   - component: {fileID: 5844184023919746622}
-  m_Layer: 6
+  m_Layer: 3
   m_Name: Dagger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -640,7 +640,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2050364572051650601}
-  m_Layer: 6
+  m_Layer: 3
   m_Name: Hurtboxes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
