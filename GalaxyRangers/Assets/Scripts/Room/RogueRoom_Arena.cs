@@ -50,7 +50,10 @@ public class RogueRoom_Arena : RogueRoom
         Debug.Log("Closed all exits.");
         //Close exits.
 
-        _teleporter.canBeActivated = false;
+        if (_teleporter)
+        {
+            _teleporter.canBeActivated = false;
+        }
 
         List<TraversalLocation> allTraversalLocations = GetAllTraversalLocations();
         foreach(TraversalLocation traversal in allTraversalLocations)
@@ -69,9 +72,6 @@ public class RogueRoom_Arena : RogueRoom
         //Open exits.
         BuildTraversalPoints(roomData);
 
-        //Set camera to exploration mode.
-        CameraManager.Instance.CameraState = CameraState.Exploration;
-
         //Force activate teleporter.
         //ToggleTeleporterActivation(true, false);
 
@@ -83,5 +83,7 @@ public class RogueRoom_Arena : RogueRoom
 
         _hasEnded = true;
         _isCompleted = true;
+
+        UseCameraSettings();
     }
 }

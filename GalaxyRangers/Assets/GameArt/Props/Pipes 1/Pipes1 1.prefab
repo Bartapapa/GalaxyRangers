@@ -90,10 +90,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8380157826906577798, guid: 0a50c62ea251a924db4174db5e3967d3,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: -6902573867230041995, guid: 0a50c62ea251a924db4174db5e3967d3,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 393e3fefe9795c241a674911f50f3664, type: 2}
     - target: {fileID: 919132149155446097, guid: 0a50c62ea251a924db4174db5e3967d3,
         type: 3}
       propertyPath: m_Name
       value: M_Pipes
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 0a50c62ea251a924db4174db5e3967d3,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:

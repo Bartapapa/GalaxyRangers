@@ -167,8 +167,6 @@ public class CameraManager : MonoBehaviour
 
     private void TransitionToState(CameraState toState)
     {
-        if (_cameraState == toState) return;
-
         CameraState oldState = _cameraState;
         switch (oldState)
         {
@@ -222,12 +220,87 @@ public class CameraManager : MonoBehaviour
 
     public void SetRogueRoomCameraSettings(RogueRoomCameraSettings cameraSettings)
     {
+        //StartCoroutine(SetNewCamSettingsWaitFrame(cameraSettings));
+        PolygonCollider2D roomCameraCollider = cameraSettings.confiner;
         TransitionToState(cameraSettings.cameraState);
 
-        PolygonCollider2D roomCameraCollider = cameraSettings.confiner;
+        CinemachineConfiner2D defaultconfiner = DefaultCamera.GetComponent<CinemachineConfiner2D>();
+        defaultconfiner.m_BoundingShape2D = roomCameraCollider;
+
+        CinemachineConfiner2D exploconfiner = ExplorationCamera.GetComponent<CinemachineConfiner2D>();
+        exploconfiner.m_BoundingShape2D = roomCameraCollider;
+
+        CinemachineConfiner2D arenaconfiner = ArenaCamera.GetComponent<CinemachineConfiner2D>();
+        arenaconfiner.m_BoundingShape2D = roomCameraCollider;
+
+        //_dialogueFramingTransposer.m_CameraDistance = cameraSettings.cameraDistance;
+        //CinemachineConfiner2D dialogueconfiner = DialogueCamera.GetComponent<CinemachineConfiner2D>();
+        //dialogueconfiner.m_BoundingShape2D = roomCameraCollider;
+
+        CinemachineConfiner2D deathconfiner = DeathCamera.GetComponent<CinemachineConfiner2D>();
+        deathconfiner.m_BoundingShape2D = roomCameraCollider;
 
         switch (_cameraState)
         {
+            case CameraState.None:
+                break;
+            case CameraState.Default:
+                break;
+            case CameraState.Exploration:
+                _explorationFramingTransposer.m_CameraDistance = cameraSettings.cameraDistance;
+                break;
+            case CameraState.Arena:
+                _arenaFramingTransposer.m_CameraDistance = cameraSettings.cameraDistance;
+                break;
+            case CameraState.Dialogue:
+                _dialogueFramingTransposer.m_CameraDistance = cameraSettings.cameraDistance;
+                break;
+            case CameraState.Death:
+                _deathFramingTransposer.m_CameraDistance = cameraSettings.cameraDistance;
+                break;
+            default:
+                break;
+        }
+    }
+
+    private IEnumerator SetNewCamSettingsWaitFrame(RogueRoomCameraSettings cameraSettings)
+    {
+        PolygonCollider2D roomCameraCollider = cameraSettings.confiner;
+        switch (_cameraState)
+        {
+            case CameraState.None:
+                break;
+            case CameraState.Default:
+                CinemachineConfiner2D defaultconfiner = DefaultCamera.GetComponent<CinemachineConfiner2D>();
+                defaultconfiner.m_BoundingShape2D = null;
+                break;
+            case CameraState.Exploration:
+                _explorationFramingTransposer.m_CameraDistance = 8f;
+                CinemachineConfiner2D exploconfiner = ExplorationCamera.GetComponent<CinemachineConfiner2D>();
+                exploconfiner.m_BoundingShape2D = null;
+                break;
+            case CameraState.Arena:
+                _arenaFramingTransposer.m_CameraDistance = 8f;
+                CinemachineConfiner2D arenaconfiner = ArenaCamera.GetComponent<CinemachineConfiner2D>();
+                arenaconfiner.m_BoundingShape2D = null;
+                break;
+            case CameraState.Dialogue:
+                _dialogueFramingTransposer.m_CameraDistance = 8f;
+                CinemachineConfiner2D dialogueconfiner = DialogueCamera.GetComponent<CinemachineConfiner2D>();
+                dialogueconfiner.m_BoundingShape2D = null;
+                break;
+            case CameraState.Death:
+                _deathFramingTransposer.m_CameraDistance = 8f;
+                CinemachineConfiner2D deathconfiner = DialogueCamera.GetComponent<CinemachineConfiner2D>();
+                deathconfiner.m_BoundingShape2D = null;
+                break;
+            default:
+                break;
+        }
+        yield return null;
+        TransitionToState(cameraSettings.cameraState);
+        switch (_cameraState)
+        {           
             case CameraState.None:
                 break;
             case CameraState.Default:
