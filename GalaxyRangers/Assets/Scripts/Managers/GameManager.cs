@@ -50,17 +50,36 @@ public class GameManager : MonoBehaviour
         fadeCoroutine = StartCoroutine(CoFade(false, overTime));
     }
 
-    private IEnumerator CoFade(bool fadeIn, float overTime)
+    private IEnumerator CoFade(bool fadeIn, float overTime, bool screenFade = false)
     {
         _isFading = true;
 
         if (fadeIn)
         {
             Debug.Log("Fading in");
+            UI_Manager.Instance.screenFader.ToggleVisibility(true);
+            if (screenFade)
+            {            
+                UI_Manager.Instance.screenFader.FadeInScreen();
+            }
+            else
+            {
+                UI_Manager.Instance.screenFader.FadeInSide();
+            }
+
         }
         else
         {
             Debug.Log("Fading out");
+            UI_Manager.Instance.screenFader.ToggleVisibility(true);
+            if (screenFade)
+            {
+                UI_Manager.Instance.screenFader.FadeOutScreen();
+            }
+            else
+            {
+                UI_Manager.Instance.screenFader.FadeOutSide();
+            }
         }
 
         yield return new WaitForSecondsRealtime(overTime);
@@ -68,6 +87,7 @@ public class GameManager : MonoBehaviour
         if (!fadeIn)
         {
             fadeCoroutine = null;
+            UI_Manager.Instance.screenFader.ToggleVisibility(false);
         }
         _isFading = false;
 
@@ -81,14 +101,26 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void FadeInCallback(float overtime)
+    private IEnumerator WaitForTime(float duration, Action onWaitEnd = null)
     {
-        FadeOut(overtime);
+        yield return new WaitForSecondsRealtime(duration);
+
+        if (onWaitEnd != null)
+        {
+            onWaitEnd();
+        }
+    }
+
+    private void FadeInCallback(float overtime)
+    {      
         if (_onFadeInComplete != null)
         {
             _onFadeInComplete();
             _onFadeInComplete = null;
         }
+
+        StartCoroutine(WaitForTime(.2f,
+            () => FadeOut(overtime)));
     }
 
     private void FadeOutCallback(float overtime)
