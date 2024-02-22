@@ -15749,8 +15749,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4859491233834779448, guid: 68cb41b83bfa5b447a01997d5dd7108e,
         type: 3}
+      propertyPath: _is_Bought
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4859491233834779448, guid: 68cb41b83bfa5b447a01997d5dd7108e,
+        type: 3}
       propertyPath: _itemPrice
-      value: 4
+      value: 75
       objectReference: {fileID: 0}
     - target: {fileID: 4859491233834779448, guid: 68cb41b83bfa5b447a01997d5dd7108e,
         type: 3}
@@ -15760,7 +15765,7 @@ PrefabInstance:
     - target: {fileID: 4859491233834779448, guid: 68cb41b83bfa5b447a01997d5dd7108e,
         type: 3}
       propertyPath: _relationLevelToUnlock
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7726347484648813304, guid: 68cb41b83bfa5b447a01997d5dd7108e,
         type: 3}
@@ -15894,17 +15899,17 @@ PrefabInstance:
     - target: {fileID: 3368917278667305263, guid: 220664f1b3d28be4190c6ec55d9fd5cf,
         type: 3}
       propertyPath: _isBlueToken
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3368917278667305263, guid: 220664f1b3d28be4190c6ec55d9fd5cf,
         type: 3}
       propertyPath: _rewardMoney
-      value: 50
+      value: 35
       objectReference: {fileID: 0}
     - target: {fileID: 3368917278667305263, guid: 220664f1b3d28be4190c6ec55d9fd5cf,
         type: 3}
       propertyPath: _enemyTypeToKill_1
-      value: 1
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3368917278667305263, guid: 220664f1b3d28be4190c6ec55d9fd5cf,
         type: 3}
@@ -15914,7 +15919,7 @@ PrefabInstance:
     - target: {fileID: 3368917278667305263, guid: 220664f1b3d28be4190c6ec55d9fd5cf,
         type: 3}
       propertyPath: _reputationXPnumber
-      value: 30
+      value: 75
       objectReference: {fileID: 0}
     - target: {fileID: 3368917278667305263, guid: 220664f1b3d28be4190c6ec55d9fd5cf,
         type: 3}
@@ -15924,7 +15929,7 @@ PrefabInstance:
     - target: {fileID: 3368917278667305263, guid: 220664f1b3d28be4190c6ec55d9fd5cf,
         type: 3}
       propertyPath: _enemyNumberToKill_2
-      value: 100
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -16326,27 +16331,37 @@ PrefabInstance:
     - target: {fileID: 3368917278667305263, guid: 220664f1b3d28be4190c6ec55d9fd5cf,
         type: 3}
       propertyPath: _rewardMoney
-      value: 200
+      value: 125
       objectReference: {fileID: 0}
     - target: {fileID: 3368917278667305263, guid: 220664f1b3d28be4190c6ec55d9fd5cf,
         type: 3}
       propertyPath: _enemyTypeToKill_1
-      value: 5
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3368917278667305263, guid: 220664f1b3d28be4190c6ec55d9fd5cf,
+        type: 3}
+      propertyPath: _enemyTypeToKill_2
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3368917278667305263, guid: 220664f1b3d28be4190c6ec55d9fd5cf,
         type: 3}
       propertyPath: _reputationXPnumber
-      value: 80
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 3368917278667305263, guid: 220664f1b3d28be4190c6ec55d9fd5cf,
         type: 3}
       propertyPath: _enemyNumberToKill_1
-      value: 1
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 3368917278667305263, guid: 220664f1b3d28be4190c6ec55d9fd5cf,
+        type: 3}
+      propertyPath: _enemyNumberToKill_2
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3368917278667305263, guid: 220664f1b3d28be4190c6ec55d9fd5cf,
         type: 3}
       propertyPath: _isSpecialQuestWithoutBeingTouch
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -16749,7 +16764,7 @@ PrefabInstance:
     - target: {fileID: 4859491233834779448, guid: 68cb41b83bfa5b447a01997d5dd7108e,
         type: 3}
       propertyPath: _itemPrice
-      value: 4
+      value: 135
       objectReference: {fileID: 0}
     - target: {fileID: 4859491233834779448, guid: 68cb41b83bfa5b447a01997d5dd7108e,
         type: 3}
@@ -17156,27 +17171,37 @@ PrefabInstance:
     - target: {fileID: 3368917278667305263, guid: 220664f1b3d28be4190c6ec55d9fd5cf,
         type: 3}
       propertyPath: _rewardMoney
-      value: 45
+      value: 350
       objectReference: {fileID: 0}
     - target: {fileID: 3368917278667305263, guid: 220664f1b3d28be4190c6ec55d9fd5cf,
         type: 3}
       propertyPath: _enemyTypeToKill_1
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3368917278667305263, guid: 220664f1b3d28be4190c6ec55d9fd5cf,
+        type: 3}
+      propertyPath: _enemyTypeToKill_2
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3368917278667305263, guid: 220664f1b3d28be4190c6ec55d9fd5cf,
         type: 3}
       propertyPath: _reputationXPnumber
-      value: 70
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 3368917278667305263, guid: 220664f1b3d28be4190c6ec55d9fd5cf,
         type: 3}
       propertyPath: _enemyNumberToKill_1
-      value: 3
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 3368917278667305263, guid: 220664f1b3d28be4190c6ec55d9fd5cf,
+        type: 3}
+      propertyPath: _enemyNumberToKill_2
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 3368917278667305263, guid: 220664f1b3d28be4190c6ec55d9fd5cf,
         type: 3}
       propertyPath: _isSpecialQuestWithoutBeingTouch
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -17439,12 +17464,17 @@ PrefabInstance:
     - target: {fileID: 3368917278667305263, guid: 220664f1b3d28be4190c6ec55d9fd5cf,
         type: 3}
       propertyPath: _isBlueToken
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3368917278667305263, guid: 220664f1b3d28be4190c6ec55d9fd5cf,
         type: 3}
       propertyPath: _rewardMoney
-      value: 125
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 3368917278667305263, guid: 220664f1b3d28be4190c6ec55d9fd5cf,
+        type: 3}
+      propertyPath: _enemyTypeToKill_1
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3368917278667305263, guid: 220664f1b3d28be4190c6ec55d9fd5cf,
         type: 3}
@@ -17454,17 +17484,17 @@ PrefabInstance:
     - target: {fileID: 3368917278667305263, guid: 220664f1b3d28be4190c6ec55d9fd5cf,
         type: 3}
       propertyPath: _reputationXPnumber
-      value: 97
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 3368917278667305263, guid: 220664f1b3d28be4190c6ec55d9fd5cf,
         type: 3}
       propertyPath: _enemyNumberToKill_1
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3368917278667305263, guid: 220664f1b3d28be4190c6ec55d9fd5cf,
         type: 3}
       propertyPath: _enemyNumberToKill_2
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
