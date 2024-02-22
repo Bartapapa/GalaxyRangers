@@ -28,14 +28,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            OnBossCharacterDeath(new CharacterHealth());
-        }
-    }
-
     #region FADING
     public void Fade(float overTime, bool screenFade = false, Action onFadeInComplete = null, Action onFadeOutComplete = null)
     {
