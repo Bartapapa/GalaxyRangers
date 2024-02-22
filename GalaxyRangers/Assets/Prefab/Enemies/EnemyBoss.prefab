@@ -106,6 +106,7 @@ MonoBehaviour:
     _currentValue: -3.4028235e+38
   _isDead: 0
   _isInvulnerable: 0
+  sound: {fileID: 0}
   _typeOfCharacter: 5
   _goldAmountToEarn: 250
 --- !u!114 &8149686720712465414
@@ -308,6 +309,10 @@ MonoBehaviour:
   hasHyperArmor: 1
   _cachedVelocity: {x: 0, y: 0, z: 0}
   _aimingTarget: {fileID: 0}
+  _damageModifier:
+    BaseValue: 0
+    _maxValue: -3.4028235e+38
+    _currentValue: -3.4028235e+38
   enableGroundDetection: 1
   enableCeilingDetection: 1
   enableResetCharacter: 0
@@ -346,6 +351,9 @@ MonoBehaviour:
   _aimDuration: 3
   _attackCooldown: -3.4028235e+38
   illuApparateState: {fileID: 3372262586604692405}
+  realPsychicBlade: {fileID: 0}
+  fakePsychicBlade: {fileID: 0}
+  psychicBladeSpawner: {fileID: 0}
 --- !u!1 &385883951706911624
 GameObject:
   m_ObjectHideFlags: 0
@@ -1703,6 +1711,11 @@ PrefabInstance:
     - target: {fileID: 5866666021909216657, guid: eda61646638405b46841738bf44b84b2,
         type: 3}
       propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7698353387739253076, guid: eda61646638405b46841738bf44b84b2,
+        type: 3}
+      propertyPath: m_CastShadows
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

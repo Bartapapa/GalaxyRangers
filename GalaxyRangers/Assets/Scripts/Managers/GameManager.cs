@@ -152,5 +152,27 @@ public class GameManager : MonoBehaviour
         character.Revive();
     }
 
+    public void OnBossCharacterDeath(CharacterHealth bossHealth)
+    {
+        //Boss has died, roll credits lmfaooooooooooooooooooo
+        CameraManager.Instance.RemoveFocusObjectFromCamera(Player.Instance.CharacterController.transform);
+        StartCoroutine(WaitForTime(2f,
+            () => EndFade()));
+    }
+
+    private void EndFade()
+    {
+        _isFading = true;
+        UI_Manager.Instance.screenFader.FadeInScreen();
+        StartCoroutine(WaitForTime(2f,
+            () => RollCredits()));
+    }
+
+    private void RollCredits()
+    {
+        UI_Manager.Instance.screenFader.credits.SetActive(true);
+        UI_Manager.Instance.screenFader.animator.Play("CreditsRoll");
+    }
+
     #endregion
 }

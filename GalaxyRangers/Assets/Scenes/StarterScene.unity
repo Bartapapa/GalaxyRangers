@@ -1502,10 +1502,15 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4346170619015136971, guid: 81f6207fd8f41414c94bf1f828d311f2,
+        type: 3}
+      propertyPath: credits
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 4354939696082917004, guid: 81f6207fd8f41414c94bf1f828d311f2,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4558633399819758188, guid: 81f6207fd8f41414c94bf1f828d311f2,
         type: 3}
@@ -3362,6 +3367,11 @@ PrefabInstance:
       propertyPath: _focusObjects.Array.data[0].Object
       value: 
       objectReference: {fileID: 1532192477}
+    - target: {fileID: 2601983355821130918, guid: fff465d56b78aca419ac00194e7e09a4,
+        type: 3}
+      propertyPath: _focusObjects.Array.data[0].Weight
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 6226320362416033835, guid: fff465d56b78aca419ac00194e7e09a4,
         type: 3}
       propertyPath: m_Name
