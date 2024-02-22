@@ -50,7 +50,10 @@ public class RogueRoom_Arena : RogueRoom
         Debug.Log("Closed all exits.");
         //Close exits.
 
-        _teleporter.canBeActivated = false;
+        if (_teleporter)
+        {
+            _teleporter.canBeActivated = false;
+        }
 
         List<TraversalLocation> allTraversalLocations = GetAllTraversalLocations();
         foreach(TraversalLocation traversal in allTraversalLocations)

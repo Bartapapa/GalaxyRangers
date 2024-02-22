@@ -247,7 +247,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6863994800363667237}
   - component: {fileID: 5825325118229345029}
-  - component: {fileID: 2334222851604191707}
   m_Layer: 0
   m_Name: Lvl_BossRoom
   m_TagString: Untagged
@@ -299,7 +298,7 @@ MonoBehaviour:
   _defaultSpawnPoint: {fileID: 2833900177547982146}
   cameraSettings:
     cameraState: 3
-    cameraDistance: 12
+    cameraDistance: 14
     confiner: {fileID: 5215249961878695313}
   completedCameraSettings:
     cameraState: 2
@@ -337,58 +336,6 @@ MonoBehaviour:
   _RB_spawnPoint: {fileID: 3718031562093917620}
   _resetParent: {fileID: 6834007078627917054}
   _boss: {fileID: 9711281075832674}
---- !u!114 &2334222851604191707
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 403176355650831762}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7028cb10df0ea864782719319e9385d5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _defaultSpawnPoint: {fileID: 2833900177547982146}
-  cameraSettings:
-    cameraState: 2
-    cameraDistance: 8
-    confiner: {fileID: 0}
-  completedCameraSettings:
-    cameraState: 2
-    cameraDistance: 8
-    confiner: {fileID: 0}
-  _ignoreScenario: 0
-  _scenario1: {fileID: 0}
-  _scenario2: {fileID: 0}
-  _scenario3: {fileID: 0}
-  _teleporter: {fileID: 0}
-  _teleporterActivationDistance: 5
-  _LT_closed: {fileID: 6896416670258660379}
-  _LT_open: {fileID: 33674162224030824}
-  _LT_teleporter: {fileID: 7941899301974234516}
-  _LT_spawnPoint: {fileID: 4614880979472453676}
-  _LB_closed: {fileID: 9006886715412246640}
-  _LB_open: {fileID: 222099076123310232}
-  _LB_teleporter: {fileID: 7468466242785397263}
-  _LB_spawnPoint: {fileID: 4333739417830474931}
-  _MT_closed: {fileID: 3218916094176025461}
-  _MT_open: {fileID: 7745399081287913869}
-  _MT_teleporter: {fileID: 3618888253240781913}
-  _MT_spawnPoint: {fileID: 6327672010459817068}
-  _MB_closed: {fileID: 0}
-  _MB_open: {fileID: 0}
-  _MB_teleporter: {fileID: 0}
-  _MB_spawnPoint: {fileID: 0}
-  _RT_closed: {fileID: 0}
-  _RT_open: {fileID: 0}
-  _RT_teleporter: {fileID: 0}
-  _RT_spawnPoint: {fileID: 0}
-  _RB_closed: {fileID: 0}
-  _RB_open: {fileID: 0}
-  _RB_teleporter: {fileID: 0}
-  _RB_spawnPoint: {fileID: 0}
-  _resetParent: {fileID: 6834007078627917054}
 --- !u!1 &546138116631277222
 GameObject:
   m_ObjectHideFlags: 0
@@ -1353,7 +1300,7 @@ GameObject:
   - component: {fileID: 5225153515359899575}
   - component: {fileID: 1101972355374749729}
   - component: {fileID: 1833581762601877707}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1656,7 +1603,7 @@ GameObject:
   - component: {fileID: 1602882986747719946}
   - component: {fileID: 5755584085952722446}
   - component: {fileID: 3777063671974719939}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10631,7 +10578,7 @@ GameObject:
   - component: {fileID: 4576874539325032314}
   - component: {fileID: 7742602156031945919}
   - component: {fileID: 1618291478308901477}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13816,7 +13763,7 @@ GameObject:
   - component: {fileID: 7789180371190293672}
   - component: {fileID: 7038209926951794997}
   - component: {fileID: 6914642957564107536}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}

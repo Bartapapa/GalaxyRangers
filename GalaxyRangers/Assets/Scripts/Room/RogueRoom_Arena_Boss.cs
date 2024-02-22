@@ -21,6 +21,7 @@ public class RogueRoom_Arena_Boss : RogueRoom_Arena
     private void OnBossDied(CharacterHealth characterHealth)
     {
         //Boss has died, roll credits lmfaooooooooooooooooooo
+        Debug.Log("BOSS HAS DIED LMFAOOOOOOOOO");
         CameraManager.Instance.RemoveFocusObjectFromCamera(Player.Instance.CharacterController.transform);
     }
 }
