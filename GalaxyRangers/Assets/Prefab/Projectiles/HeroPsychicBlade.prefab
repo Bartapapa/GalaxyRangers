@@ -116,7 +116,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 385
   _gravity: 0
-  _projectileSpeed: 10
+  _projectileSpeed: 25
   _speedDecay:
     serializedVersion: 2
     m_Curve: []
@@ -202,7 +202,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hurtFactions: 02000000
-  _damage: 1
+  _damage: 60
   _knockbackForce: 1
   _overrideKnockbackDirection: {x: 0, y: 0, z: 0}
   _disableInputDuration: 0.3
