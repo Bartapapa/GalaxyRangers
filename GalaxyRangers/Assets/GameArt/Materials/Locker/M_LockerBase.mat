@@ -101,6 +101,7 @@ Material:
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
+    - _Diffuse_Color_Intensity: 1
     - _DstBlend: 0
     - _DstBlendAlpha: 0
     - _EnvironmentReflections: 1
@@ -141,7 +142,7 @@ Material:
     - _Ambient_Color: {r: 1, g: 1, b: 1, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _Diffuse_Color: {r: 0.28235295, g: 0.30588236, b: 0.42352942, a: 0}
+    - _Diffuse_Color: {r: 0.241456, g: 0.20060517, b: 0.26415092, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _Noise_Color: {r: 0.45460767, g: 0.45278567, b: 0.5188679, a: 1}
     - _Noise_Color_1: {r: 1, g: 1, b: 1, a: 1}
