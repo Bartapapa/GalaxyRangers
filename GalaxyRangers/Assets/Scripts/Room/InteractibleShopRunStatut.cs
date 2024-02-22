@@ -34,14 +34,14 @@ public class InteractibleShopRunStatut : Interactible
 
 
 
-    [SerializeField] private List<int> _PriceByLevel_Health = new List<int>() { 10, 20, 30, 40};
-    [SerializeField] private List<float> _ValueByLevel_Health = new List<float>() { 10, 20, 30, 40};
-    [SerializeField] private List<int> _PriceByLevel_Damage = new List<int>() { 10, 20, 30, 40};
-    [SerializeField] private List<float> _ValueByLevel_Damage = new List<float>() { 10, 20, 30, 40};
-    [SerializeField] private List<int> _PriceByLevel_DashDistance = new List<int>() { 10, 20, 30, 40};
-    [SerializeField] private List<float> _ValueByLevel_DashDistance = new List<float>() { 10, 20, 30, 40};
-    [SerializeField] private List<int> _PriceByLevel_Speed = new List<int>() { 10, 20, 30, 40};
-    [SerializeField] private List<float> _ValueByLevel_Speed = new List<float>() { 10, 20, 30, 40};
+    private List<int> _PriceByLevel_Health = new List<int>() { 20, 20, 30, 40};
+    private List<float> _ValueByLevel_Health = new List<float>() { 25, 20, 30, 40};
+    private List<int> _PriceByLevel_Damage = new List<int>() { 15, 20, 30, 40};
+    private List<float> _ValueByLevel_Damage = new List<float>() { 10, 20, 30, 40};
+    private List<int> _PriceByLevel_DashDistance = new List<int>() { 10, 20, 30, 40};
+    private List<float> _ValueByLevel_DashDistance = new List<float>() { 5, 20, 30, 40};
+    private List<int> _PriceByLevel_Speed = new List<int>() { 10, 20, 30, 40};
+    private List<float> _ValueByLevel_Speed = new List<float>() { 5, 20, 30, 40};
 
     protected override void InteractEvent(InteractibleManager manager)
     {
@@ -108,7 +108,6 @@ public class InteractibleShopRunStatut : Interactible
             Debug.LogWarning("Augmenter level dans un manager: ca");
             // _currentLevel;
 
-            // Need to add the statut to the player
             //Should work??? need to test
             switch (_statutType) {
                 case StatutType.Health:
