@@ -170,7 +170,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hurtFactions: 01000000
-  _damage: 1
+  _damage: 30
   _knockbackForce: 8
   _overrideKnockbackDirection: {x: 0, y: 0, z: 0}
   _disableInputDuration: 0.3
