@@ -14,6 +14,7 @@ public enum CameraState
     Exploration,
     Arena,
     Dialogue,
+    Death,
 }
 
 public class CameraManager : MonoBehaviour
@@ -45,6 +46,9 @@ public class CameraManager : MonoBehaviour
     [SerializeField] private PlayerCamera _dialogueCamera;
     public PlayerCamera DialogueCamera { get { return _dialogueCamera; } set { _dialogueCamera = value; } }
     private CinemachineFramingTransposer _dialogueFramingTransposer;
+    [SerializeField] private PlayerCamera _deathCamera;
+    public PlayerCamera DeathCamera { get { return _deathCamera; } set { _dialogueCamera = value; } }
+    private CinemachineFramingTransposer _deathFramingTransposer;
 
     [Header("EXPLORATION CAMERA")]
     [SerializeField] private float _desiredCameraDirectionChangeTime = 1.5f;
@@ -71,6 +75,7 @@ public class CameraManager : MonoBehaviour
 
         _explorationFramingTransposer = ExplorationCamera.Camera.GetCinemachineComponent<CinemachineFramingTransposer>();
         _arenaFramingTransposer = ArenaCamera.Camera.GetCinemachineComponent<CinemachineFramingTransposer>();
+        _deathFramingTransposer = DeathCamera.Camera.GetCinemachineComponent<CinemachineFramingTransposer>();
         //_dialogueFramingTransposer = DialogueCamera.Camera.GetCinemachineComponent<CinemachineFramingTransposer>();
     }
 
@@ -180,6 +185,9 @@ public class CameraManager : MonoBehaviour
             case CameraState.Dialogue:
                 //DialogueCamera.Camera.enabled = false;
                 break;
+            case CameraState.Death:
+                DeathCamera.Camera.enabled = false;
+                break;
             default:
                 break;
         }
@@ -203,6 +211,9 @@ public class CameraManager : MonoBehaviour
                 break;
             case CameraState.Dialogue:
                 //DialogueCamera.Camera.enabled = true;
+                break;
+            case CameraState.Death:
+                DeathCamera.Camera.enabled = false;
                 break;
             default:
                 break;
@@ -237,6 +248,11 @@ public class CameraManager : MonoBehaviour
                 _dialogueFramingTransposer.m_CameraDistance = cameraSettings.cameraDistance;
                 CinemachineConfiner2D dialogueconfiner = DialogueCamera.GetComponent<CinemachineConfiner2D>();
                 dialogueconfiner.m_BoundingShape2D = roomCameraCollider;
+                break;
+            case CameraState.Death:
+                _deathFramingTransposer.m_CameraDistance = cameraSettings.cameraDistance;
+                CinemachineConfiner2D deathconfiner = DialogueCamera.GetComponent<CinemachineConfiner2D>();
+                deathconfiner.m_BoundingShape2D = roomCameraCollider;
                 break;
             default:
                 break;
@@ -284,6 +300,9 @@ public class CameraManager : MonoBehaviour
             case CameraState.Dialogue:
                 DialogueCamera.AddFocusObject(focusObject, weight, ignoreZ);
                 break;
+            case CameraState.Death:
+                DeathCamera.AddFocusObject(focusObject, weight, ignoreZ);
+                break;
             default:
                 break;
         }
@@ -306,6 +325,9 @@ public class CameraManager : MonoBehaviour
                 break;
             case CameraState.Dialogue:
                 DialogueCamera.RemoveFocusObject(focusObject);
+                break;
+            case CameraState.Death:
+                DeathCamera.RemoveFocusObject(focusObject);
                 break;
             default:
                 break;

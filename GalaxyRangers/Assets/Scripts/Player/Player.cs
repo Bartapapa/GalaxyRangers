@@ -204,14 +204,11 @@ public class Player : MonoBehaviour
     #region EVENTS
     private void OnCharacterDeath(CharacterHealth characterHealth)
     {
-        //Reset current run.
-        if (WorldManager.Instance)
+        //Tell gamemanager to do everything related to dying.
+        if (GameManager.Instance)
         {
-            WorldManager.Instance.EndRun();
-
-            characterHealth.Revive();
+            GameManager.Instance.OnPlayerCharacterDeath(characterHealth);
         }
-
     }
 
     #endregion
