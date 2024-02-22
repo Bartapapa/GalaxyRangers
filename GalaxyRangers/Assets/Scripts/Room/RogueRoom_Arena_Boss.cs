@@ -13,6 +13,7 @@ public class RogueRoom_Arena_Boss : RogueRoom_Arena
         base.StartArena();
         //Here is where the boss arena starts - show UI, etc, etc.
         UI_Manager.Instance.EnterInBossRoom(_boss.health);
+        AudioManager.Instance.MyMusicBoss();
         _boss.health.CharacterDied += OnBossDied;
 
         CameraManager.Instance.AddFocusObjectToCamera(_boss.transform, 2);

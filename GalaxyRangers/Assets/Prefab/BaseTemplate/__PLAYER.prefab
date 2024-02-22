@@ -742,6 +742,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc0488e5c8c27df4f8e8777c5da716ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sound: {fileID: 8300000, guid: 31c7ed87b70a56742bf897f799a4f771, type: 3}
   _characterBehavior: {fileID: 6765491590334254633}
   _characterHealth: {fileID: 496229119195536853}
   _characterCombat: {fileID: 2806389852463111803}

@@ -589,7 +589,7 @@ MonoBehaviour:
     _currentValue: -3.4028235e+38
   _isDead: 0
   _isInvulnerable: 0
-  sound: {fileID: 0}
+  sound: {fileID: 8300000, guid: 2059b4612ae24934787686c1fc420c34, type: 3}
   _typeOfCharacter: 3
   _goldAmountToEarn: 3
 --- !u!114 &781411374885464745

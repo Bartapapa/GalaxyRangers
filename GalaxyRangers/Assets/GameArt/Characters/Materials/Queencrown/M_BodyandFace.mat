@@ -50,21 +50,21 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Ambient_Strength: 0.258
-    - _Falloff_Amount_Diffuse: 0.1
-    - _Falloff_Amount_Rim: 0.1
+    - _Ambient_Strength: 0.35
+    - _Falloff_Amount_Diffuse: 0
+    - _Falloff_Amount_Rim: 0.05
     - _Falloff_Amount_Specular: 1
     - _Lighting_Cutoff_Diffuse: 0
     - _Lighting_Cutoff_Rim: 0
     - _Lighting_Cutoff_Specular: 0
     - _Noise_Color_Intensity: 0
     - _Noise_Color_Intensity_2: 0
-    - _Rim_Size: 0
+    - _Rim_Size: 0.28
     - _Smoothness: 2000
     m_Colors:
-    - _Ambient_Color: {r: 8, g: 8, b: 8, a: 0}
-    - _Diffuse_Color: {r: 0.1025943, g: 0.1025943, b: 0.1025943, a: 0}
-    - _Rim_Color: {r: 8, g: 8, b: 8, a: 0}
+    - _Ambient_Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Diffuse_Color: {r: 0.47058824, g: 0.49019608, b: 0.509434, a: 0}
+    - _Rim_Color: {r: 1, g: 0.32082546, b: 0, a: 1}
     - _Specular_Color: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &1124837758946511663

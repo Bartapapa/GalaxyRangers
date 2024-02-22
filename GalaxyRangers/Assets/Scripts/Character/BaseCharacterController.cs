@@ -2,6 +2,7 @@ using DG.Tweening.Core.Easing;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Windows;
@@ -19,6 +20,7 @@ public enum GameFaction
 [RequireComponent(typeof(Rigidbody))]
 public partial class BaseCharacterController : MonoBehaviour
 {
+    [SerializeField] private AudioClip sound = null;
 
     private Transform _cachedTransform;
     public Transform cachedTransform
@@ -1197,6 +1199,8 @@ public partial class BaseCharacterController : MonoBehaviour
         characterHealth.Invulnerability(.2f);
 
         CancelJumpDosage();
+        if (sound != null && AudioManager.Instance == true)
+            AudioManager.Instance.PlayClipAt(sound, this.transform.position);
 
         _isDashing = true;
         dashBuffer = false;

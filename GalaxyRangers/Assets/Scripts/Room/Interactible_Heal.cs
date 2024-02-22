@@ -15,7 +15,7 @@ public class Interactible_Heal : Interactible
         UI_Manager.Instance._HealthBarScript.InverseAnimationToHeal();
         
         _totalLife = (Player.Instance.CharacterHealth.MaxHealth * _healPurcentage) / 100;
-        Player.Instance.CharacterHealth.Heal(_healPurcentage);
+        Player.Instance.CharacterHealth.Heal(_totalLife);
         Destroy(this.gameObject);
     }
 

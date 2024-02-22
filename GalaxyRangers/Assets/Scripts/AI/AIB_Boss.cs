@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class AIB_Boss : AIBrain_Base
@@ -12,6 +13,7 @@ public class AIB_Boss : AIBrain_Base
     public Projectile fakePsychicBlade;
 
     public Transform psychicBladeSpawner;
+    [SerializeField] private AudioClip sound = null;
 
     protected override void Start()
     {
@@ -38,6 +40,8 @@ public class AIB_Boss : AIBrain_Base
             {
                 if (WorldManager.Instance.currentRogueRoom.resetParent != null)
                 {
+                    if (sound != null && AudioManager.Instance == true)
+                        AudioManager.Instance.PlayClipAt(sound, this.transform.position);
                     newProjectile.transform.parent = WorldManager.Instance.currentRogueRoom.resetParent;
                 }
             }
@@ -51,6 +55,8 @@ public class AIB_Boss : AIBrain_Base
             {
                 if (WorldManager.Instance.currentRogueRoom.resetParent != null)
                 {
+                    if (sound != null && AudioManager.Instance == true)
+                        AudioManager.Instance.PlayClipAt(sound, this.transform.position);
                     newProjectile.transform.parent = WorldManager.Instance.currentRogueRoom.resetParent;
                 }
             }

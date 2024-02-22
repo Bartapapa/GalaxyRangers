@@ -3284,7 +3284,7 @@ RectTransform:
   m_Father: {fileID: 7918050629549373532}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -4.1968994, y: -0.111299515}
   m_SizeDelta: {x: -0.6557, y: -3.1913}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -3341,7 +3341,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7646277049128377460
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4220,6 +4220,7 @@ GameObject:
   - component: {fileID: 514082896674552560}
   - component: {fileID: 4038516980120843362}
   - component: {fileID: 8599461436416441597}
+  - component: {fileID: 6655241241103120734}
   m_Layer: 5
   m_Name: UI_Manager
   m_TagString: Untagged
@@ -4261,7 +4262,7 @@ MonoBehaviour:
   _HubShopRef: {fileID: 1898528766944705989}
   _HubShop: {fileID: 3481284939940241728}
   _HubQuestRef: {fileID: 5151458563732984636}
-  _HealthBarScript: {fileID: 0}
+  _HealthBarScript: {fileID: 8973130292196893891}
   _HubButtonshop: {fileID: 886803515815767012}
   _HubButtonQuest: {fileID: 3873061132456646064}
   _GUIRef: {fileID: 3793679016401725285}
@@ -4301,6 +4302,19 @@ MonoBehaviour:
   _questLogo: {fileID: 4966360712868607542}
   _questPanelAnimator: {fileID: 8676386375837350417}
   _questLogoAnimator: {fileID: 4771707117767750572}
+--- !u!114 &6655241241103120734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2649424596160896710}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 702497b6722b6e947b131ac690260e23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sound: {fileID: 8300000, guid: 990637d4c0108cf4284bca4fb45b4552, type: 3}
 --- !u!1 &2813973433968646341
 GameObject:
   m_ObjectHideFlags: 0
@@ -5051,6 +5065,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 6655241241103120734}
+        m_TargetAssemblyTypeName: SC_Audio, Assembly-CSharp
+        m_MethodName: PlaySound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &3413028588424293448
 GameObject:
   m_ObjectHideFlags: 0
@@ -5616,6 +5642,18 @@ MonoBehaviour:
       - m_Target: {fileID: 7133275728728858567}
         m_TargetAssemblyTypeName: SC_An_HubBut, Assembly-CSharp
         m_MethodName: ClickOnButShop
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 6655241241103120734}
+        m_TargetAssemblyTypeName: SC_Audio, Assembly-CSharp
+        m_MethodName: PlaySound
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -15205,6 +15243,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 6655241241103120734}
+        m_TargetAssemblyTypeName: SC_Audio, Assembly-CSharp
+        m_MethodName: PlaySound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!95 &3873061132456646064
 Animator:
   serializedVersion: 5
@@ -15334,7 +15384,7 @@ RectTransform:
   m_Father: {fileID: 9220952223260959687}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -4.1968994, y: -0.111299515}
   m_SizeDelta: {x: -0.6557, y: -3.1913}
   m_Pivot: {x: 0.5, y: 0.5}

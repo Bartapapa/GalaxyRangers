@@ -8,6 +8,10 @@ public class SC_AnimationZachary : MonoBehaviour
 
     void Start()
     {
+    }
+
+    private void OnEnable()
+    {
         animator.SetFloat("alert",0.1f);
     }
 

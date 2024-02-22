@@ -106,7 +106,7 @@ MonoBehaviour:
     _currentValue: -3.4028235e+38
   _isDead: 0
   _isInvulnerable: 0
-  sound: {fileID: 0}
+  sound: {fileID: 8300000, guid: 2059b4612ae24934787686c1fc420c34, type: 3}
   _typeOfCharacter: 5
   _goldAmountToEarn: 250
 --- !u!114 &8149686720712465414
@@ -354,6 +354,7 @@ MonoBehaviour:
   realPsychicBlade: {fileID: 0}
   fakePsychicBlade: {fileID: 0}
   psychicBladeSpawner: {fileID: 0}
+  sound: {fileID: 8300000, guid: 890b7f083244bd140b4d61e5cd433cdd, type: 3}
 --- !u!1 &385883951706911624
 GameObject:
   m_ObjectHideFlags: 0

@@ -47,12 +47,21 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    public void MyMusicBoss()
+    {
+        // Fade d'un son vers l'autre
+        // _isFaiding = true;
+
+        audioSource.clip = playlist[0];
+        audioSource.Play();
+    }
+
     private void Update()
     {
-        /*if (audioSource.isPlaying == false) {
-            audioSource.clip = playlist[0];
+        if (audioSource.isPlaying == false) {
+            audioSource.clip = playlist[1];
             audioSource.Play();
-        }*/
+        }
         // if (_isFaiding)
         // {
             // musicMixer.SetFloat("MusicMixer", Mathf.Lerp(0, -80, _speedOfFaiding));
