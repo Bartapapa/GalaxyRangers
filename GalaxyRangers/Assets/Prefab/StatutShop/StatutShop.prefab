@@ -632,30 +632,6 @@ MonoBehaviour:
   _dashDistanceGO: {fileID: 1742326388301373446}
   _speedGO: {fileID: 6459871367708466449}
   _crossGO: {fileID: 6005970895150478079}
-  _PriceByLevel_Health: 0a000000140000001e00000028000000
-  _ValueByLevel_Health:
-  - 10
-  - 20
-  - 30
-  - 40
-  _PriceByLevel_Damage: 0a000000140000001e00000028000000
-  _ValueByLevel_Damage:
-  - 10
-  - 20
-  - 30
-  - 40
-  _PriceByLevel_DashDistance: 0a000000140000001e00000028000000
-  _ValueByLevel_DashDistance:
-  - 10
-  - 20
-  - 30
-  - 40
-  _PriceByLevel_Speed: 0a000000140000001e00000028000000
-  _ValueByLevel_Speed:
-  - 10
-  - 20
-  - 30
-  - 40
 --- !u!1 &3671807758333329765
 GameObject:
   m_ObjectHideFlags: 0
@@ -2106,6 +2082,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -90
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: ed70f7eb2a775554d9e1b713d624ce75,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 33657516349b21b4fb4481a23e22b75b, type: 2}
     - target: {fileID: 919132149155446097, guid: ed70f7eb2a775554d9e1b713d624ce75,
         type: 3}
       propertyPath: m_Name
