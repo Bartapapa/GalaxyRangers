@@ -109,6 +109,7 @@ public class InteractibleShopRunStatut : Interactible
             // _currentLevel;
 
             // Need to add the statut to the player
+            //Should work??? need to test
             switch (_statutType) {
                 case StatutType.Health:
                     StatModifier newHealthModifier = new StatModifier(.25f, StatModifierType.PercentageMultiply, WorldManager.Instance);
