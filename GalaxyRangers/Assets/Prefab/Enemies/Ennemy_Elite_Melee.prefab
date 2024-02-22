@@ -549,7 +549,8 @@ MonoBehaviour:
     _currentValue: -3.4028235e+38
   _isDead: 0
   _isInvulnerable: 0
-  _typeOfCharacter: 1
+  sound: {fileID: 0}
+  _typeOfCharacter: 2
   _goldAmountToEarn: 10
 --- !u!114 &4938026576061553525
 MonoBehaviour:

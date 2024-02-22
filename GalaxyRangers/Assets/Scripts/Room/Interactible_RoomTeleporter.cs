@@ -10,6 +10,10 @@ public class Interactible_RoomTeleporter : Interactible
     [Header("DEBUG")]
     [SerializeField] private MeshRenderer _mat;
 
+    [SerializeField] private GameObject _teleporterGOon;
+    [SerializeField] private GameObject _teleporterGOoff;
+    [SerializeField] private GameObject _interactPanel;
+
     //Cached
     [ReadOnlyInspector] public bool canBeActivated = true;
 
@@ -23,20 +27,25 @@ public class Interactible_RoomTeleporter : Interactible
 
         _canBeInteractedWith = true;
 
-        if (_mat)
-        {
-            _mat.material.color = Color.green;
-        }
+        _teleporterGOoff.SetActive(false);
+        _teleporterGOon.SetActive(true);
+        // if (_mat)
+        // {
+        //     _mat.material.color = Color.green;
+        // }
     }
 
     public void DeactivateTeleporter()
     {
         _canBeInteractedWith = false;
 
-        if (_mat)
-        {
-            _mat.material.color = Color.red;
-        }
+        _teleporterGOoff.SetActive(true);
+        _teleporterGOon.SetActive(false);
+
+        // if (_mat)
+        // {
+        //     _mat.material.color = Color.red;
+        // }
     }
 
     protected override void InteractEvent(InteractibleManager manager)
@@ -66,5 +75,17 @@ public class Interactible_RoomTeleporter : Interactible
     {
         yield return null;
         //End interact.
+    }
+
+    public override void SelectInteractible()
+    {
+        if (_canBeInteractedWith)
+            _interactPanel.SetActive(true);
+    }
+
+    public override void DeselectInteractible()
+    {
+        if (_canBeInteractedWith)
+            _interactPanel.SetActive(false);
     }
 }

@@ -29,6 +29,10 @@ public class SC_UI_ScriptDisplay : MonoBehaviour
     [Header("Quest Display")]
     [SerializeField] private GameObject _questPanel = null;
     [SerializeField] private GameObject _questLogo = null;
+    [SerializeField] private Animator _questPanelAnimator = null;
+    [SerializeField] private Animator _questLogoAnimator = null;
+    private bool _doONCE_du_bled = true;
+
     private bool _questPanelActive = true;
 
 
@@ -52,13 +56,19 @@ public class SC_UI_ScriptDisplay : MonoBehaviour
     {
         if (_questPanelActive == true) {
             _questPanelActive = false;
-            _questPanel.SetActive(false);
-            _questLogo.gameObject.SetActive(true);
+            // _questPanel.SetActive(false);
+            // _questLogo.SetActive(true);
+            _questLogoAnimator.SetTrigger("Enable");
+            Debug.LogWarning("Enable");
+            _questPanelAnimator.SetTrigger("Disable");
         }
         else {
             _questPanelActive = true;
-            _questPanel.SetActive(true);
-            _questLogo.gameObject.SetActive(false);
+            // _questPanel.SetActive(true);
+            // _questLogo.SetActive(false);
+            _questLogoAnimator.SetTrigger("Disable");
+            Debug.LogWarning("Disable");
+            _questPanelAnimator.SetTrigger("Enable");
         }
     }
 
@@ -66,6 +76,12 @@ public class SC_UI_ScriptDisplay : MonoBehaviour
     
     public void InitQuestPanel(QuestVariables _questVariables , string _enemyName_1 , string _enemyName_2)
     {
+        if (_doONCE_du_bled == true)
+        {
+            _doONCE_du_bled = false;
+            DisplayQuestPanel();
+        }
+
         ChangeValueCountKill(0, 0);
         _txtObjective_1.text = "Beat " + _questVariables._enemyNumberToKill_1.ToString() + " " + _enemyName_1;
         if (_questVariables._enemyNumberToKill_2 > 0) {

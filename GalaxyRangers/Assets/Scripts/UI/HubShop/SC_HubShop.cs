@@ -20,6 +20,13 @@ public class SC_HubShop : MonoBehaviour
     private bool _round2ofGaugeUpgrade = false;
     private float lerpSpeed = 0.005f;
 
+    
+    [SerializeField] private bool _DebugTime_isUsed = false;
+    private float _DebugTime_DurationTimer = 3.0f;
+    private float _DebugTime_CooldownTimer = 0.0f;
+
+    private bool _DebugTime_Finish = false;
+
     private void OnEnable()
     {
         ValuesUpdating();
@@ -51,6 +58,7 @@ public class SC_HubShop : MonoBehaviour
                 _round2ofGaugeUpgrade = false;
             }
             _ameliorationGauge = true;
+            _DebugTime_isUsed = true;
         }
     }
 
@@ -58,19 +66,22 @@ public class SC_HubShop : MonoBehaviour
 
     private void Update()
     {
+        UpdateTimer();
+
+
         if (_DebugRecalculateValues)
         {
             ValuesUpdating();
             _DebugRecalculateValues = false;
         }
         if (_ameliorationGauge == true) {
-            // if (GaugeXP_fill.value != GaugeXP_ease.value)
-            if (GaugeXP_fill.value >= GaugeXP_ease.value - 0.001)
+            // if (GaugeXP_fill.value >= GaugeXP_ease.value - 0.001)
+            if (GaugeXP_fill.value != GaugeXP_ease.value && _DebugTime_Finish == false)
             {
                 if (_round2ofGaugeUpgrade)
                 {
                     GaugeXP_fill.value = Mathf.Lerp(GaugeXP_fill.value, GaugeXP_ease.value, lerpSpeed * 3);
-                    Debug.Log(GaugeXP_fill.value);
+                    Debug.Log(_DebugTime_CooldownTimer);
                 }
                 else
                 {
@@ -81,6 +92,7 @@ public class SC_HubShop : MonoBehaviour
             else if (_round2ofGaugeUpgrade == true) {
                 if (_tmpDoOnce == false) {
                     _tmpDoOnce = true;
+                    _DebugTime_Finish = false;
                     Player.Instance._currencyScript.current_XPLevelAmount++;
                     _levelAmount.text = "LVL " + Player.Instance._currencyScript.current_XPLevelAmount.ToString();
 
@@ -104,6 +116,20 @@ public class SC_HubShop : MonoBehaviour
             }
 
 
+        }
+    }
+
+    private void UpdateTimer()
+    {
+        if (_DebugTime_isUsed == true)
+        {
+            _DebugTime_CooldownTimer += Time.unscaledDeltaTime;
+            if (_DebugTime_CooldownTimer >= _DebugTime_DurationTimer)
+            {
+                _DebugTime_isUsed = false;
+                _DebugTime_CooldownTimer = 0.0f;
+                _DebugTime_Finish = true;
+            }
         }
     }
 }

@@ -33,8 +33,9 @@ public class CharacterHealth : MonoBehaviour
     public event HealthCallback CharacterHurt;
     public event HealthCallback CharacterHealed;
     public event HealthCallback CharacterRevived;
+    [SerializeField] private AudioClip sound = null;
 
-// Pas beau mais fonctionne
+    // Pas beau mais fonctionne
     [Header("Leezak's Code")]
     [SerializeField] private TypeOfCharacter _typeOfCharacter = TypeOfCharacter.Player;
     [SerializeField] private int _goldAmountToEarn = 20;
@@ -71,6 +72,9 @@ public class CharacterHealth : MonoBehaviour
         }
         if (_isDead || _isInvulnerable)
             return;
+        if (_typeOfCharacter == TypeOfCharacter.Player && sound != null && AudioManager.Instance == true)
+            AudioManager.Instance.PlayClipAt(sound, this.transform.position);
+
         Health.Damage(damage);
 
         CharacterHurt?.Invoke(this);

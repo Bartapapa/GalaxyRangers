@@ -14,7 +14,6 @@ public class Interactible_PNJ : Interactible
     public override void DeselectInteractible()
     {
         _interactPanel.SetActive(false);
-    
     }
 
     protected override void InteractEvent(InteractibleManager manager)

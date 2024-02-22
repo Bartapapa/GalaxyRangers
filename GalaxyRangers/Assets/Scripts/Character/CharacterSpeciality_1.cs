@@ -15,6 +15,7 @@ public class CharacterSpeciality_1 : MonoBehaviour
     [SerializeField] private float _capacityDurationTimer = 10.0f;
     private float _capacityCooldownTimer = 0.0f;
     public float _capacityLoadValue = 0.0f;
+    [SerializeField] private AudioClip sound;
 
 
 
@@ -56,6 +57,10 @@ public class CharacterSpeciality_1 : MonoBehaviour
     private void LaunchAbility()
     {
         //Play animation.
+        if (sound != null && AudioManager.Instance == true)
+            AudioManager.Instance.PlayClipAt(sound, this.transform.position);
+        else
+            Debug.LogWarning("No sound or no AudioManager found in the scene");
         combat.SpecialAttack(specialAttack);
     }
 
