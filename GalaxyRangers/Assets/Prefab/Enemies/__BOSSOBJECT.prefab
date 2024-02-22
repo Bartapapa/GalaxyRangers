@@ -487,6 +487,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 282620639732127062}
     m_Modifications:
+    - target: {fileID: 141048247812841891, guid: 0bd6aa898f12c87488940c1b3b68ca28,
+        type: 3}
+      propertyPath: m_ExcludeLayers.m_Bits
+      value: 457
+      objectReference: {fileID: 0}
     - target: {fileID: 380062303912769602, guid: 0bd6aa898f12c87488940c1b3b68ca28,
         type: 3}
       propertyPath: m_Name
@@ -509,6 +514,11 @@ PrefabInstance:
       propertyPath: psychicBladeSpawner
       value: 
       objectReference: {fileID: 7009350736184419069}
+    - target: {fileID: 4593527854536141858, guid: 0bd6aa898f12c87488940c1b3b68ca28,
+        type: 3}
+      propertyPath: m_ExcludeLayers.m_Bits
+      value: 449
+      objectReference: {fileID: 0}
     - target: {fileID: 4875186535676989424, guid: 0bd6aa898f12c87488940c1b3b68ca28,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -558,6 +568,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6124525589637944022, guid: 0bd6aa898f12c87488940c1b3b68ca28,
+        type: 3}
+      propertyPath: onlyGroundLayers.m_Bits
+      value: 257
+      objectReference: {fileID: 0}
+    - target: {fileID: 6124525589637944022, guid: 0bd6aa898f12c87488940c1b3b68ca28,
+        type: 3}
+      propertyPath: defaultEnvironmentLayers.m_Bits
+      value: 385
       objectReference: {fileID: 0}
     - target: {fileID: 7399800559744945925, guid: 0bd6aa898f12c87488940c1b3b68ca28,
         type: 3}
@@ -628,6 +648,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 282620639732127062}
     m_Modifications:
+    - target: {fileID: 141048247812841891, guid: 0bd6aa898f12c87488940c1b3b68ca28,
+        type: 3}
+      propertyPath: m_ExcludeLayers.m_Bits
+      value: 457
+      objectReference: {fileID: 0}
     - target: {fileID: 380062303912769602, guid: 0bd6aa898f12c87488940c1b3b68ca28,
         type: 3}
       propertyPath: m_Name
@@ -664,6 +689,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4593527854536141858, guid: 0bd6aa898f12c87488940c1b3b68ca28,
+        type: 3}
+      propertyPath: m_ExcludeLayers.m_Bits
+      value: 449
       objectReference: {fileID: 0}
     - target: {fileID: 4875186535676989424, guid: 0bd6aa898f12c87488940c1b3b68ca28,
         type: 3}
@@ -714,6 +744,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6124525589637944022, guid: 0bd6aa898f12c87488940c1b3b68ca28,
+        type: 3}
+      propertyPath: onlyGroundLayers.m_Bits
+      value: 257
+      objectReference: {fileID: 0}
+    - target: {fileID: 6124525589637944022, guid: 0bd6aa898f12c87488940c1b3b68ca28,
+        type: 3}
+      propertyPath: defaultEnvironmentLayers.m_Bits
+      value: 385
       objectReference: {fileID: 0}
     - target: {fileID: 7399800559744945925, guid: 0bd6aa898f12c87488940c1b3b68ca28,
         type: 3}
@@ -868,6 +908,11 @@ PrefabInstance:
       propertyPath: wayPoints.Array.data[4]
       value: 
       objectReference: {fileID: 1470868084105751849}
+    - target: {fileID: 402203990645717603, guid: 7dda3b105ec4bf94592417735ef68f3b,
+        type: 3}
+      propertyPath: m_ExcludeLayers.m_Bits
+      value: 449
+      objectReference: {fileID: 0}
     - target: {fileID: 3372262586604692405, guid: 7dda3b105ec4bf94592417735ef68f3b,
         type: 3}
       propertyPath: illusions.Array.data[0]
@@ -902,6 +947,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4413440454262458111, guid: 7dda3b105ec4bf94592417735ef68f3b,
+        type: 3}
+      propertyPath: m_ExcludeLayers.m_Bits
+      value: 449
       objectReference: {fileID: 0}
     - target: {fileID: 4961810169372873929, guid: 7dda3b105ec4bf94592417735ef68f3b,
         type: 3}
@@ -965,8 +1015,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8149686720712465414, guid: 7dda3b105ec4bf94592417735ef68f3b,
         type: 3}
+      propertyPath: onlyGroundLayers.m_Bits
+      value: 257
+      objectReference: {fileID: 0}
+    - target: {fileID: 8149686720712465414, guid: 7dda3b105ec4bf94592417735ef68f3b,
+        type: 3}
       propertyPath: _damageModifier.BaseValue
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8149686720712465414, guid: 7dda3b105ec4bf94592417735ef68f3b,
+        type: 3}
+      propertyPath: defaultEnvironmentLayers.m_Bits
+      value: 385
       objectReference: {fileID: 0}
     - target: {fileID: 8361854105990771028, guid: 7dda3b105ec4bf94592417735ef68f3b,
         type: 3}
