@@ -562,6 +562,10 @@ MonoBehaviour:
   hasHyperArmor: 0
   _cachedVelocity: {x: 0, y: 0, z: 0}
   _aimingTarget: {fileID: 0}
+  _damageModifier:
+    BaseValue: 1
+    _maxValue: -3.4028235e+38
+    _currentValue: -3.4028235e+38
   enableGroundDetection: 1
   enableCeilingDetection: 1
   enableResetCharacter: 0
