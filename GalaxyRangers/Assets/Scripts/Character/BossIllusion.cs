@@ -35,6 +35,8 @@ public class BossIllusion : MonoBehaviour
 
     public void Apparate()
     {
+        CameraManager.Instance.AddFocusObjectToCamera(this.transform, 5);
+
         //Make renderers appear
         rend.enabled = true;
         //Make healthbar appear
@@ -50,6 +52,8 @@ public class BossIllusion : MonoBehaviour
 
     public void Disapparate()
     {
+        CameraManager.Instance.RemoveFocusObjectFromCamera(this.transform);
+
         if (apparateCoroutine != null)
         {
             StopCoroutine(apparateCoroutine);

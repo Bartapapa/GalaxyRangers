@@ -14,7 +14,7 @@ public class Interactible_HUBTeleporter : Interactible
         //Teleport out of world, generate new one based on seed.
         if (!GameManager.Instance.isInFade)
         {
-            GameManager.Instance.Fade(.5f,
+            GameManager.Instance.Fade(.5f, false,
                     () => WorldManager.Instance.StartNewRun(forceSeed),
                     () => EndInteract(manager));
         }
