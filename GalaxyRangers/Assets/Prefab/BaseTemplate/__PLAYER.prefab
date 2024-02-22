@@ -1010,7 +1010,7 @@ MonoBehaviour:
   psychicBladeHeroProjectile: {fileID: 2875950977790827050, guid: b87f06ea0af59af46b47c4804b043a8d,
     type: 3}
   _capacity_isUsed: 0
-  _capacityDurationTimer: 10
+  _capacityDurationTimer: 6.5
   _capacityLoadValue: 0
   sound: {fileID: 8300000, guid: 890b7f083244bd140b4d61e5cd433cdd, type: 3}
 --- !u!114 &4620464566907259800
