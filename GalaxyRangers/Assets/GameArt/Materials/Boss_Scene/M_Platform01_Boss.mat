@@ -39,7 +39,7 @@ Material:
     - _Noise_Scale_1: 25
     m_Colors:
     - _Ambient_Color: {r: 0.46226418, g: 0.46226418, b: 0.46226418, a: 0}
-    - _Diffuse_Color: {r: 7.129739, g: 7.129739, b: 7.129739, a: 0}
+    - _Diffuse_Color: {r: 3.771584, g: 3.5758884, b: 3.5758884, a: 0}
     - _Noise_Color: {r: 1, g: 1, b: 1, a: 1}
     - _Noise_Color_1: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
