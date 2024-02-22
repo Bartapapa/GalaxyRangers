@@ -23,15 +23,20 @@ public class SC_ItemCaseHubShop : MonoBehaviour
 
     [Header("Weapon ref")]
     [SerializeField] private Weapon _sword;
+    private int xp = 0;
 
     private void OnEnable()
     {
         Item_Updating();
     }
 
-    private void Item_Updating()
+    public void Item_Updating()
     {
-        if (_relationLevelToUnlock <= Player.Instance._currencyScript.current_XPLevelAmount)
+        if (Player.Instance._currencyScript.NewXP_Relationship && (Player.Instance._currencyScript.current_XPAmount + Player.Instance._currencyScript.New_XPAmount) >= 35)
+            xp = Player.Instance._currencyScript.current_XPLevelAmount + 1;
+        else
+            xp = Player.Instance._currencyScript.current_XPLevelAmount;
+        if (_relationLevelToUnlock <= xp)
         {
             _Lock_go.SetActive(false);
             _Unlock_go.SetActive(true);
