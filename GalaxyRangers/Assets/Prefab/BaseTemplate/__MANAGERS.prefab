@@ -159,7 +159,7 @@ MonoBehaviour:
   _itemRooms: {fileID: 11400000, guid: c3bea3a8dc71aed44808203ae777f3c3, type: 2}
   _shopRooms: {fileID: 11400000, guid: 4903c60ee66be6f4999db4cf40506d8d, type: 2}
   _spawnRooms: {fileID: 11400000, guid: c027e510af5044b49a6bcdaefcbdccfe, type: 2}
-  _bossRoom: {fileID: 3180170347035312261, guid: 61adf6335f3fa7748a2ad5c2b140cb53,
+  _bossRoom: {fileID: 5825325118229345029, guid: 90203e727c6e2784ea2b68970a485990,
     type: 3}
   _HUBRoomPrefab: {fileID: 6232000040295945291, guid: e358af6f329227843b9e57c1c694a989,
     type: 3}
