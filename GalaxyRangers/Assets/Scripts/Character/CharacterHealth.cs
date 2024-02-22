@@ -121,6 +121,11 @@ public class CharacterHealth : MonoBehaviour
         Health.HealToMaxValue();
         _isDead = false;
 
+        if (_controller)
+        {
+            _controller.Revive();
+        }
+
         CharacterRevived?.Invoke(this);
     }
 

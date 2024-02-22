@@ -56,7 +56,7 @@ public class Interactible_RoomTeleporter : Interactible
 
         if (!GameManager.Instance.isInFade)
         {
-            GameManager.Instance.Fade(.5f,
+            GameManager.Instance.Fade(.5f, false,
                 () => WorldManager.Instance.MoveToRoom(teleporter.toRoom, null, true),
                 () => EndInteract(manager));
 

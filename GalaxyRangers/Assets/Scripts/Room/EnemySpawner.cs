@@ -55,6 +55,7 @@ public class EnemySpawner : MonoBehaviour
             AIBrain_Base newEnemy = Instantiate<AIBrain_Base>(chosenEnemy, this.transform);
             _chosenEnemy = chosenEnemy; //Ref to prefab, not instantiated enemy
             _instantiatedEnemy = newEnemy;
+            _instantiatedEnemy.controller.SetRigidbodyPosition(this.transform.position, true);
 
             newEnemy.transform.parent = WorldManager.Instance.currentRogueRoom.resetParent;
             newEnemy.health.CharacterDied -= OnEnemyDied;
