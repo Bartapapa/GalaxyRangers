@@ -22,7 +22,7 @@ public class SC_HubShop : MonoBehaviour
 
     
     [SerializeField] private bool _DebugTime_isUsed = false;
-    private float _DebugTime_DurationTimer = 3.0f;
+    private float _DebugTime_DurationTimer = 2.0f;
     private float _DebugTime_CooldownTimer = 0.0f;
 
     private bool _DebugTime_Finish = false;
@@ -32,7 +32,7 @@ public class SC_HubShop : MonoBehaviour
         ValuesUpdating();
     }
 
-    private void ValuesUpdating()
+    public void ValuesUpdating()
     {
         // Currency
         _blueTokenAmount.text = Player.Instance._currencyScript.BlueTokenAmount.ToString();
@@ -81,12 +81,12 @@ public class SC_HubShop : MonoBehaviour
                 if (_round2ofGaugeUpgrade)
                 {
                     GaugeXP_fill.value = Mathf.Lerp(GaugeXP_fill.value, GaugeXP_ease.value, lerpSpeed * 3);
-                    Debug.Log(_DebugTime_CooldownTimer);
+                    // Debug.Log(_DebugTime_CooldownTimer);
                 }
                 else
                 {
                     GaugeXP_fill.value = Mathf.Lerp(GaugeXP_fill.value, GaugeXP_ease.value, lerpSpeed);
-                    Debug.Log("Je tourne");
+                    // Debug.Log("Je tourne");
                 }
             }
             else if (_round2ofGaugeUpgrade == true) {
@@ -131,5 +131,12 @@ public class SC_HubShop : MonoBehaviour
                 _DebugTime_Finish = true;
             }
         }
+    }
+
+    public void DebugReturnButton()
+    {
+        Player.Instance._currencyScript.NewXP_Relationship = true;
+        Player.Instance._currencyScript.New_XPAmount = 150;
+        Player.Instance._currencyScript.AddRelics(100);
     }
 }

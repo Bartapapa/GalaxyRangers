@@ -10,8 +10,8 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioMixerGroup musicMixer;
     [SerializeField] private AudioMixerGroup soundEffectMixer;
-    private bool _isFaiding = false;
-    private float _speedOfFaiding = 0.25f;
+    // private bool _isFaiding = false;
+    // private float _speedOfFaiding = 0.25f;
 
     private void Awake()
     {

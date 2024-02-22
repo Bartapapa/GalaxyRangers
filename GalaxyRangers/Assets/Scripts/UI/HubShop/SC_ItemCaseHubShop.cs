@@ -12,7 +12,7 @@ public class SC_ItemCaseHubShop : MonoBehaviour
     [SerializeField] private GameObject _imageRelics = null;
     [SerializeField] private GameObject _Lock_go = null;
     [SerializeField] private GameObject _Unlock_go = null;
-    [SerializeField] private GameObject _ItemBuy = null;
+    // [SerializeField] private GameObject _ItemBuy = null;
 
     [Header("Item/Ability Infos")]
     [SerializeField] private bool _isBlueToken = false;
@@ -23,6 +23,8 @@ public class SC_ItemCaseHubShop : MonoBehaviour
 
     [Header("Weapon ref")]
     [SerializeField] private Weapon _sword;
+    [SerializeField] private bool _IsdoOnce = false;
+    private bool _Activated = false;
     private int xp = 0;
 
     private void OnEnable()
@@ -32,10 +34,16 @@ public class SC_ItemCaseHubShop : MonoBehaviour
 
     public void Item_Updating()
     {
-        if (Player.Instance._currencyScript.NewXP_Relationship && (Player.Instance._currencyScript.current_XPAmount + Player.Instance._currencyScript.New_XPAmount) >= 35)
+        xp = Player.Instance._currencyScript.current_XPLevelAmount;
+        if (_Activated)
+        {
             xp = Player.Instance._currencyScript.current_XPLevelAmount + 1;
-        else
-            xp = Player.Instance._currencyScript.current_XPLevelAmount;
+        }
+        if (_IsdoOnce)
+        {
+            _Activated = true;
+        }
+
         if (_relationLevelToUnlock <= xp)
         {
             _Lock_go.SetActive(false);
@@ -58,6 +66,12 @@ public class SC_ItemCaseHubShop : MonoBehaviour
             _Unlock_go.SetActive(false);
             _textRelationLevelToUnlock.text = "LVL " + _relationLevelToUnlock.ToString();
         }
+        if (_is_Bought)
+        {
+            _textPrice.text = "";
+            _imageBlueToken.SetActive(false);
+            _imageRelics.SetActive(false);
+        }
     }
 
     public void TryToBuyItem()
@@ -66,7 +80,8 @@ public class SC_ItemCaseHubShop : MonoBehaviour
             if (_isBlueToken) {
                 if (Player.Instance._currencyScript.BlueTokenAmount >= _itemPrice){
                     Player.Instance._currencyScript.BlueTokenAmount -= _itemPrice;
-                    
+
+
                     _is_Bought = true;
 
                     Player.Instance.CharacterCombat.EquipWeapon(_sword);
@@ -76,8 +91,10 @@ public class SC_ItemCaseHubShop : MonoBehaviour
             else {
                 if (Player.Instance._currencyScript.RelicsAmount >= _itemPrice) {
                     Player.Instance._currencyScript.RelicsAmount -= _itemPrice;
+                    UI_Manager.Instance._textCurrency.text = Player.Instance._currencyScript.RelicsAmount.ToString();
 
                     _is_Bought = true;
+                    Item_Updating();
 
                     Player.Instance.CharacterCombat.EquipWeapon(_sword);
                     //Should work

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class UI_Manager : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class UI_Manager : MonoBehaviour
     [SerializeField] private SC_UI_ScriptDisplay _scriptDisplay;
     [SerializeField] public SC_PauseMenu _scriptPauseMenu;
     [SerializeField] public UI_ScreenFader screenFader;
+    public TextMeshProUGUI _textCurrency;
 
     [Header("Boss")]
     private bool _roomOfBoss;
@@ -68,12 +70,12 @@ public class UI_Manager : MonoBehaviour
 
     private void UpdateBossHealth()
     {
+        healthSliderBOSS.maxValue = _scriptCharBossHealth.Health.MaxValue;
+        easeHealthSliderBOSS.maxValue = _scriptCharBossHealth.Health.MaxValue;
         if (healthSliderBOSS.value != _scriptCharBossHealth.Health.CurrentValue)
             healthSliderBOSS.value = _scriptCharBossHealth.Health.CurrentValue;
         if (_scriptCharBossHealth.Health.CurrentValue != easeHealthSliderBOSS.value)
             easeHealthSliderBOSS.value = Mathf.Lerp(easeHealthSliderBOSS.value, _scriptCharBossHealth.Health.CurrentValue, lerpSpeedBOSS);
-        healthSliderBOSS.maxValue = _scriptCharBossHealth.Health.MaxValue;
-        easeHealthSliderBOSS.maxValue = _scriptCharBossHealth.Health.MaxValue;
     }
 
     public void OpenHubShop()
