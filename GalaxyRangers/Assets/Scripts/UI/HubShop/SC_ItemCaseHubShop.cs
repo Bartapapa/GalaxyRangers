@@ -21,6 +21,9 @@ public class SC_ItemCaseHubShop : MonoBehaviour
     [SerializeField] private bool _is_Bought = false;
     [SerializeField] private bool _DebugRefresh = false;
 
+    [Header("Weapon ref")]
+    [SerializeField] private Weapon _sword;
+
     private void OnEnable()
     {
         Item_Updating();
@@ -56,10 +59,13 @@ public class SC_ItemCaseHubShop : MonoBehaviour
     {
         if (_is_Bought == false) { 
             if (_isBlueToken) {
-                if (Player.Instance._currencyScript.BlueTokenAmount >= _itemPrice) {
+                if (Player.Instance._currencyScript.BlueTokenAmount >= _itemPrice){
                     Player.Instance._currencyScript.BlueTokenAmount -= _itemPrice;
                     
                     _is_Bought = true;
+
+                    Player.Instance.CharacterCombat.EquipWeapon(_sword);
+                    //Should work
                 }
             }
             else {
@@ -67,6 +73,9 @@ public class SC_ItemCaseHubShop : MonoBehaviour
                     Player.Instance._currencyScript.RelicsAmount -= _itemPrice;
 
                     _is_Bought = true;
+
+                    Player.Instance.CharacterCombat.EquipWeapon(_sword);
+                    //Should work
                 }
             }
         }
