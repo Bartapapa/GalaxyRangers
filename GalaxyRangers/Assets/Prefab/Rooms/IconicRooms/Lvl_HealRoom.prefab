@@ -20193,6 +20193,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1542159931469326538}
     m_Modifications:
+    - target: {fileID: 1289738870497628324, guid: 3f4dcb8e1bba5bf478f75fc47ab16743,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 3806857139882783848, guid: 3f4dcb8e1bba5bf478f75fc47ab16743,
         type: 3}
       propertyPath: m_Name
