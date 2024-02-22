@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
     }
 
     #region FADING
-    public void Fade(float overTime, Action onFadeInComplete = null, Action onFadeOutComplete = null)
+    public void Fade(float overTime, bool screenFade = false, Action onFadeInComplete = null, Action onFadeOutComplete = null)
     {
         if (isFading)
             return;
@@ -37,17 +37,17 @@ public class GameManager : MonoBehaviour
         _onFadeInComplete = onFadeInComplete;
         _onFadeOutComplete = onFadeOutComplete;
 
-        FadeIn(overTime);
+        FadeIn(overTime, screenFade);
     }
 
-    private void FadeIn(float overTime)
+    private void FadeIn(float overTime, bool screenFade = false)
     {
-        fadeCoroutine = StartCoroutine(CoFade(true, overTime));
+        fadeCoroutine = StartCoroutine(CoFade(true, overTime, screenFade));
     }
 
-    private void FadeOut(float overTime)
+    private void FadeOut(float overTime, bool screenFade = false)
     {
-        fadeCoroutine = StartCoroutine(CoFade(false, overTime));
+        fadeCoroutine = StartCoroutine(CoFade(false, overTime, screenFade));
     }
 
     private IEnumerator CoFade(bool fadeIn, float overTime, bool screenFade = false)
@@ -93,7 +93,7 @@ public class GameManager : MonoBehaviour
 
         if (fadeIn)
         {
-            FadeInCallback(overTime);
+            FadeInCallback(overTime, screenFade);
         }
         else
         {
@@ -111,7 +111,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void FadeInCallback(float overtime)
+    private void FadeInCallback(float overtime, bool screenFade)
     {      
         if (_onFadeInComplete != null)
         {
@@ -120,7 +120,7 @@ public class GameManager : MonoBehaviour
         }
 
         StartCoroutine(WaitForTime(.2f,
-            () => FadeOut(overtime)));
+            () => FadeOut(overtime, screenFade)));
     }
 
     private void FadeOutCallback(float overtime)
@@ -130,6 +130,26 @@ public class GameManager : MonoBehaviour
             _onFadeOutComplete();
             _onFadeOutComplete = null;
         }
+    }
+
+    #endregion
+
+    #region CHARDEATH
+
+    public void OnPlayerCharacterDeath(CharacterHealth characterHealth)
+    {
+        CameraManager.Instance.CameraState = CameraState.Death;
+        StartCoroutine(WaitForTime(3f,
+            () => Fade(.5f, true,
+                () => ReviveCharacter(characterHealth),
+                null)));
+    }
+
+    private void ReviveCharacter(CharacterHealth character)
+    {
+        WorldManager.Instance.EndRun();
+
+        character.Revive();
     }
 
     #endregion

@@ -1442,9 +1442,9 @@ public partial class BaseCharacterController : MonoBehaviour
 
     public void Death()
     {
-        //FreezeCharacter();
+        FreezeCharacter();
 
-        //capsuleCollider.enabled = false;
+        capsuleCollider.enabled = false;
 
         //resurrectCoroutine = StartCoroutine(WaitForResurrect());
 
@@ -1453,6 +1453,21 @@ public partial class BaseCharacterController : MonoBehaviour
         if (OnDeath != null)
         {
             OnDeath(this);
+        }
+
+    }
+
+    public void Revive()
+    {
+        UnfreezeCharacter();
+
+        capsuleCollider.enabled = true;
+
+        ResetStatModifiers();
+
+        if (OnResurrect != null)
+        {
+            OnResurrect(this);
         }
 
     }
