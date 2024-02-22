@@ -414,7 +414,7 @@ PolygonCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -429,7 +429,7 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -28.249348, y: 5.561384}
+    - - {x: -28.166557, y: 5.058733}
       - {x: -28.275167, y: 3.169112}
       - {x: -28.296112, y: -4.344926}
       - {x: 14.867056, y: -4.419697}
@@ -5935,7 +5935,7 @@ MonoBehaviour:
   completedCameraSettings:
     cameraState: 2
     cameraDistance: 8
-    confiner: {fileID: 0}
+    confiner: {fileID: 3565725992456552607}
   _ignoreScenario: 0
   _scenario1: {fileID: 0}
   _scenario2: {fileID: 0}

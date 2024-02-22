@@ -21694,7 +21694,7 @@ MonoBehaviour:
   completedCameraSettings:
     cameraState: 2
     cameraDistance: 8
-    confiner: {fileID: 0}
+    confiner: {fileID: 8934598273677661904}
   _ignoreScenario: 0
   _scenario1: {fileID: 89496023881541998}
   _scenario2: {fileID: 8203990621735419453}

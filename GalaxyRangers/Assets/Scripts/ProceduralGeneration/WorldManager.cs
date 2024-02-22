@@ -79,6 +79,8 @@ public class WorldManager : MonoBehaviour
     {
         RogueRoom hubRoom = Instantiate<RogueRoom>(_HUBRoomPrefab, HUBRoomParent);
         _currentRogueRoom = hubRoom;
+        _currentRogueRoom.UseCameraSettings();
+
         _instantiatedHUBRoom = hubRoom;
 
         EndRun();
@@ -86,15 +88,15 @@ public class WorldManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.G))
-        {
-            StartNewRun();
-        }
+        //if (Input.GetKeyDown(KeyCode.G))
+        //{
+        //    StartNewRun();
+        //}
 
-        if (Input.GetKeyDown(KeyCode.N))
-        {
-            Player.Instance.CharacterHealth.Hurt(999f);
-        }
+        //if (Input.GetKeyDown(KeyCode.N))
+        //{
+        //    Player.Instance.CharacterHealth.Hurt(999f);
+        //}
     }
 
     public void StartNewRun(string forceSeed = "")
