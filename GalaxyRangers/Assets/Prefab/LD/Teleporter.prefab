@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 8202968469896572181}
   - component: {fileID: 7353750358650573536}
   - component: {fileID: 87611665215084014}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: M_Screen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -555,6 +555,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: M_Screen (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: a2989df2ac679ad4684e0a6b55460597,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: a2989df2ac679ad4684e0a6b55460597,
         type: 3}
