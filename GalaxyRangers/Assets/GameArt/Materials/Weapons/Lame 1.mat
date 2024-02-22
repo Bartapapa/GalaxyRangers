@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: M_KnifeNeon
+  m_Name: Lame 1
   m_Shader: {fileID: -6465566751694194690, guid: 57356e5a257bc6a4fad4c446fcc06703,
     type: 3}
   m_Parent: {fileID: 0}
@@ -96,7 +96,6 @@ Material:
     - _BumpScale: 1
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
-    - _ColorNoise_Intensity: 0.5
     - _Cull: 2
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
@@ -106,7 +105,7 @@ Material:
     - _DstBlendAlpha: 0
     - _EnvironmentReflections: 1
     - _Falloff_Amount_Diffuse: 0
-    - _Falloff_Amount_Rim: 1
+    - _Falloff_Amount_Rim: 0
     - _Falloff_Amount_Specular: 1
     - _GlossMapScale: 0
     - _Glossiness: 0
@@ -119,16 +118,16 @@ Material:
     - _Noise_Color_Intensity: 0
     - _Noise_Color_Intensity_2: 0
     - _Noise_Intensity: 0
-    - _Noise_Offset: 17.94
+    - _Noise_Offset: 0
     - _Noise_Scale: 0
-    - _Noise_Scale_1: 593.8
-    - _Noise_Scale_2: 0
+    - _Noise_Scale_1: 25
+    - _Noise_Scale_2: 150
     - _OcclusionStrength: 1
     - _Parallax: 0.005
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _Rim_Size: 0.05
+    - _Rim_Size: 0
     - _SHADOWS_SOFT: 1
     - _Smoothness: 2000
     - _SmoothnessTextureChannel: 0
@@ -139,15 +138,15 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - _Ambient_Color: {r: 1, g: 1, b: 1, a: 0}
+    - _Ambient_Color: {r: 1.9242501, g: 1.9242501, b: 1.9242501, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _Diffuse_Color: {r: 0, g: 0.58515716, b: 4.6037736, a: 0}
+    - _Diffuse_Color: {r: 0.13972943, g: 0.13972943, b: 0.18867922, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _Noise_Color: {r: 0.31576136, g: 0.30598074, b: 0.33962262, a: 1}
-    - _Noise_Color_1: {r: 1, g: 0, b: 0, a: 1}
+    - _Noise_Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Noise_Color_1: {r: 1, g: 1, b: 1, a: 1}
     - _Noise_Color_2: {r: 0, g: 0.22687477, b: 1, a: 1}
-    - _Rim_Color: {r: 0, g: 10.820491, b: 14.259475, a: 0}
+    - _Rim_Color: {r: 4.735637, g: 4.735637, b: 4.735637, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _Specular_Color: {r: 14.124951, g: 11.88664, b: 8.061882, a: 0}
   m_BuildTextureStacks: []
