@@ -1653,6 +1653,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Halberd
       objectReference: {fileID: 0}
+    - target: {fileID: 7676400110299993495, guid: 74f9f64ebc3e3b445ad735a07d2c3b31,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1103355892225527197, guid: 74f9f64ebc3e3b445ad735a07d2c3b31, type: 3}
     m_RemovedGameObjects: []
