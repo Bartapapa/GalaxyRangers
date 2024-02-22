@@ -252,7 +252,8 @@ public class CharacterCombat : MonoBehaviour
             }           
         }
         //Instantiate weapon, normally.
-        _currentWeapon = weapon; //instantiated weapon
+        Weapon newWeapon = Instantiate<Weapon>(weapon, _weaponRoot);
+        _currentWeapon = newWeapon; //instantiated weapon
         InitializeCurrentWeapon();
 
         //Instantiate weapon mesh in weaponHoldSocket
@@ -292,7 +293,9 @@ public class CharacterCombat : MonoBehaviour
     public void UnEquipWeapon()
     {
         CancelFullAttack();
-        //Destroy _currentWeaponObject, then destroy the child of _weaponParent.
+        //Destroy _currentWeaponObject, then destroy the children of _weaponParent.
+        Destroy(_currentWeapon.currentWeaponObject.gameObject);
+        Destroy(_currentWeapon.gameObject);
     }
 
     public void LightAttack()

@@ -27,9 +27,6 @@ public class RoomTeleporter : MonoBehaviour
                 GameManager.Instance.Fade(.5f,
                     () => WorldManager.Instance.MoveToRoom(_traversalPoint.toRoom, _traversalPoint));
             }
-            //Use worldmanager to fade out, change room, fade in.
-            //WorldManager.Instance.world.rooms.Find(_traversalPoint.toRoom);
-            //WorldManager.Instance.MoveToRoom(_traversalPoint.toRoom, _traversalPoint);
         }
     }
 }

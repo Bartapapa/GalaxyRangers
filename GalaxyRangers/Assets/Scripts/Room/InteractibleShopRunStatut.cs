@@ -111,17 +111,25 @@ public class InteractibleShopRunStatut : Interactible
             // Need to add the statut to the player
             switch (_statutType) {
                 case StatutType.Health:
+                    StatModifier newHealthModifier = new StatModifier(.25f, StatModifierType.PercentageMultiply, WorldManager.Instance);
+                    Player.Instance.CharacterController.characterHealth.Health.AddModifier(newHealthModifier);
                     break;
                 case StatutType.Damage:
+                    StatModifier newDamageModifier = new StatModifier(.1f, StatModifierType.Flat, WorldManager.Instance);
+                    Player.Instance.CharacterController.damageModifierStat.AddModifier(newDamageModifier);
                     break;
                 case StatutType.DashDistance:
+                    StatModifier newDashDistanceModifier = new StatModifier(.05f, StatModifierType.PercentageMultiply, WorldManager.Instance);
+                    Player.Instance.CharacterController.dashSpeedStat.AddModifier(newDashDistanceModifier);
+                    Player.Instance.CharacterController.dashDurationStat.AddModifier(newDashDistanceModifier);
                     break;
                 case StatutType.Speed:
+                    StatModifier newSpeedModifier = new StatModifier(.05f, StatModifierType.PercentageMultiply, WorldManager.Instance);
+                    Player.Instance.CharacterController.maxSpeedStat.AddModifier(newSpeedModifier);
                     break;
             }
             
             Destroy(gameObject);
-
         }
     }
 
