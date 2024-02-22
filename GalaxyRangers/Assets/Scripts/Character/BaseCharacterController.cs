@@ -97,6 +97,7 @@ public partial class BaseCharacterController : MonoBehaviour
     public float minSpeed { get { return _minSpeed; } }
     [SerializeField][ReadOnlyInspector] protected CharacterStat _maxSpeed;
     public float maxSpeed { get { return _maxSpeed.MaxValue; } }
+    public CharacterStat maxSpeedStat { get { return _maxSpeed; } }
     [SerializeField] protected float currentSpeed;
     [Space]
     [SerializeField][ReadOnlyInspector] protected CharacterStat _speedLerpRate;
@@ -205,9 +206,11 @@ public partial class BaseCharacterController : MonoBehaviour
     [Space]
     [SerializeField] private CharacterStat _dashSpeed;
     public float dashSpeed { get { return _dashSpeed.MaxValue; } }
+    public CharacterStat dashSpeedStat { get { return _dashSpeed; } }
     [SerializeField] private CharacterStat _dashDuration;
     [SerializeField] private AnimationCurve dashSpeedCurve = AnimationCurve.Linear(0, 0, 1, 1);
     public float dashDuration { get { return _dashDuration.MaxValue; } }
+    public CharacterStat dashDurationStat { get { return _dashDuration; } }
     [SerializeField] private CharacterStat _dashCooldown;
     public float dashCooldown { get { return _dashCooldown.MaxValue; } }
     [Space]
@@ -234,6 +237,9 @@ public partial class BaseCharacterController : MonoBehaviour
     [Space]
     [SerializeField][ReadOnlyInspector] private Vector3 _cachedVelocity = Vector3.zero;
     [SerializeField][ReadOnlyInspector] Transform _aimingTarget = null;
+    [SerializeField] private CharacterStat _damageModifier;
+    public float damageModifier { get { return _damageModifier.MaxValue; } }
+    public CharacterStat damageModifierStat { get { return _damageModifier; } }
 
     [Header("LOCKS")]
     [Space(10)]
@@ -1436,17 +1442,45 @@ public partial class BaseCharacterController : MonoBehaviour
 
     public void Death()
     {
-        FreezeCharacter();
+        //FreezeCharacter();
 
-        capsuleCollider.enabled = false;
+        //capsuleCollider.enabled = false;
 
         //resurrectCoroutine = StartCoroutine(WaitForResurrect());
+
+        ResetStatModifiers();
 
         if (OnDeath != null)
         {
             OnDeath(this);
         }
 
+    }
+
+    private void ResetStatModifiers()
+    {
+        Debug.Log(this.gameObject.name + " stats reset!");
+
+        _maxSpeed.RemoveAllModifiersFromSource(WorldManager.Instance);
+
+        _speedLerpRate.RemoveAllModifiersFromSource(WorldManager.Instance);
+
+        gravity.RemoveAllModifiersFromSource(WorldManager.Instance);
+        minFallSpeed.RemoveAllModifiersFromSource(WorldManager.Instance);
+        fastFallGravityFactor.RemoveAllModifiersFromSource(WorldManager.Instance);
+        minFastFallSpeed.RemoveAllModifiersFromSource(WorldManager.Instance);
+
+        maxJumpCount.RemoveAllModifiersFromSource(WorldManager.Instance);
+        maxWallJumpCount.RemoveAllModifiersFromSource(WorldManager.Instance);
+        jumpStrength.RemoveAllModifiersFromSource(WorldManager.Instance);
+        maxJumpDuration.RemoveAllModifiersFromSource(WorldManager.Instance);
+
+        _dashSpeed.RemoveAllModifiersFromSource(WorldManager.Instance);
+        _dashDuration.RemoveAllModifiersFromSource(WorldManager.Instance);
+        _dashCooldown.RemoveAllModifiersFromSource(WorldManager.Instance);
+        _maxAirDashes.RemoveAllModifiersFromSource(WorldManager.Instance);
+
+        _characterHealth.Health.RemoveAllModifiersFromSource(WorldManager.Instance);
     }
 
     public void Revive(Vector3 pos)

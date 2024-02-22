@@ -43,11 +43,16 @@ public class CharacterHealth : MonoBehaviour
 
     private Coroutine invulnerabilityCoroutine;
 
+    private BaseCharacterController _controller;
+
     private bool _firstFrame = false;
 
 
 
-
+    private void Awake()
+    {
+        _controller = GetComponent<BaseCharacterController>();
+    }
 
     private void Update()
     {
@@ -124,6 +129,11 @@ public class CharacterHealth : MonoBehaviour
         if (_isDead) return;
         Debug.LogWarning(this.gameObject.name + " has died!");
         _isDead = true;
+
+        if (_controller)
+        {
+            _controller.Death();
+        }
 
         CharacterDied?.Invoke(this);
 

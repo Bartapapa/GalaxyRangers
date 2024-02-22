@@ -111,7 +111,14 @@ public class HurtBox : MonoBehaviour
                 _overrideKnockbackDirection = _overrideKnockbackDirection.normalized;
             }
 
-            character.Hit(_damage, _collider, _knockbackForce, transform.rotation * _overrideKnockbackDirection, _disableInputDuration, _hitLagDuration, _pierceInvulnerability, _invulnerabilityDuration);
+            float modifiedDamage = _damage;
+
+            if (_attacker != null)
+            {
+                modifiedDamage *= _attacker.damageModifier;
+            }
+
+            character.Hit(modifiedDamage, _collider, _knockbackForce, transform.rotation * _overrideKnockbackDirection, _disableInputDuration, _hitLagDuration, _pierceInvulnerability, _invulnerabilityDuration);
 
             OnHit?.Invoke(this);
         }

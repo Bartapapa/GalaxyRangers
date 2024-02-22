@@ -10,11 +10,18 @@ public class Interactible_HUBTeleporter : Interactible
 
     protected override void InteractEvent(InteractibleManager manager)
     {
-        Debug.Log("Interacted with the HUB teleporter!");
+        //Debug.Log("Interacted with the HUB teleporter!");
         //Teleport out of world, generate new one based on seed.
-        WorldManager.Instance.StartNewRun(forceSeed);
-
-        EndInteract(manager);
+        if (!GameManager.Instance.isInFade)
+        {
+            GameManager.Instance.Fade(.5f,
+                    () => WorldManager.Instance.StartNewRun(forceSeed),
+                    () => EndInteract(manager));
+        }
+        else
+        {
+            EndInteract(manager);
+        }
     }
 
     public override void SelectInteractible()

@@ -139,8 +139,9 @@ public class World : Graph
         SetRoomDistance();
         SetBossRoom();
         SetHealRooms();
+        SetHealRooms();
         SetShopRooms();
-        SetItemRooms();
+        //SetItemRooms();
         SetArenaRooms();
         SetExploRooms();
         SetRoomScenarios();
