@@ -37,7 +37,7 @@ public class SC_HubQuest : MonoBehaviour
 
         if (_isSpecialQuestWithoutBeingTouch) {
             _txtObjective_1.text = "Kill " + _enemyNumberToKill_1 + " " + _tmpEnemy_1 +
-            " without\n   being touched";
+            " without\n being touched";
             _enemyNumberToKill_2 = 0;
         }
         else {
@@ -60,9 +60,9 @@ public class SC_HubQuest : MonoBehaviour
     private void SetTextTemporar()
     {
         if (_enemyTypeToKill_1 == TypeOfCharacter.EnemyCac)
-            _tmpEnemy_1 = "Basics cac";
+            _tmpEnemy_1 = "Basics";
         else if (_enemyTypeToKill_1 == TypeOfCharacter.EnemyCacEpic)
-            _tmpEnemy_1 = "Epic cac";
+            _tmpEnemy_1 = "Epic";
         else if (_enemyTypeToKill_1 == TypeOfCharacter.EnemyLongRange)
             _tmpEnemy_1 = "Basics distance";
         else if (_enemyTypeToKill_1 == TypeOfCharacter.EnemyLongRangeEpic)
@@ -70,9 +70,9 @@ public class SC_HubQuest : MonoBehaviour
         else if (_enemyTypeToKill_1 == TypeOfCharacter.EnemyBoss)
             _tmpEnemy_1 = "Boss";
         if (_enemyTypeToKill_2 == TypeOfCharacter.EnemyCac)
-            _tmpEnemy_2 = "Basics cac";
+            _tmpEnemy_2 = "Basics";
         else if (_enemyTypeToKill_2 == TypeOfCharacter.EnemyCacEpic)
-            _tmpEnemy_2 = "Epic cac";
+            _tmpEnemy_2 = "Epic";
         else if (_enemyTypeToKill_2 == TypeOfCharacter.EnemyLongRange)
             _tmpEnemy_2 = "Basics distance";
         else if (_enemyTypeToKill_2 == TypeOfCharacter.EnemyLongRangeEpic)

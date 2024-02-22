@@ -4,10 +4,16 @@ using UnityEngine;
 
 public class SC_Audio : MonoBehaviour
 {
-    /*To play the sound :
     [SerializeField]
     private AudioClip sound;
 
-    AudioManager.Instance.MyFunction();
-    */
+    public void PlaySound()
+    {
+        AudioManager.Instance.PlayClipAt(sound, this.transform.position);
+    }
+
+    public void PlayMusic()
+    {
+        AudioManager.Instance.MyMusicRun();
+    }
 }

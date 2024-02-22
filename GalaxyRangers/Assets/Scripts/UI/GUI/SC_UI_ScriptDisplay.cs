@@ -31,6 +31,7 @@ public class SC_UI_ScriptDisplay : MonoBehaviour
     [SerializeField] private GameObject _questLogo = null;
     [SerializeField] private Animator _questPanelAnimator = null;
     [SerializeField] private Animator _questLogoAnimator = null;
+    private bool _doONCE_du_bled = true;
 
     private bool _questPanelActive = true;
 
@@ -75,6 +76,12 @@ public class SC_UI_ScriptDisplay : MonoBehaviour
     
     public void InitQuestPanel(QuestVariables _questVariables , string _enemyName_1 , string _enemyName_2)
     {
+        if (_doONCE_du_bled == true)
+        {
+            _doONCE_du_bled = false;
+            DisplayQuestPanel();
+        }
+
         ChangeValueCountKill(0, 0);
         _txtObjective_1.text = "Beat " + _questVariables._enemyNumberToKill_1.ToString() + " " + _enemyName_1;
         if (_questVariables._enemyNumberToKill_2 > 0) {

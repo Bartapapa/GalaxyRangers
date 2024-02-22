@@ -8,9 +8,10 @@ public class AudioManager : MonoBehaviour
     public static AudioManager Instance;
     [SerializeField] private AudioClip[] playlist;
     [SerializeField] private AudioSource audioSource;
-    [SerializeField] private AudioMixer audioMixer;
+    [SerializeField] private AudioMixerGroup musicMixer;
     [SerializeField] private AudioMixerGroup soundEffectMixer;
-    private GameObject[] _soundAlreadyExist;
+    private bool _isFaiding = false;
+    private float _speedOfFaiding = 0.25f;
 
     private void Awake()
     {
@@ -23,7 +24,9 @@ public class AudioManager : MonoBehaviour
             Debug.LogWarning("Multiple AudioManagers found in game! Removing latest one.");
             Destroy(this.gameObject);
         }
+        DontDestroyOnLoad(this.gameObject);
         audioSource.clip = playlist[0];
+        audioSource.outputAudioMixerGroup = musicMixer;
         audioSource.Play();
         // audioMixer.SetFloat("MusicMixer", -30);
         // audioMixer.SetFloat("MainVolume", -80);
@@ -32,24 +35,33 @@ public class AudioManager : MonoBehaviour
 
     // utiliser dans un autre script
 
-    public void MyFunction()
+    public void MyMusicRun()
     {
         // Fade d'un son vers l'autre
-    }
+        // _isFaiding = true;
 
-    private void Update()
-    {
-        if (audioSource.isPlaying == false) {
-            audioSource.clip = playlist[0];
+        if (playlist.Length > 1)
+        {
+            audioSource.clip = playlist[1];
             audioSource.Play();
         }
     }
 
+    private void Update()
+    {
+        /*if (audioSource.isPlaying == false) {
+            audioSource.clip = playlist[0];
+            audioSource.Play();
+        }*/
+        // if (_isFaiding)
+        // {
+            // musicMixer.SetFloat("MusicMixer", Mathf.Lerp(0, -80, _speedOfFaiding));
+        // }
+    }
+
     public AudioSource PlayClipAt(AudioClip clip, Vector3 pos)
     {
-        _soundAlreadyExist = GameObject.FindGameObjectsWithTag("TempAudioTag");
-        for (int i = 0; i < _soundAlreadyExist.Length; i++)
-            Destroy(_soundAlreadyExist[i]);
+        // _soundAlreadyExist = GameObject.FindGameObjectsWithTag("TempAudioTag");
 
         GameObject tempGO = new GameObject("TempAudio");
         tempGO.transform.position = pos;

@@ -56,7 +56,7 @@ public class InteractibleShopRunStatut : Interactible
            case StatutType.Health:
                price = _PriceByLevel_Health[_currentLevel];
                 _txt_Title.text = "HEALTH";
-                _txt_TitleLevel.text = "LVL " + _currentLevel;
+                _txt_TitleLevel.text = "LVL " + (_currentLevel + 1);
                _textGlobal.text = "YOUR HEALTH IS INCREASE BY";
                _textValue.text = "+" + _ValueByLevel_Health[_currentLevel].ToString() + "%";
                _textPrice.text = _PriceByLevel_Health[_currentLevel].ToString();
@@ -65,7 +65,7 @@ public class InteractibleShopRunStatut : Interactible
            case StatutType.Damage:
                 price = _PriceByLevel_Damage[_currentLevel];
                 _txt_Title.text = "DAMAGE";
-                _txt_TitleLevel.text = "LVL " + _currentLevel;
+                _txt_TitleLevel.text = "LVL " + (_currentLevel + 1);
                 _textGlobal.text = "YOUR DAMAGE IS INCREASE BY";
                 _textValue.text = "+" + _ValueByLevel_Damage[_currentLevel].ToString() + "%";
                 _textPrice.text = _PriceByLevel_Damage[_currentLevel].ToString();
@@ -74,7 +74,7 @@ public class InteractibleShopRunStatut : Interactible
            case StatutType.DashDistance:
                 price = _PriceByLevel_DashDistance[_currentLevel];
                 _txt_Title.text = "DASH";
-                _txt_TitleLevel.text = "LVL " + _currentLevel;
+                _txt_TitleLevel.text = "LVL " + (_currentLevel + 1);
                 _textGlobal.text = "YOUR DASH DISTANCE IS\nINCREASE BY";
                 _textValue.text = "+" + _ValueByLevel_DashDistance[_currentLevel].ToString() + "%";
                 _textPrice.text = _PriceByLevel_DashDistance[_currentLevel].ToString();
@@ -83,7 +83,7 @@ public class InteractibleShopRunStatut : Interactible
            case StatutType.Speed:
                 price = _PriceByLevel_Speed[_currentLevel];
                 _txt_Title.text = "SPEED";
-                _txt_TitleLevel.text = "LVL " + _currentLevel;
+                _txt_TitleLevel.text = "LVL " + (_currentLevel + 1);
                 _textGlobal.text = "YOUR SPEED IS INCREASE BY";
                 _textValue.text = "+" + _ValueByLevel_Speed[_currentLevel].ToString() + "%";
                 _textPrice.text = _PriceByLevel_Speed[_currentLevel].ToString();
