@@ -7,7 +7,7 @@ public class Interactible_Heal : Interactible
     [SerializeField] private int _healPurcentage = 35;
     private float _totalLife = 0;
 
-    private GameObject HeartGO = null;
+    [SerializeField] private GameObject HeartGO = null;
 
 
     public override void SelectInteractible()
@@ -26,7 +26,7 @@ public class Interactible_Heal : Interactible
 
     private void Update()
     {
-        HeartGO.transform.Rotate(0, 0, 0.1f);
+        HeartGO.transform.Rotate(0, 0, 0.4f);
     }
 
 }
