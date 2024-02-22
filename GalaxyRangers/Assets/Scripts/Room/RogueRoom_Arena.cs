@@ -69,9 +69,6 @@ public class RogueRoom_Arena : RogueRoom
         //Open exits.
         BuildTraversalPoints(roomData);
 
-        //Set camera to exploration mode.
-        CameraManager.Instance.CameraState = CameraState.Exploration;
-
         //Force activate teleporter.
         //ToggleTeleporterActivation(true, false);
 
@@ -83,5 +80,7 @@ public class RogueRoom_Arena : RogueRoom
 
         _hasEnded = true;
         _isCompleted = true;
+
+        UseCameraSettings();
     }
 }
