@@ -17,6 +17,7 @@ public class UI_Manager : MonoBehaviour
     [SerializeField] private GameObject _GUIRef;
     [SerializeField] private SC_UI_ScriptDisplay _scriptDisplay;
     [SerializeField] public SC_PauseMenu _scriptPauseMenu;
+    [SerializeField] public UI_ScreenFader screenFader;
 
     [Header("Boss")]
     private bool _roomOfBoss;

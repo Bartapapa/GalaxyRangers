@@ -254,6 +254,7 @@ public class CharacterCombat : MonoBehaviour
         //Instantiate weapon, normally.
         Weapon newWeapon = Instantiate<Weapon>(weapon, _weaponRoot);
         _currentWeapon = newWeapon; //instantiated weapon
+        _currentWeapon.gameObject.SetActive(true);
         InitializeCurrentWeapon();
 
         //Instantiate weapon mesh in weaponHoldSocket
@@ -261,6 +262,7 @@ public class CharacterCombat : MonoBehaviour
         _currentWeapon.currentWeaponObject = weaponObject;
 
         CancelFullAttack();
+
     }
 
     private void InitializeCurrentWeapon()
